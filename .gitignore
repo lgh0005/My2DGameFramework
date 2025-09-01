@@ -1,0 +1,12 @@
+*.obj
+*.pdb
+*.exe
+Client/Binaries/
+Client/Intermediate/
+
+!Libraries/**/*.lib
+!Libraries/**/*.dll
+
+.vs/
+*.user
+*.suo
