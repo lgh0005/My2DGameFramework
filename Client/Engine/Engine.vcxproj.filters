@@ -9,21 +9,105 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\99. Headers">
+      <UniqueIdentifier>{2e8222b2-72c4-4b7d-a913-81d1132786fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\98. Utils">
+      <UniqueIdentifier>{3a60ad91-6710-4609-ae90-a0cfe2f75d93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\00. Game">
+      <UniqueIdentifier>{8a702ee5-bcb3-4612-b3bc-e20866638e48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Scene">
+      <UniqueIdentifier>{5e9ec61c-b51d-4941-ac8a-7f07d3c46d32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. GameObject">
+      <UniqueIdentifier>{8127e9f0-b0bd-40dd-8182-2850654b2ed1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03. Components">
+      <UniqueIdentifier>{fd151420-39e9-4b7c-847a-05fb880144cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\04. Managers">
+      <UniqueIdentifier>{57315708-75a5-4a42-86a1-d7df334cad19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\05. Shaders">
+      <UniqueIdentifier>{b37283b7-28b8-4d91-bcc1-edfce612cf8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\06. Interfaces">
+      <UniqueIdentifier>{8f2c1730-d5cd-4d45-a6b0-cf62f2240d8c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="EnginePch.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\99. Headers</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>소스 파일\99. Headers</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>소스 파일\00. Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ISingleton.cpp">
+      <Filter>소스 파일\06. Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>소스 파일\04. Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="IComponent.cpp">
+      <Filter>소스 파일\06. Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="IRenderable.cpp">
+      <Filter>소스 파일\06. Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="IBehaviour.cpp">
+      <Filter>소스 파일\06. Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>소스 파일\03. Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>소스 파일\02. GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
     <ClInclude Include="EnginePch.h">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>소스 파일\99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>소스 파일\99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Defines.h">
+      <Filter>소스 파일\99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Values.h">
+      <Filter>소스 파일\99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>소스 파일\00. Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ISingleton.h">
+      <Filter>소스 파일\06. Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>소스 파일\04. Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponent.h">
+      <Filter>소스 파일\06. Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderable.h">
+      <Filter>소스 파일\06. Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IBehaviour.h">
+      <Filter>소스 파일\06. Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>소스 파일\03. Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>소스 파일\02. GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -7,6 +7,4 @@
 #else
 #pragma comment(lib, "Engine/Release/Engine.lib")
 #endif
-
-// Game
-#include "Game.h"
+#include "Engine/Game.h"

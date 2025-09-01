@@ -21,3 +21,4 @@ private:
 	int bufferHeight = 0;
 };
 
+extern unique_ptr<Game> GAME;

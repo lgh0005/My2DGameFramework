@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Game.h"
 
+unique_ptr<Game> GAME = make_unique<Game>();
+
 Game::Game()
 {
 
@@ -17,7 +19,7 @@ Game::~Game()
 void Game::Init()
 {
     // Init SDL
-    SDL_Init(SDL_INIT_VIDEO);
+    SDL_ASSERT(SDL_Init(SDL_INIT_VIDEO) != 0, "SDL_Init Error", SDL_GetError);
 
     // Set OpenGL version 4.6
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
@@ -28,26 +30,25 @@ void Game::Init()
     // Create window
     _window = SDL_CreateWindow
     (
-        "SDL2 Window",
-        SDL_WINDOWPOS_CENTERED,
-        SDL_WINDOWPOS_CENTERED,
-        800,
-        600,
+        WindowConfig::GameTitle, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+        WindowConfig::GWinSizeX, WindowConfig::GWinSizeY,
         SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL
     );
+    SDL_ASSERT(_window == nullptr, "SDL_CreateWindow Error", SDL_GetError);
 
     // Get window buffer information
     SDL_GL_GetDrawableSize(_window, &bufferWidth, &bufferHeight);
 
     // Create OpenGL context
     _glContext = SDL_GL_CreateContext(_window);
+    SDL_ASSERT(_glContext == nullptr, "SDL_GL_CreateContext Error", SDL_GetError);
     SDL_GL_MakeCurrent(_window, _glContext);
 
-    // 모던 OpenGL Extension들을 허용 및 glew 초기화
+    // Enable modern OpenGL extensions and initialize GLEW
     glewExperimental = GL_TRUE;
-    GLenum err = glewInit();
+    GLEW_ASSERT(glewInit() != GLEW_OK, "glewInit Error");
 
-    // 뷰포트 만들기
+    // Create Viewport
     glViewport(0, 0, bufferWidth, bufferHeight);
     glClearColor(0.2f, 0.f, 0.f, 1.f);
 
@@ -60,6 +61,9 @@ void Game::Launch()
     // Event Looping
     while (_running)
     {
+        // Update TimeManager
+        TIME.Update();
+
         // Event Polling
         while (SDL_PollEvent(&_event))
         {

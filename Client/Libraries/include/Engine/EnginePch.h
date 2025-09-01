@@ -1,6 +1,6 @@
 #pragma once
 
-// C++
+// C++ STL
 #include <iostream>
 #include <string>
 #include <vector>
@@ -50,3 +50,13 @@ using namespace FMOD;
 #include <glm/gtc/type_ptr.hpp>
 #pragma comment(lib, "glew/glew32.lib")
 #pragma comment(lib, "opengl32.lib")
+
+// Misc
+#include "Types.h"
+#include "Defines.h"
+#include "Values.h"
+
+// Managers
+#include "TimeManager.h"
+
+#define TIME TimeManager::GetInstance()
