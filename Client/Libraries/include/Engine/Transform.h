@@ -10,7 +10,6 @@ public:
 	virtual ~Transform() override;
 
 public:
-	virtual void Init(shared_ptr<GameObject> owner) override;
 	virtual void Update() override;
 
 private:

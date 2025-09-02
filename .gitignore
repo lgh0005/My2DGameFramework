@@ -3,6 +3,8 @@
 *.exe
 Client/Binaries/
 Client/Intermediate/
+Client/Resources/
+Client/Debug/
 
 !Libraries/**/*.lib
 !Libraries/**/*.dll

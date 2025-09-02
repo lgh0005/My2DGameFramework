@@ -1,6 +1,6 @@
 #pragma once
 
-// C++ STL
+// C++20 STL
 #include <iostream>
 #include <string>
 #include <vector>
@@ -12,9 +12,13 @@
 #include <algorithm>
 #include <memory>
 #include <cmath>
+#include <cstdlib>
+#include <functional>
 #include <concepts>
 #include <type_traits>
 #include <fstream>
+#include <sstream>
+#include <format>
 #include <thread>
 using namespace std;
 
@@ -55,8 +59,12 @@ using namespace FMOD;
 #include "Types.h"
 #include "Defines.h"
 #include "Values.h"
+#include "Logger.h"
+#define LOGGER Logger::GetInstance()
 
 // Managers
 #include "TimeManager.h"
+#include "RenderManager.h"
 
 #define TIME TimeManager::GetInstance()
+#define RENDER RenderManager::GetInstance()

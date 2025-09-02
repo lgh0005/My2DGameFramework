@@ -30,11 +30,26 @@
     <Filter Include="소스 파일\04. Managers">
       <UniqueIdentifier>{57315708-75a5-4a42-86a1-d7df334cad19}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\05. Shaders">
-      <UniqueIdentifier>{b37283b7-28b8-4d91-bcc1-edfce612cf8d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\06. Interfaces">
       <UniqueIdentifier>{8f2c1730-d5cd-4d45-a6b0-cf62f2240d8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\05. Resources">
+      <UniqueIdentifier>{b37283b7-28b8-4d91-bcc1-edfce612cf8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\05. Resources\glsl">
+      <UniqueIdentifier>{64426970-de4f-46e6-9858-494d3ae449b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03. Components\Default">
+      <UniqueIdentifier>{7cad5208-f5c6-477e-a817-e9871148cd0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03. Components\UI">
+      <UniqueIdentifier>{833e6185-345e-4ef2-a55f-c84fd9bf3657}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\97. Debug">
+      <UniqueIdentifier>{41f0381a-55b2-44bc-b183-2458c5dae4ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\97. Debug\ErrorLog">
+      <UniqueIdentifier>{c95d0177-2fc4-4440-a009-c28cfd683931}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -62,11 +77,56 @@
     <ClCompile Include="IBehaviour.cpp">
       <Filter>소스 파일\06. Interfaces</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>소스 파일\03. Components</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>소스 파일\02. GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>소스 파일\04. Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>소스 파일\04. Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>소스 파일\04. Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="IResource.cpp">
+      <Filter>소스 파일\06. Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>소스 파일\05. Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="ITexture.cpp">
+      <Filter>소스 파일\06. Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>소스 파일\05. Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>소스 파일\05. Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Flipbook.cpp">
+      <Filter>소스 파일\05. Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioListener.cpp">
+      <Filter>소스 파일\03. Components\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioSource.cpp">
+      <Filter>소스 파일\03. Components\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>소스 파일\03. Components\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>소스 파일\03. Components\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>소스 파일\03. Components\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>소스 파일\05. Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>소스 파일\97. Debug</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -103,11 +163,69 @@
     <ClInclude Include="IBehaviour.h">
       <Filter>소스 파일\06. Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>소스 파일\03. Components</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>소스 파일\02. GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>소스 파일\04. Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>소스 파일\04. Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>소스 파일\04. Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="IResource.h">
+      <Filter>소스 파일\06. Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>소스 파일\05. Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="ITexture.h">
+      <Filter>소스 파일\06. Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>소스 파일\05. Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>소스 파일\05. Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Flipbook.h">
+      <Filter>소스 파일\05. Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioListener.h">
+      <Filter>소스 파일\03. Components\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSource.h">
+      <Filter>소스 파일\03. Components\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>소스 파일\03. Components\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>소스 파일\03. Components\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>소스 파일\03. Components\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>소스 파일\05. Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>소스 파일\97. Debug</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="triangle.frag">
+      <Filter>소스 파일\05. Resources\glsl</Filter>
+    </None>
+    <None Include="triangle.vert">
+      <Filter>소스 파일\05. Resources\glsl</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Debug\Error_report.log">
+      <Filter>소스 파일\97. Debug\ErrorLog</Filter>
+    </Text>
   </ItemGroup>
 </Project>

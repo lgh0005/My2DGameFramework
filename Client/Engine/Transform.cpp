@@ -11,11 +11,6 @@ Transform::~Transform()
 
 }
 
-void Transform::Init(shared_ptr<GameObject> owner)
-{
-
-}
-
 void Transform::Update()
 {
 

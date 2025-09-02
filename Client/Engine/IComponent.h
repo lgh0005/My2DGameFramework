@@ -9,7 +9,7 @@ public:
 	virtual ~IComponent();
 
 public:
-	virtual void Init(shared_ptr<GameObject> owner) abstract;
+	virtual void Init(shared_ptr<GameObject> owner);
 	virtual void Update() abstract;
 
 public:
