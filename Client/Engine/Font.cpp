@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Font.h"
 
-Font::Font(const string& name) : Super(name)
+Font::Font(const string& name, const string& filePath) : Super(name, filePath)
 {
 }
 
@@ -13,6 +13,7 @@ void Font::Init()
 {
 }
 
-void Font::Render()
+void Font::Render(shared_ptr<Shader> shader, glm::mat4 model)
 {
+	Super::Render(shader, model);
 }

@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "Shader.h"
 
-Shader::Shader(const string& name) : Super(name)
+Shader::Shader(const string& name, const string& vertexShaderFile, const string& fragmentShaderFile) 
+	: Super(name), _vertexShaderFileLocation(vertexShaderFile), _fragmentShaderFileLocation(fragmentShaderFile)
 {
 }
 
@@ -14,6 +15,36 @@ void Shader::Init()
 	// Create shader program
 	_shaderID = glCreateProgram();
 	LOGGER.DebugAssert(_shaderID == 0, "Failed to create shader program.", glGetError);
+
+	// Set default view, projection matrix
+	_view = glm::mat4(1.0);
+	_projection = glm::ortho
+	(
+		-(float)WindowConfig::GWinSizeX / 2.0f, (float)WindowConfig::GWinSizeX / 2.0f,  // left, right
+		-(float)WindowConfig::GWinSizeY / 2.0f, (float)WindowConfig::GWinSizeY / 2.0f,  // bottom, top
+		-1.0f, 1.0f
+	);
+
+	// Compile shader
+	CompileShader();
+}
+
+GLuint Shader::GetUniformLocation(const string& uniform)
+{
+	auto it = _uniformLocation.find(uniform);
+	if (it != _uniformLocation.end()) return it->second;
+	return -1;
+}
+
+void Shader::AddUniforms(const vector<const char*>& uniforms)
+{
+	for (auto uniform : uniforms)
+		AddUniform(uniform);
+}
+
+void Shader::AddUniform(const char* uniform)
+{
+	_uniformLocation[uniform] = glGetUniformLocation(_shaderID, uniform);
 }
 
 string Shader::ReadFile(const string& filePath)
@@ -68,10 +99,12 @@ void Shader::AddShader(const string& shaderCode, GLenum shaderType)
 	glAttachShader(_shaderID, shader);
 }
 
-void Shader::CompileShader(const string& shaderCode, uint32 glShaderType)
+void Shader::CompileShader()
 {
 	// Add shader and compile it.
-	AddShader(shaderCode, glShaderType);
+	// TODO : 하드 코딩된 부분 수정할 필요 있음.
+	AddShader(ReadFile(_vertexShaderFileLocation), GL_VERTEX_SHADER);
+	AddShader(ReadFile(_fragmentShaderFileLocation), GL_FRAGMENT_SHADER);
 
 	GLint success = 0;
 

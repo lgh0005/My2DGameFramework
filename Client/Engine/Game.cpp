@@ -2,6 +2,12 @@
 #include "Game.h"
 #include "RenderManager.h"
 
+#pragma region TEST
+#include "Shader.h"
+#include "Texture.h"
+#include "Sprite.h"
+#pragma endregion
+
 unique_ptr<Game> GAME = make_unique<Game>();
 
 Game::Game()
@@ -26,6 +32,22 @@ void Game::Init()
 
     // Init Fonts
     TTF_Init();
+
+#pragma region TEST
+
+    // Shader
+    _shader = make_shared<Shader>("shader", "../Resources/Shaders/VertShader.vert", "../Resources/Shaders/FragShader.frag");
+
+    // Texture
+    _texture = make_shared<Texture>("texture", "../Resources/Images/cuphead_idle_0001.png");
+
+    // Sprite
+    _sprite = make_shared<Sprite>("sprite", _texture, _shader);
+    _sprite->Init(nullptr);
+    _shader->AddUniforms({ Uniforms::UNIFORM_MODEL, Uniforms::UNIFORM_VIEW, Uniforms::UNIFORM_PROJECTION, Uniforms::UNIFORM_TEXTURE });
+    RENDER.AddRenderable(_sprite);
+
+#pragma endregion
 }
 
 void Game::Launch()
@@ -45,8 +67,10 @@ void Game::Launch()
 
         Update();
 
+#pragma region TEST
         // Render game
         RENDER.Render();
+#pragma endregion
     }
 }
 

@@ -10,8 +10,3 @@ Transform::~Transform()
 {
 
 }
-
-void Transform::Update()
-{
-
-}

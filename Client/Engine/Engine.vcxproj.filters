@@ -216,16 +216,16 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="triangle.frag">
-      <Filter>소스 파일\05. Resources\glsl</Filter>
-    </None>
-    <None Include="triangle.vert">
-      <Filter>소스 파일\05. Resources\glsl</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="..\Debug\Error_report.log">
       <Filter>소스 파일\97. Debug\ErrorLog</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resources\Shaders\FragShader.frag">
+      <Filter>소스 파일\05. Resources\glsl</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\VertShader.vert">
+      <Filter>소스 파일\05. Resources\glsl</Filter>
+    </None>
   </ItemGroup>
 </Project>

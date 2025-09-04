@@ -2,6 +2,11 @@
 #include "RenderManager.h"
 #include "ITexture.h"
 
+#pragma region TEST
+#include "IRenderable.h"
+#pragma endregion
+
+
 RenderManager::~RenderManager()
 {
     if (_glContext) SDL_GL_DeleteContext(_glContext);
@@ -50,7 +55,15 @@ void RenderManager::Render()
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // Render Logic here
+    for (auto renderable : _renderables)
+    {
+        renderable->Render();
+    }
 
     SDL_GL_SwapWindow(_window);
+}
+
+void RenderManager::AddRenderable(shared_ptr<IRenderable> renderable)
+{
+    _renderables.push_back(renderable);
 }

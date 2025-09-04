@@ -11,3 +11,8 @@ IResource::~IResource()
 {
 
 }
+
+void IResource::Init()
+{
+
+}

@@ -13,6 +13,3 @@ void Flipbook::Init()
 {
 }
 
-void Flipbook::Render()
-{
-}

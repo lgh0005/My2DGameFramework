@@ -9,9 +9,6 @@ public:
 	Transform(const string& name);
 	virtual ~Transform() override;
 
-public:
-	virtual void Update() override;
-
 private:
 	// TODO : Scale, Rotation, Transform
 	// TODO : Dirty Flags

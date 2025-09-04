@@ -10,7 +10,7 @@ public:
 
 public:
 	virtual void Init(shared_ptr<GameObject> owner);
-	virtual void Update() abstract;
+	virtual void Update();
 
 public:
 	const string& GetName() { return _name; }

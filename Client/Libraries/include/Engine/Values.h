@@ -19,3 +19,11 @@ namespace Colors
     constexpr const SDL_Color Cyan = { 0, 255, 255, 255 };
     constexpr const SDL_Color Gray = { 100, 100, 100, 255 };
 }
+
+namespace Uniforms
+{
+    constexpr const char* UNIFORM_MODEL = "model";
+    constexpr const char* UNIFORM_VIEW = "view";
+    constexpr const char* UNIFORM_PROJECTION = "projection";
+    constexpr const char* UNIFORM_TEXTURE = "texSampler";
+}

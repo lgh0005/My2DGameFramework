@@ -1,9 +1,9 @@
 #pragma once
-#include "ITexture.h"
+#include "IResource.h"
 
-class Flipbook : public ITexture
+class Flipbook : public IResource
 {
-	using Super = ITexture;
+	using Super = IResource;
 
 public:
 	Flipbook(const string& name);
@@ -11,7 +11,6 @@ public:
 
 public:
 	virtual void Init() override;
-	virtual void Render() override;
 
 private:
 

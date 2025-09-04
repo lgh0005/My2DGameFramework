@@ -15,3 +15,8 @@ void IComponent::Init(shared_ptr<GameObject> owner)
 {
 	_owner = owner;
 }
+
+void IComponent::Update()
+{
+
+}

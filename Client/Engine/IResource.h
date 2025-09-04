@@ -9,7 +9,7 @@ public:
 	virtual ~IResource();
 
 public:
-	virtual void Init() abstract;
+	virtual void Init();
 
 protected:
 	const string _name;

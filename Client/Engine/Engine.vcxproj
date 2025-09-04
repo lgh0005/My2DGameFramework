@@ -210,11 +210,11 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="triangle.frag" />
-    <None Include="triangle.vert" />
+    <Text Include="..\Debug\Error_report.log" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Debug\Error_report.log" />
+    <None Include="..\Resources\Shaders\FragShader.frag" />
+    <None Include="..\Resources\Shaders\VertShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
