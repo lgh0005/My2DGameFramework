@@ -16,7 +16,7 @@ public:
 	const string& GetName() { return _name; }
 	shared_ptr<GameObject> GetOwner() { return _owner.lock(); }
 
-private:
+protected:
 	const string _name;
 	weak_ptr<GameObject> _owner;
 };

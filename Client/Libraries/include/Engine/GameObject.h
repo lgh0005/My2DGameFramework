@@ -11,10 +11,10 @@ public:
 	GameObject(const string& name);
 
 public:
-	void AddChild(shared_ptr<GameObject>& child) { _children.push_back(child); }
-	void AddComponent(shared_ptr<IComponent>& component) { _components.push_back(component); }
-	void AddRenderable(shared_ptr<IRenderable>& renderable) { _renderables.push_back(renderable); }
-	void AddBehaviour(shared_ptr<IBehaviour>& behaviour) { _bahaviours.push_back(behaviour); }
+	void AddChild(const shared_ptr<GameObject>& child) { _children.push_back(child); }
+	void AddComponent(const shared_ptr<IComponent>& component) { _components.push_back(component); }
+	void AddRenderable(const shared_ptr<IRenderable>& renderable) { _renderables.push_back(renderable); }
+	void AddBehaviour(const shared_ptr<IBehaviour>& behaviour) { _bahaviours.push_back(behaviour); }
 
 // Component Getters
 public:

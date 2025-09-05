@@ -24,6 +24,6 @@ void Sprite::Init(shared_ptr<GameObject> owner)
 
 void Sprite::Render()
 {
-	_texture->Render(_shader, glm::mat4(1.0));
+	_texture->Render(_shader, _model);
 }
 

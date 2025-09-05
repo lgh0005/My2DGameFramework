@@ -1,3 +1,4 @@
+*.idb
 *.obj
 *.pdb
 *.exe
@@ -6,6 +7,8 @@ Client/Intermediate/
 Client/Resources/
 Client/Debug/
 
+Libraries/**/*.pdb
+Libraries/**/*.idb
 !Libraries/**/*.lib
 !Libraries/**/*.dll
 

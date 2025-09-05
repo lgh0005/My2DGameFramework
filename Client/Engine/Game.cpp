@@ -7,6 +7,8 @@
 #include "Texture.h"
 #include "Font.h"
 #include "Sprite.h"
+#include "Transform.h"
+#include "GameObject.h"
 #pragma endregion
 
 unique_ptr<Game> GAME = make_unique<Game>();
@@ -55,7 +57,7 @@ void Game::Init()
     }
 
     // Shader : Defualt text shader
-    {
+    /*{
         _fontShader = make_shared<Shader>
         (
             "shader2",
@@ -71,7 +73,7 @@ void Game::Init()
             }
         );
         RESOURCE.AddResource(_fontShader);
-    }
+    }*/
 
     // Sprite
     {
@@ -81,19 +83,35 @@ void Game::Init()
 
         // Sprite
         _sprite1 = make_shared<Sprite>("sprite", RESOURCE.GetResource<Texture>("texture"), RESOURCE.GetResource<Shader>("shader1"));
-        _sprite1->Init(nullptr);
         RENDER.AddRenderable(_sprite1);
     }
 
-    // Font
-    {
-        _font = make_shared<Font>("font", "../Resources/Fonts/Crang.ttf", "Hello world!", 64, Colors::White);
-        RESOURCE.AddResource(_font);
+    //// Font
+    //{
+    //    _font = make_shared<Font>("font", "../Resources/Fonts/Crang.ttf", "Hello world!", 64, Colors::White);
+    //    RESOURCE.AddResource(_font);
 
-        // Sprite(UI)
-        _sprite2 = make_shared<Sprite>("Font", RESOURCE.GetResource<Font>("font"), RESOURCE.GetResource<Shader>("shader2"));
-        _sprite2->Init(nullptr);
-        RENDER.AddRenderable(_sprite2);
+    //    // Sprite(UI)
+    //    _sprite2 = make_shared<Sprite>("Font", RESOURCE.GetResource<Font>("font"), RESOURCE.GetResource<Shader>("shader2"));
+    //    _sprite2->Init(nullptr);
+    //    RENDER.AddRenderable(_sprite2);
+    //}
+
+    // Transform and GameObject
+    {
+        _trans1 = make_shared<Transform>
+        (
+            "transform",
+            glm::vec3(300.0f, 1.0f, 0.0f),
+            glm::vec3(0.0f, 0.0f, 0.0f),
+            glm::vec3(1.0f, 1.0f, 1.0f)
+        );
+
+        _gameObject = make_shared<GameObject>("GameObject");
+        _gameObject->SetTransform(_trans1);
+        _gameObject->AddRenderable(static_pointer_cast<IRenderable>(_sprite1));
+
+        _gameObject->Init();
     }
 
 #pragma endregion
@@ -125,5 +143,5 @@ void Game::Launch()
 
 void Game::Update()
 {
-
+    _gameObject->Update();
 }

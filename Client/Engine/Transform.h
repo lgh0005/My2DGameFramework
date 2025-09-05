@@ -21,6 +21,9 @@ public:
 	glm::vec3 GetScale() { return _scale; }
 
 private:
+	void CalculateModelMatrix();
+
+private:
 	glm::mat4 _model;
 
 	bool _dirty = false;
