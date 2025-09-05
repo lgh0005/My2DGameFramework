@@ -65,6 +65,8 @@ using namespace FMOD;
 // Managers
 #include "TimeManager.h"
 #include "RenderManager.h"
+#include "ResourceManager.h"
 
 #define TIME TimeManager::GetInstance()
 #define RENDER RenderManager::GetInstance()
+#define RESOURCE ResourceManager::GetInstance()

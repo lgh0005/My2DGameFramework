@@ -51,6 +51,7 @@ void Game::Init()
                 Uniforms::UNIFORM_TEXTURE
             }
         );
+        RESOURCE.AddResource(_texShader);
     }
 
     // Shader : Defualt text shader
@@ -69,26 +70,28 @@ void Game::Init()
                 Uniforms::UNIFORM_COLOR,
             }
         );
+        RESOURCE.AddResource(_fontShader);
     }
 
     // Sprite
     {
         // Texture
         _texture = make_shared<Texture>("texture", "../Resources/Images/cuphead_idle_0001.png");
+        RESOURCE.AddResource(_texture);
 
         // Sprite
-        _sprite1 = make_shared<Sprite>("sprite", _texture, _texShader);
+        _sprite1 = make_shared<Sprite>("sprite", RESOURCE.GetResource<Texture>("texture"), RESOURCE.GetResource<Shader>("shader1"));
         _sprite1->Init(nullptr);
         RENDER.AddRenderable(_sprite1);
     }
 
     // Font
     {
-        _font = make_shared<Font>("font", "../Resources/Fonts/Crang.ttf",
-            "Hello world!", 64, Colors::White);
+        _font = make_shared<Font>("font", "../Resources/Fonts/Crang.ttf", "Hello world!", 64, Colors::White);
+        RESOURCE.AddResource(_font);
 
         // Sprite(UI)
-        _sprite2 = make_shared<Sprite>("Font", _font, _fontShader);
+        _sprite2 = make_shared<Sprite>("Font", RESOURCE.GetResource<Font>("font"), RESOURCE.GetResource<Shader>("shader2"));
         _sprite2->Init(nullptr);
         RENDER.AddRenderable(_sprite2);
     }
