@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "Sprite.h"
+#include "ITexture.h"
 #include "Texture.h"
 #include "Shader.h"
 
-Sprite::Sprite(const string& name, shared_ptr<Texture> texture, shared_ptr<Shader> shader)
+Sprite::Sprite(const string& name, shared_ptr<ITexture> texture, shared_ptr<Shader> shader)
 	: Super(name), _texture(texture), _shader(shader)
 {
 

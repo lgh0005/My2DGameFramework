@@ -26,4 +26,5 @@ namespace Uniforms
     constexpr const char* UNIFORM_VIEW = "view";
     constexpr const char* UNIFORM_PROJECTION = "projection";
     constexpr const char* UNIFORM_TEXTURE = "texSampler";
+    constexpr const char* UNIFORM_COLOR = "color";
 }

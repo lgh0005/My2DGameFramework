@@ -5,6 +5,7 @@
 #pragma region TEST
 #include "Shader.h"
 #include "Texture.h"
+#include "Font.h"
 #include "Sprite.h"
 #pragma endregion
 
@@ -35,17 +36,62 @@ void Game::Init()
 
 #pragma region TEST
 
-    // Shader
-    _shader = make_shared<Shader>("shader", "../Resources/Shaders/VertShader.vert", "../Resources/Shaders/FragShader.frag");
+    // Shader : Default texture shader
+    {
+        _texShader = make_shared<Shader>
+        (
+            "shader1",
+            "../Engine/glsl/default.vert",
+            "../Engine/glsl/default.frag",
+            vector<const char*>
+            {
+                Uniforms::UNIFORM_MODEL,
+                Uniforms::UNIFORM_VIEW,
+                Uniforms::UNIFORM_PROJECTION,
+                Uniforms::UNIFORM_TEXTURE
+            }
+        );
+    }
 
-    // Texture
-    _texture = make_shared<Texture>("texture", "../Resources/Images/cuphead_idle_0001.png");
+    // Shader : Defualt text shader
+    {
+        _fontShader = make_shared<Shader>
+        (
+            "shader2",
+            "../Engine/glsl/text.vert",
+            "../Engine/glsl/text.frag",
+            vector<const char*>
+            {
+                Uniforms::UNIFORM_MODEL,
+                Uniforms::UNIFORM_VIEW,
+                Uniforms::UNIFORM_PROJECTION,
+                Uniforms::UNIFORM_TEXTURE,
+                Uniforms::UNIFORM_COLOR,
+            }
+        );
+    }
 
     // Sprite
-    _sprite = make_shared<Sprite>("sprite", _texture, _shader);
-    _sprite->Init(nullptr);
-    _shader->AddUniforms({ Uniforms::UNIFORM_MODEL, Uniforms::UNIFORM_VIEW, Uniforms::UNIFORM_PROJECTION, Uniforms::UNIFORM_TEXTURE });
-    RENDER.AddRenderable(_sprite);
+    {
+        // Texture
+        _texture = make_shared<Texture>("texture", "../Resources/Images/cuphead_idle_0001.png");
+
+        // Sprite
+        _sprite1 = make_shared<Sprite>("sprite", _texture, _texShader);
+        _sprite1->Init(nullptr);
+        RENDER.AddRenderable(_sprite1);
+    }
+
+    // Font
+    {
+        _font = make_shared<Font>("font", "../Resources/Fonts/Crang.ttf",
+            "Hello world!", 64, Colors::White);
+
+        // Sprite(UI)
+        _sprite2 = make_shared<Sprite>("Font", _font, _fontShader);
+        _sprite2->Init(nullptr);
+        RENDER.AddRenderable(_sprite2);
+    }
 
 #pragma endregion
 }

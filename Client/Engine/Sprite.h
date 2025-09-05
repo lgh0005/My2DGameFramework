@@ -1,7 +1,7 @@
 #pragma once
 #include "IRenderable.h"
 
-class Texture;
+class ITexture;
 class Shader;
 
 class Sprite : public IRenderable
@@ -9,7 +9,7 @@ class Sprite : public IRenderable
 	using Super = IRenderable;
 
 public:
-	Sprite(const string& name, shared_ptr<Texture> texture, shared_ptr<Shader> shader);
+	Sprite(const string& name, shared_ptr<ITexture> texture, shared_ptr<Shader> shader);
 	virtual ~Sprite() override;
 
 public:
@@ -17,7 +17,7 @@ public:
 	virtual void Render() override;
 
 private:
-	shared_ptr<Texture> _texture;
+	shared_ptr<ITexture> _texture;
 	shared_ptr<Shader> _shader;
 };
 

@@ -221,10 +221,16 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Resources\Shaders\FragShader.frag">
+    <None Include="glsl\default.frag">
       <Filter>소스 파일\05. Resources\glsl</Filter>
     </None>
-    <None Include="..\Resources\Shaders\VertShader.vert">
+    <None Include="glsl\default.vert">
+      <Filter>소스 파일\05. Resources\glsl</Filter>
+    </None>
+    <None Include="glsl\text.frag">
+      <Filter>소스 파일\05. Resources\glsl</Filter>
+    </None>
+    <None Include="glsl\text.vert">
       <Filter>소스 파일\05. Resources\glsl</Filter>
     </None>
   </ItemGroup>

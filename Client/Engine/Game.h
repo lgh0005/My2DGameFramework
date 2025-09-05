@@ -3,6 +3,7 @@
 #pragma region TEST
 class Shader;
 class Texture;
+class Font;
 class Sprite;
 #pragma endregion
 
@@ -25,12 +26,15 @@ private:
 private:
 
 	// Resources
-	shared_ptr<Shader> _shader;
+	shared_ptr<Shader> _texShader;
 	shared_ptr<Texture> _texture;
+	shared_ptr<Font> _font;
+
+	shared_ptr<Shader> _fontShader;
 
 	// Component
-	shared_ptr<Sprite> _sprite;
-
+	shared_ptr<Sprite> _sprite1;
+	shared_ptr<Sprite> _sprite2; // For the font rendering component. Will be rendered later through the UI component.
 	//..
 
 #pragma endregion

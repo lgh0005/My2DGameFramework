@@ -45,6 +45,10 @@ void RenderManager::Init()
     // Create Viewport
     glViewport(0, 0, _bufferWidth, _bufferHeight);
     glClearColor(_clearColor[0], _clearColor[1], _clearColor[2], _clearColor[3]);
+
+    // Enable alpha blending for font/text rendering
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void RenderManager::Update()

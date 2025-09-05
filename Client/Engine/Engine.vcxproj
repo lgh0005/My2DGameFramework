@@ -213,8 +213,10 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <Text Include="..\Debug\Error_report.log" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Resources\Shaders\FragShader.frag" />
-    <None Include="..\Resources\Shaders\VertShader.vert" />
+    <None Include="glsl\default.frag" />
+    <None Include="glsl\default.vert" />
+    <None Include="glsl\text.frag" />
+    <None Include="glsl\text.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
