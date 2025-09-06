@@ -1,6 +1,8 @@
 #pragma once
 #include "ITexture.h"
 
+class Camera;
+
 class Texture : public ITexture
 {
 	using Super = ITexture;
@@ -11,6 +13,6 @@ public:
 
 public:
 	virtual void Init() override;
-	virtual void Render(shared_ptr<Shader> shader, glm::mat4 model) override;
+	virtual void Render(shared_ptr<Shader> shader, glm::mat4 mode, shared_ptr<Camera> camera) override;
 };
 

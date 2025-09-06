@@ -3,6 +3,7 @@
 
 class ITexture;
 class Shader;
+class Camera;
 
 class Sprite : public IRenderable
 {
@@ -14,7 +15,7 @@ public:
 
 public:
 	virtual void Init(shared_ptr<GameObject> owner) override;
-	virtual void Render() override;
+	virtual void Render(const shared_ptr<Camera>& camera) override;
 
 private:
 	shared_ptr<ITexture> _texture;

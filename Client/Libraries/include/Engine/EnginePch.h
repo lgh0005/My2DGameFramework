@@ -59,6 +59,7 @@ using namespace FMOD;
 #include "Types.h"
 #include "Defines.h"
 #include "Values.h"
+#include "Enums.h"
 #include "Logger.h"
 #define LOGGER Logger::GetInstance()
 
@@ -66,7 +67,11 @@ using namespace FMOD;
 #include "TimeManager.h"
 #include "RenderManager.h"
 #include "ResourceManager.h"
+#include "InputManager.h"
+#include "AudioManager.h"
 
 #define TIME TimeManager::GetInstance()
 #define RENDER RenderManager::GetInstance()
 #define RESOURCE ResourceManager::GetInstance()
+#define INPUT InputManager::GetInstance()
+#define AUDIO AudioManager::GetInstance()

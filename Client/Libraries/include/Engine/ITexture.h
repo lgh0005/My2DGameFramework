@@ -2,6 +2,7 @@
 #include "IResource.h"
 
 class Shader;
+class Camera;
 
 class ITexture : public IResource
 {
@@ -13,7 +14,10 @@ public:
 
 public:
 	virtual void Init() override;
-	virtual void Render(shared_ptr<Shader> shader, glm::mat4 model);
+
+#pragma region TEST
+	virtual void Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera> camera);
+#pragma endregion
 
 protected:
 	virtual void LoadTexture();

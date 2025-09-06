@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Font.h"
 #include "Shader.h"
+#include "Camera.h"
 
 Font::Font(const string& name, const string& filePath, const string& text, uint32 fontSize, SDL_Color color)
 	: Super(name, filePath), _text(text), _fontSize(fontSize), _color(color)
@@ -16,7 +17,7 @@ void Font::Init()
 	Super::Init();
 }
 
-void Font::Render(shared_ptr<Shader> shader, glm::mat4 model)
+void Font::Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera> camera)
 {
 	shader->Use();
 
@@ -27,8 +28,8 @@ void Font::Render(shared_ptr<Shader> shader, glm::mat4 model)
 
 	// Transfrom 관련된 것들
 	glUniformMatrix4fv(shader->GetUniformLocation(Uniforms::UNIFORM_MODEL), 1, GL_FALSE, glm::value_ptr(model));
-	glUniformMatrix4fv(shader->GetUniformLocation(Uniforms::UNIFORM_VIEW), 1, GL_FALSE, glm::value_ptr(shader->GetView()));
-	glUniformMatrix4fv(shader->GetUniformLocation(Uniforms::UNIFORM_PROJECTION), 1, GL_FALSE, glm::value_ptr(shader->GetProjection()));
+	glUniformMatrix4fv(shader->GetUniformLocation(Uniforms::UNIFORM_VIEW), 1, GL_FALSE, glm::value_ptr(camera->GetView()));
+	glUniformMatrix4fv(shader->GetUniformLocation(Uniforms::UNIFORM_PROJECTION), 1, GL_FALSE, glm::value_ptr(camera->GetProjection()));
 	glUniform4f
 	(
 		shader->GetUniformLocation(Uniforms::UNIFORM_COLOR),

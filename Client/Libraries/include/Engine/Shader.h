@@ -18,12 +18,6 @@ public:
 	GLuint GetShaderProgram() { return _shaderID; }
 	GLuint GetUniformLocation(const string& uniform);
 
-public:
-	void SetView(glm::mat4& view) { _view = view; }
-	glm::mat4& GetView() { return _view; }
-	void SetProjection(glm::mat4& projection) { _projection = projection; }
-	glm::mat4& GetProjection() { return _projection; }
-
 private:
 	void AddUniforms(const vector<const char*>& uniforms);
 	void CompileShader();
@@ -36,7 +30,4 @@ private:
 	string _fragmentShaderFileLocation;
 	vector<const char*> _uniformVariables;
 	unordered_map<string, GLuint> _uniformLocation;
-	
-	glm::mat4 _view;
-	glm::mat4 _projection;
 };

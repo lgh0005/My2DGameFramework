@@ -3,6 +3,7 @@
 #include "ITexture.h"
 #include "Texture.h"
 #include "Shader.h"
+#include "Camera.h"
 
 Sprite::Sprite(const string& name, shared_ptr<ITexture> texture, shared_ptr<Shader> shader)
 	: Super(name), _texture(texture), _shader(shader)
@@ -22,8 +23,8 @@ void Sprite::Init(shared_ptr<GameObject> owner)
 	_texture->Init();
 }
 
-void Sprite::Render()
+void Sprite::Render(const shared_ptr<Camera>& camera)
 {
-	_texture->Render(_shader, _model);
+	_texture->Render(_shader, _model, camera);
 }
 

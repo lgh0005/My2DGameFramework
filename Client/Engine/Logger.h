@@ -13,7 +13,7 @@ public:
 	static void WriteLog(const string& msg);
 
 	template<typename Func>
-	static void DebugAssert(bool cond, const string& msg, Func err)
+	static void DebugAssert(bool cond, const string& msg, Func err = nullptr)
 	{
 		if (!cond) return;
 

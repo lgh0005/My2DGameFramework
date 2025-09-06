@@ -10,9 +10,17 @@ public:
 	virtual ~Camera() override;
 
 public:
+	virtual void Init(shared_ptr<GameObject> owner) override;
 	virtual void Update() override;
 
-private:
+public:
+	void SetView(glm::mat4& view) { _view = view; }
+	glm::mat4& GetView() { return _view; }
+	void SetProjection(glm::mat4& projection) { _projection = projection; }
+	glm::mat4& GetProjection() { return _projection; }
 
+private:
+	glm::mat4 _view;
+	glm::mat4 _projection;
 };
 

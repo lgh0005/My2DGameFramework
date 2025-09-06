@@ -128,6 +128,9 @@
     <ClCompile Include="Logger.cpp">
       <Filter>소스 파일\97. Debug</Filter>
     </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>소스 파일\04. Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -213,6 +216,12 @@
     </ClInclude>
     <ClInclude Include="Logger.h">
       <Filter>소스 파일\97. Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>소스 파일\04. Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h">
+      <Filter>소스 파일\99. Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

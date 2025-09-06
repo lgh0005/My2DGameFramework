@@ -8,6 +8,7 @@
 #include "Font.h"
 #include "Sprite.h"
 #include "Transform.h"
+#include "Camera.h"
 #include "GameObject.h"
 #pragma endregion
 
@@ -28,15 +29,53 @@ Game::~Game()
 void Game::Init()
 {
     // Init SDL
-    LOGGER.DebugAssert(SDL_Init(SDL_INIT_VIDEO) != 0, "SDL_Init Error", SDL_GetError);
+    int result = SDL_Init(SDL_INIT_VIDEO);
+    LOGGER.DebugAssert(result != 0, "SDL_Init Error", SDL_GetError);
+
+    // Init Font
+    result = TTF_Init();
+    LOGGER.DebugAssert(result != 0, "SDL_Init Error", nullptr);
 
     // Init Managers
     RENDER.Init();
-
-    // Init Fonts
-    TTF_Init();
+    AUDIO.Init();
 
 #pragma region TEST
+
+    // Cameras
+    {
+        // World Camera
+        _worldCamera = make_shared<Camera>("WorldCamera");
+        _cameraObjectWorld = make_shared<GameObject>("WorldCameraObject");
+        _cameraObjectWorld->AddComponent(_worldCamera);
+        _trans2 = make_shared<Transform>
+        (
+           "t1",
+            glm::vec3(300.0f, 0.0f, 0.0f),
+            glm::vec3(0.0f, 0.0f, 0.0f),
+            glm::vec3(1.0f, 1.0f, 1.0f)
+        );
+        _cameraObjectWorld->SetTransform(_trans2);
+        RENDER.AddCamera(Render::RenderLayer::World, _worldCamera);
+        _cameraObjectWorld->Init();
+    }
+
+    {
+        // UI Camera
+        _uiCamera = make_shared<Camera>("UICamera");
+        _cameraObjectUI = make_shared<GameObject>("UICameraObject");
+        _cameraObjectUI->AddComponent(_uiCamera);
+        _trans3 = make_shared<Transform>
+        (
+           "t2",
+            glm::vec3(300.0f, 0.0f, 0.0f),
+            glm::vec3(0.0f, 0.0f, 0.0f),
+            glm::vec3(1.0f, 1.0f, 1.0f)
+        );
+        _cameraObjectUI->SetTransform(_trans3);
+        RENDER.AddCamera(Render::RenderLayer::UI, _uiCamera);
+        _cameraObjectUI->Init();
+    }
 
     // Shader : Default texture shader
     {
@@ -57,7 +96,7 @@ void Game::Init()
     }
 
     // Shader : Defualt text shader
-    /*{
+    {
         _fontShader = make_shared<Shader>
         (
             "shader2",
@@ -73,7 +112,7 @@ void Game::Init()
             }
         );
         RESOURCE.AddResource(_fontShader);
-    }*/
+    }
 
     // Sprite
     {
@@ -83,26 +122,26 @@ void Game::Init()
 
         // Sprite
         _sprite1 = make_shared<Sprite>("sprite", RESOURCE.GetResource<Texture>("texture"), RESOURCE.GetResource<Shader>("shader1"));
-        RENDER.AddRenderable(_sprite1);
+        RENDER.AddRenderable(Render::RenderLayer::World, _sprite1);
     }
 
-    //// Font
-    //{
-    //    _font = make_shared<Font>("font", "../Resources/Fonts/Crang.ttf", "Hello world!", 64, Colors::White);
-    //    RESOURCE.AddResource(_font);
+    // Font
+    {
+        _font = make_shared<Font>("font", "../Resources/Fonts/Crang.ttf", "Hello world!", 64, Colors::White);
+        RESOURCE.AddResource(_font);
 
-    //    // Sprite(UI)
-    //    _sprite2 = make_shared<Sprite>("Font", RESOURCE.GetResource<Font>("font"), RESOURCE.GetResource<Shader>("shader2"));
-    //    _sprite2->Init(nullptr);
-    //    RENDER.AddRenderable(_sprite2);
-    //}
+        // Sprite(UI)
+        _sprite2 = make_shared<Sprite>("Font", RESOURCE.GetResource<Font>("font"), RESOURCE.GetResource<Shader>("shader2"));
+        _sprite2->Init(nullptr);
+        RENDER.AddRenderable(Render::RenderLayer::UI, _sprite2);
+    }
 
     // Transform and GameObject
     {
         _trans1 = make_shared<Transform>
         (
             "transform",
-            glm::vec3(300.0f, 1.0f, 0.0f),
+            glm::vec3(300.0f, 200.0f, 0.0f),
             glm::vec3(0.0f, 0.0f, 0.0f),
             glm::vec3(1.0f, 1.0f, 1.0f)
         );
@@ -130,6 +169,9 @@ void Game::Launch()
         {
             if (_event.type == SDL_QUIT)
                 _running = false;
+
+            // Input event polling
+            INPUT.GetEvent(_event);
         }
 
         Update();
@@ -143,5 +185,11 @@ void Game::Launch()
 
 void Game::Update()
 {
+    // Update Managers
+    INPUT.Update();
+
+
     _gameObject->Update();
+    _cameraObjectUI->Update();
+    _cameraObjectWorld->Update();
 }

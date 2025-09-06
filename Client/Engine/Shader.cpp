@@ -19,15 +19,6 @@ void Shader::Init()
 	_shaderID = glCreateProgram();
 	LOGGER.DebugAssert(_shaderID == 0, "Failed to create shader program.", glGetError);
 
-	// Set default view, projection matrix
-	_view = glm::mat4(1.0);
-	_projection = glm::ortho
-	(
-		-(float)WindowConfig::GWinSizeX / 2.0f, (float)WindowConfig::GWinSizeX / 2.0f,  // left, right
-		-(float)WindowConfig::GWinSizeY / 2.0f, (float)WindowConfig::GWinSizeY / 2.0f,  // bottom, top
-		-1.0f, 1.0f
-	);
-
 	// Compile shader
 	CompileShader();
 }

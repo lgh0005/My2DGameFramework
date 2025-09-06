@@ -1,6 +1,8 @@
 #include "pch.h"
+#include "Camera.h"
 #include "ITexture.h"
 #include "Shader.h"
+#include "Camera.h"
 
 ITexture::ITexture(const string& name, const string& filePath)
 	: Super(name), _resourceFilePath(filePath)
@@ -19,7 +21,7 @@ void ITexture::Init()
 	CreateRect();
 }
 
-void ITexture::Render(shared_ptr<Shader> shader, glm::mat4 model)
+void ITexture::Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera> camera)
 {
 	shader->Use();
 
@@ -30,8 +32,8 @@ void ITexture::Render(shared_ptr<Shader> shader, glm::mat4 model)
 
 	// Transfrom 관련된 것들
 	glUniformMatrix4fv(shader->GetUniformLocation(Uniforms::UNIFORM_MODEL), 1, GL_FALSE, glm::value_ptr(model));
-	glUniformMatrix4fv(shader->GetUniformLocation(Uniforms::UNIFORM_VIEW), 1, GL_FALSE, glm::value_ptr(shader->GetView()));
-	glUniformMatrix4fv(shader->GetUniformLocation(Uniforms::UNIFORM_PROJECTION), 1, GL_FALSE, glm::value_ptr(shader->GetProjection()));
+	glUniformMatrix4fv(shader->GetUniformLocation(Uniforms::UNIFORM_VIEW), 1, GL_FALSE, glm::value_ptr(camera->GetView()));
+	glUniformMatrix4fv(shader->GetUniformLocation(Uniforms::UNIFORM_PROJECTION), 1, GL_FALSE, glm::value_ptr(camera->GetProjection()));
 
 	// Bind texture
 	UseTexture();

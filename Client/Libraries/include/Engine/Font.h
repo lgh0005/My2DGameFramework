@@ -2,6 +2,7 @@
 #include "ITexture.h"
 
 class Shader;
+class Camera;
 
 class Font : public ITexture
 {
@@ -13,7 +14,7 @@ public:
 
 public:
 	virtual void Init() override;
-	virtual void Render(shared_ptr<Shader> shader, glm::mat4 model) override;
+	virtual void Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera> camera) override;
 	
 protected:
 	virtual void LoadTexture() override;

@@ -59,15 +59,24 @@ void RenderManager::Render()
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    for (auto renderable : _renderables)
+    for (auto& [layer, camera] : _cameras)
     {
-        renderable->Render();
+        auto& queue = _renderQueues[layer];
+        for (auto& renderable : queue)
+            renderable->Render(camera);
     }
 
     SDL_GL_SwapWindow(_window);
 }
 
-void RenderManager::AddRenderable(shared_ptr<IRenderable> renderable)
+void RenderManager::AddCamera(Render::RenderLayer layer, shared_ptr<Camera> camera)
 {
-    _renderables.push_back(renderable);
+    _cameras[layer] = camera;
 }
+
+void RenderManager::AddRenderable(Render::RenderLayer layer, shared_ptr<IRenderable> renderable)
+{
+    _renderQueues[layer].push_back(renderable);
+}
+
+
