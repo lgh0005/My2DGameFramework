@@ -68,7 +68,7 @@ void Game::Init()
         _trans3 = make_shared<Transform>
         (
            "t2",
-            glm::vec3(300.0f, 0.0f, 0.0f),
+            glm::vec3(0.0f, 0.0f, 0.0f),
             glm::vec3(0.0f, 0.0f, 0.0f),
             glm::vec3(1.0f, 1.0f, 1.0f)
         );
@@ -152,7 +152,6 @@ void Game::Init()
 
         _gameObject->Init();
     }
-
 #pragma endregion
 }
 
@@ -174,6 +173,7 @@ void Game::Launch()
             INPUT.GetEvent(_event);
         }
 
+        // Update Logic
         Update();
 
 #pragma region TEST
@@ -188,8 +188,13 @@ void Game::Update()
     // Update Managers
     INPUT.Update();
 
-
+#pragma region TEST
     _gameObject->Update();
     _cameraObjectUI->Update();
     _cameraObjectWorld->Update();
+
+    if (_sprite1->IsMouseHovered(INPUT.GetMousePosition(_worldCamera)))
+        cout << "Mouse Hovered!" << endl;
+
+#pragma endregion
 }

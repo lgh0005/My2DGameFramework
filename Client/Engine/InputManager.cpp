@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "InputManager.h"
+#include "Camera.h"
 
 void InputManager::Init()
 {
@@ -76,7 +77,6 @@ void InputManager::GetEvent(const SDL_Event& e)
 		}
 		case SDL_MOUSEMOTION:
 		{
-			// TODO : OpenGL 좌표계에 맞춰서 위치가 보정이 되어야 할 필요가 있다.
 			_mousePosition = glm::vec2(e.motion.x, e.motion.y);
 			break;
 		}
@@ -88,3 +88,15 @@ void InputManager::GetEvent(const SDL_Event& e)
 	}
 }
 
+glm::vec2 InputManager::GetMousePosition(shared_ptr<Camera> camera)
+{
+	// Convert coordinate SDL to NDC
+	float x_ndc = (_mousePosition.x / WindowConfig::GWinSizeX) * 2.0f - 1.0f;
+	float y_ndc = 1.0f - (_mousePosition.y / WindowConfig::GWinSizeY) * 2.0f;
+
+	// Convert coordinate NDC to World
+	glm::vec4 ndcPos(x_ndc, y_ndc, 0.0f, 1.0f);
+	glm::vec4 worldPos = camera->GetInvVP() * ndcPos;
+
+	return glm::vec2(worldPos);
+}

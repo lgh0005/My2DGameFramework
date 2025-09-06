@@ -28,9 +28,34 @@ void Camera::Update()
 {
     if (auto owner = _owner.lock())
     {
-        glm::vec3 pos = owner->GetTransform()->GetPosition();
-        glm::vec3 rot = owner->GetTransform()->GetRotation();
+        auto transform = owner->GetTransform();
+        glm::vec3 pos = transform->GetPosition();
+        glm::vec3 rot = transform->GetRotation();
+        glm::vec3 scl = transform->GetScale();
 
-        _view = glm::translate(glm::mat4(1.0f), -pos);
+        if (pos != _lastPos || rot != _lastRot || scl != _lastScale)
+        {
+            glm::mat4 view(1.0f);
+            view = glm::translate(view, -pos);
+            view = glm::rotate(view, glm::radians(-rot.z), glm::vec3(0.0f, 0.0f, 1.0f));
+            view = glm::scale(view, glm::vec3(1.0f / scl.x, 1.0f / scl.y, 1.0f));
+            
+            _view = view;
+            _dirty = true;
+
+            _lastPos = pos;
+            _lastRot = rot;
+            _lastScale = scl;
+        }
     }
+}
+
+glm::mat4& Camera::GetInvVP()
+{
+    if (_dirty)
+    {
+        _invVP = glm::inverse(_projection * _view);
+        _dirty = false;
+    }
+    return _invVP;
 }

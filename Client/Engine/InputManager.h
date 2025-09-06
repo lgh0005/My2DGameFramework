@@ -1,6 +1,8 @@
 #pragma once
 #include "ISingleton.h"
 
+class Camera;
+
 enum class InputState
 {
 	None,
@@ -32,7 +34,7 @@ public:
 	bool MouseClick(Inputs::Mouse button) { return InputState::Down == GetMouseState(button); }
 	bool MouseUp(Inputs::Mouse button) { return InputState::Up == GetMouseState(button); }
 
-	glm::vec2 GetMousePosition() { return _mousePosition; }
+	glm::vec2 GetMousePosition(shared_ptr<Camera> camera);
 	int8 GetMouseWheel() const { return _mouseWheel; }
 
 private:
@@ -46,7 +48,6 @@ private:
 
 	array<InputState, Inputs::MOUSE_COUNT> _mouseState{};
 
-	// TODO : _mousePosition currently stores SDL window coordinates (top-left origin) and should be converted to OpenGL coordinates for UI or scene interactions.
 	glm::vec2 _mousePosition;
 	int8 _mouseWheel = 0;
 };

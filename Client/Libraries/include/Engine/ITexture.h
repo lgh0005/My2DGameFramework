@@ -19,6 +19,10 @@ public:
 	virtual void Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera> camera);
 #pragma endregion
 
+public:
+	uint32 GetWidth() { return _width; }
+	uint32 GetHeight() { return _height; }
+
 protected:
 	virtual void LoadTexture();
 	void CreateRect();
