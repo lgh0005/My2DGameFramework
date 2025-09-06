@@ -20,8 +20,9 @@ public:
 #pragma endregion
 
 public:
-	uint32 GetWidth() { return _width; }
-	uint32 GetHeight() { return _height; }
+	uint32 GetWidth() const { return _width; }
+	uint32 GetHeight() const { return _height; }
+	glm::vec2 GetSize() const { return glm::vec2(_width, _height); }
 
 protected:
 	virtual void LoadTexture();

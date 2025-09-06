@@ -7,6 +7,7 @@ class Font;
 class Sprite;
 class Transform;
 class Camera;
+class Text;
 class GameObject;
 #pragma endregion
 
@@ -37,8 +38,10 @@ private:
 
 	// Component
 	shared_ptr<Sprite> _sprite1;
-	shared_ptr<Sprite> _sprite2; // For the font rendering component. Will be rendered later through the UI component.
+	shared_ptr<Text> _sprite2; // For the font rendering component. Will be rendered later through the UI component.
+
 	shared_ptr<Transform> _trans1;
+	shared_ptr<Transform> _trans4;
 
 	shared_ptr<Camera> _uiCamera;
 	shared_ptr<Transform> _trans2;
@@ -47,7 +50,8 @@ private:
 	shared_ptr<Transform> _trans3;
 	
 	// GameObject
-	shared_ptr<GameObject> _gameObject;
+	shared_ptr<GameObject> _gameObject; 
+	shared_ptr<GameObject> _gameObject2;
 	shared_ptr<GameObject> _cameraObjectUI;
 	shared_ptr<GameObject> _cameraObjectWorld;
 

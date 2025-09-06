@@ -8,9 +8,8 @@ class IRenderable : public IComponent
 	using Super = IComponent;
 
 public:
-	// TODO : 텍스쳐를 받아와서 OpenGL을 통해 렌더링 시켜야 함.
 	IRenderable(const string& name);
-	virtual ~IRenderable();
+	virtual ~IRenderable() override;
 
 public:
 	virtual void Render(const shared_ptr<Camera>& camera) abstract;

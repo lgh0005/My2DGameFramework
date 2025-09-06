@@ -17,11 +17,6 @@ public:
 	virtual void Init(shared_ptr<GameObject> owner) override;
 	virtual void Render(const shared_ptr<Camera>& camera) override;
 
-#pragma region TEST
-public:
-	bool IsMouseHovered(glm::vec2 mousePos);
-#pragma endregion
-
 private:
 	shared_ptr<ITexture> _texture;
 	shared_ptr<Shader> _shader;

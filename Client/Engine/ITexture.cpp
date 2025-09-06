@@ -2,7 +2,6 @@
 #include "Camera.h"
 #include "ITexture.h"
 #include "Shader.h"
-#include "Camera.h"
 
 ITexture::ITexture(const string& name, const string& filePath)
 	: Super(name), _resourceFilePath(filePath)

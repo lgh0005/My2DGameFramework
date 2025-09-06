@@ -9,6 +9,7 @@
 #include "Sprite.h"
 #include "Transform.h"
 #include "Camera.h"
+#include "Text.h"
 #include "GameObject.h"
 #pragma endregion
 
@@ -60,15 +61,15 @@ void Game::Init()
         _cameraObjectWorld->Init();
     }
 
+    // UI Camera
     {
-        // UI Camera
         _uiCamera = make_shared<Camera>("UICamera");
         _cameraObjectUI = make_shared<GameObject>("UICameraObject");
         _cameraObjectUI->AddComponent(_uiCamera);
         _trans3 = make_shared<Transform>
         (
            "t2",
-            glm::vec3(0.0f, 0.0f, 0.0f),
+            glm::vec3(300.0f, 0.0f, 0.0f),
             glm::vec3(0.0f, 0.0f, 0.0f),
             glm::vec3(1.0f, 1.0f, 1.0f)
         );
@@ -114,30 +115,20 @@ void Game::Init()
         RESOURCE.AddResource(_fontShader);
     }
 
-    // Sprite
+    // GameObject #1 : GameObject
     {
-        // Texture
-        _texture = make_shared<Texture>("texture", "../Resources/Images/cuphead_idle_0001.png");
-        RESOURCE.AddResource(_texture);
-
         // Sprite
-        _sprite1 = make_shared<Sprite>("sprite", RESOURCE.GetResource<Texture>("texture"), RESOURCE.GetResource<Shader>("shader1"));
-        RENDER.AddRenderable(Render::RenderLayer::World, _sprite1);
-    }
+        {
+            // Texture
+            _texture = make_shared<Texture>("texture", "../Resources/Images/cuphead_idle_0001.png");
+            RESOURCE.AddResource(_texture);
 
-    // Font
-    {
-        _font = make_shared<Font>("font", "../Resources/Fonts/Crang.ttf", "Hello world!", 64, Colors::White);
-        RESOURCE.AddResource(_font);
+            // Sprite
+            _sprite1 = make_shared<Sprite>("sprite", RESOURCE.GetResource<Texture>("texture"), RESOURCE.GetResource<Shader>("shader1"));
+            RENDER.AddRenderable(Render::RenderLayer::World, _sprite1);
+        }
 
-        // Sprite(UI)
-        _sprite2 = make_shared<Sprite>("Font", RESOURCE.GetResource<Font>("font"), RESOURCE.GetResource<Shader>("shader2"));
-        _sprite2->Init(nullptr);
-        RENDER.AddRenderable(Render::RenderLayer::UI, _sprite2);
-    }
-
-    // Transform and GameObject
-    {
+        // GameObject and Transform
         _trans1 = make_shared<Transform>
         (
             "transform",
@@ -152,6 +143,35 @@ void Game::Init()
 
         _gameObject->Init();
     }
+
+    // GameObject #2 : Text UI
+    {
+        // Font
+        {
+            _font = make_shared<Font>("font", "../Resources/Fonts/Crang.ttf", "Hello world!", 64, Colors::White);
+            RESOURCE.AddResource(_font);
+
+            // Sprite(UI)
+            _sprite2 = make_shared<Text>("Font", RESOURCE.GetResource<Font>("font"), RESOURCE.GetResource<Shader>("shader2"));
+            RENDER.AddRenderable(Render::RenderLayer::UI, _sprite2);
+        }
+
+        // GameObject and Transform
+        _trans4 = make_shared<Transform>
+        (
+            "transform4",
+            glm::vec3(0.0f, 0.0f, 0.0f),
+            glm::vec3(0.0f, 0.0f, 0.0f),
+            glm::vec3(1.0f, 1.0f, 1.0f)
+        );
+
+        _gameObject2 = make_shared<GameObject>("GameObject2");
+        _gameObject2->SetTransform(_trans4);
+        _gameObject2->AddRenderable(static_pointer_cast<IRenderable>(_sprite2));
+
+        _gameObject2->Init();
+    }
+
 #pragma endregion
 }
 
@@ -193,8 +213,8 @@ void Game::Update()
     _cameraObjectUI->Update();
     _cameraObjectWorld->Update();
 
-    if (_sprite1->IsMouseHovered(INPUT.GetMousePosition(_worldCamera)))
-        cout << "Mouse Hovered!" << endl;
+    //if (_sprite1->IsMouseHovered(INPUT.GetMousePosition(_worldCamera)))
+    //    cout << "Mouse Hovered!" << endl;
 
 #pragma endregion
 }
