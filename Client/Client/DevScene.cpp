@@ -19,6 +19,10 @@
 #include "Engine/Font.h"
 #pragma endregion
 
+#pragma region Behaviour
+#include "example.h"
+#pragma endregion
+
 #pragma region Test Scene
 DevScene::DevScene(const string& name) : Super(name)
 {
@@ -27,6 +31,11 @@ DevScene::DevScene(const string& name) : Super(name)
 
 void DevScene::CreateSceneContext()
 {
+	/*==================
+	*   preprocessing  *
+	===================*/
+	RENDER.SetClearColor({ 0.2f, 0.0f, 0.0f, 1.0f });
+
 	// Main Camera
 	{
 		_mainCameraComponent = make_shared<Camera>("MainCameraComponent");
@@ -130,9 +139,11 @@ void DevScene::CreateSceneContext()
 			glm::vec3(0.0f, 0.0f, 0.0f),
 			glm::vec3(1.0f, 1.0f, 1.0f)
 		);
+		_sampleScript = make_shared<example>("example");
 		_spriteObject = make_shared<GameObject>("SpriteObject");
 		_spriteObject->SetTransform(_spriteTransform);
 		_spriteObject->AddRenderable(static_pointer_cast<IRenderable>(_sprite));
+		_spriteObject->AddBehaviour(static_pointer_cast<IBehaviour>(_sampleScript));
 		_gameObjects.push_back(_spriteObject);
 	}
 }

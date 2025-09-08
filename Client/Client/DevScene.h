@@ -18,6 +18,10 @@ class Texture;
 class Font;
 #pragma endregion
 
+#pragma region Behaviour
+class example;
+#pragma endregion
+
 #pragma region Test Scene
 class DevScene : public Scene
 {
@@ -55,6 +59,7 @@ private:
 	shared_ptr<Texture> _texture;
 	shared_ptr<Sprite> _sprite;
 	shared_ptr<Transform> _spriteTransform;
+	shared_ptr<example> _sampleScript;
 	shared_ptr<GameObject> _spriteObject;
 };
 #pragma endregion

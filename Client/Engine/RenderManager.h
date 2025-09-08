@@ -16,8 +16,12 @@ public:
 	virtual void Update() override;
 	void Render();
 
+public:
 	void AddCamera(Render::RenderLayer layer, shared_ptr<Camera> camera);
 	void AddRenderable(Render::RenderLayer layer, shared_ptr<IRenderable> renderable);
+	
+public:
+	void SetClearColor(const array<GLclampf, 4>& clearColor);
 
 private:
 	SDL_Window* _window;

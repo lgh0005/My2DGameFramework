@@ -80,3 +80,8 @@ void RenderManager::AddRenderable(Render::RenderLayer layer, shared_ptr<IRendera
 }
 
 
+void RenderManager::SetClearColor(const array<GLclampf, 4>& clearColor)
+{
+    _clearColor = clearColor;
+    glClearColor(_clearColor[0], _clearColor[1], _clearColor[2], _clearColor[3]);
+}

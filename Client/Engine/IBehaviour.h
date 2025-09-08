@@ -3,8 +3,17 @@
 
 class IBehaviour : public IComponent
 {
-public:
+	using Super = IComponent;
 
-private:
+public:
+	IBehaviour(const string& name);
+	virtual ~IBehaviour() override;
+
+public:
+	virtual void Awake(shared_ptr<GameObject> owner);
+	virtual void Init();
+	virtual void Update();
+	virtual void FixedUpdate();
+	virtual void LateUpdate();
 };
 

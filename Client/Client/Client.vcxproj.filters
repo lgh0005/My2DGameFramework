@@ -41,6 +41,9 @@
     <ClCompile Include="DevScene.cpp">
       <Filter>소스 파일\01. DevScene\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="example.cpp">
+      <Filter>소스 파일\01. DevScene\Scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -54,6 +57,9 @@
     </ClInclude>
     <ClInclude Include="DevScene.h">
       <Filter>소스 파일\01. DevScene\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="example.h">
+      <Filter>소스 파일\01. DevScene\Scripts</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
