@@ -13,11 +13,11 @@ IUIStatic::~IUIStatic()
 {
 }
 
-void IUIStatic::Init(shared_ptr<GameObject> owner)
+void IUIStatic::Awake(shared_ptr<GameObject> owner)
 {
-	Super::Init(owner);
-	_texture->Init();
-	_shader->Init();
+	Super::Awake(owner);
+	_texture->Awake();
+	_shader->Awake();
 }
 
 void IUIStatic::Render(const shared_ptr<Camera>& camera)

@@ -1,0 +1,139 @@
+#include "pch.h"
+#include "DevScene.h"
+
+#pragma region GameObject
+#include "Engine/GameObject.h"
+#pragma endregion
+
+#pragma region Components
+#include "Engine/IRenderable.h"
+#include "Engine/Transform.h"
+#include "Engine/Camera.h"
+#include "Engine/Sprite.h"
+#include "Engine/Text.h"
+#pragma endregion
+
+#pragma region Resources
+#include "Engine/Shader.h"
+#include "Engine/Texture.h"
+#include "Engine/Font.h"
+#pragma endregion
+
+#pragma region Test Scene
+DevScene::DevScene(const string& name) : Super(name)
+{
+
+}
+
+void DevScene::CreateSceneContext()
+{
+	// Main Camera
+	{
+		_mainCameraComponent = make_shared<Camera>("MainCameraComponent");
+		_mainCamera = make_shared<GameObject>("MainCamera");
+		_mainCamera->AddComponent(_mainCameraComponent);
+		_mainCameraTransform = make_shared<Transform>
+		(
+			"MainCameraTransform",
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(1.0f ,1.0f, 1.0f)
+		);
+		_mainCamera->SetTransform(_mainCameraTransform);
+		RENDER.AddCamera(Render::RenderLayer::World, _mainCameraComponent);
+		_gameObjects.push_back(_mainCamera);
+	}
+
+	// UI Camera
+	{
+		_uiCameraComponent = make_shared<Camera>("UICameraComponent");
+		_uiCamera = make_shared<GameObject>("UICamera");
+		_uiCamera->AddComponent(_uiCameraComponent);
+		_uiCameraTransform = make_shared<Transform>
+			(
+				"UICameraTransform",
+				glm::vec3(0.0f, 0.0f, 0.0f),
+				glm::vec3(0.0f, 0.0f, 0.0f),
+				glm::vec3(1.0f, 1.0f, 1.0f)
+			);
+		_uiCamera->SetTransform(_uiCameraTransform);
+		RENDER.AddCamera(Render::RenderLayer::UI, _uiCameraComponent);
+		_gameObjects.push_back(_uiCamera);
+	}
+
+	// Shader : Default texture shader
+	{
+		_textureShader = make_shared<Shader>
+		(
+			"TextureShader",
+			"../Engine/glsl/default.vert",
+			"../Engine/glsl/default.frag",
+			vector<const char*>
+			{
+				Uniforms::UNIFORM_MODEL,
+				Uniforms::UNIFORM_VIEW,
+				Uniforms::UNIFORM_PROJECTION,
+				Uniforms::UNIFORM_TEXTURE
+			}
+		);
+		RESOURCE.AddResource(_textureShader);
+	}
+
+	// Shader : Defualt text shader
+	{
+		_textShader = make_shared<Shader>
+		(
+			"TextShader",
+			"../Engine/glsl/text.vert",
+			"../Engine/glsl/text.frag",
+			vector<const char*>
+			{
+				Uniforms::UNIFORM_MODEL,
+				Uniforms::UNIFORM_VIEW,
+				Uniforms::UNIFORM_PROJECTION,
+				Uniforms::UNIFORM_TEXTURE,
+				Uniforms::UNIFORM_COLOR
+			}
+		);
+		RESOURCE.AddResource(_textShader);
+	}
+
+	// Text UI GameObject
+	{
+		_font = make_shared<Font>("font", "../Resources/Fonts/Crang.ttf", "Hello world!", 64, Colors::White);
+		RESOURCE.AddResource(_font);
+		_textTexture = make_shared<Text>("Text", RESOURCE.GetResource<Font>("font"), RESOURCE.GetResource<Shader>("TextShader"));
+		RENDER.AddRenderable(Render::RenderLayer::UI, _textTexture);
+		_textTransform = make_shared<Transform>
+		(
+			"TextTransform",
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(1.0f, 1.0f, 1.0f)
+		);
+		_textObject = make_shared<GameObject>("TextObject");
+		_textObject->SetTransform(_textTransform);
+		_textObject->AddRenderable(static_pointer_cast<IRenderable>(_textTexture));
+		_gameObjects.push_back(_textObject);
+	}
+
+	// Sprite GameObject
+	{
+		_texture = make_shared<Texture>("Texture", "../Resources/Images/cuphead_idle_0001.png");
+		RESOURCE.AddResource(_texture);
+		_sprite = make_shared<Sprite>("Sprite", RESOURCE.GetResource<Texture>("Texture"), RESOURCE.GetResource<Shader>("TextureShader"));
+		RENDER.AddRenderable(Render::RenderLayer::World, _sprite);
+		_spriteTransform = make_shared<Transform>
+		(
+			"TextTransform",
+			glm::vec3(300.0f, 200.0f, 0.0f),
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(1.0f, 1.0f, 1.0f)
+		);
+		_spriteObject = make_shared<GameObject>("SpriteObject");
+		_spriteObject->SetTransform(_spriteTransform);
+		_spriteObject->AddRenderable(static_pointer_cast<IRenderable>(_sprite));
+		_gameObjects.push_back(_spriteObject);
+	}
+}
+#pragma endregion

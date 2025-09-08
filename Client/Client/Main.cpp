@@ -3,8 +3,15 @@
 
 int SDL_main(int, char**)
 {
-	GAME->Init();
-	GAME->Launch();
+	// Game content scenes
+	vector<shared_ptr<Scene>> SCENES
+	{
+		make_shared<DevScene>("DevScene")
+	};
+
+	// Run game application
+	LAUNCH->AddScenes(SCENES);
+	LAUNCH->Run("DevScene");
 
 	return 0;
 }

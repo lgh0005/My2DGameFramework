@@ -12,9 +12,9 @@ Font::~Font()
 {
 }
 
-void Font::Init()
+void Font::Awake()
 {
-	Super::Init();
+	Super::Awake();
 }
 
 void Font::Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera> camera)

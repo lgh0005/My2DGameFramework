@@ -12,7 +12,7 @@ public:
 	virtual ~Texture() override;
 
 public:
-	virtual void Init() override;
+	virtual void Awake() override;
 	virtual void Render(shared_ptr<Shader> shader, glm::mat4 mode, shared_ptr<Camera> camera) override;
 };
 

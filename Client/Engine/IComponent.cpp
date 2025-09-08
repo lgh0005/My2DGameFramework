@@ -11,12 +11,8 @@ IComponent::~IComponent()
 
 }
 
-void IComponent::Init(shared_ptr<GameObject> owner)
-{
-	_owner = owner;
-}
-
-void IComponent::Update()
-{
-
-}
+void IComponent::Awake(shared_ptr<GameObject> owner) { _owner = owner; }
+void IComponent::Init() {}
+void IComponent::Update() {}
+void IComponent::FixedUpdate() {}
+void IComponent::LateUpdate() {}

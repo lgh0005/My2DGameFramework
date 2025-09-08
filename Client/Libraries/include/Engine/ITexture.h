@@ -13,7 +13,7 @@ public:
 	virtual ~ITexture();
 
 public:
-	virtual void Init() override;
+	virtual void Awake() override;
 
 #pragma region TEST
 	virtual void Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera> camera);

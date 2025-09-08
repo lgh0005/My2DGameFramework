@@ -69,9 +69,11 @@ using namespace FMOD;
 #include "ResourceManager.h"
 #include "InputManager.h"
 #include "AudioManager.h"
+#include "SceneManager.h"
 
 #define TIME TimeManager::GetInstance()
 #define RENDER RenderManager::GetInstance()
 #define RESOURCE ResourceManager::GetInstance()
 #define INPUT InputManager::GetInstance()
 #define AUDIO AudioManager::GetInstance()
+#define SCENE SceneManager::GetInstance()

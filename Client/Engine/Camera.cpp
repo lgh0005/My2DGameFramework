@@ -11,9 +11,9 @@ Camera::~Camera()
 {
 }
 
-void Camera::Init(shared_ptr<GameObject> owner)
+void Camera::Awake(shared_ptr<GameObject> owner)
 {
-	Super::Init(owner);
+	Super::Awake(owner);
 	
 	_view = glm::mat4(1.0f);
     _projection = glm::ortho

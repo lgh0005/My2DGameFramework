@@ -1,6 +1,8 @@
 #pragma once
 #include "IComponent.h"
 
+class GameObject;
+
 class Transform : public IComponent
 {
 	using Super = IComponent;
@@ -30,6 +32,8 @@ private:
 	glm::vec3 _position = glm::vec3(0.0f);
 	glm::vec3 _rotation = glm::vec3(0.0f);
 	glm::vec3 _scale = glm::vec3(1.0f);
+
+	weak_ptr<GameObject> _parent;
 };
 
 

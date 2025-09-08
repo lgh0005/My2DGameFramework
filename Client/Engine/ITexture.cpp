@@ -14,7 +14,7 @@ ITexture::~ITexture()
 }
 
 
-void ITexture::Init()
+void ITexture::Awake()
 {
 	LoadTexture();
 	CreateRect();

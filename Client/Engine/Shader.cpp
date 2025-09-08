@@ -13,7 +13,7 @@ Shader::~Shader()
 {
 }
 
-void Shader::Init()
+void Shader::Awake()
 {
 	// Create shader program
 	_shaderID = glCreateProgram();

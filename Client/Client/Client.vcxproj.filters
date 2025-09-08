@@ -15,6 +15,18 @@
     <Filter Include="소스 파일\99. Headers">
       <UniqueIdentifier>{15c16f7b-17c4-441d-8337-cf6b3a005f9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01. DevScene">
+      <UniqueIdentifier>{447c7fbc-bd2d-49be-a1b9-6beb44619d6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. DevScene\Scripts">
+      <UniqueIdentifier>{175d065a-1c04-455d-8d08-5d4c16536cc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. DevScene\Scene">
+      <UniqueIdentifier>{5af2dd72-bae9-4fc4-9ab5-97a48ca04125}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. DevScene\Prefabs">
+      <UniqueIdentifier>{eb8d3636-bf7f-4737-8163-eaa1eaa4fdf2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -23,6 +35,12 @@
     <ClCompile Include="pch.cpp">
       <Filter>소스 파일\99. Headers</Filter>
     </ClCompile>
+    <ClCompile Include="Launcher.cpp">
+      <Filter>소스 파일\00. Main</Filter>
+    </ClCompile>
+    <ClCompile Include="DevScene.cpp">
+      <Filter>소스 파일\01. DevScene\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -30,6 +48,12 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>소스 파일\99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Launcher.h">
+      <Filter>소스 파일\00. Main</Filter>
+    </ClInclude>
+    <ClInclude Include="DevScene.h">
+      <Filter>소스 파일\01. DevScene\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

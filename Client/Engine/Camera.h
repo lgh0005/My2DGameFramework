@@ -10,7 +10,7 @@ public:
 	virtual ~Camera() override;
 
 public:
-	virtual void Init(shared_ptr<GameObject> owner) override;
+	virtual void Awake(shared_ptr<GameObject> owner) override;
 	virtual void Update() override;
 
 public:

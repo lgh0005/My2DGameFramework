@@ -10,9 +10,9 @@ Texture::~Texture()
 {
 }
 
-void Texture::Init()
+void Texture::Awake()
 {
-	Super::Init();
+	Super::Awake();
 }
 
 void Texture::Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera> camera)

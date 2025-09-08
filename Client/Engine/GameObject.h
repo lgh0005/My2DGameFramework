@@ -25,7 +25,9 @@ public:
 // Init and Update
 public:
 	void Init();
+	void FixedUpdate();
 	void Update();
+	void LateUpdate();
 
 // Properties
 public:

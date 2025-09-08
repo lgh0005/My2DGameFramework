@@ -18,9 +18,9 @@ IUIElement::~IUIElement()
 {
 }
 
-void IUIElement::Init(shared_ptr<GameObject> owner)
+void IUIElement::Awake(shared_ptr<GameObject> owner)
 {
-	Super::Init(owner);
+	Super::Awake(owner);
 }
 
 glm::vec2 IUIElement::GetWorldPosition() const

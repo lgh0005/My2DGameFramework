@@ -8,6 +8,9 @@ class ResourceManager : public ISingleton<ResourceManager>
 	DECLARE_SINGLE(ResourceManager);
 
 public:
+	virtual ~ResourceManager() override;
+
+public:
 	virtual void Init() override;
 	virtual void Update() override;
 

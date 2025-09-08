@@ -10,7 +10,7 @@ public:
 	virtual ~Flipbook() override;
 
 public:
-	virtual void Init() override;
+	virtual void Awake() override;
 
 private:
 

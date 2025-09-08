@@ -16,10 +16,8 @@ public:
 	virtual void Update() override;
 	void Render();
 
-#pragma region TEST
 	void AddCamera(Render::RenderLayer layer, shared_ptr<Camera> camera);
 	void AddRenderable(Render::RenderLayer layer, shared_ptr<IRenderable> renderable);
-#pragma endregion
 
 private:
 	SDL_Window* _window;
@@ -28,8 +26,6 @@ private:
 	int _bufferHeight = 0;
 	array<GLclampf, 4> _clearColor = { 0.0f, 0.0f, 0.0f, 0.0f };
 
-#pragma region TEST
 	unordered_map<Render::RenderLayer, shared_ptr<Camera>> _cameras;
 	unordered_map<Render::RenderLayer, vector<shared_ptr<IRenderable>>> _renderQueues;
-#pragma endregion
 };

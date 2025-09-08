@@ -194,6 +194,9 @@
     <ClCompile Include="CircleCollider.cpp">
       <Filter>소스 파일\03. Components\Default</Filter>
     </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>소스 파일\03. Components\Default</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -341,6 +344,9 @@
       <Filter>소스 파일\03. Components\Default</Filter>
     </ClInclude>
     <ClInclude Include="CircleCollider.h">
+      <Filter>소스 파일\03. Components\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
       <Filter>소스 파일\03. Components\Default</Filter>
     </ClInclude>
   </ItemGroup>

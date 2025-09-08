@@ -12,6 +12,11 @@ IResource::~IResource()
 
 }
 
+void IResource::Awake()
+{
+
+}
+
 void IResource::Init()
 {
 

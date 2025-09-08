@@ -21,11 +21,11 @@ Sprite::~Sprite()
 
 }
 
-void Sprite::Init(shared_ptr<GameObject> owner)
+void Sprite::Awake(shared_ptr<GameObject> owner)
 {
-	Super::Init(owner);
-	_shader->Init();
-	_texture->Init();
+	Super::Awake(owner);
+	_shader->Awake();
+	_texture->Awake();
 }
 
 void Sprite::Render(const shared_ptr<Camera>& camera)

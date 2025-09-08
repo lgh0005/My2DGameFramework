@@ -7,6 +7,7 @@ public:
 	virtual ~IResource();
 
 public:
+	virtual void Awake();
 	virtual void Init();
 
 public:

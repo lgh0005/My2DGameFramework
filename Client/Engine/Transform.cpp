@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Transform.h"
+#include "GameObject.h"
 
 Transform::Transform(const string& name, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale)
 	: Super(name), _position(position), _rotation(rotation), _scale(scale)
@@ -40,5 +41,9 @@ void Transform::CalculateModelMatrix()
 
 	// Model Matrix = Translation * Rotation * Scale
 	_model = transMat * rotMat * scaleMat;
+	
+	// 부모 Transform 적용
+	if (auto parent = _parent.lock())
+		_model = parent->GetTransform()->GetModel() * _model;
 }
 

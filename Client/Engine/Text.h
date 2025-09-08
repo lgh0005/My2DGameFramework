@@ -10,7 +10,7 @@ public:
 	virtual ~Text() override;
 
 public:
-	virtual void Init(shared_ptr<GameObject> owner) override;
+	virtual void Awake(shared_ptr<GameObject> owner) override;
 	virtual void Render(const shared_ptr<Camera>& camera) override;
 };
 

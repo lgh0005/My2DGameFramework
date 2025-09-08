@@ -9,7 +9,7 @@ Flipbook::~Flipbook()
 {
 }
 
-void Flipbook::Init()
+void Flipbook::Awake()
 {
 }
 

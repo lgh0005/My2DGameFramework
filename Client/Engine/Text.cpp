@@ -11,9 +11,9 @@ Text::~Text()
 
 }
 
-void Text::Init(shared_ptr<GameObject> owner)
+void Text::Awake(shared_ptr<GameObject> owner)
 {
-	Super::Init(owner);
+	Super::Awake(owner);
 }
 
 void Text::Render(const shared_ptr<Camera>& camera)

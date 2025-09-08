@@ -2,6 +2,10 @@
 #include "InputManager.h"
 #include "Camera.h"
 
+InputManager::~InputManager()
+{
+}
+
 void InputManager::Init()
 {
 }

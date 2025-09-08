@@ -6,6 +6,9 @@ class TimeManager : public ISingleton<TimeManager>
 	DECLARE_SINGLE(TimeManager);
 
 public:
+	virtual ~TimeManager() override;
+
+public:
 	virtual void Init() override;
 	virtual void Update() override;
 	float deltaTime = 0.0f;

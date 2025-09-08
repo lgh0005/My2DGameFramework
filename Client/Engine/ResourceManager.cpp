@@ -2,6 +2,10 @@
 #include "ResourceManager.h"
 #include "IResource.h"
 
+ResourceManager::~ResourceManager()
+{
+}
+
 void ResourceManager::Init()
 {
 }

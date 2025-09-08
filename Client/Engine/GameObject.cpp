@@ -42,20 +42,33 @@ shared_ptr<IBehaviour> GameObject::GetBehaviour(const string& name)
 
 void GameObject::Init()
 {
-	// Init transform
-	_transform->Init(shared_from_this());
+	auto self = shared_from_this();
+
+	// Awake transform, components, renderables, behaviours
+	_transform->Awake(self);
+	for (auto& component : _components) component->Awake(self);
+	for (auto& renderable : _renderables) renderable->Awake(self);
+	for (auto& behaviour : _bahaviours) behaviour->Awake(self);
 	
-	// Init components
-	for (auto& component : _components)
-		component->Init(shared_from_this());
+	// Init transform, components, renderables, behaviours
+	_transform->Init();
+	for (auto& component : _components) component->Init();
+	for (auto& renderable : _renderables) renderable->Init();
+	for (auto& behaviour : _bahaviours) behaviour->Init();
+}
 
-	// Init renderables
-	for (auto& renderable : _renderables)
-		renderable->Init(shared_from_this());
+void GameObject::FixedUpdate()
+{
+	// FixedUpdate children
+	for (auto& weakChild : _children)
+	{
+		if (auto child = weakChild.lock()) child->FixedUpdate();
+	}
 
-	// Init behaviours
-	for (auto& behaviour : _bahaviours)
-		behaviour->Init(shared_from_this());
+	// FixedUpdate component, renderables, Behaviours
+	for (auto& component : _components) component->FixedUpdate();
+	for (auto& renderable : _renderables) renderable->FixedUpdate();
+	for (auto& behaviour : _bahaviours) behaviour->FixedUpdate();
 }
 
 void GameObject::Update()
@@ -63,19 +76,25 @@ void GameObject::Update()
 	// Update children
 	for (auto& weakChild : _children)
 	{
-		if (auto child = weakChild.lock())
-			child->Update();
+		if (auto child = weakChild.lock()) child->Update();
 	}
 
-	// Update component
-	for (auto& component : _components)
-		component->Update();
+	// Update component, renderables, Behaviours
+	for (auto& component : _components) component->Update();
+	for (auto& renderable : _renderables) renderable->Update();
+	for (auto& behaviour : _bahaviours) behaviour->Update();
+}
 
-	// Update renderables
-	for (auto& renderable : _renderables)
-		renderable->Update();
+void GameObject::LateUpdate()
+{
+	// LateUpdate children
+	for (auto& weakChild : _children)
+	{
+		if (auto child = weakChild.lock()) child->LateUpdate();
+	}
 
-	// Update Behaviours
-	for (auto& behaviour : _bahaviours)
-		behaviour->Update();
+	// LateUpdate component, renderables, Behaviours
+	for (auto& component : _components) component->LateUpdate();
+	for (auto& renderable : _renderables) renderable->LateUpdate();
+	for (auto& behaviour : _bahaviours) behaviour->LateUpdate();
 }
