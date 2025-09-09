@@ -9,11 +9,6 @@ ITexture::ITexture(const string& name, const string& filePath)
 
 }
 
-ITexture::~ITexture()
-{
-}
-
-
 void ITexture::Awake()
 {
 	LoadTexture();
@@ -86,7 +81,7 @@ void ITexture::CreateRect()
 	float halfW = _width / 2.0f;
 	float halfH = _height / 2.0f;
 
-	GLfloat vertices[] =
+	_vertices =
 	{
 		-halfW, -halfH, 0.0f,   0.0f, 1.0f, // 좌하단
 		-halfW,  halfH, 0.0f,   0.0f, 0.0f, // 좌상단
@@ -106,7 +101,7 @@ void ITexture::CreateRect()
 	// vbo
 	glGenBuffers(1, &_vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(_vertices), _vertices.data(), GL_STATIC_DRAW);
 
 	// 정점 속성 중 1 : 위치
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 5, (void*)0);

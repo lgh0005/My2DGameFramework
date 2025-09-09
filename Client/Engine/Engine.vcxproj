@@ -162,6 +162,7 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClInclude Include="EnginePch.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="Flipbook.h" />
+    <ClInclude Include="FlipbookPlayer.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Grid.h" />
@@ -212,6 +213,7 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="EnginePch.cpp" />
     <ClCompile Include="Flipbook.cpp" />
+    <ClCompile Include="FlipbookPlayer.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Grid.cpp" />

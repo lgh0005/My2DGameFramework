@@ -7,17 +7,17 @@ IResource::IResource(const string& name) : _name(name)
 
 }
 
-IResource::~IResource()
-{
-
-}
-
 void IResource::Awake()
 {
 
 }
 
 void IResource::Init()
+{
+
+}
+
+void IResource::Update()
 {
 
 }

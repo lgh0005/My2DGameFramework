@@ -8,10 +8,6 @@ IRenderable::IRenderable(const string& name) : Super(name)
 
 }
 
-IRenderable::~IRenderable()
-{
-}
-
 void IRenderable::Update()
 {
     if (_owner.expired())

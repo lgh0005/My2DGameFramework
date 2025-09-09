@@ -9,7 +9,7 @@ class IRenderable : public IComponent
 
 public:
 	IRenderable(const string& name);
-	virtual ~IRenderable() override;
+	virtual ~IRenderable() override = default;
 
 public:
 	virtual void Render(const shared_ptr<Camera>& camera) abstract;

@@ -1,12 +1,7 @@
 #pragma once
-#include "IUIStatic.h"
 
-class Image : public IUIStatic
+class Image
 {
-	using Super = IUIStatic;
-
-public:
-
 
 };
 

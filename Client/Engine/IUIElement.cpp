@@ -1,26 +1,14 @@
 #include "pch.h"
 #include "IUIElement.h"
-
-#pragma region TEST
 #include "Transform.h"
 #include "GameObject.h"
 #include "ITexture.h"
 #include "Shader.h"
 #include "IUIInteractable.h"
-#pragma endregion
 
 IUIElement::IUIElement(const string& name, const glm::vec2& size) 
 	: Super(name), _size(size)
 {
-}
-
-IUIElement::~IUIElement()
-{
-}
-
-void IUIElement::Awake(shared_ptr<GameObject> owner)
-{
-	Super::Awake(owner);
 }
 
 glm::vec2 IUIElement::GetWorldPosition() const

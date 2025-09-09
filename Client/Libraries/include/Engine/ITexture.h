@@ -10,14 +10,11 @@ class ITexture : public IResource
 
 public:
 	ITexture(const string& name, const string& filePath);
-	virtual ~ITexture();
+	virtual ~ITexture() = default;
 
 public:
 	virtual void Awake() override;
-
-#pragma region TEST
 	virtual void Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera> camera);
-#pragma endregion
 
 public:
 	uint32 GetWidth() const { return _width; }
@@ -34,6 +31,7 @@ protected:
 	GLuint _textureID;
 	string _resourceFilePath;
 	GLuint _vao, _ibo, _vbo;
+	array<GLfloat, 20> _vertices;
 	uint32 _width, _height;
 };
 

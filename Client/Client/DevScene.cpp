@@ -11,12 +11,14 @@
 #include "Engine/Camera.h"
 #include "Engine/Sprite.h"
 #include "Engine/Text.h"
+#include "Engine/FlipbookPlayer.h"
 #pragma endregion
 
 #pragma region Resources
 #include "Engine/Shader.h"
 #include "Engine/Texture.h"
 #include "Engine/Font.h"
+#include "Engine/Flipbook.h"
 #pragma endregion
 
 #pragma region Behaviour
@@ -145,6 +147,26 @@ void DevScene::CreateSceneContext()
 		_spriteObject->AddRenderable(static_pointer_cast<IRenderable>(_sprite));
 		_spriteObject->AddBehaviour(static_pointer_cast<IBehaviour>(_sampleScript));
 		_gameObjects.push_back(_spriteObject);
+	}
+
+	// Flipbook GameObject
+	{
+		FlipbookInfo info{ 8, 16, 0, 0, 3, 12.0f, true, true };
+		_flipbook = make_shared<Flipbook>("Flipbook", "../Resources/Images/cuphead_overworld.png", info);
+		RESOURCE.AddResource(_flipbook);
+		_flipbookPlayer = make_shared<FlipbookPlayer>("FlipbookPlayer", RESOURCE.GetResource<Flipbook>("Flipbook"), RESOURCE.GetResource<Shader>("TextureShader"));
+		RENDER.AddRenderable(Render::RenderLayer::World, _flipbookPlayer);
+		_spriteTransform = make_shared<Transform>
+		(
+			"FlipbookTransform",
+			glm::vec3(-300.0f, 200.0f, 0.0f),
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(1.0f, 1.0f, 1.0f)
+		);
+		_flipbookObject = make_shared<GameObject>("FlipbookObject");
+		_flipbookObject->SetTransform(_spriteTransform);
+		_flipbookObject->AddRenderable(static_pointer_cast<IRenderable>(_flipbookPlayer));
+		_gameObjects.push_back(_flipbookObject);
 	}
 }
 #pragma endregion

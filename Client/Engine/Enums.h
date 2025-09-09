@@ -59,5 +59,33 @@ namespace Inputs
     };
 
     // constants
-    constexpr int MOUSE_COUNT = static_cast<int>(Mouse::END) - 1;
+    constexpr int32 MOUSE_COUNT = static_cast<int32>(Mouse::END) - 1;
+}
+
+namespace UI
+{
+    enum class UIType
+    {
+        Button,
+        Canvas,
+        CheckBox,
+        Grid,
+        Image,
+        Quad,
+        ScrollBox,
+        Slider,
+        Text,
+        END
+    };
+
+    enum class Interaction
+    {
+        None,
+        Click,
+        HoverEnter,
+        HoverExit,
+        Drag
+    };
+
+    constexpr int32 UITYPE_COUNT = static_cast<int32>(UIType::END) - 1;
 }

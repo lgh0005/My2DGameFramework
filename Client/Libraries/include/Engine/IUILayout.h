@@ -7,7 +7,7 @@ class IUILayout : public IUIElement
 
 public:
 	IUILayout(const string& name, const glm::vec2& size);
-	virtual ~IUILayout() override;
+	virtual ~IUILayout() override = default;
 
 private:
 

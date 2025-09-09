@@ -10,10 +10,7 @@ class IUIElement : public IRenderable
 
 public:
 	IUIElement(const string& name, const glm::vec2& size);
-	virtual ~IUIElement() override;
-
-public:
-	virtual void Awake(shared_ptr<GameObject> owner) override;
+	virtual ~IUIElement() override = default;
 
 protected:
 	glm::vec2 GetWorldPosition() const;

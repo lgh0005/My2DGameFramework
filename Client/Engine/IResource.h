@@ -4,11 +4,12 @@ class IResource : public enable_shared_from_this<IResource>
 {
 public:
 	IResource(const string& name);
-	virtual ~IResource();
+	virtual ~IResource() = default;
 
 public:
 	virtual void Awake();
 	virtual void Init();
+	virtual void Update();
 
 public:
 	const string& GetName() { return _name; }

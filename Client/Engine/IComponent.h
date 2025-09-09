@@ -6,7 +6,7 @@ class IComponent : public enable_shared_from_this<IComponent>
 {
 public:
 	IComponent(const string& name);
-	virtual ~IComponent();
+	virtual ~IComponent() = default;
 
 public:
 	virtual void Awake(shared_ptr<GameObject> owner);

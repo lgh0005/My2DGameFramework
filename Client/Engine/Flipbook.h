@@ -1,18 +1,49 @@
 #pragma once
-#include "IResource.h"
+#include "ITexture.h"
 
-class Flipbook : public IResource
+class Shader;
+class Camera;
+
+struct FlipbookInfo
 {
-	using Super = IResource;
+	uint32 rows;
+	uint32 cols;
+	uint32 animationRow;
+	uint32 startFrame;
+	uint32 endFrame;
+	float fps;
+	bool isPlaying;
+	bool isLoop;
+};
+
+class Flipbook : public ITexture
+{
+	using Super = ITexture;
 
 public:
-	Flipbook(const string& name);
-	virtual ~Flipbook() override;
+	Flipbook(const string& name, const string& filePath, FlipbookInfo& info);
+	virtual ~Flipbook() override = default;
 
 public:
 	virtual void Awake() override;
+	virtual void Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera> camera) override;
+	virtual void Update() override;
+
+public:
+	void SetFrame(uint32 frame);
+	uint32 GetCurrentFrame() const { return _currentFrame; }
+	uint32 GetTotalFrames() const { return _flipbookInfo.endFrame - _flipbookInfo.startFrame + 1; }
+
+public:
+	void Play();
+	void Stop();
 
 private:
+	void GetFrameVertices();
 
+private:
+	FlipbookInfo _flipbookInfo;
+	uint32 _currentFrame;
+	float _elapsedTime;
 };
 

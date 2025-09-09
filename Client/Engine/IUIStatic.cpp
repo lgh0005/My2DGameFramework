@@ -9,10 +9,6 @@ IUIStatic::IUIStatic(const string& name, shared_ptr<ITexture> texture, shared_pt
 {
 }
 
-IUIStatic::~IUIStatic()
-{
-}
-
 void IUIStatic::Awake(shared_ptr<GameObject> owner)
 {
 	Super::Awake(owner);
