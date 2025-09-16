@@ -20,9 +20,33 @@ void example2::Init()
 	Super::Init();
 	auto self = GetSelf<example2>();
 	_button = static_pointer_cast<UIButton>(_owner.lock()->GetRenderable("Button"));
-	_button->OnHoveredEvent([self]() { self->MouseHovered(); });
-	_button->OnClickedEvent([self]() { self->MouseClicked(); });
-	_button->OnExitEvent([self]() { self->MouseExit(); });
+	_button->OnHoveredEvent
+	(
+		[self]() { self->MouseHovered(); }, 
+		UI::UIEventPolicy::Immediate, 
+		EMPTY_VEC2, EMPTY_VEC2
+	);
+
+	_button->OnClickedEvent
+	(
+		[self]() { self->MouseClickedDeferred(); },
+		UI::UIEventPolicy::Deferred,
+		EMPTY_VEC2, EMPTY_VEC2
+	);
+
+	_button->OnClickedEvent
+	(
+		[self]() { self->MouseClickedImmediate(); },
+		UI::UIEventPolicy::Immediate,
+		EMPTY_VEC2, EMPTY_VEC2
+	);
+
+	_button->OnExitEvent
+	(
+		[self]() { self->MouseExit(); },
+		UI::UIEventPolicy::Deferred,
+		EMPTY_VEC2, EMPTY_VEC2
+	);
 }
 
 void example2::Update()
@@ -40,7 +64,12 @@ void example2::MouseExit()
 	_button->SetTexture(RESOURCE.GetResource<Texture>("buttonTexture"));
 }
 
-void example2::MouseClicked()
+void example2::MouseClickedDeferred()
 {
-	cout << "Clicked!" << endl;
+	cout << "Button : Clicked! Deffered." << endl;
+}
+
+void example2::MouseClickedImmediate()
+{
+	cout << "Button : Clicked! Immediate." << endl;
 }

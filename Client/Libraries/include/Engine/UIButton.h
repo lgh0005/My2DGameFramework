@@ -17,17 +17,8 @@ public:
 public:
 	virtual void Update() override;
 
-public:
-	void OnHoveredEvent(function<void()> event) { _hoverEvent = event; }
-	void OnClickedEvent(function<void()> event) { _clickEvent = event; }
-	void OnExitEvent(function<void()> event) { _exitEvent = event; }
-
 private:
 	shared_ptr<Camera> _camera;
 	Inputs::Mouse _input;
-
-	function<void()> _hoverEvent;
-	function<void()> _clickEvent;
-	function<void()> _exitEvent;
 };
 

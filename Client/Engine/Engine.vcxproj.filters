@@ -57,6 +57,9 @@
     <Filter Include="소스 파일\03. Components\UI\UITypes">
       <UniqueIdentifier>{9479efcc-7c6f-4877-b7ae-4730018a8fac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\03. Components\UI\UIEvent">
+      <UniqueIdentifier>{91d86280-2533-48af-a49f-00921f58ed35}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EnginePch.cpp">
@@ -178,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="UIImage.cpp">
       <Filter>소스 파일\03. Components\UI\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="UIEvent.cpp">
+      <Filter>소스 파일\03. Components\UI\UIEvent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -312,6 +318,9 @@
     </ClInclude>
     <ClInclude Include="UIImage.h">
       <Filter>소스 파일\03. Components\UI\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="UIEvent.h">
+      <Filter>소스 파일\03. Components\UI\UIEvent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

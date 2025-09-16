@@ -23,9 +23,26 @@ void UIButton::Update()
     Super::Update();
 
 	auto MousePosition = INPUT.GetMousePosition(_camera);
-	if (_hoverEvent && OnHovered(MousePosition)) _hoverEvent();
+	for (auto& binding : _eventBindings)
+	{
+		bool trigger = false;
+		switch (binding.eventType)
+		{
+			case UI::UIEventType::OnHover: trigger = OnMouseHovered(MousePosition); break;
+			case UI::UIEventType::OnExit: trigger = OnMouseExit(MousePosition); break;
+			case UI::UIEventType::OnClick: trigger = OnMouseClick(MousePosition, _input); break;
+			default: break;
+		}
 
-	if (_exitEvent && OnExit(MousePosition)) _exitEvent();
-
-	if (_clickEvent && OnClick(MousePosition, _input)) _clickEvent();
+		if (trigger)
+		{
+			UIMANAGER.CreateEvent
+			(
+				binding.eventType, binding.eventPolicy, 
+				GetSelf<IUIElement>(), 
+				binding.mousePos, binding.mouseDelta,
+				binding.callback
+			);
+		}
+	}
 }

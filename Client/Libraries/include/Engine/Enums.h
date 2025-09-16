@@ -78,13 +78,22 @@ namespace UI
         END
     };
 
-    enum class Interaction
+    enum class UIEventType
     {
         None,
-        Click,
-        HoverEnter,
-        HoverExit,
-        Drag
+        OnEnter,
+        OnExit,
+        OnHover,
+        OnClick,
+        OnDragStart,
+        OnDrag,
+        OnDragEnd
+    };
+    
+    enum class UIEventPolicy
+    {
+        Immediate,
+        Deferred
     };
 
     constexpr int32 UITYPE_COUNT = static_cast<int32>(UIType::END) - 1;

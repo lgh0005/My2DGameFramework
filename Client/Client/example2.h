@@ -20,7 +20,8 @@ private:
 	shared_ptr<UIButton> _button;
 	void MouseHovered();
 	void MouseExit();
-	void MouseClicked();
+	void MouseClickedDeferred();
+	void MouseClickedImmediate();
 
 private:
 

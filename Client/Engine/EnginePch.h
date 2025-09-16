@@ -71,6 +71,7 @@ using namespace FMOD;
 #include "InputManager.h"
 #include "AudioManager.h"
 #include "SceneManager.h"
+#include "UIManager.h"
 
 #define TIME TimeManager::GetInstance()
 #define RENDER RenderManager::GetInstance()
@@ -78,3 +79,4 @@ using namespace FMOD;
 #define INPUT InputManager::GetInstance()
 #define AUDIO AudioManager::GetInstance()
 #define SCENE SceneManager::GetInstance()
+#define UIMANAGER UIManager::GetInstance()
