@@ -63,6 +63,6 @@ void Game::Launch(const string& FirstSceneName)
 void Game::Update()
 {
     // Update Managers
-    INPUT.Update();
     SCENE.Update();
+    INPUT.Update();
 }

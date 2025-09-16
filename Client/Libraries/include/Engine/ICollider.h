@@ -3,6 +3,9 @@
 
 class ICollider : public IComponent
 {
+	using Super = IComponent;
+
+public:
 
 };
 

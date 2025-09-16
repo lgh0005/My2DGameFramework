@@ -27,6 +27,9 @@
     <Filter Include="소스 파일\01. DevScene\Prefabs">
       <UniqueIdentifier>{eb8d3636-bf7f-4737-8163-eaa1eaa4fdf2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01. DevScene\Shaders">
+      <UniqueIdentifier>{a9e13763-ac80-4e48-99b2-746c1332e2c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -42,6 +45,9 @@
       <Filter>소스 파일\01. DevScene\Scene</Filter>
     </ClCompile>
     <ClCompile Include="example.cpp">
+      <Filter>소스 파일\01. DevScene\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="example2.cpp">
       <Filter>소스 파일\01. DevScene\Scripts</Filter>
     </ClCompile>
   </ItemGroup>
@@ -61,5 +67,16 @@
     <ClInclude Include="example.h">
       <Filter>소스 파일\01. DevScene\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="example2.h">
+      <Filter>소스 파일\01. DevScene\Scripts</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="select.frag">
+      <Filter>소스 파일\01. DevScene\Shaders</Filter>
+    </None>
+    <None Include="select.vert">
+      <Filter>소스 파일\01. DevScene\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -9,8 +9,9 @@ class GameObject;
 class Transform;
 class Camera;
 class Sprite;
-class Text;
+class UIText;
 class FlipbookPlayer;
+class UIButton;
 #pragma endregion
 
 #pragma region Resources
@@ -22,6 +23,7 @@ class Flipbook;
 
 #pragma region Behaviour
 class example;
+class example2;
 #pragma endregion
 
 #pragma region Test Scene
@@ -55,22 +57,37 @@ private:
 
 	// Text UI GameObject
 	shared_ptr<Font> _font;
-	shared_ptr<Text> _textTexture;
+	shared_ptr<UIText> _textTexture;
 	shared_ptr<Transform> _textTransform;
 	shared_ptr<GameObject> _textObject;
 
-	// Sprite GameObject;
+	// Text UI GameObject2
+	shared_ptr<Font> _font2;
+	shared_ptr<UIText> _textTexture2;
+	shared_ptr<Transform> _textTransform2;
+	shared_ptr<GameObject> _textObject2;
+
+	// Sprite GameObject
 	shared_ptr<Texture> _texture;
 	shared_ptr<Sprite> _sprite;
 	shared_ptr<Transform> _spriteTransform;
 	shared_ptr<example> _sampleScript;
 	shared_ptr<GameObject> _spriteObject;
 
-	// Flipbook GameObject;
+	// Flipbook GameObject
 	shared_ptr<Flipbook> _flipbook;
 	shared_ptr<FlipbookPlayer> _flipbookPlayer;
 	shared_ptr<Transform> _flipbookTransform;
 	shared_ptr<GameObject> _flipbookObject;
+
+	// UI Button
+	shared_ptr<Texture> _buttonTexture;
+	shared_ptr<Texture> _buttonHoveredTexture;
+	shared_ptr<UIButton> _button;
+	shared_ptr<Transform> _uiButtonTransform;
+	shared_ptr<example2> _sampleScript2;
+	shared_ptr<GameObject> _uiButtonObject;
+
 };
 #pragma endregion
 

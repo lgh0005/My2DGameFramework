@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Scene.h"
+#include "IResource.h"
 #include "GameObject.h"
 
 Scene::Scene(const string& name) : _name(name)

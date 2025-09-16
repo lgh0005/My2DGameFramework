@@ -52,10 +52,10 @@
       <UniqueIdentifier>{c95d0177-2fc4-4440-a009-c28cfd683931}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\03. Components\UI\Elements">
-      <UniqueIdentifier>{dfc82276-5f72-47ce-a499-d149a5ce4838}</UniqueIdentifier>
+      <UniqueIdentifier>{9ace482d-e369-42ca-a490-751f6449f2e6}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\03. Components\UI\UITypes">
-      <UniqueIdentifier>{be7ff489-831b-4616-9552-f6754b8dded0}</UniqueIdentifier>
+      <UniqueIdentifier>{9479efcc-7c6f-4877-b7ae-4730018a8fac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -140,50 +140,14 @@
     <ClCompile Include="IUIElement.cpp">
       <Filter>소스 파일\06. Interfaces</Filter>
     </ClCompile>
-    <ClCompile Include="Text.cpp">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
-    </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <Filter>소스 파일\04. Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="IUIInteractable.cpp">
-      <Filter>소스 파일\03. Components\UI\UITypes</Filter>
-    </ClCompile>
-    <ClCompile Include="IUILayout.cpp">
-      <Filter>소스 파일\03. Components\UI\UITypes</Filter>
-    </ClCompile>
-    <ClCompile Include="IUIStatic.cpp">
-      <Filter>소스 파일\03. Components\UI\UITypes</Filter>
-    </ClCompile>
-    <ClCompile Include="Image.cpp">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>소스 파일\04. Managers</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>소스 파일\01. Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="CheckBox.cpp">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
-    </ClCompile>
-    <ClCompile Include="Slider.cpp">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
-    </ClCompile>
-    <ClCompile Include="ScrollBox.cpp">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
-    </ClCompile>
-    <ClCompile Include="Quad.cpp">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
-    </ClCompile>
-    <ClCompile Include="Canvas.cpp">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
-    </ClCompile>
-    <ClCompile Include="Grid.cpp">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
     </ClCompile>
     <ClCompile Include="ICollider.cpp">
       <Filter>소스 파일\06. Interfaces</Filter>
@@ -199,6 +163,21 @@
     </ClCompile>
     <ClCompile Include="FlipbookPlayer.cpp">
       <Filter>소스 파일\03. Components\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="IUIContainer.cpp">
+      <Filter>소스 파일\03. Components\UI\UITypes</Filter>
+    </ClCompile>
+    <ClCompile Include="IUIRenderable.cpp">
+      <Filter>소스 파일\03. Components\UI\UITypes</Filter>
+    </ClCompile>
+    <ClCompile Include="UIText.cpp">
+      <Filter>소스 파일\03. Components\UI\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>소스 파일\03. Components\UI\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="UIImage.cpp">
+      <Filter>소스 파일\03. Components\UI\Elements</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -295,50 +274,14 @@
     <ClInclude Include="IUIElement.h">
       <Filter>소스 파일\06. Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Text.h">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
-    </ClInclude>
     <ClInclude Include="UIManager.h">
       <Filter>소스 파일\04. Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="IUIInteractable.h">
-      <Filter>소스 파일\03. Components\UI\UITypes</Filter>
-    </ClInclude>
-    <ClInclude Include="IUILayout.h">
-      <Filter>소스 파일\03. Components\UI\UITypes</Filter>
-    </ClInclude>
-    <ClInclude Include="IUIStatic.h">
-      <Filter>소스 파일\03. Components\UI\UITypes</Filter>
-    </ClInclude>
-    <ClInclude Include="Image.h">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>소스 파일\04. Managers</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>소스 파일\01. Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="CheckBox.h">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="Slider.h">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="ScrollBox.h">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="Quad.h">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="Canvas.h">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="Grid.h">
-      <Filter>소스 파일\03. Components\UI\Elements</Filter>
     </ClInclude>
     <ClInclude Include="ICollider.h">
       <Filter>소스 파일\06. Interfaces</Filter>
@@ -354,6 +297,21 @@
     </ClInclude>
     <ClInclude Include="FlipbookPlayer.h">
       <Filter>소스 파일\03. Components\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="IUIContainer.h">
+      <Filter>소스 파일\03. Components\UI\UITypes</Filter>
+    </ClInclude>
+    <ClInclude Include="IUIRenderable.h">
+      <Filter>소스 파일\03. Components\UI\UITypes</Filter>
+    </ClInclude>
+    <ClInclude Include="UIText.h">
+      <Filter>소스 파일\03. Components\UI\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>소스 파일\03. Components\UI\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="UIImage.h">
+      <Filter>소스 파일\03. Components\UI\Elements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

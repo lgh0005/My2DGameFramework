@@ -51,15 +51,15 @@ namespace Inputs
     {
         Unknown = 0,
         Left = SDL_BUTTON_LEFT,
-        Right = SDL_BUTTON_RIGHT,
         Middle = SDL_BUTTON_MIDDLE,
+        Right = SDL_BUTTON_RIGHT,
         X1 = SDL_BUTTON_X1,
         X2 = SDL_BUTTON_X2,
         END
     };
 
     // constants
-    constexpr int32 MOUSE_COUNT = static_cast<int32>(Mouse::END) - 1;
+    constexpr int32 MOUSE_COUNT = static_cast<int32>(Mouse::END);
 }
 
 namespace UI

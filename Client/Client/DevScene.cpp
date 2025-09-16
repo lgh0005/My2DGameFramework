@@ -10,8 +10,9 @@
 #include "Engine/Transform.h"
 #include "Engine/Camera.h"
 #include "Engine/Sprite.h"
-#include "Engine/Text.h"
+#include "Engine/UIText.h"
 #include "Engine/FlipbookPlayer.h"
+#include "Engine/UIButton.h"
 #pragma endregion
 
 #pragma region Resources
@@ -23,6 +24,7 @@
 
 #pragma region Behaviour
 #include "example.h"
+#include "example2.h"
 #pragma endregion
 
 #pragma region Test Scene
@@ -37,6 +39,43 @@ void DevScene::CreateSceneContext()
 	*   preprocessing  *
 	===================*/
 	RENDER.SetClearColor({ 0.2f, 0.0f, 0.0f, 1.0f });
+
+	// Shader : Default texture shader
+	{
+		_textureShader = make_shared<Shader>
+		(
+			"TextureShader",
+			"../Engine/glsl/default.vert",
+			"../Engine/glsl/default.frag",
+			vector<const char*>
+			{
+				Uniforms::UNIFORM_MODEL,
+				Uniforms::UNIFORM_VIEW,
+				Uniforms::UNIFORM_PROJECTION,
+				Uniforms::UNIFORM_TEXTURE
+			}
+		);
+		RESOURCE.AddResource(_textureShader);
+	}
+
+	// Shader : Defualt text shader
+	{
+		_textShader = make_shared<Shader>
+			(
+				"TextShader",
+				"../Engine/glsl/text.vert",
+				"../Engine/glsl/text.frag",
+				vector<const char*>
+		{
+			Uniforms::UNIFORM_MODEL,
+				Uniforms::UNIFORM_VIEW,
+				Uniforms::UNIFORM_PROJECTION,
+				Uniforms::UNIFORM_TEXTURE,
+				Uniforms::UNIFORM_COLOR
+		}
+			);
+		RESOURCE.AddResource(_textShader);
+	}
 
 	// Main Camera
 	{
@@ -72,48 +111,14 @@ void DevScene::CreateSceneContext()
 		_gameObjects.push_back(_uiCamera);
 	}
 
-	// Shader : Default texture shader
-	{
-		_textureShader = make_shared<Shader>
-		(
-			"TextureShader",
-			"../Engine/glsl/default.vert",
-			"../Engine/glsl/default.frag",
-			vector<const char*>
-			{
-				Uniforms::UNIFORM_MODEL,
-				Uniforms::UNIFORM_VIEW,
-				Uniforms::UNIFORM_PROJECTION,
-				Uniforms::UNIFORM_TEXTURE
-			}
-		);
-		RESOURCE.AddResource(_textureShader);
-	}
-
-	// Shader : Defualt text shader
-	{
-		_textShader = make_shared<Shader>
-		(
-			"TextShader",
-			"../Engine/glsl/text.vert",
-			"../Engine/glsl/text.frag",
-			vector<const char*>
-			{
-				Uniforms::UNIFORM_MODEL,
-				Uniforms::UNIFORM_VIEW,
-				Uniforms::UNIFORM_PROJECTION,
-				Uniforms::UNIFORM_TEXTURE,
-				Uniforms::UNIFORM_COLOR
-			}
-		);
-		RESOURCE.AddResource(_textShader);
-	}
-
 	// Text UI GameObject
 	{
 		_font = make_shared<Font>("font", "../Resources/Fonts/Crang.ttf", "Hello world!", 64, Colors::White);
 		RESOURCE.AddResource(_font);
-		_textTexture = make_shared<Text>("Text", RESOURCE.GetResource<Font>("font"), RESOURCE.GetResource<Shader>("TextShader"));
+
+		auto MyFont = RESOURCE.GetResource<Font>("font");
+		auto MyShader = RESOURCE.GetResource<Shader>("TextShader");
+		_textTexture = make_shared<UIText>("Text", MyFont, MyShader);
 		RENDER.AddRenderable(Render::RenderLayer::UI, _textTexture);
 		_textTransform = make_shared<Transform>
 		(
@@ -126,6 +131,28 @@ void DevScene::CreateSceneContext()
 		_textObject->SetTransform(_textTransform);
 		_textObject->AddRenderable(static_pointer_cast<IRenderable>(_textTexture));
 		_gameObjects.push_back(_textObject);
+	}
+
+	// Text UI GameObject
+	{
+		_font2 = make_shared<Font>("font2", "../Resources/Fonts/Crang.ttf", "This is Text!", 64, Colors::Red);
+		RESOURCE.AddResource(_font2);
+
+		auto MyFont = RESOURCE.GetResource<Font>("font2");
+		auto MyShader = RESOURCE.GetResource<Shader>("TextShader");
+		_textTexture2 = make_shared<UIText>("Text2", MyFont, MyShader);
+		RENDER.AddRenderable(Render::RenderLayer::UI, _textTexture2);
+		_textTransform2 = make_shared<Transform>
+			(
+				"TextTransform2",
+				glm::vec3(0.0f, -200.0f, 0.0f),
+				glm::vec3(0.0f, 0.0f, 0.0f),
+				glm::vec3(1.0f, 1.0f, 1.0f)
+			);
+		_textObject2 = make_shared<GameObject>("TextObject2");
+		_textObject2->SetTransform(_textTransform2);
+		_textObject2->AddRenderable(static_pointer_cast<IRenderable>(_textTexture2));
+		_gameObjects.push_back(_textObject2);
 	}
 
 	// Sprite GameObject
@@ -151,7 +178,7 @@ void DevScene::CreateSceneContext()
 
 	// Flipbook GameObject
 	{
-		FlipbookInfo info{ 8, 16, 0, 0, 3, 12.0f, true, true };
+		FlipbookInfo info{ 8, 16, 7, 0, 9, 12.0f, true, true };
 		_flipbook = make_shared<Flipbook>("Flipbook", "../Resources/Images/cuphead_overworld.png", info);
 		RESOURCE.AddResource(_flipbook);
 		_flipbookPlayer = make_shared<FlipbookPlayer>("FlipbookPlayer", RESOURCE.GetResource<Flipbook>("Flipbook"), RESOURCE.GetResource<Shader>("TextureShader"));
@@ -167,6 +194,42 @@ void DevScene::CreateSceneContext()
 		_flipbookObject->SetTransform(_spriteTransform);
 		_flipbookObject->AddRenderable(static_pointer_cast<IRenderable>(_flipbookPlayer));
 		_gameObjects.push_back(_flipbookObject);
+	}
+
+	// Button UI GameObject
+	{
+		_buttonHoveredTexture = make_shared<Texture>("HOVERED", "../Resources/Images/b_1_hover.png");
+		RESOURCE.AddResource(_buttonHoveredTexture);
+		_buttonHoveredTexture->Awake();
+
+		_buttonTexture = make_shared<Texture>("buttonTexture", "../Resources/Images/b_1.png");
+		RESOURCE.AddResource(_buttonTexture);
+		auto ButtonTexture = RESOURCE.GetResource<ITexture>("buttonTexture");
+		_button = make_shared<UIButton>
+			(
+				"Button",
+				ButtonTexture,
+				_textureShader,
+				_uiCameraComponent,
+				glm::vec2(201.0f, 93.0f),
+				Inputs::Mouse::Left
+			);
+
+		RENDER.AddRenderable(Render::RenderLayer::UI, _button);
+
+		_uiButtonTransform = make_shared<Transform>
+			(
+				"ButtonTransform",
+				glm::vec3(100.0f, 100.0f, 0.0f),
+				glm::vec3(0.0f, 0.0f, 0.0f),
+				glm::vec3(1.0f, 1.0f, 1.0f)
+			);
+		_sampleScript2 = make_shared<example2>("example2");
+		_uiButtonObject = make_shared<GameObject>("ButtonObject");
+		_uiButtonObject->SetTransform(_uiButtonTransform);
+		_uiButtonObject->AddRenderable(static_pointer_cast<IRenderable>(_button));
+		_uiButtonObject->AddBehaviour(static_pointer_cast<IBehaviour>(_sampleScript2));
+		_gameObjects.push_back(_uiButtonObject);
 	}
 }
 #pragma endregion

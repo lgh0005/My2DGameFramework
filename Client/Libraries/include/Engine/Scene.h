@@ -1,5 +1,7 @@
 #pragma once
+#include "IBehaviour.h"
 
+class IResource;
 class GameObject;
 
 class Scene
@@ -17,9 +19,9 @@ public:
 
 protected:
 	virtual void CreateSceneContext() abstract;
-	vector<shared_ptr<GameObject>> _gameObjects;
 
 protected:
 	string _name;
+	vector<shared_ptr<GameObject>> _gameObjects;
 };
 

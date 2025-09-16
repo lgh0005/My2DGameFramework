@@ -16,6 +16,8 @@ example::~example()
 
 void example::Update()
 {
+    Super::Update();
+
 	auto transform = _owner.lock()->GetTransform(); // Transform 가져오기
 	if (!transform) return;
 
