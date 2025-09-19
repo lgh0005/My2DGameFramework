@@ -12,6 +12,7 @@ class Sprite;
 class UIText;
 class FlipbookPlayer;
 class UIButton;
+class UICanvas;
 #pragma endregion
 
 #pragma region Resources
@@ -87,6 +88,11 @@ private:
 	shared_ptr<Transform> _uiButtonTransform;
 	shared_ptr<example2> _sampleScript2;
 	shared_ptr<GameObject> _uiButtonObject;
+
+	// UI Canvas
+	shared_ptr<UICanvas> _uiCanvas;
+	shared_ptr<Transform> _uiCanvasTransform;
+	shared_ptr<GameObject> _uiCanvasObject;
 
 };
 #pragma endregion

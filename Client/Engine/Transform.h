@@ -12,6 +12,10 @@ public:
 	virtual ~Transform() override;
 
 public:
+	virtual void Init() override;
+	virtual void LateUpdate() override;
+
+public:
 	glm::mat4 GetModel();
 
 public:
@@ -23,12 +27,13 @@ public:
 	glm::vec3 GetScale() { return _scale; }
 
 private:
-	void CalculateModelMatrix();
+	glm::mat4 CalculateLocalModel();
+	void UpdateModelMatrix();
 
 private:
 	glm::mat4 _model;
 
-	bool _dirty = false;
+	bool _dirty = true;
 	glm::vec3 _position = glm::vec3(0.0f);
 	glm::vec3 _rotation = glm::vec3(0.0f);
 	glm::vec3 _scale = glm::vec3(1.0f);

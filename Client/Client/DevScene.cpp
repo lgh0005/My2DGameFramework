@@ -13,6 +13,7 @@
 #include "Engine/UIText.h"
 #include "Engine/FlipbookPlayer.h"
 #include "Engine/UIButton.h"
+#include "Engine/UICanvas.h"
 #pragma endregion
 
 #pragma region Resources
@@ -123,7 +124,7 @@ void DevScene::CreateSceneContext()
 		_textTransform = make_shared<Transform>
 		(
 			"TextTransform",
-			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(0.0f, 200.0f, 0.0f),
 			glm::vec3(0.0f, 0.0f, 0.0f),
 			glm::vec3(1.0f, 1.0f, 1.0f)
 		);
@@ -183,18 +184,19 @@ void DevScene::CreateSceneContext()
 		RESOURCE.AddResource(_flipbook);
 		_flipbookPlayer = make_shared<FlipbookPlayer>("FlipbookPlayer", RESOURCE.GetResource<Flipbook>("Flipbook"), RESOURCE.GetResource<Shader>("TextureShader"));
 		RENDER.AddRenderable(Render::RenderLayer::World, _flipbookPlayer);
-		_spriteTransform = make_shared<Transform>
+		_flipbookTransform = make_shared<Transform>
 		(
 			"FlipbookTransform",
-			glm::vec3(-300.0f, 200.0f, 0.0f),
+			glm::vec3(100.0f, 0.0f, 0.0f),
 			glm::vec3(0.0f, 0.0f, 0.0f),
 			glm::vec3(1.0f, 1.0f, 1.0f)
 		);
 		_flipbookObject = make_shared<GameObject>("FlipbookObject");
-		_flipbookObject->SetTransform(_spriteTransform);
+		_flipbookObject->SetTransform(_flipbookTransform);
 		_flipbookObject->AddRenderable(static_pointer_cast<IRenderable>(_flipbookPlayer));
 		_gameObjects.push_back(_flipbookObject);
 	}
+	_flipbookObject->SetParent(_spriteObject);
 
 	// Button UI GameObject
 	{
@@ -220,7 +222,7 @@ void DevScene::CreateSceneContext()
 		_uiButtonTransform = make_shared<Transform>
 			(
 				"ButtonTransform",
-				glm::vec3(100.0f, 100.0f, 0.0f),
+				glm::vec3(0.0f, 0.0f, 0.0f),
 				glm::vec3(0.0f, 0.0f, 0.0f),
 				glm::vec3(1.0f, 1.0f, 1.0f)
 			);
@@ -230,6 +232,25 @@ void DevScene::CreateSceneContext()
 		_uiButtonObject->AddRenderable(static_pointer_cast<IRenderable>(_button));
 		_uiButtonObject->AddBehaviour(static_pointer_cast<IBehaviour>(_sampleScript2));
 		_gameObjects.push_back(_uiButtonObject);
+	}
+
+	// UI Canvas GameObject
+	{
+		_uiCanvas = make_shared<UICanvas>("MyCanvas", glm::vec2(300.0f, 200.0f));
+		_uiCanvasTransform = make_shared<Transform>
+			(
+				"ButtonTransform",
+				glm::vec3(0.0f, 0.0f, 0.0f),
+				glm::vec3(0.0f, 0.0f, 0.0f),
+				glm::vec3(1.0f, 1.0f, 1.0f)
+			);
+		_uiCanvasObject = make_shared<GameObject>("CanvasObject");
+		_uiCanvasObject->SetTransform(_uiCanvasTransform);
+		_uiCanvasObject->AddComponent(_uiCanvas);
+		_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_button));
+		_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_textTexture));
+		_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_textTexture2));
+		_gameObjects.push_back(_uiCanvasObject);
 	}
 }
 #pragma endregion

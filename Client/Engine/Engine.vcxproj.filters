@@ -185,6 +185,12 @@
     <ClCompile Include="UIEvent.cpp">
       <Filter>소스 파일\03. Components\UI\UIEvent</Filter>
     </ClCompile>
+    <ClCompile Include="UICanvas.cpp">
+      <Filter>소스 파일\03. Components\UI\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="UIGrid.cpp">
+      <Filter>소스 파일\03. Components\UI\Elements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -321,6 +327,12 @@
     </ClInclude>
     <ClInclude Include="UIEvent.h">
       <Filter>소스 파일\03. Components\UI\UIEvent</Filter>
+    </ClInclude>
+    <ClInclude Include="UICanvas.h">
+      <Filter>소스 파일\03. Components\UI\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="UIGrid.h">
+      <Filter>소스 파일\03. Components\UI\Elements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

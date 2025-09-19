@@ -4,10 +4,11 @@
 #include "GameObject.h"
 #include "ITexture.h"
 #include "Shader.h"
+#include "Camera.h"
 
-/*=====================
-//    Constructor    //
-=====================*/
+/*=========================
+//    Default Methods    //
+=========================*/
 IUIElement::IUIElement(const string& name, const glm::vec2& size) 
 	: Super(name), _size(size)
 {
@@ -19,10 +20,13 @@ IUIElement::IUIElement(const string& name, const glm::vec2& size)
 glm::vec2 IUIElement::GetWorldPosition() const
 {
 	auto owner = _owner.lock();
-	if (!owner) return glm::vec2(1.0f);
+	if (!owner) return glm::vec2(0.0f);
 
 	auto transform = owner->GetTransform();
-	return glm::vec2(transform->GetPosition());
+	glm::mat4 model = transform->GetModel();
+
+	glm::vec3 worldPos = glm::vec3(model[3]);
+	return glm::vec2(worldPos.x, worldPos.y);
 }
 
 glm::vec2 IUIElement::GetWorldSize() const
@@ -31,8 +35,13 @@ glm::vec2 IUIElement::GetWorldSize() const
 	if (!owner) return glm::vec2(1.0f);
 
 	auto transform = owner->GetTransform();
-	glm::vec2 scale = glm::vec2(transform->GetScale());
-	return _size * scale;
+	glm::mat4 model = transform->GetModel();
+
+	glm::vec3 worldScale;
+	worldScale.x = glm::length(glm::vec3(model[0]));
+	worldScale.y = glm::length(glm::vec3(model[1]));
+
+	return _size * glm::vec2(worldScale.x, worldScale.y);
 }
 
 /*=================================
@@ -40,10 +49,9 @@ glm::vec2 IUIElement::GetWorldSize() const
 =================================*/
 bool IUIElement::OnMouseEnter(glm::vec2 mousePos)
 {
-	auto transform = _owner.lock()->GetTransform();
-	glm::vec2 pos = glm::vec2(transform->GetPosition());
-
-	glm::vec2 halfSize = _size * 0.5f;
+	glm::vec2 pos = GetWorldPosition();
+	glm::vec2 size = GetWorldSize();
+	glm::vec2 halfSize = size * 0.5f;
 	glm::vec2 min = pos - halfSize;
 	glm::vec2 max = pos + halfSize;
 

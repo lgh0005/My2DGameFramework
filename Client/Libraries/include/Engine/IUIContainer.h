@@ -1,28 +1,23 @@
 #pragma once
 #include "IUIElement.h"
 
-enum class AlignType
-{
-	None,
-	Horizontal,
-	Vertical
-};
-
 class IUIContainer : public IUIElement
 {
 	using Super = IUIElement;
 
 public:
 	IUIContainer(const string& name, const glm::vec2& size);
-	virtual ~IUIContainer() override;
+	virtual ~IUIContainer() override = default;
 
 public:
+	virtual void Init() override;
+	virtual void Render(const shared_ptr<Camera>& camera) override;
+
+public:
+	void AddUIComponent(shared_ptr<IUIElement> ui);
+	void RemoveUIComponent(shared_ptr<IUIElement> ui);
 
 protected:
-	AlignType _align;
-	int32 _padding;
-	int32 _row;
-	int32 _column;
-	vector<IUIElement> _uis;
+	vector<shared_ptr<IUIElement>> _uis;
 };
 

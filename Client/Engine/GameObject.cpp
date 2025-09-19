@@ -87,6 +87,9 @@ void GameObject::Update()
 
 void GameObject::LateUpdate()
 {
+	// LateUpdate Transform
+	_transform->LateUpdate();
+
 	// LateUpdate children
 	for (auto& weakChild : _children)
 	{

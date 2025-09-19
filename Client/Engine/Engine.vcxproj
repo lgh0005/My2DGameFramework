@@ -188,7 +188,9 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="UIButton.h" />
+    <ClInclude Include="UICanvas.h" />
     <ClInclude Include="UIEvent.h" />
+    <ClInclude Include="UIGrid.h" />
     <ClInclude Include="UIImage.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="UIText.h" />
@@ -237,7 +239,9 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="UICanvas.cpp" />
     <ClCompile Include="UIEvent.cpp" />
+    <ClCompile Include="UIGrid.cpp" />
     <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="UIText.cpp" />
