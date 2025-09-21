@@ -14,6 +14,7 @@
 #include "Engine/FlipbookPlayer.h"
 #include "Engine/UIButton.h"
 #include "Engine/UICanvas.h"
+#include "Engine/UICheckBox.h"
 #pragma endregion
 
 #pragma region Resources
@@ -26,6 +27,7 @@
 #pragma region Behaviour
 #include "example.h"
 #include "example2.h"
+#include "example3.h"
 #pragma endregion
 
 #pragma region Test Scene
@@ -44,18 +46,18 @@ void DevScene::CreateSceneContext()
 	// Shader : Default texture shader
 	{
 		_textureShader = make_shared<Shader>
-		(
-			"TextureShader",
-			"../Engine/glsl/default.vert",
-			"../Engine/glsl/default.frag",
-			vector<const char*>
-			{
-				Uniforms::UNIFORM_MODEL,
+			(
+				"TextureShader",
+				"../Engine/glsl/default.vert",
+				"../Engine/glsl/default.frag",
+				vector<const char*>
+		{
+			Uniforms::UNIFORM_MODEL,
 				Uniforms::UNIFORM_VIEW,
 				Uniforms::UNIFORM_PROJECTION,
 				Uniforms::UNIFORM_TEXTURE
-			}
-		);
+		}
+			);
 		RESOURCE.AddResource(_textureShader);
 	}
 
@@ -84,12 +86,12 @@ void DevScene::CreateSceneContext()
 		_mainCamera = make_shared<GameObject>("MainCamera");
 		_mainCamera->AddComponent(_mainCameraComponent);
 		_mainCameraTransform = make_shared<Transform>
-		(
-			"MainCameraTransform",
-			glm::vec3(0.0f, 0.0f, 0.0f),
-			glm::vec3(0.0f, 0.0f, 0.0f),
-			glm::vec3(1.0f ,1.0f, 1.0f)
-		);
+			(
+				"MainCameraTransform",
+				glm::vec3(0.0f, 0.0f, 0.0f),
+				glm::vec3(0.0f, 0.0f, 0.0f),
+				glm::vec3(1.0f, 1.0f, 1.0f)
+			);
 		_mainCamera->SetTransform(_mainCameraTransform);
 		RENDER.AddCamera(Render::RenderLayer::World, _mainCameraComponent);
 		_gameObjects.push_back(_mainCamera);
@@ -122,12 +124,12 @@ void DevScene::CreateSceneContext()
 		_textTexture = make_shared<UIText>("Text", MyFont, MyShader);
 		RENDER.AddRenderable(Render::RenderLayer::UI, _textTexture);
 		_textTransform = make_shared<Transform>
-		(
-			"TextTransform",
-			glm::vec3(0.0f, 200.0f, 0.0f),
-			glm::vec3(0.0f, 0.0f, 0.0f),
-			glm::vec3(1.0f, 1.0f, 1.0f)
-		);
+			(
+				"TextTransform",
+				glm::vec3(0.0f, 200.0f, 0.0f),
+				glm::vec3(0.0f, 0.0f, 0.0f),
+				glm::vec3(1.0f, 1.0f, 1.0f)
+			);
 		_textObject = make_shared<GameObject>("TextObject");
 		_textObject->SetTransform(_textTransform);
 		_textObject->AddRenderable(static_pointer_cast<IRenderable>(_textTexture));
@@ -163,12 +165,12 @@ void DevScene::CreateSceneContext()
 		_sprite = make_shared<Sprite>("Sprite", RESOURCE.GetResource<Texture>("Texture"), RESOURCE.GetResource<Shader>("TextureShader"));
 		RENDER.AddRenderable(Render::RenderLayer::World, _sprite);
 		_spriteTransform = make_shared<Transform>
-		(
-			"TextTransform",
-			glm::vec3(300.0f, 200.0f, 0.0f),
-			glm::vec3(0.0f, 0.0f, 0.0f),
-			glm::vec3(1.0f, 1.0f, 1.0f)
-		);
+			(
+				"TextTransform",
+				glm::vec3(300.0f, 200.0f, 0.0f),
+				glm::vec3(0.0f, 0.0f, 0.0f),
+				glm::vec3(1.0f, 1.0f, 1.0f)
+			);
 		_sampleScript = make_shared<example>("example");
 		_spriteObject = make_shared<GameObject>("SpriteObject");
 		_spriteObject->SetTransform(_spriteTransform);
@@ -185,18 +187,18 @@ void DevScene::CreateSceneContext()
 		_flipbookPlayer = make_shared<FlipbookPlayer>("FlipbookPlayer", RESOURCE.GetResource<Flipbook>("Flipbook"), RESOURCE.GetResource<Shader>("TextureShader"));
 		RENDER.AddRenderable(Render::RenderLayer::World, _flipbookPlayer);
 		_flipbookTransform = make_shared<Transform>
-		(
-			"FlipbookTransform",
-			glm::vec3(100.0f, 0.0f, 0.0f),
-			glm::vec3(0.0f, 0.0f, 0.0f),
-			glm::vec3(1.0f, 1.0f, 1.0f)
-		);
+			(
+				"FlipbookTransform",
+				glm::vec3(100.0f, 0.0f, 0.0f),
+				glm::vec3(0.0f, 0.0f, 0.0f),
+				glm::vec3(1.0f, 1.0f, 1.0f)
+			);
 		_flipbookObject = make_shared<GameObject>("FlipbookObject");
 		_flipbookObject->SetTransform(_flipbookTransform);
 		_flipbookObject->AddRenderable(static_pointer_cast<IRenderable>(_flipbookPlayer));
+		_flipbookObject->SetParent(_spriteObject);
 		_gameObjects.push_back(_flipbookObject);
 	}
-	_flipbookObject->SetParent(_spriteObject);
 
 	// Button UI GameObject
 	{
@@ -216,7 +218,6 @@ void DevScene::CreateSceneContext()
 				glm::vec2(201.0f, 93.0f),
 				Inputs::Mouse::Left
 			);
-
 		RENDER.AddRenderable(Render::RenderLayer::UI, _button);
 
 		_uiButtonTransform = make_shared<Transform>
@@ -232,6 +233,41 @@ void DevScene::CreateSceneContext()
 		_uiButtonObject->AddRenderable(static_pointer_cast<IRenderable>(_button));
 		_uiButtonObject->AddBehaviour(static_pointer_cast<IBehaviour>(_sampleScript2));
 		_gameObjects.push_back(_uiButtonObject);
+	}
+
+	// Button CheckBox UI
+	{
+		_chechboxClicked = make_shared<Texture>("CLICKED", "../Resources/Images/b_2_click.png");
+		RESOURCE.AddResource(_chechboxClicked);
+		_chechboxClicked->Awake();
+
+		_checkboxTexture = make_shared<Texture>("CheckBoxTexture", "../Resources/Images/b_2.png");
+		RESOURCE.AddResource(_checkboxTexture);
+		auto CheckBoxTexture = RESOURCE.GetResource<ITexture>("CheckBoxTexture");
+		_checkbox = make_shared<UICheckBox>
+			(
+				"CheckBox",
+				CheckBoxTexture,
+				_textureShader,
+				_uiCameraComponent,
+				glm::vec2(205.0f, 205.0f),
+				Inputs::Mouse::Left
+			);
+		RENDER.AddRenderable(Render::RenderLayer::UI, _checkbox);
+
+		_uiCheckBoxTransform = make_shared<Transform>
+			(
+				"CheckBoxTransform",
+				glm::vec3(300.0f, 0.0f, 0.0f),
+				glm::vec3(0.0f, 0.0f, 0.0f),
+				glm::vec3(0.25f, 0.25f, 1.0f)
+			);
+		_sampleScript3 = make_shared<example3>("example3");
+		_uiCheckBoxObject = make_shared<GameObject>("CheckBoxObject");
+		_uiCheckBoxObject->SetTransform(_uiCheckBoxTransform);
+		_uiCheckBoxObject->AddRenderable(static_pointer_cast<IRenderable>(_checkbox));
+		_uiCheckBoxObject->AddBehaviour(static_pointer_cast<IBehaviour>(_sampleScript3));
+		_gameObjects.push_back(_uiCheckBoxObject);
 	}
 
 	// UI Canvas GameObject
@@ -250,6 +286,7 @@ void DevScene::CreateSceneContext()
 		_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_button));
 		_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_textTexture));
 		_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_textTexture2));
+		_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_checkbox));
 		_gameObjects.push_back(_uiCanvasObject);
 	}
 }

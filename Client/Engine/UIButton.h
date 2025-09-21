@@ -18,7 +18,7 @@ public:
 	virtual void Update() override;
 
 private:
-	shared_ptr<Camera> _camera;
+	shared_ptr<Camera> _camera; // TODO : Camera는 상위 클래스의 멤버로 둘 필요가 있다.
 	Inputs::Mouse _input;
 };
 

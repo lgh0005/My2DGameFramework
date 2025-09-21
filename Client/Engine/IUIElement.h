@@ -25,6 +25,11 @@ public:
 	void OnDragStartEvent(function<void()> event, UI::UIEventPolicy policy, glm::vec2 mousePos, glm::vec2 mouseDelta);
 	void OnDragEvent(function<void()> event, UI::UIEventPolicy policy, glm::vec2 mousePos, glm::vec2 mouseDelta);
 	void OnDragEndEvent(function<void()> event, UI::UIEventPolicy policy, glm::vec2 mousePos, glm::vec2 mouseDelta);
+	void OnToggleEvent(function<void()> event, UI::UIEventPolicy policy, glm::vec2 mousePos, glm::vec2 mouseDelta);
+
+public:
+	bool IsToggled() { return _toggle; }
+	void SetToggle(bool toggle) { _toggle = toggle; }
 
 protected:
 	bool OnMouseEnter(glm::vec2 mousePos);
@@ -34,8 +39,10 @@ protected:
 	bool OnMouseDragStart(glm::vec2 mousePos, Inputs::Mouse click);
 	bool OnMouseDrag(glm::vec2 mousePos, Inputs::Mouse click);
 	bool OnMouseDragEnd(Inputs::Mouse click);
+	bool OnToggled(glm::vec2 mousePos, Inputs::Mouse click);
 
 protected:
+	bool _toggle = false;
 	glm::vec2 _size;
 	vector<UIEvent> _eventBindings;
 };

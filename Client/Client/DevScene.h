@@ -13,6 +13,7 @@ class UIText;
 class FlipbookPlayer;
 class UIButton;
 class UICanvas;
+class UICheckBox;
 #pragma endregion
 
 #pragma region Resources
@@ -25,6 +26,7 @@ class Flipbook;
 #pragma region Behaviour
 class example;
 class example2;
+class example3;
 #pragma endregion
 
 #pragma region Test Scene
@@ -88,6 +90,14 @@ private:
 	shared_ptr<Transform> _uiButtonTransform;
 	shared_ptr<example2> _sampleScript2;
 	shared_ptr<GameObject> _uiButtonObject;
+
+	// UI CheckBox
+	shared_ptr<Texture> _checkboxTexture;
+	shared_ptr<Texture> _chechboxClicked;
+	shared_ptr<UICheckBox> _checkbox;
+	shared_ptr<Transform> _uiCheckBoxTransform;
+	shared_ptr<example3> _sampleScript3;
+	shared_ptr<GameObject> _uiCheckBoxObject;
 
 	// UI Canvas
 	shared_ptr<UICanvas> _uiCanvas;

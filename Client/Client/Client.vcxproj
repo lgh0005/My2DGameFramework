@@ -135,6 +135,7 @@
     <ClInclude Include="DevScene.h" />
     <ClInclude Include="example.h" />
     <ClInclude Include="example2.h" />
+    <ClInclude Include="example3.h" />
     <ClInclude Include="Launcher.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="pch.h" />
@@ -143,6 +144,7 @@
     <ClCompile Include="DevScene.cpp" />
     <ClCompile Include="example.cpp" />
     <ClCompile Include="example2.cpp" />
+    <ClCompile Include="example3.cpp" />
     <ClCompile Include="Launcher.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="pch.cpp">

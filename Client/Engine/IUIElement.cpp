@@ -89,6 +89,16 @@ bool IUIElement::OnMouseDragEnd(Inputs::Mouse click)
 	return INPUT.MouseUp(click);
 }
 
+bool IUIElement::OnToggled(glm::vec2 mousePos, Inputs::Mouse click)
+{
+	if (OnMouseClick(mousePos, click))
+	{
+		_toggle = !_toggle;
+		return true;
+	}
+	return false;
+}
+
 /*======================
 //    Event Pusher    //
 ======================*/
@@ -120,4 +130,9 @@ void IUIElement::OnDragEvent(function<void()> event, UI::UIEventPolicy policy, g
 void IUIElement::OnDragEndEvent(function<void()> event, UI::UIEventPolicy policy, glm::vec2 mousePos, glm::vec2 mouseDelta)
 {
 	_eventBindings.push_back({ event, GetSelf<IUIElement>(), mousePos, mouseDelta, UI::UIEventType::OnDragEnd, policy });
+}
+
+void IUIElement::OnToggleEvent(function<void()> event, UI::UIEventPolicy policy, glm::vec2 mousePos, glm::vec2 mouseDelta)
+{
+	_eventBindings.push_back({ event, GetSelf<IUIElement>(), mousePos, mouseDelta, UI::UIEventType::OnToggle, policy });
 }

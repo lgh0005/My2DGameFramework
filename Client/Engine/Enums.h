@@ -87,7 +87,8 @@ namespace UI
         OnClick,
         OnDragStart,
         OnDrag,
-        OnDragEnd
+        OnDragEnd,
+        OnToggle
     };
     
     enum class UIEventPolicy
