@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "UICheckBox.h"
 
-UICheckBox::UICheckBox(const string& name, 
-	shared_ptr<ITexture> texture, shared_ptr<Shader> shader, shared_ptr<Camera> camera,
+UICheckBox::UICheckBox(const string& name, shared_ptr<Camera> camera,
+	shared_ptr<ITexture> texture, shared_ptr<Shader> shader,
 	const glm::vec2& clieckArea, Inputs::Mouse input)
-	: Super(name, texture, shader, clieckArea), _camera(camera), _input(input)
+	: Super(name, camera, texture, shader, clieckArea), _input(input)
 {
 
 }

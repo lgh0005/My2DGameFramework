@@ -1,17 +1,25 @@
 #pragma once
-#include "IUIContainer.h"
+#include "IUIElement.h"
 
-class UIGrid;
+class Camera;
 
-class UICanvas : public IUIContainer
+class UICanvas : public IUIElement
 {
-	using Super = IUIContainer;
+	using Super = IUIElement;
 
 public:
-	UICanvas(const string& name, const glm::vec2& size);
+	UICanvas(const string& name, shared_ptr<Camera> camera, const glm::vec2& size);
 	virtual ~UICanvas() override = default;
 
 public:
-	virtual void Update() override;
+	virtual void Init() override;
+	virtual void Render() override;
+
+public:
+	void AddUIComponent(shared_ptr<IUIElement> ui);
+	void RemoveUIComponent(shared_ptr<IUIElement> ui);
+
+protected:
+	vector<shared_ptr<IUIElement>> _uis;
 };
 

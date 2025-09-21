@@ -5,10 +5,10 @@
 #include "Transform.h"
 #include "ITexture.h"
 
-UIButton::UIButton(const string& name, 
-				   shared_ptr<ITexture> button, shared_ptr<Shader> shader, shared_ptr<Camera> camera, 
+UIButton::UIButton(const string& name, shared_ptr<Camera> camera,
+				   shared_ptr<ITexture> button, shared_ptr<Shader> shader, 
 				   const glm::vec2& clickArea, Inputs::Mouse input)
-	: Super(name, button, shader, clickArea), _camera(camera), _input(input)
+	: Super(name, camera, button, shader, clickArea), _input(input)
 {
 
 }

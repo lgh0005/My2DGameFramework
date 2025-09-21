@@ -26,6 +26,7 @@
 
 #pragma region Behaviour
 #include "example.h"
+#include "example1.h"
 #include "example2.h"
 #include "example3.h"
 #pragma endregion
@@ -93,7 +94,6 @@ void DevScene::CreateSceneContext()
 				glm::vec3(1.0f, 1.0f, 1.0f)
 			);
 		_mainCamera->SetTransform(_mainCameraTransform);
-		RENDER.AddCamera(Render::RenderLayer::World, _mainCameraComponent);
 		_gameObjects.push_back(_mainCamera);
 	}
 
@@ -110,7 +110,6 @@ void DevScene::CreateSceneContext()
 				glm::vec3(1.0f, 1.0f, 1.0f)
 			);
 		_uiCamera->SetTransform(_uiCameraTransform);
-		RENDER.AddCamera(Render::RenderLayer::UI, _uiCameraComponent);
 		_gameObjects.push_back(_uiCamera);
 	}
 
@@ -121,7 +120,7 @@ void DevScene::CreateSceneContext()
 
 		auto MyFont = RESOURCE.GetResource<Font>("font");
 		auto MyShader = RESOURCE.GetResource<Shader>("TextShader");
-		_textTexture = make_shared<UIText>("Text", MyFont, MyShader);
+		_textTexture = make_shared<UIText>("Text", _uiCameraComponent, MyFont, MyShader);
 		RENDER.AddRenderable(Render::RenderLayer::UI, _textTexture);
 		_textTransform = make_shared<Transform>
 			(
@@ -143,7 +142,7 @@ void DevScene::CreateSceneContext()
 
 		auto MyFont = RESOURCE.GetResource<Font>("font2");
 		auto MyShader = RESOURCE.GetResource<Shader>("TextShader");
-		_textTexture2 = make_shared<UIText>("Text2", MyFont, MyShader);
+		_textTexture2 = make_shared<UIText>("Text2", _uiCameraComponent, MyFont, MyShader);
 		RENDER.AddRenderable(Render::RenderLayer::UI, _textTexture2);
 		_textTransform2 = make_shared<Transform>
 			(
@@ -162,7 +161,8 @@ void DevScene::CreateSceneContext()
 	{
 		_texture = make_shared<Texture>("Texture", "../Resources/Images/cuphead_idle_0001.png");
 		RESOURCE.AddResource(_texture);
-		_sprite = make_shared<Sprite>("Sprite", RESOURCE.GetResource<Texture>("Texture"), RESOURCE.GetResource<Shader>("TextureShader"));
+		_sprite = make_shared<Sprite>("Sprite", _mainCameraComponent,
+			RESOURCE.GetResource<Texture>("Texture"), RESOURCE.GetResource<Shader>("TextureShader"));
 		RENDER.AddRenderable(Render::RenderLayer::World, _sprite);
 		_spriteTransform = make_shared<Transform>
 			(
@@ -184,7 +184,8 @@ void DevScene::CreateSceneContext()
 		FlipbookInfo info{ 8, 16, 7, 0, 9, 12.0f, true, true };
 		_flipbook = make_shared<Flipbook>("Flipbook", "../Resources/Images/cuphead_overworld.png", info);
 		RESOURCE.AddResource(_flipbook);
-		_flipbookPlayer = make_shared<FlipbookPlayer>("FlipbookPlayer", RESOURCE.GetResource<Flipbook>("Flipbook"), RESOURCE.GetResource<Shader>("TextureShader"));
+		_flipbookPlayer = make_shared<FlipbookPlayer>("FlipbookPlayer", _mainCameraComponent,
+			RESOURCE.GetResource<Flipbook>("Flipbook"), RESOURCE.GetResource<Shader>("TextureShader"));
 		RENDER.AddRenderable(Render::RenderLayer::World, _flipbookPlayer);
 		_flipbookTransform = make_shared<Transform>
 			(
@@ -212,9 +213,9 @@ void DevScene::CreateSceneContext()
 		_button = make_shared<UIButton>
 			(
 				"Button",
+				_uiCameraComponent,
 				ButtonTexture,
 				_textureShader,
-				_uiCameraComponent,
 				glm::vec2(201.0f, 93.0f),
 				Inputs::Mouse::Left
 			);
@@ -247,9 +248,9 @@ void DevScene::CreateSceneContext()
 		_checkbox = make_shared<UICheckBox>
 			(
 				"CheckBox",
+				_uiCameraComponent,
 				CheckBoxTexture,
 				_textureShader,
-				_uiCameraComponent,
 				glm::vec2(205.0f, 205.0f),
 				Inputs::Mouse::Left
 			);
@@ -272,7 +273,7 @@ void DevScene::CreateSceneContext()
 
 	// UI Canvas GameObject
 	{
-		_uiCanvas = make_shared<UICanvas>("MyCanvas", glm::vec2(300.0f, 200.0f));
+		_uiCanvas = make_shared<UICanvas>("MyCanvas", _uiCameraComponent, glm::vec2(300.0f, 200.0f));
 		_uiCanvasTransform = make_shared<Transform>
 			(
 				"ButtonTransform",

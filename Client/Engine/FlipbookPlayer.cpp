@@ -3,8 +3,9 @@
 #include "Flipbook.h"
 #include "Shader.h"
 
-FlipbookPlayer::FlipbookPlayer(const string& name, shared_ptr<Flipbook> flipbook, shared_ptr<Shader> shader)
-	: Super(name), _flipbook(flipbook), _shader(shader)
+FlipbookPlayer::FlipbookPlayer(const string& name, shared_ptr<Camera> camera,
+	shared_ptr<Flipbook> flipbook, shared_ptr<Shader> shader)
+	: Super(name, camera), _flipbook(flipbook), _shader(shader)
 {
 }
 
@@ -15,9 +16,9 @@ void FlipbookPlayer::Awake(shared_ptr<GameObject> owner)
 	_shader->Awake();
 }
 
-void FlipbookPlayer::Render(const shared_ptr<Camera>& camera)
+void FlipbookPlayer::Render()
 {
-	_flipbook->Render(_shader, _model, camera);
+	_flipbook->Render(_shader, _model, _camera);
 }
 
 void FlipbookPlayer::Update()

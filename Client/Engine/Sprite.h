@@ -10,12 +10,13 @@ class Sprite : public IRenderable
 	using Super = IRenderable;
 
 public:
-	Sprite(const string& name, shared_ptr<ITexture> texture, shared_ptr<Shader> shader);
+	Sprite(const string& name, shared_ptr<Camera> camera,
+		shared_ptr<ITexture> texture, shared_ptr<Shader> shader);
 	virtual ~Sprite() override;
 
 public:
 	virtual void Awake(shared_ptr<GameObject> owner) override;
-	virtual void Render(const shared_ptr<Camera>& camera) override;
+	virtual void Render() override;
 
 private:
 	shared_ptr<ITexture> _texture;

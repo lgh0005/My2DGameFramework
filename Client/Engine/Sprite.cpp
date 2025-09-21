@@ -7,8 +7,9 @@
 #include "Shader.h"
 #include "Camera.h"
 
-Sprite::Sprite(const string& name, shared_ptr<ITexture> texture, shared_ptr<Shader> shader)
-	: Super(name), _texture(texture), _shader(shader)
+Sprite::Sprite(const string& name, shared_ptr<Camera> camera,
+	shared_ptr<ITexture> texture, shared_ptr<Shader> shader)
+	: Super(name, camera), _texture(texture), _shader(shader)
 {
 
 }
@@ -25,8 +26,8 @@ void Sprite::Awake(shared_ptr<GameObject> owner)
 	_texture->Awake();
 }
 
-void Sprite::Render(const shared_ptr<Camera>& camera)
+void Sprite::Render()
 {
-	_texture->Render(_shader, _model, camera);
+	_texture->Render(_shader, _model, _camera);
 }
 

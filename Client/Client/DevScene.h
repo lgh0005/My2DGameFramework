@@ -25,6 +25,7 @@ class Flipbook;
 
 #pragma region Behaviour
 class example;
+class example1;
 class example2;
 class example3;
 #pragma endregion
@@ -50,6 +51,7 @@ private:
 
 	// UI Camera
 	shared_ptr<Transform> _uiCameraTransform;
+	shared_ptr<example1> _uiCameraScript;
 	shared_ptr<Camera> _uiCameraComponent;
 	shared_ptr<GameObject> _uiCamera;
 

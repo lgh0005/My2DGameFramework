@@ -9,8 +9,8 @@
 /*=========================
 //    Default Methods    //
 =========================*/
-IUIElement::IUIElement(const string& name, const glm::vec2& size) 
-	: Super(name), _size(size)
+IUIElement::IUIElement(const string& name, shared_ptr<Camera> camera, const glm::vec2& size)
+	: Super(name, camera), _size(size)
 {
 }
 

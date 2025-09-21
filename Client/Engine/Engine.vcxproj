@@ -171,7 +171,7 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClInclude Include="IResource.h" />
     <ClInclude Include="ISingleton.h" />
     <ClInclude Include="ITexture.h" />
-    <ClInclude Include="IUIContainer.h" />
+    <ClInclude Include="UICanvas.h" />
     <ClInclude Include="IUIElement.h" />
     <ClInclude Include="IUIRenderable.h" />
     <ClInclude Include="Logger.h" />
@@ -188,7 +188,6 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="UIButton.h" />
-    <ClInclude Include="UICanvas.h" />
     <ClInclude Include="UICheckBox.h" />
     <ClInclude Include="UIEvent.h" />
     <ClInclude Include="UIImage.h" />
@@ -218,7 +217,7 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClCompile Include="IResource.cpp" />
     <ClCompile Include="ISingleton.cpp" />
     <ClCompile Include="ITexture.cpp" />
-    <ClCompile Include="IUIContainer.cpp" />
+    <ClCompile Include="UICanvas.cpp" />
     <ClCompile Include="IUIElement.cpp" />
     <ClCompile Include="IUIRenderable.cpp" />
     <ClCompile Include="Logger.cpp" />
@@ -239,7 +238,6 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UIButton.cpp" />
-    <ClCompile Include="UICanvas.cpp" />
     <ClCompile Include="UICheckBox.cpp" />
     <ClCompile Include="UIEvent.cpp" />
     <ClCompile Include="UIImage.cpp" />

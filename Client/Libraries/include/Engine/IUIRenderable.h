@@ -10,12 +10,13 @@ class IUIRenderable : public IUIElement
 	using Super = IUIElement;
 
 public:
-	IUIRenderable(const string& name, shared_ptr<ITexture> texture, shared_ptr<Shader> shader, const glm::vec2& size);
+	IUIRenderable(const string& name, shared_ptr<Camera> camera, 
+				  shared_ptr<ITexture> texture, shared_ptr<Shader> shader, const glm::vec2& size);
 	virtual ~IUIRenderable() override;
 
 public:
 	virtual void Awake(shared_ptr<GameObject> owner) override;
-	virtual void Render(const shared_ptr<Camera>& camera) override;
+	virtual void Render() override;
 
 public:
 	shared_ptr<ITexture> GetTexture() { return _texture; }
