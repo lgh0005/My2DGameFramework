@@ -1,5 +1,4 @@
 #pragma once
-#include "IBehaviour.h"
 
 class IResource;
 class GameObject;

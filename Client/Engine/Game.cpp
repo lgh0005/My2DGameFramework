@@ -4,11 +4,6 @@
 
 unique_ptr<Game> GAME = make_unique<Game>();
 
-Game::Game()
-{
-
-}
-
 Game::~Game()
 {
     // Release SDL resources

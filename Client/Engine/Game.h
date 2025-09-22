@@ -5,7 +5,7 @@ class Scene;
 class Game
 {
 public:
-	Game();
+	Game() = default;
 	~Game();
 
 public:
