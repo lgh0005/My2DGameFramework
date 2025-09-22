@@ -1,7 +1,5 @@
 #pragma once
 
-class Scene;
-
 class Game
 {
 public:

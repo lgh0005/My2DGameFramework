@@ -56,6 +56,9 @@ using namespace FMOD;
 #pragma comment(lib, "glew/glew32.lib")
 #pragma comment(lib, "opengl32.lib")
 
+// tinyxml2
+#include "tinyxml2/tinyxml2.h"
+
 // Misc
 #include "Types.h"
 #include "Defines.h"

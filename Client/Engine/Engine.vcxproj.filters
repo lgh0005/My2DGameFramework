@@ -185,6 +185,12 @@
     <ClCompile Include="IUIRenderable.cpp">
       <Filter>소스 파일\06. Interfaces</Filter>
     </ClCompile>
+    <ClCompile Include="TileMapRenderer.cpp">
+      <Filter>소스 파일\03. Components\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>소스 파일\05. Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -324,6 +330,12 @@
     </ClInclude>
     <ClInclude Include="IUIRenderable.h">
       <Filter>소스 파일\06. Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMapRenderer.h">
+      <Filter>소스 파일\03. Components\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>소스 파일\05. Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

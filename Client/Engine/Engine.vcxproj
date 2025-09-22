@@ -171,6 +171,8 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClInclude Include="IResource.h" />
     <ClInclude Include="ISingleton.h" />
     <ClInclude Include="ITexture.h" />
+    <ClInclude Include="TileMap.h" />
+    <ClInclude Include="TileMapRenderer.h" />
     <ClInclude Include="UICanvas.h" />
     <ClInclude Include="IUIElement.h" />
     <ClInclude Include="IUIRenderable.h" />
@@ -217,6 +219,8 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClCompile Include="IResource.cpp" />
     <ClCompile Include="ISingleton.cpp" />
     <ClCompile Include="ITexture.cpp" />
+    <ClCompile Include="TileMap.cpp" />
+    <ClCompile Include="TileMapRenderer.cpp" />
     <ClCompile Include="UICanvas.cpp" />
     <ClCompile Include="IUIElement.cpp" />
     <ClCompile Include="IUIRenderable.cpp" />

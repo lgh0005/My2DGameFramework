@@ -90,7 +90,7 @@ void Shader::AddShader(const string& shaderCode, GLenum shaderType)
 
 void Shader::CompileShader()
 {
-	// Add shader and compile it.
+	// Add shader and compile it
 	// TODO : 하드 코딩된 부분 수정할 필요 있음.
 	AddShader(ReadFile(_vertexShaderFileLocation), GL_VERTEX_SHADER);
 	AddShader(ReadFile(_fragmentShaderFileLocation), GL_FRAGMENT_SHADER);
