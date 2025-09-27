@@ -5,17 +5,16 @@
 #include "Transform.h"
 #include "ITexture.h"
 
-UIButton::UIButton(const string& name, shared_ptr<Camera> camera,
-				   shared_ptr<ITexture> button, shared_ptr<Shader> shader, 
-				   const glm::vec2& clickArea, Inputs::Mouse input)
-	: Super(name, camera, button, shader, clickArea), _input(input)
+UIButton::UIButton(const string& name, shared_ptr<Camera> camera, shared_ptr<ITexture> button, const glm::vec2& clickArea, Inputs::Mouse input)
+	: Super(name, camera, button, clickArea), _input(input)
 {
 
 }
 
-UIButton::~UIButton()
+void UIButton::Awake(const shared_ptr<GameObject>& owner)
 {
-
+	Super::Awake(owner);
+	_texture->Awake();
 }
 
 void UIButton::Update()

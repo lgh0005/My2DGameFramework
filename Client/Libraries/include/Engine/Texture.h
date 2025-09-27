@@ -9,10 +9,6 @@ class Texture : public ITexture
 
 public:
 	Texture(const string& name, const string& filePath);
-	virtual ~Texture() override;
-
-public:
-	virtual void Awake() override;
-	virtual void Render(shared_ptr<Shader> shader, glm::mat4 mode, shared_ptr<Camera> camera) override;
+	virtual ~Texture() override = default;
 };
 

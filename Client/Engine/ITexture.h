@@ -14,7 +14,7 @@ public:
 
 public:
 	virtual void Awake() override;
-	virtual void Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera> camera);
+	virtual void Render(const shared_ptr<Shader>& shader, const glm::mat4& model, const shared_ptr<Camera>& camera);
 
 public:
 	uint32 GetWidth() const { return _width; }

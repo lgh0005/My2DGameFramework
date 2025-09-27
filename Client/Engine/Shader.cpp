@@ -1,11 +1,10 @@
 #include "pch.h"
 #include "Shader.h"
 
-Shader::Shader(const string& name, const string& vertexShaderFile, const string& fragmentShaderFile, const vector<const char*>& uniforms)
+Shader::Shader(const string& name, const string& vertexShaderFile, const string& fragmentShaderFile)
 	: Super(name),
 	_vertexShaderFileLocation(vertexShaderFile),
-	_fragmentShaderFileLocation(fragmentShaderFile),
-	_uniformVariables(uniforms)
+	_fragmentShaderFileLocation(fragmentShaderFile)
 {
 }
 
@@ -30,11 +29,22 @@ GLuint Shader::GetUniformLocation(const string& uniform)
 	return -1;
 }
 
-void Shader::AddUniforms(const vector<const char*>& uniforms)
+#pragma region TEST
+// TEST
+void Shader::AddUniform(const string& uniform)
 {
-	for (auto uniform : uniforms)
-		_uniformLocation[uniform] = glGetUniformLocation(_shaderID, uniform);
+	_uniformLocation[uniform] = glGetUniformLocation(_shaderID, uniform.c_str());
 }
+
+void Shader::ApplyUniforms()
+{
+	for (auto& [name, value] : _uniformMap)
+	{
+		visit([&](auto&& v) { SetUniform(name, v); }, value);
+	}
+}
+
+#pragma endregion
 
 string Shader::ReadFile(const string& filePath)
 {
@@ -130,7 +140,4 @@ void Shader::CompileShader()
 			return string(infoLog.begin(), infoLog.end());
 		}
 	);
-
-	// Add uniform variables
-	AddUniforms(_uniformVariables);
 }

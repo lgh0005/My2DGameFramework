@@ -13,7 +13,7 @@ public:
 
 public:
 	virtual void Init() override;
-	virtual void Render() override;
+	virtual void Render(const shared_ptr<Shader>& shader, const glm::mat4& model, const shared_ptr<Camera>& camera) override;
 
 public:
 	void AddUIComponent(shared_ptr<IUIElement> ui);

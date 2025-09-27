@@ -1,11 +1,11 @@
 #include "pch.h"
 #include "IRenderable.h"
 #include "GameObject.h"
-#include "Transform.h"
+#include "Shader.h"
 #include "Camera.h"
+#include "Transform.h"
 
-IRenderable::IRenderable(const string& name, shared_ptr<Camera> camera) 
-    : Super(name), _camera(camera)
+IRenderable::IRenderable(const string& name) : Super(name)
 {
 
 }

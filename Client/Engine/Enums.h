@@ -5,8 +5,11 @@ namespace Render
     enum class RenderLayer
     {
         World,
-        UI
+        UI,
+        END
     };
+
+    constexpr int32 RENDER_LAYER_COUNT = static_cast<int32>(RenderLayer::END);
 }
 
 namespace Inputs

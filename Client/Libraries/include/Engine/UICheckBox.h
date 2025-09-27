@@ -9,12 +9,11 @@ class UICheckBox : public IUIRenderable
 	using Super = IUIRenderable;
 
 public:
-	UICheckBox(const string& name, shared_ptr<Camera> camera,
-		shared_ptr<ITexture> texture, shared_ptr<Shader> shader,
-		const glm::vec2& clieckArea, Inputs::Mouse input);
+	UICheckBox(const string& name, const shared_ptr<Camera>& camera, shared_ptr<ITexture> texture, const glm::vec2& clieckArea, Inputs::Mouse input);
 	virtual ~UICheckBox() override = default;
 
 public:
+	virtual void Awake(const shared_ptr<GameObject>& owner) override;
 	virtual void Update() override;
 
 private:

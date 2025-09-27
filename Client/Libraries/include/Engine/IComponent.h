@@ -9,7 +9,7 @@ public:
 	virtual ~IComponent() = default;
 
 public:
-	virtual void Awake(shared_ptr<GameObject> owner);
+	virtual void Awake(const shared_ptr<GameObject>& owner);
 	virtual void Init();
 	virtual void Update();
 	virtual void FixedUpdate();

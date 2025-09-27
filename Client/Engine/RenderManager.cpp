@@ -3,7 +3,7 @@
 #include "ITexture.h"
 
 #pragma region TEST
-#include "IRenderable.h"
+#include "RenderPass.h"
 #pragma endregion
 
 
@@ -53,24 +53,17 @@ void RenderManager::Init()
 
 void RenderManager::Update()
 {
-}
-
-void RenderManager::Render()
-{
     glClear(GL_COLOR_BUFFER_BIT);
 
-    for (auto& [layer, queue] : _renderQueues)
-    {
-        for (auto& renderable : queue)
-            renderable->Render();
-    }
+    for (auto& renderPass : _renderQueue)
+        renderPass->Render();
 
     SDL_GL_SwapWindow(_window);
 }
 
-void RenderManager::AddRenderable(Render::RenderLayer layer, shared_ptr<IRenderable> renderable)
+void RenderManager::AddRenderPass(const shared_ptr<RenderPass>& renderPass)
 {
-    _renderQueues[layer].push_back(renderable);
+    _renderQueue.push_back(renderPass);
 }
 
 void RenderManager::SetClearColor(const array<GLclampf, 4>& clearColor)

@@ -9,7 +9,7 @@ class TileMapRenderer : public IRenderable
 	using Super = IRenderable;
 
 public:
-	TileMapRenderer(const string& name, shared_ptr<Camera> camera, shared_ptr<TileMap> tileMap);
+	TileMapRenderer(const string& name, shared_ptr<TileMap> tileMap);
 	virtual ~TileMapRenderer() override = default;
 
 public:

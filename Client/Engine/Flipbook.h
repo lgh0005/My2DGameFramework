@@ -26,7 +26,6 @@ public:
 
 public:
 	virtual void Awake() override;
-	virtual void Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera> camera) override;
 	virtual void Update() override;
 
 public:

@@ -3,8 +3,8 @@
 #include "Camera.h"
 #include "TileMap.h"
 
-TileMapRenderer::TileMapRenderer(const string& name, shared_ptr<Camera> camera, shared_ptr<TileMap> tileMap)
-	: Super(name, camera), _tileMap(tileMap)
+TileMapRenderer::TileMapRenderer(const string& name, shared_ptr<TileMap> tileMap)
+	: Super(name), _tileMap(tileMap)
 {
 
 }

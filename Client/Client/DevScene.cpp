@@ -18,6 +18,7 @@
 #pragma endregion
 
 #pragma region Resources
+#include "Engine/RenderPass.h"
 #include "Engine/Shader.h"
 #include "Engine/Texture.h"
 #include "Engine/Font.h"
@@ -39,26 +40,24 @@ DevScene::DevScene(const string& name) : Super(name)
 
 void DevScene::CreateSceneContext()
 {
-	/*==================
-	*   preprocessing  *
-	===================*/
+#pragma region PREPROCESSING
 	RENDER.SetClearColor({ 0.2f, 0.0f, 0.0f, 1.0f });
+#pragma endregion
 
+#pragma region REDNER_PASSES
 	// Shader : Default texture shader
 	{
 		_textureShader = make_shared<Shader>
 			(
 				"TextureShader",
 				"../Engine/glsl/default.vert",
-				"../Engine/glsl/default.frag",
-				vector<const char*>
-		{
-			Uniforms::UNIFORM_MODEL,
-				Uniforms::UNIFORM_VIEW,
-				Uniforms::UNIFORM_PROJECTION,
-				Uniforms::UNIFORM_TEXTURE
-		}
+				"../Engine/glsl/default.frag"
 			);
+		_textureShader->Awake();
+		_textureShader->AddUniform(Uniforms::UNIFORM_MODEL);
+		_textureShader->AddUniform(Uniforms::UNIFORM_VIEW);
+		_textureShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
+		_textureShader->AddUniform(Uniforms::UNIFORM_TEXTURE);
 		RESOURCE.AddResource(static_pointer_cast<IResource>(_textureShader));
 	}
 
@@ -68,16 +67,14 @@ void DevScene::CreateSceneContext()
 			(
 				"TextShader",
 				"../Engine/glsl/text.vert",
-				"../Engine/glsl/text.frag",
-				vector<const char*>
-		{
-			Uniforms::UNIFORM_MODEL,
-				Uniforms::UNIFORM_VIEW,
-				Uniforms::UNIFORM_PROJECTION,
-				Uniforms::UNIFORM_TEXTURE,
-				Uniforms::UNIFORM_COLOR
-		}
+				"../Engine/glsl/text.frag"
 			);
+		_textShader->Awake();
+		_textShader->AddUniform(Uniforms::UNIFORM_MODEL);
+		_textShader->AddUniform(Uniforms::UNIFORM_VIEW);
+		_textShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
+		_textShader->AddUniform(Uniforms::UNIFORM_TEXTURE);
+		_textShader->AddUniform(Uniforms::UNIFORM_COLOR);
 		RESOURCE.AddResource(static_pointer_cast<IResource>(_textShader));
 	}
 
@@ -113,6 +110,18 @@ void DevScene::CreateSceneContext()
 		_gameObjects.push_back(_uiCamera);
 	}
 
+	// UI Render Pass
+	_uiRenderPass = make_shared<RenderPass>();
+	_uiRenderPass->SetShader(_textShader);
+	_uiRenderPass->SetCamera(_uiCameraComponent);
+
+	// texture Render Pass
+	_textureRenderPass = make_shared<RenderPass>();
+	_textureRenderPass->SetShader(_textureShader);
+	_textureRenderPass->SetCamera(_mainCameraComponent);
+#pragma endregion
+
+#pragma region GAME_OBJECTS
 	// Text UI GameObject
 	{
 		_font = make_shared<Font>("font", "../Resources/Fonts/Crang.ttf", "Hello world!", 64, Colors::White);
@@ -120,8 +129,7 @@ void DevScene::CreateSceneContext()
 
 		auto MyFont = RESOURCE.GetResource<Font>("font");
 		auto MyShader = RESOURCE.GetResource<Shader>("TextShader");
-		_textTexture = make_shared<UIText>("Text", _uiCameraComponent, MyFont, MyShader);
-		RENDER.AddRenderable(Render::RenderLayer::UI, _textTexture);
+		_textTexture = make_shared<UIText>("Text", _uiCameraComponent, MyFont);
 		_textTransform = make_shared<Transform>
 			(
 				"TextTransform",
@@ -132,6 +140,7 @@ void DevScene::CreateSceneContext()
 		_textObject = make_shared<GameObject>("TextObject");
 		_textObject->SetTransform(_textTransform);
 		_textObject->AddRenderable(static_pointer_cast<IRenderable>(_textTexture));
+		_uiRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_textTexture));
 		_gameObjects.push_back(_textObject);
 	}
 
@@ -142,8 +151,7 @@ void DevScene::CreateSceneContext()
 
 		auto MyFont = RESOURCE.GetResource<Font>("font2");
 		auto MyShader = RESOURCE.GetResource<Shader>("TextShader");
-		_textTexture2 = make_shared<UIText>("Text2", _uiCameraComponent, MyFont, MyShader);
-		RENDER.AddRenderable(Render::RenderLayer::UI, _textTexture2);
+		_textTexture2 = make_shared<UIText>("Text2", _uiCameraComponent, MyFont);
 		_textTransform2 = make_shared<Transform>
 			(
 				"TextTransform2",
@@ -154,6 +162,7 @@ void DevScene::CreateSceneContext()
 		_textObject2 = make_shared<GameObject>("TextObject2");
 		_textObject2->SetTransform(_textTransform2);
 		_textObject2->AddRenderable(static_pointer_cast<IRenderable>(_textTexture2));
+		_uiRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_textTexture2));
 		_gameObjects.push_back(_textObject2);
 	}
 
@@ -161,9 +170,7 @@ void DevScene::CreateSceneContext()
 	{
 		_texture = make_shared<Texture>("Texture", "../Resources/Images/cuphead_idle_0001.png");
 		RESOURCE.AddResource(_texture);
-		_sprite = make_shared<Sprite>("Sprite", _mainCameraComponent,
-			RESOURCE.GetResource<Texture>("Texture"), RESOURCE.GetResource<Shader>("TextureShader"));
-		RENDER.AddRenderable(Render::RenderLayer::World, _sprite);
+		_sprite = make_shared<Sprite>("Sprite", RESOURCE.GetResource<Texture>("Texture"));
 		_spriteTransform = make_shared<Transform>
 			(
 				"TextTransform",
@@ -175,6 +182,7 @@ void DevScene::CreateSceneContext()
 		_spriteObject = make_shared<GameObject>("SpriteObject");
 		_spriteObject->SetTransform(_spriteTransform);
 		_spriteObject->AddRenderable(static_pointer_cast<IRenderable>(_sprite));
+		_textureRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_sprite));
 		_spriteObject->AddBehaviour(static_pointer_cast<IBehaviour>(_sampleScript));
 		_gameObjects.push_back(_spriteObject);
 	}
@@ -184,9 +192,7 @@ void DevScene::CreateSceneContext()
 		FlipbookInfo info{ 8, 16, 7, 0, 9, 12.0f, true, true };
 		_flipbook = make_shared<Flipbook>("Flipbook", "../Resources/Images/cuphead_overworld.png", info);
 		RESOURCE.AddResource(_flipbook);
-		_flipbookPlayer = make_shared<FlipbookPlayer>("FlipbookPlayer", _mainCameraComponent,
-			RESOURCE.GetResource<Flipbook>("Flipbook"), RESOURCE.GetResource<Shader>("TextureShader"));
-		RENDER.AddRenderable(Render::RenderLayer::World, _flipbookPlayer);
+		_flipbookPlayer = make_shared<FlipbookPlayer>("FlipbookPlayer", RESOURCE.GetResource<Flipbook>("Flipbook"));
 		_flipbookTransform = make_shared<Transform>
 			(
 				"FlipbookTransform",
@@ -197,6 +203,7 @@ void DevScene::CreateSceneContext()
 		_flipbookObject = make_shared<GameObject>("FlipbookObject");
 		_flipbookObject->SetTransform(_flipbookTransform);
 		_flipbookObject->AddRenderable(static_pointer_cast<IRenderable>(_flipbookPlayer));
+		_textureRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_flipbookPlayer));
 		_flipbookObject->SetParent(_spriteObject);
 		_gameObjects.push_back(_flipbookObject);
 	}
@@ -215,11 +222,9 @@ void DevScene::CreateSceneContext()
 				"Button",
 				_uiCameraComponent,
 				ButtonTexture,
-				_textureShader,
 				glm::vec2(201.0f, 93.0f),
 				Inputs::Mouse::Left
 			);
-		RENDER.AddRenderable(Render::RenderLayer::UI, _button);
 
 		_uiButtonTransform = make_shared<Transform>
 			(
@@ -232,10 +237,17 @@ void DevScene::CreateSceneContext()
 		_uiButtonObject = make_shared<GameObject>("ButtonObject");
 		_uiButtonObject->SetTransform(_uiButtonTransform);
 		_uiButtonObject->AddRenderable(static_pointer_cast<IRenderable>(_button));
+		_textureRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_button));
 		_uiButtonObject->AddBehaviour(static_pointer_cast<IBehaviour>(_sampleScript2));
 		_gameObjects.push_back(_uiButtonObject);
 	}
 
+	// TODO : 아마 기본 셰이더는 이렇게 세 가지를 만들어야 할 듯 하다.
+	// 1. 기본 Texture를 가지는 컴폰넌트들을 위한 텍스쳐 셰이더	 : default.vert, default.frag
+	// 2. UI	
+	//	2.1. Text : Text 전용 셰이더							 : text.vert, text.frag
+	//  2.2. Texture : UI 전용 텍스쳐 셰이더					 : UITexture.vert, UITexture.frag
+	// 
 	// Button CheckBox UI
 	{
 		_chechboxClicked = make_shared<Texture>("CLICKED", "../Resources/Images/b_2_click.png");
@@ -250,11 +262,9 @@ void DevScene::CreateSceneContext()
 				"CheckBox",
 				_uiCameraComponent,
 				CheckBoxTexture,
-				_textureShader,
 				glm::vec2(205.0f, 205.0f),
 				Inputs::Mouse::Left
 			);
-		RENDER.AddRenderable(Render::RenderLayer::UI, _checkbox);
 
 		_uiCheckBoxTransform = make_shared<Transform>
 			(
@@ -267,6 +277,7 @@ void DevScene::CreateSceneContext()
 		_uiCheckBoxObject = make_shared<GameObject>("CheckBoxObject");
 		_uiCheckBoxObject->SetTransform(_uiCheckBoxTransform);
 		_uiCheckBoxObject->AddRenderable(static_pointer_cast<IRenderable>(_checkbox));
+		_textureRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_checkbox));
 		_uiCheckBoxObject->AddBehaviour(static_pointer_cast<IBehaviour>(_sampleScript3));
 		_gameObjects.push_back(_uiCheckBoxObject);
 	}
@@ -290,5 +301,13 @@ void DevScene::CreateSceneContext()
 		_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_checkbox));
 		_gameObjects.push_back(_uiCanvasObject);
 	}
+
+#pragma region POSTPROCESSING
+	RENDER.AddRenderPass(_uiRenderPass);
+	RENDER.AddRenderPass(_textureRenderPass);
+
+#pragma endregion
+	
+#pragma endregion
 }
 #pragma endregion

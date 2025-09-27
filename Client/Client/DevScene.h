@@ -17,6 +17,7 @@ class UICheckBox;
 #pragma endregion
 
 #pragma region Resources
+class RenderPass;
 class Shader;
 class Texture;
 class Font;
@@ -45,6 +46,8 @@ protected:
 // Add GameObjects, Components, Resources here
 private:
 
+#pragma region RENDER_PASSES
+
 	// Local scene shaders
 	shared_ptr<Shader> _textShader;
 	shared_ptr<Shader> _textureShader;
@@ -59,6 +62,12 @@ private:
 	shared_ptr<Transform> _mainCameraTransform;
 	shared_ptr<Camera> _mainCameraComponent;
 	shared_ptr<GameObject> _mainCamera;
+
+	// Render Passes
+	shared_ptr<RenderPass> _uiRenderPass;
+	shared_ptr<RenderPass> _textureRenderPass;
+
+#pragma endregion
 
 	// Text UI GameObject
 	shared_ptr<Font> _font;

@@ -2,32 +2,20 @@
 #include "Sprite.h"
 #include "ITexture.h"
 #include "Texture.h"
-#include "Transform.h"
-#include "GameObject.h"
-#include "Shader.h"
-#include "Camera.h"
 
-Sprite::Sprite(const string& name, shared_ptr<Camera> camera,
-	shared_ptr<ITexture> texture, shared_ptr<Shader> shader)
-	: Super(name, camera), _texture(texture), _shader(shader)
+Sprite::Sprite(const string& name, shared_ptr<ITexture> texture)
+	: Super(name), _texture(texture)
 {
-
 }
 
-Sprite::~Sprite()
-{
-
-}
-
-void Sprite::Awake(shared_ptr<GameObject> owner)
+void Sprite::Awake(const shared_ptr<GameObject>& owner)
 {
 	Super::Awake(owner);
-	_shader->Awake();
 	_texture->Awake();
 }
 
-void Sprite::Render()
+void Sprite::Render(const shared_ptr<Shader>& shader, const glm::mat4& model, const shared_ptr<Camera>& camera)
 {
-	_texture->Render(_shader, _model, _camera);
+	_texture->Render(shader, model, camera);
 }
 

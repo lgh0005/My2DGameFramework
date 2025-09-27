@@ -1,26 +1,26 @@
 #pragma once
 
 class Shader;
+class Camera;
 class IRenderable;
 
 class RenderPass
 {
 public:
-    void Draw(const GLuint vao, const GLuint indexCount)
-    {
-        _shader->Bind();
-        _shader->ApplyUniforms();
-        glBindVertexArray(vao);
-        glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
-        glBindVertexArray(0);
-        _shader->Unbind();
-    }
+	RenderPass() = default;
+	~RenderPass() = default;
 
 public:
-    void SetShader(const shared_ptr<Shader>& shader) { _shader = shader; }
+	void Render();
+
+public:
+	void SetShader(const shared_ptr<Shader>& shader) { _shader = shader; }
+	void SetCamera(const shared_ptr<Camera>& camera) { _camera = camera; }
+	void AddRenderable(const shared_ptr<IRenderable>& renderable) { _renderables.push_back(renderable); }
 
 private:
-    shared_ptr<Shader> _shader;
-    vector<IRenderable> _renderables;
+	shared_ptr<Shader> _shader;
+	shared_ptr<Camera> _camera;
+	vector<shared_ptr<IRenderable>> _renderables;
 };
 

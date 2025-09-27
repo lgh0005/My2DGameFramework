@@ -11,7 +11,7 @@ public:
 
 public:
 	virtual void Awake() override;
-	virtual void Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera> camera) override;
+	virtual void Render(const shared_ptr<Shader>& shader, const glm::mat4& model, const shared_ptr<Camera>& camera) override;
 
 private:
 	// TODO : Tile size etc.

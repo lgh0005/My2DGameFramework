@@ -2,7 +2,7 @@
 #include "ISingleton.h"
 
 class Camera;
-class IRenderable;
+class RenderPass;
 
 class RenderManager : public ISingleton<RenderManager>
 {
@@ -14,10 +14,13 @@ public:
 public:
 	virtual void Init() override;
 	virtual void Update() override;
-	void Render();
 
+#pragma region ADD_RENDER_PASS_TEST
 public:
-	void AddRenderable(Render::RenderLayer layer, shared_ptr<IRenderable> renderable);
+	//void AddRenderable(Render::RenderLayer layer, shared_ptr<IRenderable> renderable);
+	void AddRenderPass(const shared_ptr<RenderPass>& renderPass);
+
+#pragma endregion
 	
 public:
 	void SetClearColor(const array<GLclampf, 4>& clearColor);
@@ -30,5 +33,5 @@ private:
 	array<GLclampf, 4> _clearColor = { 0.0f, 0.0f, 0.0f, 0.0f };
 
 private:
-	unordered_map<Render::RenderLayer, vector<shared_ptr<IRenderable>>> _renderQueues;
+	vector<shared_ptr<RenderPass>> _renderQueue;
 };

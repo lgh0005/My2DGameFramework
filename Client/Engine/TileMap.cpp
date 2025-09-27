@@ -8,10 +8,10 @@ TileMap::TileMap(const string& name, const string& filePath) : Super(name, fileP
 
 void TileMap::Awake()
 {
-
+	// TODO
 }
 
-void TileMap::Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera> camera)
+void TileMap::Render(const shared_ptr<Shader>& shader, const glm::mat4& model, const shared_ptr<Camera>& camera)
 {
-
+	// TODO
 }

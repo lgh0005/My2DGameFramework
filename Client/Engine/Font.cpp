@@ -12,32 +12,22 @@ Font::~Font()
 {
 }
 
-void Font::Awake()
+void Font::Render(const shared_ptr<Shader>& shader, const glm::mat4& model, const shared_ptr<Camera>& camera)
 {
-	Super::Awake();
-}
-
-void Font::Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera> camera)
-{
-	shader->Use();
-
 	// Use shader program and bind buffers
 	glUseProgram(shader->GetShaderProgram());
 	glBindVertexArray(_vao);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
 
-	// Transfrom 관련된 것들
-	glUniformMatrix4fv(shader->GetUniformLocation(Uniforms::UNIFORM_MODEL), 1, GL_FALSE, glm::value_ptr(model));
-	glUniformMatrix4fv(shader->GetUniformLocation(Uniforms::UNIFORM_VIEW), 1, GL_FALSE, glm::value_ptr(camera->GetView()));
-	glUniformMatrix4fv(shader->GetUniformLocation(Uniforms::UNIFORM_PROJECTION), 1, GL_FALSE, glm::value_ptr(camera->GetProjection()));
-	glUniform4f
-	(
-		shader->GetUniformLocation(Uniforms::UNIFORM_COLOR),
-		_color.r / 255.0f,
-		_color.g / 255.0f,
-		_color.b / 255.0f,
-		_color.a / 255.0f
-	);
+	// Uniforms
+	shader->SetUniformValue(Uniforms::UNIFORM_MODEL, model);
+	shader->SetUniformValue(Uniforms::UNIFORM_VIEW, camera->GetView());
+	shader->SetUniformValue(Uniforms::UNIFORM_PROJECTION, camera->GetProjection());
+	shader->SetUniformValue(Uniforms::UNIFORM_COLOR, glm::vec4(_color.r / 255.0f, _color.g / 255.0f, _color.b / 255.0f, _color.a / 255.0f));
+	shader->SetUniformValue(Uniforms::UNIFORM_TEXTURE, 0);
+
+	// Apply them at once
+	shader->ApplyUniforms();
 
 	// Bind texture
 	UseTexture();
@@ -49,8 +39,6 @@ void Font::Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera>
 	// Unbind buffers
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
-
-	shader->Unuse();
 }
 
 void Font::LoadTexture()

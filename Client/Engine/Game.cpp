@@ -49,9 +49,6 @@ void Game::Launch(const string& FirstSceneName)
 
         // Update Logic
         Update();
-
-        // Render game
-        RENDER.Render();
     }
 }
 
@@ -61,4 +58,5 @@ void Game::Update()
     SCENE.Update();
     INPUT.Update();
     UIMANAGER.Update();
+    RENDER.Update();
 }

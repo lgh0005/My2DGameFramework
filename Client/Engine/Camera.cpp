@@ -11,7 +11,7 @@ Camera::~Camera()
 {
 }
 
-void Camera::Awake(shared_ptr<GameObject> owner)
+void Camera::Awake(const shared_ptr<GameObject>& owner)
 {
 	Super::Awake(owner);
 	

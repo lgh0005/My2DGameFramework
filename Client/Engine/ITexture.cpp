@@ -3,8 +3,7 @@
 #include "ITexture.h"
 #include "Shader.h"
 
-ITexture::ITexture(const string& name, const string& filePath)
-	: Super(name), _resourceFilePath(filePath)
+ITexture::ITexture(const string& name, const string& filePath) : Super(name), _resourceFilePath(filePath)
 {
 
 }
@@ -15,23 +14,24 @@ void ITexture::Awake()
 	CreateRect();
 }
 
-void ITexture::Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera> camera)
+void ITexture::Render(const shared_ptr<Shader>& shader, const glm::mat4& model, const shared_ptr<Camera>& camera)
 {
-	shader->Use();
-
 	// Use shader program and bind buffers
 	glUseProgram(shader->GetShaderProgram());
 	glBindVertexArray(_vao);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
 
-	// Transfrom 관련된 것들
-	glUniformMatrix4fv(shader->GetUniformLocation(Uniforms::UNIFORM_MODEL), 1, GL_FALSE, glm::value_ptr(model));
-	glUniformMatrix4fv(shader->GetUniformLocation(Uniforms::UNIFORM_VIEW), 1, GL_FALSE, glm::value_ptr(camera->GetView()));
-	glUniformMatrix4fv(shader->GetUniformLocation(Uniforms::UNIFORM_PROJECTION), 1, GL_FALSE, glm::value_ptr(camera->GetProjection()));
+	// Uniforms
+	shader->SetUniformValue(Uniforms::UNIFORM_MODEL, model);
+	shader->SetUniformValue(Uniforms::UNIFORM_VIEW, camera->GetView());
+	shader->SetUniformValue(Uniforms::UNIFORM_PROJECTION, camera->GetProjection());
+	shader->SetUniformValue(Uniforms::UNIFORM_TEXTURE, 0);
+
+	// Apply them at once
+	shader->ApplyUniforms();
 
 	// Bind texture
 	UseTexture();
-	glUniform1i(shader->GetUniformLocation(Uniforms::UNIFORM_TEXTURE), 0);
 
 	// Draw call
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -39,8 +39,6 @@ void ITexture::Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Cam
 	// Unbind buffers
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
-
-	shader->Unuse();
 }
 
 void ITexture::LoadTexture()

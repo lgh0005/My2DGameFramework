@@ -194,6 +194,9 @@
     <ClCompile Include="Utils.cpp">
       <Filter>소스 파일\98. Utils</Filter>
     </ClCompile>
+    <ClCompile Include="RenderPass.cpp">
+      <Filter>소스 파일\98. Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -341,6 +344,9 @@
       <Filter>소스 파일\05. Resources</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
+      <Filter>소스 파일\98. Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderPass.h">
       <Filter>소스 파일\98. Utils</Filter>
     </ClInclude>
   </ItemGroup>

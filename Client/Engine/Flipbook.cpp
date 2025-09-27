@@ -17,11 +17,6 @@ void Flipbook::Awake()
     SetFrame(_currentFrame);
 }
 
-void Flipbook::Render(shared_ptr<Shader> shader, glm::mat4 model, shared_ptr<Camera> camera)
-{
-    Super::Render(shader, model, camera);
-}
-
 void Flipbook::Update()
 {
     if (!_flipbookInfo.isPlaying) return;

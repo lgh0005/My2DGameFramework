@@ -30,9 +30,10 @@ void UICanvas::Init()
 	}
 }
 
-void UICanvas::Render()
+void UICanvas::Render(const shared_ptr<Shader>& shader, const glm::mat4& model, const shared_ptr<Camera>& camera)
 {
-	for (auto& ui : _uis) ui->Render();
+	for (auto& ui : _uis) 
+		ui->Render(shader, model, camera);
 }
 
 void UICanvas::AddUIComponent(shared_ptr<IUIElement> ui)

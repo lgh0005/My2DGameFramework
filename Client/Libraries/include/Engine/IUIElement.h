@@ -12,7 +12,7 @@ class IUIElement : public IRenderable
 	using Super = IRenderable;
 
 public:
-	IUIElement(const string& name, shared_ptr<Camera> camera, const glm::vec2& size);
+	IUIElement(const string& name, const shared_ptr<Camera>& camera, const glm::vec2& size);
 	virtual ~IUIElement() override = default;
 
 protected:
@@ -46,4 +46,5 @@ protected:
 	bool _toggle = false;
 	glm::vec2 _size;
 	vector<UIEvent> _eventBindings;
+	shared_ptr<Camera> _camera;
 };
