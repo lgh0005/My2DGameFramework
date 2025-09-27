@@ -13,15 +13,19 @@ void UICanvas::Init()
 { 
 	Super::Init();
 
-	auto owner = _owner.lock();
-	for (auto& ui : _uis)
+	shared_ptr<GameObject> owner;
+	if (Utils::IsValidPtr(_owner, owner))
 	{
-		ui->Init();
-		auto childObj = ui->GetOwner();
-		if (childObj)
+		for (auto& ui : _uis)
 		{
-			childObj->SetParent(owner);
-			childObj->GetTransform()->Init();
+			ui->Init();
+			
+			shared_ptr<GameObject> child;
+			if (Utils::IsValidPtr(ui->GetOwner(), child))
+			{
+				child->SetParent(owner);
+				child->GetTransform()->Init();
+			}
 		}
 	}
 }

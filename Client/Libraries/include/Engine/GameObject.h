@@ -11,10 +11,9 @@ public:
 	GameObject(const string& name);
 
 public:
-	void AddChild(const shared_ptr<GameObject>& child) { _children.push_back(child); }
 	void AddComponent(const shared_ptr<IComponent>& component) { _components.push_back(component); }
 	void AddRenderable(const shared_ptr<IRenderable>& renderable) { _renderables.push_back(renderable); }
-	void AddBehaviour(const shared_ptr<IBehaviour>& behaviour) { _bahaviours.push_back(behaviour); }
+	void AddBehaviour(const shared_ptr<IBehaviour>& behaviour) { _behaviours.push_back(behaviour); }
 
 // Component Getters
 public:
@@ -36,22 +35,18 @@ public:
 
 	// Getter and Setter : transform
 	shared_ptr<Transform> GetTransform() { return _transform; }
-	void SetTransform(shared_ptr<Transform>& transform) { _transform = transform; }
+	void SetTransform(const shared_ptr<Transform>& transform) { _transform = transform; }
 
 	// Getter and Setter : parent
-	shared_ptr<GameObject> GetParent() { return _parent.lock(); }
-	void SetParent(shared_ptr<GameObject>& parent) { _parent = parent; }
-	
-	// Getter : children
-	vector<weak_ptr<GameObject>>& GetChildren() { return _children; }
+	weak_ptr<GameObject> GetParent() { return _parent; }
+	void SetParent(const shared_ptr<GameObject>& parent) { _parent = parent; }
 
 private:
 	const string _name;
 	shared_ptr<Transform> _transform;
 	weak_ptr<GameObject> _parent;
-	vector<weak_ptr<GameObject>> _children;
 	vector<shared_ptr<IComponent>> _components;
 	vector<shared_ptr<IRenderable>> _renderables;
-	vector<shared_ptr<IBehaviour>> _bahaviours;
+	vector<shared_ptr<IBehaviour>> _behaviours;
 };
 

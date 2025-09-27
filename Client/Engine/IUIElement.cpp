@@ -19,8 +19,8 @@ IUIElement::IUIElement(const string& name, shared_ptr<Camera> camera, const glm:
 =============================*/
 glm::vec2 IUIElement::GetWorldPosition() const
 {
-	auto owner = _owner.lock();
-	if (!owner) return glm::vec2(0.0f);
+	shared_ptr<GameObject> owner;
+	if (Utils::IsValidPtr(_owner, owner) == false) return glm::vec2(0.0f);
 
 	auto transform = owner->GetTransform();
 	glm::mat4 model = transform->GetModel();
@@ -31,8 +31,8 @@ glm::vec2 IUIElement::GetWorldPosition() const
 
 glm::vec2 IUIElement::GetWorldSize() const
 {
-	auto owner = _owner.lock();
-	if (!owner) return glm::vec2(1.0f);
+	shared_ptr<GameObject> owner;
+	if (Utils::IsValidPtr(_owner, owner) == false) return glm::vec2(1.0f);
 
 	auto transform = owner->GetTransform();
 	glm::mat4 model = transform->GetModel();

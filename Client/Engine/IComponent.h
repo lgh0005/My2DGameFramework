@@ -17,7 +17,7 @@ public:
 
 public:
 	const string& GetName() { return _name; }
-	shared_ptr<GameObject> GetOwner() { return _owner.lock(); }
+	weak_ptr<GameObject> GetOwner() { return _owner; }
 
 public:
 	template<typename T>

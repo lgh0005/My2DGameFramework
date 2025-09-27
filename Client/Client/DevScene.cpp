@@ -59,7 +59,7 @@ void DevScene::CreateSceneContext()
 				Uniforms::UNIFORM_TEXTURE
 		}
 			);
-		RESOURCE.AddResource(_textureShader);
+		RESOURCE.AddResource(static_pointer_cast<IResource>(_textureShader));
 	}
 
 	// Shader : Defualt text shader
@@ -78,7 +78,7 @@ void DevScene::CreateSceneContext()
 				Uniforms::UNIFORM_COLOR
 		}
 			);
-		RESOURCE.AddResource(_textShader);
+		RESOURCE.AddResource(static_pointer_cast<IResource>(_textShader));
 	}
 
 	// Main Camera

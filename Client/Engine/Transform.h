@@ -9,7 +9,7 @@ class Transform : public IComponent
 
 public:
 	Transform(const string& name, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale);
-	virtual ~Transform() override;
+	virtual ~Transform() override = default;
 
 public:
 	virtual void Init() override;
@@ -38,7 +38,7 @@ private:
 	glm::vec3 _rotation = glm::vec3(0.0f);
 	glm::vec3 _scale = glm::vec3(1.0f);
 
-	weak_ptr<GameObject> _parent;
+	weak_ptr<Transform> _parent;
 };
 
 

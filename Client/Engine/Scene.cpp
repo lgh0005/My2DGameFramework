@@ -19,17 +19,13 @@ void Scene::Init()
 	CreateSceneContext();
 
 	// Init all game objects
-	for (auto& obj : _gameObjects)
-		obj->Init();
+	for (auto& obj : _gameObjects) { obj->Init(); }
 }
 
 void Scene::Update()
 {
 	// Update all game objects
-	for (auto& obj : _gameObjects)
-	{
-		obj->FixedUpdate();
-		obj->Update();
-		obj->LateUpdate();
-	}
+	for (auto& obj : _gameObjects) { obj->FixedUpdate(); }
+	for (auto& obj : _gameObjects) { obj->Update(); }
+	for (auto& obj : _gameObjects) { obj->LateUpdate(); }
 }

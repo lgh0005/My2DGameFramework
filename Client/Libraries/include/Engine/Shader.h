@@ -18,14 +18,14 @@ public:
 	GLuint GetShaderProgram() { return _shaderID; }
 	GLuint GetUniformLocation(const string& uniform);
 
-public:
-	void SetBool(const string& name, bool value) { glUniform1i(GetUniformLocation(name), value ? 1 : 0); }
-	void SetInt(const string& name, int value) { glUniform1i(GetUniformLocation(name), value); }
-	void SetFloat(const string& name, float value) { glUniform1f(GetUniformLocation(name), value); }
-	void SetVec2(const string& name, const glm::vec2& value) { glUniform2fv(GetUniformLocation(name), 1, &value[0]); }
-	void SetVec3(const string& name, const glm::vec3& value) { glUniform2fv(GetUniformLocation(name), 1, &value[0]); }
-	void SetVec4(const string& name, const glm::vec4& value) { glUniform2fv(GetUniformLocation(name), 1, &value[0]); }
-	void SetMat4(const string& name, const glm::mat4& value) { glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, &value[0][0]); }
+//public:
+//	void SetBool(const string& name, bool value) { glUniform1i(GetUniformLocation(name), value ? 1 : 0); }
+//	void SetInt(const string& name, int value) { glUniform1i(GetUniformLocation(name), value); }
+//	void SetFloat(const string& name, float value) { glUniform1f(GetUniformLocation(name), value); }
+//	void SetVec2(const string& name, const glm::vec2& value) { glUniform2fv(GetUniformLocation(name), 1, &value[0]); }
+//	void SetVec3(const string& name, const glm::vec3& value) { glUniform2fv(GetUniformLocation(name), 1, &value[0]); }
+//	void SetVec4(const string& name, const glm::vec4& value) { glUniform2fv(GetUniformLocation(name), 1, &value[0]); }
+//	void SetMat4(const string& name, const glm::mat4& value) { glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, &value[0][0]); }
 
 private:
 	void AddUniforms(const vector<const char*>& uniforms);

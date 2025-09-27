@@ -2,9 +2,9 @@
 #include "Shader.h"
 
 Shader::Shader(const string& name, const string& vertexShaderFile, const string& fragmentShaderFile, const vector<const char*>& uniforms)
-	: Super(name), 
-	_vertexShaderFileLocation(vertexShaderFile), 
-	_fragmentShaderFileLocation(fragmentShaderFile), 
+	: Super(name),
+	_vertexShaderFileLocation(vertexShaderFile),
+	_fragmentShaderFileLocation(fragmentShaderFile),
 	_uniformVariables(uniforms)
 {
 }
@@ -91,7 +91,7 @@ void Shader::AddShader(const string& shaderCode, GLenum shaderType)
 void Shader::CompileShader()
 {
 	// Add shader and compile it
-	// TODO : 하드 코딩된 부분 수정할 필요 있음.
+	// TODO : 하드 코딩된 부분을 수정할 필요가 있다.
 	AddShader(ReadFile(_vertexShaderFileLocation), GL_VERTEX_SHADER);
 	AddShader(ReadFile(_fragmentShaderFileLocation), GL_FRAGMENT_SHADER);
 

@@ -21,8 +21,7 @@ public:
 	shared_ptr<T> GetResource(const string& resourceName)
 	{
 		auto it = _resources.find(resourceName);
-		if (it != _resources.end())
-			return dynamic_pointer_cast<T>(it->second);
+		if (it != _resources.end()) return dynamic_pointer_cast<T>(it->second);
 		return nullptr;
 	}
 

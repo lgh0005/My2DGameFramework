@@ -21,6 +21,5 @@ public:
 private:
 	FMOD::Studio::System* _system;
 	FMOD::System* _coreSystem;
-
 };
 

@@ -17,6 +17,7 @@
 #include <functional>
 #include <concepts>
 #include <type_traits>
+#include <variant>
 #include <fstream>
 #include <sstream>
 #include <format>
@@ -64,6 +65,7 @@ using namespace FMOD;
 #include "Defines.h"
 #include "Values.h"
 #include "Enums.h"
+#include "Utils.h"
 #include "Logger.h"
 #define LOGGER Logger::GetInstance()
 
