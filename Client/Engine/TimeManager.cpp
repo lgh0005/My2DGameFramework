@@ -1,10 +1,6 @@
 #include "pch.h"
 #include "TimeManager.h"
 
-TimeManager::~TimeManager()
-{
-}
-
 void TimeManager::Init()
 {
 

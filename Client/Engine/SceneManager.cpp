@@ -2,12 +2,9 @@
 #include "SceneManager.h"
 #include "Scene.h"
 
-SceneManager::~SceneManager()
-{
-}
-
 void SceneManager::Init()
 {
+
 }
 
 void SceneManager::Update()

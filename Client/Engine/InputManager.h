@@ -17,7 +17,7 @@ class InputManager : public ISingleton<InputManager>
 	DECLARE_SINGLE(InputManager);
 
 public:
-	virtual ~InputManager() override;
+	virtual ~InputManager() override = default;
 
 public:
 	virtual void Init() override;
