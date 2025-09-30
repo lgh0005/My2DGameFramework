@@ -57,6 +57,12 @@
     <Filter Include="소스 파일\03. Components\UI\Event">
       <UniqueIdentifier>{91d86280-2533-48af-a49f-00921f58ed35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\05. Resources\InstanceResources">
+      <UniqueIdentifier>{56ca150f-cfee-4eb3-9440-f60c85bc2fa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03. Components\Instance">
+      <UniqueIdentifier>{4356d998-7811-4904-8f18-65e914988978}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EnginePch.cpp">
@@ -196,6 +202,18 @@
     </ClCompile>
     <ClCompile Include="RenderPass.cpp">
       <Filter>소스 파일\98. Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="TMXLoader.cpp">
+      <Filter>소스 파일\98. Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ITextureInstance.cpp">
+      <Filter>소스 파일\06. Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureInstance.cpp">
+      <Filter>소스 파일\05. Resources\InstanceResources</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteInstance.cpp">
+      <Filter>소스 파일\03. Components\Instance</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -349,6 +367,18 @@
     <ClInclude Include="RenderPass.h">
       <Filter>소스 파일\98. Utils</Filter>
     </ClInclude>
+    <ClInclude Include="TMXLoader.h">
+      <Filter>소스 파일\98. Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ITextureInstance.h">
+      <Filter>소스 파일\06. Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureInstance.h">
+      <Filter>소스 파일\05. Resources\InstanceResources</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteInstance.h">
+      <Filter>소스 파일\03. Components\Instance</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Debug\Error_report.log">
@@ -366,6 +396,12 @@
       <Filter>소스 파일\05. Resources\glsl</Filter>
     </None>
     <None Include="glsl\text.vert">
+      <Filter>소스 파일\05. Resources\glsl</Filter>
+    </None>
+    <None Include="glsl\instance.frag">
+      <Filter>소스 파일\05. Resources\glsl</Filter>
+    </None>
+    <None Include="glsl\instance.vert">
       <Filter>소스 파일\05. Resources\glsl</Filter>
     </None>
   </ItemGroup>

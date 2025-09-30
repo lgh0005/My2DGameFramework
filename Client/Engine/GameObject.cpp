@@ -75,10 +75,8 @@ void GameObject::Update()
 
 void GameObject::LateUpdate()
 {
-	// LateUpdate Transform
+	// LateUpdate Transform, component, renderables, Behaviours
 	_transform->LateUpdate();
-
-	// LateUpdate component, renderables, Behaviours
 	for (auto& component : _components) component->LateUpdate();
 	for (auto& renderable : _renderables) renderable->LateUpdate();
 	for (auto& behaviour : _behaviours) behaviour->LateUpdate();

@@ -6,7 +6,7 @@ class TimeManager : public ISingleton<TimeManager>
 	DECLARE_SINGLE(TimeManager);
 
 public:
-	virtual ~TimeManager() override;
+	virtual ~TimeManager() override = default;
 
 public:
 	virtual void Init() override;

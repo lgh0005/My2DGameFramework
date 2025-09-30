@@ -8,7 +8,7 @@ class SceneManager : public ISingleton<SceneManager>
 	DECLARE_SINGLE(SceneManager);
 
 public:
-	virtual ~SceneManager() override;
+	virtual ~SceneManager() override = default;
 
 public:
 	virtual void Init() override;

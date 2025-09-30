@@ -15,6 +15,9 @@
 #include "Engine/UIButton.h"
 #include "Engine/UICanvas.h"
 #include "Engine/UICheckBox.h"
+
+#include "Engine/SpriteInstance.h"
+
 #pragma endregion
 
 #pragma region Resources
@@ -23,6 +26,9 @@
 #include "Engine/Texture.h"
 #include "Engine/Font.h"
 #include "Engine/Flipbook.h"
+
+#include "Engine/TextureInstance.h"
+
 #pragma endregion
 
 #pragma region Behaviour
@@ -78,6 +84,23 @@ void DevScene::CreateSceneContext()
 		RESOURCE.AddResource(static_pointer_cast<IResource>(_textShader));
 	}
 
+	// Shader : Default Instancing shader
+	{
+		_instanceShader = make_shared<Shader>
+			(
+				"InstanceShader",
+				"../Engine/glsl/instance.vert",
+				"../Engine/glsl/instance.frag"
+			);
+		_instanceShader->Awake();
+		_instanceShader->AddUniform(Uniforms::UNIFORM_VIEW);
+		_instanceShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
+		_instanceShader->AddUniform(Uniforms::UNIFORM_TEXTURE);
+		_instanceShader->AddUniform(Uniforms::UNIFORM_COLOR);
+		RESOURCE.AddResource(static_pointer_cast<IResource>(_instanceShader));
+	}
+
+	
 	// Main Camera
 	{
 		_mainCameraComponent = make_shared<Camera>("MainCameraComponent");
@@ -119,6 +142,11 @@ void DevScene::CreateSceneContext()
 	_textureRenderPass = make_shared<RenderPass>();
 	_textureRenderPass->SetShader(_textureShader);
 	_textureRenderPass->SetCamera(_mainCameraComponent);
+
+	// texture Render Pass
+	_instanceRenderPass = make_shared<RenderPass>();
+	_instanceRenderPass->SetShader(_instanceShader);
+	_instanceRenderPass->SetCamera(_mainCameraComponent);
 #pragma endregion
 
 #pragma region GAME_OBJECTS
@@ -187,6 +215,57 @@ void DevScene::CreateSceneContext()
 		_gameObjects.push_back(_spriteObject);
 	}
 
+#pragma region INSTANCING_TEST
+	{
+		{
+			_InstTex = make_shared<TextureInstance>("instanceTarget", "../Resources/Images/cuphead_ex_straight_0001.png");
+			RESOURCE.AddResource(_InstTex);
+			_InstSprt = make_shared<SpriteInstance>("instanceSprite", RESOURCE.GetResource<TextureInstance>("instanceTarget"));
+			_DummyTransform = make_shared<Transform>
+				(
+					"Dummy",
+					glm::vec3(0.0f, 0.0f, 0.0f),
+					glm::vec3(0.0f, 0.0f, 0.0f),
+					glm::vec3(1.0f, 1.0f, 1.0f)
+				);
+			_InstGameObject = make_shared<GameObject>("GameSpriteInstance");
+			_InstGameObject->SetTransform(_DummyTransform);
+			_InstGameObject->AddRenderable(static_pointer_cast<IRenderable>(_InstSprt));
+			_instanceRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_InstSprt));
+			_gameObjects.push_back(_InstGameObject);
+		}
+
+		{
+			_trns4 = make_shared<Transform>
+				(
+					"Trns4",
+					glm::vec3(0.0f, 200.0f, 0.0f),
+					glm::vec3(0.0f, 0.0f, 0.0f),
+					glm::vec3(1.0f, 1.0f, 1.0f)
+				);
+			_obj4 = make_shared<GameObject>("Instance1");
+			_obj4->SetTransform(_trns4);
+			_InstSprt->AddModelMatrix(_trns4->GetModel());
+			_gameObjects.push_back(_obj4);
+		}
+
+		{
+			_trns5 = make_shared<Transform>
+				(
+					"Trns5",
+					glm::vec3(0.0f, -200.0f, 0.0f),
+					glm::vec3(0.0f, 0.0f, 0.0f),
+					glm::vec3(1.0f, 1.0f, 1.0f)
+				);
+			_obj5 = make_shared<GameObject>("Instance2");
+			_obj5->SetTransform(_trns5);
+			_InstSprt->AddModelMatrix(_trns5->GetModel());
+			_gameObjects.push_back(_obj5);
+		}
+	}
+
+#pragma endregion
+
 	// Flipbook GameObject
 	{
 		FlipbookInfo info{ 8, 16, 7, 0, 9, 12.0f, true, true };
@@ -242,12 +321,6 @@ void DevScene::CreateSceneContext()
 		_gameObjects.push_back(_uiButtonObject);
 	}
 
-	// TODO : 아마 기본 셰이더는 이렇게 세 가지를 만들어야 할 듯 하다.
-	// 1. 기본 Texture를 가지는 컴폰넌트들을 위한 텍스쳐 셰이더	 : default.vert, default.frag
-	// 2. UI	
-	//	2.1. Text : Text 전용 셰이더							 : text.vert, text.frag
-	//  2.2. Texture : UI 전용 텍스쳐 셰이더					 : UITexture.vert, UITexture.frag
-	// 
 	// Button CheckBox UI
 	{
 		_chechboxClicked = make_shared<Texture>("CLICKED", "../Resources/Images/b_2_click.png");
@@ -302,12 +375,13 @@ void DevScene::CreateSceneContext()
 		_gameObjects.push_back(_uiCanvasObject);
 	}
 
-#pragma region POSTPROCESSING
 	RENDER.AddRenderPass(_uiRenderPass);
 	RENDER.AddRenderPass(_textureRenderPass);
+	RENDER.AddRenderPass(_instanceRenderPass);
 
-#pragma endregion
 	
 #pragma endregion
+
+	
 }
 #pragma endregion

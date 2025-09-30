@@ -59,6 +59,7 @@ using namespace FMOD;
 
 // tinyxml2
 #include "tinyxml2/tinyxml2.h"
+using namespace tinyxml2;
 
 // Misc
 #include "Types.h"

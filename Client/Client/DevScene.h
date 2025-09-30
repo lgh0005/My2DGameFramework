@@ -14,6 +14,9 @@ class FlipbookPlayer;
 class UIButton;
 class UICanvas;
 class UICheckBox;
+
+class SpriteInstance;
+
 #pragma endregion
 
 #pragma region Resources
@@ -22,6 +25,9 @@ class Shader;
 class Texture;
 class Font;
 class Flipbook;
+
+class TextureInstance;
+
 #pragma endregion
 
 #pragma region Behaviour
@@ -51,6 +57,7 @@ private:
 	// Local scene shaders
 	shared_ptr<Shader> _textShader;
 	shared_ptr<Shader> _textureShader;
+	shared_ptr<Shader> _instanceShader;
 
 	// UI Camera
 	shared_ptr<Transform> _uiCameraTransform;
@@ -66,6 +73,7 @@ private:
 	// Render Passes
 	shared_ptr<RenderPass> _uiRenderPass;
 	shared_ptr<RenderPass> _textureRenderPass;
+	shared_ptr<RenderPass> _instanceRenderPass;
 
 #pragma endregion
 
@@ -115,6 +123,22 @@ private:
 	shared_ptr<Transform> _uiCanvasTransform;
 	shared_ptr<GameObject> _uiCanvasObject;
 
+#pragma region INSTANCING_TEST	
+	// Instancing Target Texture
+	shared_ptr<TextureInstance> _InstTex;
+	shared_ptr<SpriteInstance> _InstSprt;
+	shared_ptr<Transform> _DummyTransform;
+	shared_ptr<GameObject> _InstGameObject;
+
+	// Instance Object 1
+	shared_ptr<Transform> _trns4;
+	shared_ptr<GameObject> _obj4;
+
+	// Instance Object 2
+	shared_ptr<Transform> _trns5;
+	shared_ptr<GameObject> _obj5;
+
+#pragma endregion
 };
 #pragma endregion
 
