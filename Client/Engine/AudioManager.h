@@ -18,6 +18,8 @@ public:
 public:
 	// TODO : Control group audio
 
+public:
+
 private:
 	FMOD::Studio::System* _system;
 	FMOD::System* _coreSystem;

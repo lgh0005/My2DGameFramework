@@ -15,9 +15,6 @@
 #include "Engine/UIButton.h"
 #include "Engine/UICanvas.h"
 #include "Engine/UICheckBox.h"
-
-#include "Engine/SpriteInstance.h"
-
 #pragma endregion
 
 #pragma region Resources
@@ -26,9 +23,6 @@
 #include "Engine/Texture.h"
 #include "Engine/Font.h"
 #include "Engine/Flipbook.h"
-
-#include "Engine/TextureInstance.h"
-
 #pragma endregion
 
 #pragma region Behaviour
@@ -214,57 +208,6 @@ void DevScene::CreateSceneContext()
 		_spriteObject->AddBehaviour(static_pointer_cast<IBehaviour>(_sampleScript));
 		_gameObjects.push_back(_spriteObject);
 	}
-
-#pragma region INSTANCING_TEST
-	{
-		{
-			_InstTex = make_shared<TextureInstance>("instanceTarget", "../Resources/Images/cuphead_ex_straight_0001.png");
-			RESOURCE.AddResource(_InstTex);
-			_InstSprt = make_shared<SpriteInstance>("instanceSprite", RESOURCE.GetResource<TextureInstance>("instanceTarget"));
-			_DummyTransform = make_shared<Transform>
-				(
-					"Dummy",
-					glm::vec3(0.0f, 0.0f, 0.0f),
-					glm::vec3(0.0f, 0.0f, 0.0f),
-					glm::vec3(1.0f, 1.0f, 1.0f)
-				);
-			_InstGameObject = make_shared<GameObject>("GameSpriteInstance");
-			_InstGameObject->SetTransform(_DummyTransform);
-			_InstGameObject->AddRenderable(static_pointer_cast<IRenderable>(_InstSprt));
-			_instanceRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_InstSprt));
-			_gameObjects.push_back(_InstGameObject);
-		}
-
-		{
-			_trns4 = make_shared<Transform>
-				(
-					"Trns4",
-					glm::vec3(0.0f, 200.0f, 0.0f),
-					glm::vec3(0.0f, 0.0f, 0.0f),
-					glm::vec3(1.0f, 1.0f, 1.0f)
-				);
-			_obj4 = make_shared<GameObject>("Instance1");
-			_obj4->SetTransform(_trns4);
-			_InstSprt->AddModelMatrix(_trns4->GetModel());
-			_gameObjects.push_back(_obj4);
-		}
-
-		{
-			_trns5 = make_shared<Transform>
-				(
-					"Trns5",
-					glm::vec3(0.0f, -200.0f, 0.0f),
-					glm::vec3(0.0f, 0.0f, 0.0f),
-					glm::vec3(1.0f, 1.0f, 1.0f)
-				);
-			_obj5 = make_shared<GameObject>("Instance2");
-			_obj5->SetTransform(_trns5);
-			_InstSprt->AddModelMatrix(_trns5->GetModel());
-			_gameObjects.push_back(_obj5);
-		}
-	}
-
-#pragma endregion
 
 	// Flipbook GameObject
 	{

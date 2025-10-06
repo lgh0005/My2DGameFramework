@@ -149,7 +149,6 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Audio.h" />
-    <ClInclude Include="AudioListener.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="AudioSource.h" />
     <ClInclude Include="BoxCollider.h" />
@@ -171,13 +170,7 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClInclude Include="IResource.h" />
     <ClInclude Include="ISingleton.h" />
     <ClInclude Include="ITexture.h" />
-    <ClInclude Include="ITextureInstance.h" />
     <ClInclude Include="RenderPass.h" />
-    <ClInclude Include="SpriteInstance.h" />
-    <ClInclude Include="TextureInstance.h" />
-    <ClInclude Include="TileMap.h" />
-    <ClInclude Include="TileMapRenderer.h" />
-    <ClInclude Include="TMXLoader.h" />
     <ClInclude Include="UICanvas.h" />
     <ClInclude Include="IUIElement.h" />
     <ClInclude Include="IUIRenderable.h" />
@@ -205,7 +198,6 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Audio.cpp" />
-    <ClCompile Include="AudioListener.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="AudioSource.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
@@ -225,13 +217,7 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClCompile Include="IResource.cpp" />
     <ClCompile Include="ISingleton.cpp" />
     <ClCompile Include="ITexture.cpp" />
-    <ClCompile Include="ITextureInstance.cpp" />
     <ClCompile Include="RenderPass.cpp" />
-    <ClCompile Include="SpriteInstance.cpp" />
-    <ClCompile Include="TextureInstance.cpp" />
-    <ClCompile Include="TileMap.cpp" />
-    <ClCompile Include="TileMapRenderer.cpp" />
-    <ClCompile Include="TMXLoader.cpp" />
     <ClCompile Include="UICanvas.cpp" />
     <ClCompile Include="IUIElement.cpp" />
     <ClCompile Include="IUIRenderable.cpp" />

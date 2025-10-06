@@ -30,9 +30,6 @@
     <Filter Include="소스 파일\01. DevScene\Shaders">
       <UniqueIdentifier>{a9e13763-ac80-4e48-99b2-746c1332e2c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. TileMapTest">
-      <UniqueIdentifier>{14386b37-d299-4bdc-ac50-8c0aa12ee833}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -85,13 +82,5 @@
     <ClInclude Include="example1.h">
       <Filter>소스 파일\01. DevScene\Scripts</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="select.frag">
-      <Filter>소스 파일\01. DevScene\Shaders</Filter>
-    </None>
-    <None Include="select.vert">
-      <Filter>소스 파일\01. DevScene\Shaders</Filter>
-    </None>
   </ItemGroup>
 </Project>
