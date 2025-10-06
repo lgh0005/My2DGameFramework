@@ -57,11 +57,13 @@ void example2::Update()
 
 void example2::MouseHovered()
 {
+	AUDIO.Play("WHOOSH", AudioType::SFX);
 	_button->SetTexture(RESOURCE.GetResource<Texture>("HOVERED"));
 }
 
 void example2::MouseExit()
 {
+	AUDIO.Stop("WHOOSH");
 	_button->SetTexture(RESOURCE.GetResource<Texture>("buttonTexture"));
 }
 

@@ -23,6 +23,7 @@
 #include "Engine/Texture.h"
 #include "Engine/Font.h"
 #include "Engine/Flipbook.h"
+#include "Engine/Audio.h"
 #pragma endregion
 
 #pragma region Behaviour
@@ -232,6 +233,16 @@ void DevScene::CreateSceneContext()
 
 	// Button UI GameObject
 	{
+		shared_ptr<Audio> MySFX = make_shared<Audio>
+			(
+				"WHOOSH",
+				"../Resources/Audio/SFX/whoosh2.wav",
+				AudioType::SFX,
+				AudioGroups::SFX
+			);
+		RESOURCE.AddResource(MySFX);
+		AUDIO.AddAudioSource(MySFX);
+
 		_buttonHoveredTexture = make_shared<Texture>("HOVERED", "../Resources/Images/b_1_hover.png");
 		RESOURCE.AddResource(_buttonHoveredTexture);
 		_buttonHoveredTexture->Awake();
@@ -325,6 +336,18 @@ void DevScene::CreateSceneContext()
 	
 #pragma endregion
 
-	
+#pragma region AUDIO_TEST_BGM
+	shared_ptr<Audio> MyBGM = make_shared<Audio>
+	(
+		"DadnMe", 
+		"../Resources/Audio/BGM/dadnme.wav",
+		AudioType::BGM,
+		AudioGroups::BGM
+	);
+	RESOURCE.AddResource(MyBGM);
+	AUDIO.AddAudioSource(RESOURCE.GetResource<Audio>("DadnMe"));
+	AUDIO.Play("DadnMe", AudioType::BGM);
+#pragma endregion
+
 }
 #pragma endregion

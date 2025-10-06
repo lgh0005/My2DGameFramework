@@ -17,6 +17,7 @@
 #include <functional>
 #include <concepts>
 #include <type_traits>
+#include <filesystem>
 #include <variant>
 #include <fstream>
 #include <sstream>

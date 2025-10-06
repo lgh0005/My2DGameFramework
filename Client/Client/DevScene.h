@@ -14,9 +14,6 @@ class FlipbookPlayer;
 class UIButton;
 class UICanvas;
 class UICheckBox;
-
-class SpriteInstance;
-
 #pragma endregion
 
 #pragma region Resources
@@ -25,6 +22,7 @@ class Shader;
 class Texture;
 class Font;
 class Flipbook;
+class Audio;
 #pragma endregion
 
 #pragma region Behaviour

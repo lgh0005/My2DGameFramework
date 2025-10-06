@@ -6,13 +6,20 @@ class Audio : public IResource
 	using Super = IResource;
 
 public:
-	Audio(const string& name);
-	virtual ~Audio() override;
+	Audio(const string& name, const string& filePath, AudioType type, AudioGroups group);
+	virtual ~Audio() override = default;
 
 public:
-	virtual void Awake() override;
+	FMOD::Sound* GetSound() { return _sound; }
+	AudioType GetType() { return _type; }
+	AudioGroups GetGroup() { return _group; }
+	FMOD::Channel* GetChannel() { return _channel; }
 
 private:
-
+	string _audioPath;
+	FMOD::Sound* _sound;
+	FMOD::Channel* _channel = nullptr;
+	AudioType		_type;
+	AudioGroups		_group;
 };
 
