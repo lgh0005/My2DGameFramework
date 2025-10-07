@@ -104,9 +104,6 @@
     <ClCompile Include="ITexture.cpp">
       <Filter>소스 파일\06. Interfaces</Filter>
     </ClCompile>
-    <ClCompile Include="Audio.cpp">
-      <Filter>소스 파일\05. Resources</Filter>
-    </ClCompile>
     <ClCompile Include="Font.cpp">
       <Filter>소스 파일\05. Resources</Filter>
     </ClCompile>
@@ -143,13 +140,7 @@
     <ClCompile Include="Scene.cpp">
       <Filter>소스 파일\01. Scene</Filter>
     </ClCompile>
-    <ClCompile Include="ICollider.cpp">
-      <Filter>소스 파일\06. Interfaces</Filter>
-    </ClCompile>
     <ClCompile Include="BoxCollider.cpp">
-      <Filter>소스 파일\03. Components\Default</Filter>
-    </ClCompile>
-    <ClCompile Include="CircleCollider.cpp">
       <Filter>소스 파일\03. Components\Default</Filter>
     </ClCompile>
     <ClCompile Include="RigidBody.cpp">
@@ -184,6 +175,15 @@
     </ClCompile>
     <ClCompile Include="RenderPass.cpp">
       <Filter>소스 파일\98. Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="IAudio.cpp">
+      <Filter>소스 파일\06. Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="SFX.cpp">
+      <Filter>소스 파일\05. Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="BGM.cpp">
+      <Filter>소스 파일\05. Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,9 +241,6 @@
     <ClInclude Include="ITexture.h">
       <Filter>소스 파일\06. Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Audio.h">
-      <Filter>소스 파일\05. Resources</Filter>
-    </ClInclude>
     <ClInclude Include="Font.h">
       <Filter>소스 파일\05. Resources</Filter>
     </ClInclude>
@@ -283,13 +280,7 @@
     <ClInclude Include="Scene.h">
       <Filter>소스 파일\01. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="ICollider.h">
-      <Filter>소스 파일\06. Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="BoxCollider.h">
-      <Filter>소스 파일\03. Components\Default</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleCollider.h">
       <Filter>소스 파일\03. Components\Default</Filter>
     </ClInclude>
     <ClInclude Include="RigidBody.h">
@@ -324,6 +315,15 @@
     </ClInclude>
     <ClInclude Include="RenderPass.h">
       <Filter>소스 파일\98. Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="IAudio.h">
+      <Filter>소스 파일\06. Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="SFX.h">
+      <Filter>소스 파일\05. Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="BGM.h">
+      <Filter>소스 파일\05. Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

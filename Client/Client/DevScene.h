@@ -22,7 +22,8 @@ class Shader;
 class Texture;
 class Font;
 class Flipbook;
-class Audio;
+class BGM;
+class SFX;
 #pragma endregion
 
 #pragma region Behaviour

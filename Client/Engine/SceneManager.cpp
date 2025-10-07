@@ -19,6 +19,8 @@ void SceneManager::AddScenes(const vector<shared_ptr<Scene>>& scenes)
 
 void SceneManager::LoadScene(const string& scene)
 {
+	if (_currentScene) _currentScene->ClearPreviousSceneContext();
+
 	auto nextScene = _scenes[scene];
 	LOGGER.DebugAssert(nextScene == nullptr, format("Failed to load scene. {}", scene), nullptr);
 

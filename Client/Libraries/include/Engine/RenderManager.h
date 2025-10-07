@@ -19,6 +19,7 @@ public:
 public:
 	//void AddRenderable(Render::RenderLayer layer, shared_ptr<IRenderable> renderable);
 	void AddRenderPass(const shared_ptr<RenderPass>& renderPass);
+	void Clear() { _renderQueue.clear(); }
 
 #pragma endregion
 	

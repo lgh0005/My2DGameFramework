@@ -17,7 +17,7 @@ void ResourceManager::AddResource(shared_ptr<IResource> resource)
 	_resources[resource->GetName()] = resource;
 }
 
-void ResourceManager::Release()
+void ResourceManager::Clear()
 {
 	_resources.clear();
 }

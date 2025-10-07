@@ -84,7 +84,6 @@ namespace UI
     enum class UIEventType
     {
         None,
-        OnEnter,
         OnExit,
         OnHover,
         OnClick,

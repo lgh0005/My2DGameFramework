@@ -8,11 +8,6 @@ Scene::Scene(const string& name) : _name(name)
 
 }
 
-Scene::~Scene()
-{
-
-}
-
 void Scene::Init()
 {
 	// Load scene objects
@@ -28,4 +23,12 @@ void Scene::Update()
 	for (auto& obj : _gameObjects) { obj->FixedUpdate(); }
 	for (auto& obj : _gameObjects) { obj->Update(); }
 	for (auto& obj : _gameObjects) { obj->LateUpdate(); }
+}
+
+void Scene::ClearPreviousSceneContext()
+{
+	_gameObjects.clear();
+	AUDIO.Clear();
+	RENDER.Clear();
+	RESOURCE.Clear();
 }

@@ -30,6 +30,12 @@
     <Filter Include="소스 파일\01. DevScene\Shaders">
       <UniqueIdentifier>{a9e13763-ac80-4e48-99b2-746c1332e2c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02. TestScene">
+      <UniqueIdentifier>{c2a11234-f22b-47cb-803c-90691c29ebbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. TestScene\Scene">
+      <UniqueIdentifier>{c66c4e0d-bd0d-457d-b53e-99a934a6e224}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -56,6 +62,9 @@
     <ClCompile Include="example1.cpp">
       <Filter>소스 파일\01. DevScene\Scripts</Filter>
     </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>소스 파일\02. TestScene\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -81,6 +90,9 @@
     </ClInclude>
     <ClInclude Include="example1.h">
       <Filter>소스 파일\01. DevScene\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>소스 파일\02. TestScene\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

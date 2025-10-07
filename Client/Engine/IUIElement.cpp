@@ -103,6 +103,7 @@ bool IUIElement::OnToggled(glm::vec2 mousePos, Inputs::Mouse click)
 /*======================
 //    Event Pusher    //
 ======================*/
+
 void IUIElement::OnHoveredEvent(function<void()> event, UI::UIEventPolicy policy, glm::vec2 mousePos, glm::vec2 mouseDelta)
 {
 	_eventBindings.push_back({ event, GetSelf<IUIElement>(), mousePos, mouseDelta, UI::UIEventType::OnHover, policy });

@@ -37,6 +37,8 @@ void example3::Update()
 
 void example3::MouseToggle()
 {
+	AUDIO.PlaySFX("WHOOSH");
+
 	if (_checkBox->IsToggled())
 	{
 		_checkBox->SetTexture(RESOURCE.GetResource<Texture>("CLICKED"));

@@ -23,7 +23,8 @@
 #include "Engine/Texture.h"
 #include "Engine/Font.h"
 #include "Engine/Flipbook.h"
-#include "Engine/Audio.h"
+#include "Engine/BGM.h"
+#include "Engine/SFX.h"
 #pragma endregion
 
 #pragma region Behaviour
@@ -233,15 +234,14 @@ void DevScene::CreateSceneContext()
 
 	// Button UI GameObject
 	{
-		shared_ptr<Audio> MySFX = make_shared<Audio>
-			(
-				"WHOOSH",
-				"../Resources/Audio/SFX/whoosh2.wav",
-				AudioType::SFX,
-				AudioGroups::SFX
-			);
+		shared_ptr<SFX> MySFX = make_shared<SFX>
+		(
+			"WHOOSH",
+			"../Resources/Audio/SFX/whoosh2.wav",
+			FMOD_LOOP_OFF
+		);
 		RESOURCE.AddResource(MySFX);
-		AUDIO.AddAudioSource(MySFX);
+		AUDIO.AddSFX(MySFX);
 
 		_buttonHoveredTexture = make_shared<Texture>("HOVERED", "../Resources/Images/b_1_hover.png");
 		RESOURCE.AddResource(_buttonHoveredTexture);
@@ -251,21 +251,21 @@ void DevScene::CreateSceneContext()
 		RESOURCE.AddResource(_buttonTexture);
 		auto ButtonTexture = RESOURCE.GetResource<ITexture>("buttonTexture");
 		_button = make_shared<UIButton>
-			(
-				"Button",
-				_uiCameraComponent,
-				ButtonTexture,
-				glm::vec2(201.0f, 93.0f),
-				Inputs::Mouse::Left
-			);
+		(
+			"Button",
+			_uiCameraComponent,
+			ButtonTexture,
+			glm::vec2(201.0f, 93.0f),
+			Inputs::Mouse::Left
+		);
 
 		_uiButtonTransform = make_shared<Transform>
-			(
-				"ButtonTransform",
-				glm::vec3(0.0f, 0.0f, 0.0f),
-				glm::vec3(0.0f, 0.0f, 0.0f),
-				glm::vec3(1.0f, 1.0f, 1.0f)
-			);
+		(
+			"ButtonTransform",
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			glm::vec3(1.0f, 1.0f, 1.0f)
+		);
 		_sampleScript2 = make_shared<example2>("example2");
 		_uiButtonObject = make_shared<GameObject>("ButtonObject");
 		_uiButtonObject->SetTransform(_uiButtonTransform);
@@ -337,16 +337,15 @@ void DevScene::CreateSceneContext()
 #pragma endregion
 
 #pragma region AUDIO_TEST_BGM
-	shared_ptr<Audio> MyBGM = make_shared<Audio>
+	shared_ptr<BGM> MyBGM = make_shared<BGM>
 	(
-		"DadnMe", 
+		"DadnMe",
 		"../Resources/Audio/BGM/dadnme.wav",
-		AudioType::BGM,
-		AudioGroups::BGM
+		FMOD_LOOP_NORMAL
 	);
 	RESOURCE.AddResource(MyBGM);
-	AUDIO.AddAudioSource(RESOURCE.GetResource<Audio>("DadnMe"));
-	AUDIO.Play("DadnMe", AudioType::BGM);
+	AUDIO.AddBGM(MyBGM);
+	AUDIO.PlayBGM("DadnMe");
 #pragma endregion
 
 }

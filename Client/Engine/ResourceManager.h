@@ -25,7 +25,7 @@ public:
 		return nullptr;
 	}
 
-	void Release();
+	void Clear();
 
 private:
 	unordered_map<string, shared_ptr<IResource>> _resources;

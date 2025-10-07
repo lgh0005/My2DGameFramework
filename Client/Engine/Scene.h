@@ -7,7 +7,7 @@ class Scene
 {
 public:
 	Scene(const string& name);
-	virtual ~Scene();
+	virtual ~Scene() = default;
 
 public:
 	void Init();
@@ -15,6 +15,7 @@ public:
 
 public:
 	const string& GetName() { return _name; }
+	void ClearPreviousSceneContext();
 
 protected:
 	virtual void CreateSceneContext() abstract;

@@ -1,26 +1,14 @@
 #pragma once
 #include "ISingleton.h"
-
-class Audio;
+#include "BGM.h"
+#include "SFX.h"
 
 enum class AudioType
 {
-	BGM,
+	MASTER,
 	SFX,
-	END
-};
-
-enum class AudioGroups
-{
 	BGM,
-	SFX,
 	END
-};
-
-enum
-{
-	AUDIOTYPE_COUNT = static_cast<uint8>(AudioType::END),
-	AUDIOGROUP_COUNT = static_cast<uint8>(AudioGroups::END)
 };
 
 class AudioManager : public ISingleton<AudioManager>
@@ -32,30 +20,38 @@ public:
 
 public:
 	virtual void Init() override;
-	virtual void Update() override {};
+	virtual void Update() override;
 
 public:
 	FMOD::System* GetCoreSystem() { return _coreSystem; }
-	void AddAudioSource(const shared_ptr<Audio>& audio);
+	void AddBGM(const shared_ptr<BGM>& bgm) { _bgm[bgm->GetName()] = bgm; }
+	void AddSFX(const shared_ptr<SFX>& sfx) { _sfx[sfx->GetName()] = sfx; }
 
 public:
-	void Play(const string& name, AudioType audioType);
-	void Stop(const string& name);
-	void Pause(const string& name);
-	void Resume(const string& name);
+	void PlayBGM(const string& name);
+	void StopBGM(const string& name);
+	void PauseBGM(const string& name);
+	void ResumeBGM(const string& name);
 
 public:
-	void StopGroup(AudioGroups group);
-	void PauseGroup(AudioGroups group);
-	void ResumeGroup(AudioGroups group);
+	void PlaySFX(const string& name);
+	void StopSFX(const string& name);
+
+public:
+	void SetVolume(AudioType type, float volume);
+
+public:
+	void Clear();
 
 private:
 	FMOD::Studio::System* _system;
 	FMOD::System* _coreSystem;
 
 private:
-	array<unordered_map<string, shared_ptr<Audio>>, AUDIOTYPE_COUNT> _audioMap;
-	array<FMOD::ChannelGroup*, AUDIOGROUP_COUNT> _audioGroup;
-	unordered_map<string, FMOD::Channel*> _playingChannels;
-};
+	FMOD::ChannelGroup* _bgmGroup = nullptr;
+	FMOD::ChannelGroup* _sfxGroup = nullptr;
+	FMOD::ChannelGroup* _masterGroup = nullptr;
 
+	unordered_map<string, shared_ptr<BGM>> _bgm; 
+	unordered_map<string, shared_ptr<SFX>> _sfx;
+};

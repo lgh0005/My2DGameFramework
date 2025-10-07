@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "AudioManager.h"
-#include "Audio.h"
 
 AudioManager::~AudioManager()
 {
@@ -33,99 +32,85 @@ void AudioManager::Init()
 	// Initialize FMOD system.
 	result = _system->initialize(1024, FMOD_STUDIO_INIT_NORMAL, FMOD_INIT_NORMAL, nullptr);
 	LOGGER.DebugAssert(result != FMOD_OK, "FMOD Error : Failed to initialize system.", errFunc);
+
+	// Create channel group
+	_coreSystem->createChannelGroup("Master", &_masterGroup);
+	_coreSystem->createChannelGroup("BGM", &_bgmGroup);
+	_coreSystem->createChannelGroup("SFX", &_sfxGroup);
+	_masterGroup->addGroup(_bgmGroup);
+	_masterGroup->addGroup(_sfxGroup);
 }
 
-void AudioManager::AddAudioSource(const shared_ptr<Audio>& audio)
+void AudioManager::Update()
 {
-	AudioType audioType = audio->GetType();
-	AudioGroups audioGroup = audio->GetGroup();
-	string audioName = audio->GetName();
-
-	auto& audioDict = _audioMap[static_cast<uint8>(audioType)];
-	if (audioDict.find(audioName) != audioDict.end()) return;
-
-	_audioMap[static_cast<uint8>(audioType)][audioName] = audio;
+	_system->update();
 }
 
-void AudioManager::Play(const string& name, AudioType audioType)
+void AudioManager::PlayBGM(const string& name)
 {
-	// 이미 재생 중이면 무시
-	if (_playingChannels.find(name) != _playingChannels.end()) return;
+	auto it = _bgm.find(name);
+	if (it == _bgm.end()) return;
 
-	auto& audioDict = _audioMap[static_cast<uint8>(audioType)];
-
-	// find audio in audioDict.
-	auto audio = audioDict[name];
-	if (audio == nullptr) return;
-
-	FMOD::Sound* sound = audio->GetSound();
-	if (!sound) return;
-
-	// play sound and setting new channel
-	FMOD::Channel* channel = nullptr;
-	_coreSystem->playSound(sound, nullptr, false, &channel);
-
-	AudioGroups group = audio->GetGroup();
-	FMOD::ChannelGroup* channelGroup = _audioGroup[static_cast<uint8>(group)];
-	if (channelGroup) channel->setChannelGroup(channelGroup);
-
-	// register channel to now playing audio's channelMap; _playingChannels;
-	_playingChannels[name] = channel;
+	auto& bgm = it->second;
+	if (!bgm->IsPlaying()) bgm->Play(_bgmGroup);
 }
 
-void AudioManager::Stop(const string& name)
+void AudioManager::StopBGM(const string& name)
 {
-	auto it = _playingChannels.find(name);
-	if (it != _playingChannels.end())
+	auto it = _bgm.find(name);
+	if (it == _bgm.end()) return;
+	it->second->Stop();
+}
+
+void AudioManager::PauseBGM(const string& name)
+{
+	auto it = _bgm.find(name);
+	if (it == _bgm.end()) return;
+	it->second->Pause();
+}
+
+void AudioManager::ResumeBGM(const string& name)
+{
+	auto it = _bgm.find(name);
+	if (it == _bgm.end()) return;
+	it->second->Resume();
+}
+
+void AudioManager::PlaySFX(const string& name)
+{
+	auto it = _sfx.find(name);
+	if (it == _sfx.end()) return;
+	shared_ptr<SFX> sfx = it->second;
+	sfx->Play(_sfxGroup);
+}
+
+void AudioManager::StopSFX(const string& name)
+{
+	auto it = _sfx.find(name);
+	if (it == _sfx.end()) return;
+	it->second->Stop();
+}
+
+void AudioManager::SetVolume(AudioType type, float volume)
+{
+	FMOD::ChannelGroup* group = nullptr;
+
+	switch (type)
 	{
-		it->second->stop();
-		_playingChannels.erase(it);
-	}
-}
-
-void AudioManager::Pause(const string& name)
-{
-	auto it = _playingChannels.find(name);
-	if (it != _playingChannels.end()) it->second->setPaused(true);
-}
-
-void AudioManager::Resume(const string& name)
-{
-	auto it = _playingChannels.find(name);
-	if (it != _playingChannels.end()) it->second->setPaused(false);
-}
-
-void AudioManager::StopGroup(AudioGroups group)
-{
-	// Get the channel group to stop
-	FMOD::ChannelGroup* channelGroup = _audioGroup[static_cast<uint8>(group)];
-
-	// stop and remove all channels belonging to this group
-	for (auto it = _playingChannels.begin(); it != _playingChannels.end(); )
-	{
-		FMOD::ChannelGroup* chGroup = nullptr;
-		it->second->getChannelGroup(&chGroup);
-		if (chGroup == channelGroup)
-		{
-			it->second->stop();
-			it = _playingChannels.erase(it);
-		}
-		else it++;
+	case AudioType::MASTER: group = _masterGroup; break;
+	case AudioType::BGM: group = _bgmGroup; break;
+	case AudioType::SFX: group = _sfxGroup; break;
+	default: group = _masterGroup; break;
 	}
 
-	// Finally, stop the channel group itself
-	if (channelGroup) channelGroup->stop();
+	if (group) group->setVolume(volume);
 }
 
-void AudioManager::PauseGroup(AudioGroups group)
+void AudioManager::Clear()
 {
-	FMOD::ChannelGroup* channelGroup = _audioGroup[static_cast<uint8>(group)];
-	if (channelGroup) channelGroup->setPaused(true);
-}
+	_bgmGroup->stop();
+	_sfxGroup->stop();
 
-void AudioManager::ResumeGroup(AudioGroups group)
-{
-	FMOD::ChannelGroup* channelGroup = _audioGroup[static_cast<uint8>(group)];
-	if (channelGroup) channelGroup->setPaused(false);
+	_bgm.clear();
+	_sfx.clear();
 }
-

@@ -148,11 +148,10 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Audio.h" />
     <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="BGM.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="EnginePch.h" />
     <ClInclude Include="Enums.h" />
@@ -160,8 +159,8 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClInclude Include="FlipbookPlayer.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="IAudio.h" />
     <ClInclude Include="IBehaviour.h" />
-    <ClInclude Include="ICollider.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="InputManager.h" />
@@ -170,6 +169,7 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClInclude Include="ISingleton.h" />
     <ClInclude Include="ITexture.h" />
     <ClInclude Include="RenderPass.h" />
+    <ClInclude Include="SFX.h" />
     <ClInclude Include="UICanvas.h" />
     <ClInclude Include="IUIElement.h" />
     <ClInclude Include="IUIRenderable.h" />
@@ -196,18 +196,17 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClInclude Include="Values.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Audio.cpp" />
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="BGM.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="EnginePch.cpp" />
     <ClCompile Include="Flipbook.cpp" />
     <ClCompile Include="FlipbookPlayer.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="IAudio.cpp" />
     <ClCompile Include="IBehaviour.cpp" />
-    <ClCompile Include="ICollider.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -216,6 +215,7 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClCompile Include="ISingleton.cpp" />
     <ClCompile Include="ITexture.cpp" />
     <ClCompile Include="RenderPass.cpp" />
+    <ClCompile Include="SFX.cpp" />
     <ClCompile Include="UICanvas.cpp" />
     <ClCompile Include="IUIElement.cpp" />
     <ClCompile Include="IUIRenderable.cpp" />

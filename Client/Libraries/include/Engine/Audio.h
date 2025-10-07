@@ -6,7 +6,8 @@ class Audio : public IResource
 	using Super = IResource;
 
 public:
-	Audio(const string& name, const string& filePath, AudioType type, AudioGroups group);
+	Audio(const string& name, const string& filePath, uint32 playMode,
+		AudioType type, AudioGroups group);
 	virtual ~Audio() override = default;
 
 public:

@@ -15,14 +15,11 @@
 #include <cmath>
 #include <cstdlib>
 #include <functional>
-#include <concepts>
-#include <type_traits>
 #include <filesystem>
 #include <variant>
 #include <fstream>
 #include <sstream>
 #include <format>
-#include <thread>
 using namespace std;
 
 // SDL

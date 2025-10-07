@@ -21,6 +21,7 @@ void example2::Init()
 	Super::Init();
 	auto self = GetSelf<example2>();
 	_button = static_pointer_cast<UIButton>(_owner.lock()->GetRenderable("Button"));
+
 	_button->OnHoveredEvent
 	(
 		[self]() { self->MouseHovered(); }, 
@@ -57,19 +58,24 @@ void example2::Update()
 
 void example2::MouseHovered()
 {
-	AUDIO.Play("WHOOSH", AudioType::SFX);
+	if (_playOnce)
+	{
+		AUDIO.PlaySFX("WHOOSH");
+		_playOnce = false;
+	}
 	_button->SetTexture(RESOURCE.GetResource<Texture>("HOVERED"));
 }
 
 void example2::MouseExit()
 {
-	AUDIO.Stop("WHOOSH");
+	_playOnce = true;
 	_button->SetTexture(RESOURCE.GetResource<Texture>("buttonTexture"));
 }
 
 void example2::MouseClickedDeferred()
 {
 	cout << "Button : Clicked! Deffered." << endl;
+	SCENE.LoadScene("TestScene");
 }
 
 void example2::MouseClickedImmediate()

@@ -24,6 +24,6 @@ private:
 	void MouseClickedImmediate();
 
 private:
-
+	bool _playOnce = true;
 };
 

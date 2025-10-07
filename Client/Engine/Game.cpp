@@ -57,6 +57,7 @@ void Game::Update()
     // Update Managers
     SCENE.Update();
     INPUT.Update();
+    AUDIO.Update();
     UIMANAGER.Update();
     RENDER.Update();
 }
