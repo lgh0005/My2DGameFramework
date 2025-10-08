@@ -57,6 +57,9 @@
     <Filter Include="소스 파일\miscellaneous\02. TestScene\Scene">
       <UniqueIdentifier>{c66c4e0d-bd0d-457d-b53e-99a934a6e224}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01. Lobby\Prefabs\Backgrounds">
+      <UniqueIdentifier>{053ee63e-88c9-4727-b2d2-54e436245c64}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -89,8 +92,29 @@
     <ClCompile Include="Lobby.cpp">
       <Filter>소스 파일\01. Lobby\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Ground.cpp">
+    <ClCompile Include="Character.cpp">
       <Filter>소스 파일\01. Lobby\Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="Background1.cpp">
+      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+    </ClCompile>
+    <ClCompile Include="Background2.cpp">
+      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+    </ClCompile>
+    <ClCompile Include="SideWall.cpp">
+      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+    </ClCompile>
+    <ClCompile Include="House1.cpp">
+      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+    </ClCompile>
+    <ClCompile Include="House2.cpp">
+      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+    </ClCompile>
+    <ClCompile Include="Bush.cpp">
+      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -124,8 +148,29 @@
     <ClInclude Include="Lobby.h">
       <Filter>소스 파일\01. Lobby\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Ground.h">
+    <ClInclude Include="Character.h">
       <Filter>소스 파일\01. Lobby\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="Background1.h">
+      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+    </ClInclude>
+    <ClInclude Include="Background2.h">
+      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+    </ClInclude>
+    <ClInclude Include="SideWall.h">
+      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+    </ClInclude>
+    <ClInclude Include="House1.h">
+      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+    </ClInclude>
+    <ClInclude Include="House2.h">
+      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+    </ClInclude>
+    <ClInclude Include="Bush.h">
+      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

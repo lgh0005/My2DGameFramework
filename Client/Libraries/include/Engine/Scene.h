@@ -3,7 +3,7 @@
 class IResource;
 class GameObject;
 
-class Scene
+class Scene : public enable_shared_from_this<Scene>
 {
 public:
 	Scene(const string& name);
@@ -16,6 +16,7 @@ public:
 public:
 	const string& GetName() { return _name; }
 	void ClearPreviousSceneContext();
+	vector<shared_ptr<GameObject>>& GetGameObjectList() { return _gameObjects; }
 
 protected:
 	virtual void CreateSceneContext() abstract;

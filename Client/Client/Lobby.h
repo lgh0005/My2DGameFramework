@@ -26,10 +26,21 @@ class BGM;
 class SFX;
 #pragma endregion
 
+// TODO : 이후에 배경의 경우, 자식으로 묶어서 하나의 프리팹으로 만들어야 함.
 #pragma region Prefabs
 class Ground;
+class Background1;
+class Background2;
+class Character;
+class SideWall;
+class House1;
+class House2;
+class Bush;
 #pragma endregion
 
+#pragma region Scripts
+class example2;
+#pragma endregion
 
 class Lobby : public Scene
 {
@@ -73,13 +84,79 @@ private:
 	shared_ptr<RenderPass> _textureRenderPass;
 #pragma endregion
 
-#pragma region GAME_OBJECTS_AND_PREFABS
-	
+#pragma region NECESSARY_RESOURCES
+
 	void LoadResources();
 
 	// Ground prefab
 	shared_ptr<Texture> _groundTexture;
 	shared_ptr<Ground> _ground;
+
+	// Background Prefab
+	shared_ptr<Texture> _backgroundTexture1;
+	shared_ptr<Background1> _background1;
+
+	// Background Prefab
+	shared_ptr<Texture> _backgroundTexture2;
+	shared_ptr<Background2> _background2;
+
+	// Character Prefab
+	shared_ptr<Flipbook> _characterFlipbook;
+	shared_ptr<Character> _character;
+
+	// Sidewall Prefab
+	shared_ptr<Texture> _sideWallTexture;
+	shared_ptr<SideWall> _sideWall;
+
+	// Bush Prefab
+	shared_ptr<Texture> _bushTexture;
+	shared_ptr<Bush> _bush;
+		
+	// House Prefab
+	shared_ptr<Texture> _houseTexture1;
+	shared_ptr<House1> _house1;
+	shared_ptr<Texture> _houseTexture2;
+	shared_ptr<House2> _house2;
+
+
+#pragma region MainUI
+	shared_ptr<UICanvas> _uiCanvas;
+	shared_ptr<Transform> _uiCanvasTransform;
+	shared_ptr<GameObject> _uiCanvasObject;
+
+	shared_ptr<Font> _gameTitleText1;
+	shared_ptr<UIText> _gameTitleTextTexture1;
+	shared_ptr<Transform> _gameTitleTextTransform1;
+	shared_ptr<GameObject> _gameTitleGameObject1;
+
+	shared_ptr<Font> _gameTitleText2;
+	shared_ptr<UIText> _gameTitleTextTexture2;
+	shared_ptr<Transform> _gameTitleTextTransform2;
+	shared_ptr<GameObject> _gameTitleGameObject2;
+
+	shared_ptr<Texture> _buttonTextureNormal;
+	shared_ptr<Texture> _buttonTextureSelect;
+	shared_ptr<example2> _buttonScript;
+
+	shared_ptr<UIButton> _button1;
+	shared_ptr<Transform> _buttonTransform1;
+	shared_ptr<GameObject> _buttonGameObject1;
+	shared_ptr<Font> _buttonText1;
+	shared_ptr<UIText> _buttonText1Texture;
+
+	shared_ptr<UIButton> _button2;
+	shared_ptr<Transform> _buttonTransform2;
+	shared_ptr<GameObject> _buttonGameObject2;
+	shared_ptr<Font> _buttonText2;
+	shared_ptr<UIText> _buttonText2Texture;
+
+	shared_ptr<UIButton> _button3;
+	shared_ptr<Transform> _buttonTransform3;
+	shared_ptr<GameObject> _buttonGameObject3;
+	shared_ptr<Font> _buttonText3;
+	shared_ptr<UIText> _buttonText3Texture;
+
+#pragma endregion
 
 #pragma endregion
 

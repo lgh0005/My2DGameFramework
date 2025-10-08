@@ -60,7 +60,7 @@ void example2::MouseHovered()
 {
 	if (_playOnce)
 	{
-		AUDIO.PlaySFX("WHOOSH");
+		// AUDIO.PlaySFX("WHOOSH");
 		_playOnce = false;
 	}
 	_button->SetTexture(RESOURCE.GetResource<Texture>("HOVERED"));

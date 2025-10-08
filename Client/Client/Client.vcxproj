@@ -132,31 +132,45 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Background1.h" />
+    <ClInclude Include="Background2.h" />
+    <ClInclude Include="Bush.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="DevScene.h" />
     <ClInclude Include="example.h" />
     <ClInclude Include="example1.h" />
     <ClInclude Include="example2.h" />
     <ClInclude Include="example3.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="House1.h" />
+    <ClInclude Include="House2.h" />
     <ClInclude Include="Launcher.h" />
     <ClInclude Include="Lobby.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="SideWall.h" />
     <ClInclude Include="TestScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Background1.cpp" />
+    <ClCompile Include="Background2.cpp" />
+    <ClCompile Include="Bush.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="DevScene.cpp" />
     <ClCompile Include="example.cpp" />
     <ClCompile Include="example1.cpp" />
     <ClCompile Include="example2.cpp" />
     <ClCompile Include="example3.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="House1.cpp" />
+    <ClCompile Include="House2.cpp" />
     <ClCompile Include="Launcher.cpp" />
     <ClCompile Include="Lobby.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SideWall.cpp" />
     <ClCompile Include="TestScene.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
