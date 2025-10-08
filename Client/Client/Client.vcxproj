@@ -138,6 +138,7 @@
     <ClInclude Include="example2.h" />
     <ClInclude Include="example3.h" />
     <ClInclude Include="Launcher.h" />
+    <ClInclude Include="Lobby.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="TestScene.h" />
@@ -149,6 +150,7 @@
     <ClCompile Include="example2.cpp" />
     <ClCompile Include="example3.cpp" />
     <ClCompile Include="Launcher.cpp" />
+    <ClCompile Include="Lobby.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

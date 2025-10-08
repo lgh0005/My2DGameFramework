@@ -15,26 +15,47 @@
     <Filter Include="소스 파일\99. Headers">
       <UniqueIdentifier>{15c16f7b-17c4-441d-8337-cf6b3a005f9a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. DevScene">
+    <Filter Include="소스 파일\01. Lobby">
+      <UniqueIdentifier>{2c6b4a0a-8d01-4422-8750-a90df7f83ede}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. InGame">
+      <UniqueIdentifier>{0f6db938-fdc5-4002-ae62-c733bc7f6512}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\miscellaneous">
+      <UniqueIdentifier>{59e7b3b0-76ff-4ed2-bd96-70690953eab4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\miscellaneous\01. DevScene">
       <UniqueIdentifier>{447c7fbc-bd2d-49be-a1b9-6beb44619d6e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. DevScene\Scripts">
+    <Filter Include="소스 파일\miscellaneous\01. DevScene\Scripts">
       <UniqueIdentifier>{175d065a-1c04-455d-8d08-5d4c16536cc0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. DevScene\Scene">
+    <Filter Include="소스 파일\miscellaneous\01. DevScene\Scene">
       <UniqueIdentifier>{5af2dd72-bae9-4fc4-9ab5-97a48ca04125}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. DevScene\Prefabs">
+    <Filter Include="소스 파일\miscellaneous\01. DevScene\Prefabs">
       <UniqueIdentifier>{eb8d3636-bf7f-4737-8163-eaa1eaa4fdf2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. DevScene\Shaders">
+    <Filter Include="소스 파일\miscellaneous\01. DevScene\Shaders">
       <UniqueIdentifier>{a9e13763-ac80-4e48-99b2-746c1332e2c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. TestScene">
+    <Filter Include="소스 파일\miscellaneous\02. TestScene">
       <UniqueIdentifier>{c2a11234-f22b-47cb-803c-90691c29ebbf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. TestScene\Scene">
+    <Filter Include="소스 파일\miscellaneous\02. TestScene\Scene">
       <UniqueIdentifier>{c66c4e0d-bd0d-457d-b53e-99a934a6e224}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Lobby\Shaders">
+      <UniqueIdentifier>{fa652eba-b5f5-4267-b926-039959fe5d4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Lobby\Scene">
+      <UniqueIdentifier>{634cc2ed-8b32-46e4-8e7d-d2a7b4115dbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Lobby\Scripts">
+      <UniqueIdentifier>{aae42fba-e41d-4be9-9d68-75e51f3ac5c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Lobby\Prefabs">
+      <UniqueIdentifier>{b3b331af-d2c0-489f-a18d-c9103210c62c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -48,22 +69,25 @@
       <Filter>소스 파일\00. Main</Filter>
     </ClCompile>
     <ClCompile Include="DevScene.cpp">
-      <Filter>소스 파일\01. DevScene\Scene</Filter>
+      <Filter>소스 파일\miscellaneous\01. DevScene\Scene</Filter>
     </ClCompile>
     <ClCompile Include="example.cpp">
-      <Filter>소스 파일\01. DevScene\Scripts</Filter>
+      <Filter>소스 파일\miscellaneous\01. DevScene\Scripts</Filter>
     </ClCompile>
     <ClCompile Include="example2.cpp">
-      <Filter>소스 파일\01. DevScene\Scripts</Filter>
+      <Filter>소스 파일\miscellaneous\01. DevScene\Scripts</Filter>
     </ClCompile>
     <ClCompile Include="example3.cpp">
-      <Filter>소스 파일\01. DevScene\Scripts</Filter>
+      <Filter>소스 파일\miscellaneous\01. DevScene\Scripts</Filter>
     </ClCompile>
     <ClCompile Include="example1.cpp">
-      <Filter>소스 파일\01. DevScene\Scripts</Filter>
+      <Filter>소스 파일\miscellaneous\01. DevScene\Scripts</Filter>
     </ClCompile>
     <ClCompile Include="TestScene.cpp">
-      <Filter>소스 파일\02. TestScene\Scene</Filter>
+      <Filter>소스 파일\miscellaneous\02. TestScene\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Lobby.cpp">
+      <Filter>소스 파일\01. Lobby\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,22 +101,25 @@
       <Filter>소스 파일\00. Main</Filter>
     </ClInclude>
     <ClInclude Include="DevScene.h">
-      <Filter>소스 파일\01. DevScene\Scene</Filter>
+      <Filter>소스 파일\miscellaneous\01. DevScene\Scene</Filter>
     </ClInclude>
     <ClInclude Include="example.h">
-      <Filter>소스 파일\01. DevScene\Scripts</Filter>
+      <Filter>소스 파일\miscellaneous\01. DevScene\Scripts</Filter>
     </ClInclude>
     <ClInclude Include="example2.h">
-      <Filter>소스 파일\01. DevScene\Scripts</Filter>
+      <Filter>소스 파일\miscellaneous\01. DevScene\Scripts</Filter>
     </ClInclude>
     <ClInclude Include="example3.h">
-      <Filter>소스 파일\01. DevScene\Scripts</Filter>
+      <Filter>소스 파일\miscellaneous\01. DevScene\Scripts</Filter>
     </ClInclude>
     <ClInclude Include="example1.h">
-      <Filter>소스 파일\01. DevScene\Scripts</Filter>
+      <Filter>소스 파일\miscellaneous\01. DevScene\Scripts</Filter>
     </ClInclude>
     <ClInclude Include="TestScene.h">
-      <Filter>소스 파일\02. TestScene\Scene</Filter>
+      <Filter>소스 파일\miscellaneous\02. TestScene\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Lobby.h">
+      <Filter>소스 파일\01. Lobby\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

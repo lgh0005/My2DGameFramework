@@ -52,7 +52,6 @@ private:
 	// Local scene shaders
 	shared_ptr<Shader> _textShader;
 	shared_ptr<Shader> _textureShader;
-	shared_ptr<Shader> _instanceShader;
 
 	// UI Camera
 	shared_ptr<Transform> _uiCameraTransform;
@@ -68,7 +67,6 @@ private:
 	// Render Passes
 	shared_ptr<RenderPass> _uiRenderPass;
 	shared_ptr<RenderPass> _textureRenderPass;
-	shared_ptr<RenderPass> _instanceRenderPass;
 #pragma endregion
 
 	// Text UI GameObject

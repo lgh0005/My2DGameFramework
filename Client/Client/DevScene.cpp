@@ -1,32 +1,6 @@
 #include "pch.h"
 #include "DevScene.h"
 
-#pragma region GameObject
-#include "Engine/GameObject.h"
-#pragma endregion
-
-#pragma region Components
-#include "Engine/IRenderable.h"
-#include "Engine/Transform.h"
-#include "Engine/Camera.h"
-#include "Engine/Sprite.h"
-#include "Engine/UIText.h"
-#include "Engine/FlipbookPlayer.h"
-#include "Engine/UIButton.h"
-#include "Engine/UICanvas.h"
-#include "Engine/UICheckBox.h"
-#pragma endregion
-
-#pragma region Resources
-#include "Engine/RenderPass.h"
-#include "Engine/Shader.h"
-#include "Engine/Texture.h"
-#include "Engine/Font.h"
-#include "Engine/Flipbook.h"
-#include "Engine/BGM.h"
-#include "Engine/SFX.h"
-#pragma endregion
-
 #pragma region Behaviour
 #include "example.h"
 #include "example1.h"
@@ -80,22 +54,6 @@ void DevScene::CreateSceneContext()
 		RESOURCE.AddResource(static_pointer_cast<IResource>(_textShader));
 	}
 
-	// Shader : Default Instancing shader
-	{
-		_instanceShader = make_shared<Shader>
-			(
-				"InstanceShader",
-				"../Engine/glsl/instance.vert",
-				"../Engine/glsl/instance.frag"
-			);
-		_instanceShader->Awake();
-		_instanceShader->AddUniform(Uniforms::UNIFORM_VIEW);
-		_instanceShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
-		_instanceShader->AddUniform(Uniforms::UNIFORM_TEXTURE);
-		_instanceShader->AddUniform(Uniforms::UNIFORM_COLOR);
-		RESOURCE.AddResource(static_pointer_cast<IResource>(_instanceShader));
-	}
-
 	
 	// Main Camera
 	{
@@ -138,11 +96,6 @@ void DevScene::CreateSceneContext()
 	_textureRenderPass = make_shared<RenderPass>();
 	_textureRenderPass->SetShader(_textureShader);
 	_textureRenderPass->SetCamera(_mainCameraComponent);
-
-	// texture Render Pass
-	_instanceRenderPass = make_shared<RenderPass>();
-	_instanceRenderPass->SetShader(_instanceShader);
-	_instanceRenderPass->SetCamera(_mainCameraComponent);
 #pragma endregion
 
 #pragma region GAME_OBJECTS
@@ -331,7 +284,6 @@ void DevScene::CreateSceneContext()
 
 	RENDER.AddRenderPass(_uiRenderPass);
 	RENDER.AddRenderPass(_textureRenderPass);
-	RENDER.AddRenderPass(_instanceRenderPass);
 
 	
 #pragma endregion
