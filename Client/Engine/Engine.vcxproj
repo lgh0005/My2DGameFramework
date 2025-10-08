@@ -168,6 +168,7 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClInclude Include="IResource.h" />
     <ClInclude Include="ISingleton.h" />
     <ClInclude Include="ITexture.h" />
+    <ClInclude Include="Prefab.h" />
     <ClInclude Include="RenderPass.h" />
     <ClInclude Include="SFX.h" />
     <ClInclude Include="UICanvas.h" />
@@ -214,6 +215,7 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClCompile Include="IResource.cpp" />
     <ClCompile Include="ISingleton.cpp" />
     <ClCompile Include="ITexture.cpp" />
+    <ClCompile Include="Prefab.cpp" />
     <ClCompile Include="RenderPass.cpp" />
     <ClCompile Include="SFX.cpp" />
     <ClCompile Include="UICanvas.cpp" />
@@ -250,8 +252,6 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
   <ItemGroup>
     <None Include="glsl\default.frag" />
     <None Include="glsl\default.vert" />
-    <None Include="glsl\instance.frag" />
-    <None Include="glsl\instance.vert" />
     <None Include="glsl\text.frag" />
     <None Include="glsl\text.vert" />
   </ItemGroup>

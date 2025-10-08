@@ -185,6 +185,9 @@
     <ClCompile Include="BGM.cpp">
       <Filter>소스 파일\05. Resources</Filter>
     </ClCompile>
+    <ClCompile Include="Prefab.cpp">
+      <Filter>소스 파일\01. Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -325,6 +328,9 @@
     <ClInclude Include="BGM.h">
       <Filter>소스 파일\05. Resources</Filter>
     </ClInclude>
+    <ClInclude Include="Prefab.h">
+      <Filter>소스 파일\01. Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Debug\Error_report.log">
@@ -342,12 +348,6 @@
       <Filter>소스 파일\05. Resources\glsl</Filter>
     </None>
     <None Include="glsl\text.vert">
-      <Filter>소스 파일\05. Resources\glsl</Filter>
-    </None>
-    <None Include="glsl\instance.frag">
-      <Filter>소스 파일\05. Resources\glsl</Filter>
-    </None>
-    <None Include="glsl\instance.vert">
       <Filter>소스 파일\05. Resources\glsl</Filter>
     </None>
   </ItemGroup>

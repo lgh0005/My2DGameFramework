@@ -7,12 +7,13 @@ int SDL_main(int, char**)
 	vector<shared_ptr<Scene>> SCENES
 	{
 		make_shared<DevScene>("DevScene"),
-		make_shared<TestScene>("TestScene")
+		make_shared<TestScene>("TestScene"),
+		make_shared<Lobby>("Lobby")
 	};
 
 	// Run game application
 	LAUNCH->AddScenes(SCENES);
-	LAUNCH->Run("DevScene");
+	LAUNCH->Run("Lobby");
 
 	return 0;
 }

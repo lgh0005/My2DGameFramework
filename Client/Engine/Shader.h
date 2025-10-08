@@ -12,10 +12,10 @@ class Shader : public IResource
 
 public:
 	Shader(const string& name, const string& vertexShaderFile, const string& fragmentShaderFile);
-	virtual ~Shader() override;
+	virtual ~Shader() override = default;
 
 public:
-	virtual void Awake() override;
+	virtual void Init() override;
 
 public:
 	void Use() { glUseProgram(_shaderID); }

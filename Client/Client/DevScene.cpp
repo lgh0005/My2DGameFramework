@@ -29,7 +29,7 @@ void DevScene::CreateSceneContext()
 				"../Engine/glsl/default.vert",
 				"../Engine/glsl/default.frag"
 			);
-		_textureShader->Awake();
+		_textureShader->Init();
 		_textureShader->AddUniform(Uniforms::UNIFORM_MODEL);
 		_textureShader->AddUniform(Uniforms::UNIFORM_VIEW);
 		_textureShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
@@ -45,7 +45,7 @@ void DevScene::CreateSceneContext()
 				"../Engine/glsl/text.vert",
 				"../Engine/glsl/text.frag"
 			);
-		_textShader->Awake();
+		_textShader->Init();
 		_textShader->AddUniform(Uniforms::UNIFORM_MODEL);
 		_textShader->AddUniform(Uniforms::UNIFORM_VIEW);
 		_textShader->AddUniform(Uniforms::UNIFORM_PROJECTION);

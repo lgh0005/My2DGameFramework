@@ -21,6 +21,18 @@
     <Filter Include="소스 파일\02. InGame">
       <UniqueIdentifier>{0f6db938-fdc5-4002-ae62-c733bc7f6512}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01. Lobby\Shaders">
+      <UniqueIdentifier>{fa652eba-b5f5-4267-b926-039959fe5d4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Lobby\Scene">
+      <UniqueIdentifier>{634cc2ed-8b32-46e4-8e7d-d2a7b4115dbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Lobby\Scripts">
+      <UniqueIdentifier>{aae42fba-e41d-4be9-9d68-75e51f3ac5c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Lobby\Prefabs">
+      <UniqueIdentifier>{b3b331af-d2c0-489f-a18d-c9103210c62c}</UniqueIdentifier>
+    </Filter>
     <Filter Include="소스 파일\miscellaneous">
       <UniqueIdentifier>{59e7b3b0-76ff-4ed2-bd96-70690953eab4}</UniqueIdentifier>
     </Filter>
@@ -44,18 +56,6 @@
     </Filter>
     <Filter Include="소스 파일\miscellaneous\02. TestScene\Scene">
       <UniqueIdentifier>{c66c4e0d-bd0d-457d-b53e-99a934a6e224}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01. Lobby\Shaders">
-      <UniqueIdentifier>{fa652eba-b5f5-4267-b926-039959fe5d4d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01. Lobby\Scene">
-      <UniqueIdentifier>{634cc2ed-8b32-46e4-8e7d-d2a7b4115dbd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01. Lobby\Scripts">
-      <UniqueIdentifier>{aae42fba-e41d-4be9-9d68-75e51f3ac5c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01. Lobby\Prefabs">
-      <UniqueIdentifier>{b3b331af-d2c0-489f-a18d-c9103210c62c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +89,9 @@
     <ClCompile Include="Lobby.cpp">
       <Filter>소스 파일\01. Lobby\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>소스 파일\01. Lobby\Prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -120,6 +123,9 @@
     </ClInclude>
     <ClInclude Include="Lobby.h">
       <Filter>소스 파일\01. Lobby\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>소스 파일\01. Lobby\Prefabs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

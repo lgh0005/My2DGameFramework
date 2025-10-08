@@ -6,13 +6,10 @@ Shader::Shader(const string& name, const string& vertexShaderFile, const string&
 	_vertexShaderFileLocation(vertexShaderFile),
 	_fragmentShaderFileLocation(fragmentShaderFile)
 {
+
 }
 
-Shader::~Shader()
-{
-}
-
-void Shader::Awake()
+void Shader::Init()
 {
 	// Create shader program
 	_shaderID = glCreateProgram();

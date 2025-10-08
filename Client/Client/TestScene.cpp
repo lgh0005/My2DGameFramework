@@ -20,7 +20,7 @@ void TestScene::CreateSceneContext()
 				"../Engine/glsl/default.vert",
 				"../Engine/glsl/default.frag"
 			);
-		_textureShader->Awake();
+		_textureShader->Init();
 		_textureShader->AddUniform(Uniforms::UNIFORM_MODEL);
 		_textureShader->AddUniform(Uniforms::UNIFORM_VIEW);
 		_textureShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
