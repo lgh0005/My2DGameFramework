@@ -5,7 +5,7 @@
 unique_ptr<Game> GAME = make_unique<Game>();
 
 Game::~Game()
-{
+{    
     // Release SDL resources
     TTF_Quit();
     SDL_Quit();
@@ -60,4 +60,9 @@ void Game::Update()
     AUDIO.Update();
     UIMANAGER.Update();
     RENDER.Update();
+}
+
+void Game::Quit()
+{
+    _running = false;
 }

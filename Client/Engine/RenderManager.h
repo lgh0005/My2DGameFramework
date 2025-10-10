@@ -1,7 +1,6 @@
 #pragma once
 #include "ISingleton.h"
 
-class Camera;
 class RenderPass;
 
 class RenderManager : public ISingleton<RenderManager>
@@ -15,13 +14,9 @@ public:
 	virtual void Init() override;
 	virtual void Update() override;
 
-#pragma region ADD_RENDER_PASS_TEST
 public:
-	//void AddRenderable(Render::RenderLayer layer, shared_ptr<IRenderable> renderable);
 	void AddRenderPass(const shared_ptr<RenderPass>& renderPass);
 	void Clear() { _renderQueue.clear(); }
-
-#pragma endregion
 	
 public:
 	void SetClearColor(const array<GLclampf, 4>& clearColor);

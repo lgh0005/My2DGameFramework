@@ -8,7 +8,7 @@ ITexture::ITexture(const string& name, const string& filePath) : Super(name), _r
 
 }
 
-void ITexture::Awake()
+void ITexture::Init()
 {
 	LoadTexture();
 	CreateRect();

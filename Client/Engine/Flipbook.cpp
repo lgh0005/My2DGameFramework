@@ -10,9 +10,9 @@ Flipbook::Flipbook(const string& name, const string& filePath, FlipbookInfo& inf
 {
 }
 
-void Flipbook::Awake()
+void Flipbook::Init()
 {
-    Super::Awake();
+    Super::Init();
     GetFrameVertices();
     SetFrame(_currentFrame);
 }

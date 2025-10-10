@@ -1,11 +1,6 @@
 #include "pch.h"
 #include "RenderManager.h"
-#include "ITexture.h"
-
-#pragma region TEST
 #include "RenderPass.h"
-#pragma endregion
-
 
 RenderManager::~RenderManager()
 {
@@ -49,6 +44,10 @@ void RenderManager::Init()
     // Enable alpha blending for font/text rendering
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    // Render initialized frame
+    glClear(GL_COLOR_BUFFER_BIT);
+    SDL_GL_SwapWindow(_window);
 }
 
 void RenderManager::Update()

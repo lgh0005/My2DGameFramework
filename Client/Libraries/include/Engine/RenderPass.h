@@ -15,6 +15,7 @@ public:
 
 public:
 	void SetShader(const shared_ptr<Shader>& shader) { _shader = shader; }
+	shared_ptr<Shader> GetShader() { return _shader; }
 	void SetCamera(const shared_ptr<Camera>& camera) { _camera = camera; }
 	shared_ptr<Camera> GetCamera() { return _camera; }
 	void AddRenderable(const shared_ptr<IRenderable>& renderable) { _renderables.push_back(renderable); }

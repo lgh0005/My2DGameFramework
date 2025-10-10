@@ -25,7 +25,7 @@ public:
 	virtual ~Flipbook() override = default;
 
 public:
-	virtual void Awake() override;
+	virtual void Init() override;
 	virtual void Update() override;
 
 public:

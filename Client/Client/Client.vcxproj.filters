@@ -33,6 +33,15 @@
     <Filter Include="소스 파일\01. Lobby\Prefabs">
       <UniqueIdentifier>{b3b331af-d2c0-489f-a18d-c9103210c62c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01. Lobby\Prefabs\Backgrounds">
+      <UniqueIdentifier>{053ee63e-88c9-4727-b2d2-54e436245c64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Lobby\Scripts\Controllers">
+      <UniqueIdentifier>{6b4dd425-dcfd-4f3d-bc24-bddc0ac87122}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Lobby\Scripts\UIScripts">
+      <UniqueIdentifier>{cc154709-16eb-4e0a-b52c-585ccf469acd}</UniqueIdentifier>
+    </Filter>
     <Filter Include="소스 파일\miscellaneous">
       <UniqueIdentifier>{59e7b3b0-76ff-4ed2-bd96-70690953eab4}</UniqueIdentifier>
     </Filter>
@@ -57,8 +66,8 @@
     <Filter Include="소스 파일\miscellaneous\02. TestScene\Scene">
       <UniqueIdentifier>{c66c4e0d-bd0d-457d-b53e-99a934a6e224}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Lobby\Prefabs\Backgrounds">
-      <UniqueIdentifier>{053ee63e-88c9-4727-b2d2-54e436245c64}</UniqueIdentifier>
+    <Filter Include="소스 파일\01. Lobby\Prefabs\Settings">
+      <UniqueIdentifier>{72077592-146a-4e41-8df6-5518f6ca980a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -92,9 +101,6 @@
     <ClCompile Include="Lobby.cpp">
       <Filter>소스 파일\01. Lobby\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>소스 파일\01. Lobby\Prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="Background1.cpp">
       <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
     </ClCompile>
@@ -115,6 +121,27 @@
     </ClCompile>
     <ClCompile Include="Bush.cpp">
       <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterController.cpp">
+      <Filter>소스 파일\01. Lobby\Scripts\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="StartButtonScript.cpp">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionButtonScript.cpp">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts</Filter>
+    </ClCompile>
+    <ClCompile Include="QuitButtonScript.cpp">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts</Filter>
+    </ClCompile>
+    <ClCompile Include="UISetting.cpp">
+      <Filter>소스 파일\01. Lobby\Prefabs\Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame.cpp">
+      <Filter>소스 파일\02. InGame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,9 +175,6 @@
     <ClInclude Include="Lobby.h">
       <Filter>소스 파일\01. Lobby\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>소스 파일\01. Lobby\Prefabs</Filter>
-    </ClInclude>
     <ClInclude Include="Background1.h">
       <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
     </ClInclude>
@@ -171,6 +195,27 @@
     </ClInclude>
     <ClInclude Include="Bush.h">
       <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterController.h">
+      <Filter>소스 파일\01. Lobby\Scripts\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="StartButtonScript.h">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionButtonScript.h">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="QuitButtonScript.h">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="UISetting.h">
+      <Filter>소스 파일\01. Lobby\Prefabs\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame.h">
+      <Filter>소스 파일\02. InGame</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

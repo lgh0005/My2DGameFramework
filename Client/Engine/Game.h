@@ -10,6 +10,7 @@ public:
 	void Init();
 	void Launch(const string& FirstSceneName);
 	void Update();
+	void Quit();
 
 private:
 	SDL_Event _event;

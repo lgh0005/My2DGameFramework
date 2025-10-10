@@ -26,7 +26,6 @@ class BGM;
 class SFX;
 #pragma endregion
 
-// TODO : 이후에 배경의 경우, 자식으로 묶어서 하나의 프리팹으로 만들어야 함.
 #pragma region Prefabs
 class Ground;
 class Background1;
@@ -39,7 +38,10 @@ class Bush;
 #pragma endregion
 
 #pragma region Scripts
-class example2;
+class CharacterController;
+class StartButtonScript;
+class OptionButtonScript;
+class QuitButtonScript;
 #pragma endregion
 
 class Lobby : public Scene
@@ -63,6 +65,7 @@ private:
 	=============================*/
 	shared_ptr<Shader> _textureShader;
 	shared_ptr<Shader> _textShader;
+	shared_ptr<Shader> _characterShader;
 
 	/*======================
 	//    Game Cameras    //
@@ -82,6 +85,7 @@ private:
 	=======================*/
 	shared_ptr<RenderPass> _uiRenderPass;
 	shared_ptr<RenderPass> _textureRenderPass;
+	shared_ptr<RenderPass> _characterRenderPass;
 #pragma endregion
 
 #pragma region NECESSARY_RESOURCES
@@ -101,8 +105,11 @@ private:
 	shared_ptr<Background2> _background2;
 
 	// Character Prefab
-	shared_ptr<Flipbook> _characterFlipbook;
 	shared_ptr<Character> _character;
+	shared_ptr<Flipbook> _characterIdleLeftFlipbook;
+	shared_ptr<Flipbook> _characterIdleRightFlipbook;
+	shared_ptr<Flipbook> _characterWalkLeftFlipbook;
+	shared_ptr<Flipbook> _characterWalkRightFlipbook;
 
 	// Sidewall Prefab
 	shared_ptr<Texture> _sideWallTexture;
@@ -117,7 +124,6 @@ private:
 	shared_ptr<House1> _house1;
 	shared_ptr<Texture> _houseTexture2;
 	shared_ptr<House2> _house2;
-
 
 #pragma region MainUI
 	shared_ptr<UICanvas> _uiCanvas;
@@ -136,25 +142,27 @@ private:
 
 	shared_ptr<Texture> _buttonTextureNormal;
 	shared_ptr<Texture> _buttonTextureSelect;
-	shared_ptr<example2> _buttonScript;
 
 	shared_ptr<UIButton> _button1;
 	shared_ptr<Transform> _buttonTransform1;
 	shared_ptr<GameObject> _buttonGameObject1;
 	shared_ptr<Font> _buttonText1;
 	shared_ptr<UIText> _buttonText1Texture;
+	shared_ptr<StartButtonScript> _buttonScript1;
 
 	shared_ptr<UIButton> _button2;
 	shared_ptr<Transform> _buttonTransform2;
 	shared_ptr<GameObject> _buttonGameObject2;
 	shared_ptr<Font> _buttonText2;
 	shared_ptr<UIText> _buttonText2Texture;
+	shared_ptr<OptionButtonScript> _buttonScript2;
 
 	shared_ptr<UIButton> _button3;
 	shared_ptr<Transform> _buttonTransform3;
 	shared_ptr<GameObject> _buttonGameObject3;
 	shared_ptr<Font> _buttonText3;
 	shared_ptr<UIText> _buttonText3Texture;
+	shared_ptr<QuitButtonScript> _buttonScript3;
 
 #pragma endregion
 

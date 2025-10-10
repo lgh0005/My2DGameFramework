@@ -12,6 +12,12 @@
 #include "Bush.h"
 #pragma endregion
 
+#pragma region Scripts
+#include "example2.h"
+#include "StartButtonScript.h"
+#include "OptionButtonScript.h"
+#include "QuitButtonScript.h"
+#pragma endregion
 
 Lobby::Lobby(const string& name) : Super(name) {}
 
@@ -89,87 +95,114 @@ void Lobby::LoadResources()
 	// Load Resources
 	{
 		_groundTexture = make_shared<Texture>("Ground", "../Resources/Images/Extras/groundBig.png");
+		_groundTexture->Init();
 		RESOURCE.AddResource(_groundTexture);
 
 		_backgroundTexture1 = make_shared<Texture>("Background1", "../Resources/Images/Extras/background2.png");
+		_backgroundTexture1->Init();
 		RESOURCE.AddResource(_backgroundTexture1);
 
 		_backgroundTexture2 = make_shared<Texture>("Background2", "../Resources/Images/Extras/background1.png");
+		_backgroundTexture2->Init();
 		RESOURCE.AddResource(_backgroundTexture2);
 
-		FlipbookInfo info{1, 8, 0, 0, 7, 16.0f, true, true};
-		_characterFlipbook = make_shared<Flipbook>("Character_Idle", "../Resources/Images/Flipbooks/Player_normal/FB_Player_idle.png", info);
-		RESOURCE.AddResource(_characterFlipbook);
+
+
+
+		FlipbookInfo info1{ 1, 8, 0, 0, 7, 16.0f, true, true };
+		_characterIdleRightFlipbook = make_shared<Flipbook>("Character_Idle_right", "../Resources/Images/Flipbooks/Player_normal/FB_Player_idle_right.png", info1);
+		_characterIdleRightFlipbook->Init();
+		RESOURCE.AddResource(_characterIdleRightFlipbook);
+
+		FlipbookInfo info2{ 1, 8, 0, 0, 7, 16.0f, true, true };
+		_characterIdleLeftFlipbook = make_shared<Flipbook>("Character_Idle_left", "../Resources/Images/Flipbooks/Player_normal/FB_Player_idle_left.png", info2);
+		_characterIdleLeftFlipbook->Init();
+		RESOURCE.AddResource(_characterIdleLeftFlipbook);
+
+		FlipbookInfo info3{ 1, 8, 0, 0, 7, 16.0f, true, true };
+		_characterWalkLeftFlipbook = make_shared<Flipbook>("Character_Walk_right", "../Resources/Images/Flipbooks/Player_normal/FB_Player_walk_right.png", info3);
+		_characterWalkLeftFlipbook->Init();
+		RESOURCE.AddResource(_characterWalkLeftFlipbook);
+
+		FlipbookInfo info4{ 1, 8, 0, 0, 7, 16.0f, true, true };
+		_characterWalkRightFlipbook = make_shared<Flipbook>("Character_Walk_left", "../Resources/Images/Flipbooks/Player_normal/FB_Player_walk_left.png", info4);
+		_characterWalkRightFlipbook->Init();
+		RESOURCE.AddResource(_characterWalkRightFlipbook);
+
+		
+
+
 
 		_sideWallTexture = make_shared<Texture>("SideWall", "../Resources/Images/Extras/sidewall.png");
+		_sideWallTexture->Init();
 		RESOURCE.AddResource(_sideWallTexture);
 		
 		_houseTexture1 = make_shared<Texture>("House1", "../Resources/Images/Extras/building2.png");
+		_houseTexture1->Init();
 		RESOURCE.AddResource(_houseTexture1);
 
 		_houseTexture2 = make_shared<Texture>("House2", "../Resources/Images/Extras/house2.png");
+		_houseTexture2->Init();
 		RESOURCE.AddResource(_houseTexture2);
 
 		_bushTexture = make_shared<Texture>("Bush", "../Resources/Images/Extras/grass_foreground.png");
+		_bushTexture->Init();
 		RESOURCE.AddResource(_bushTexture);
 
 		_gameTitleText1 = make_shared<Font>("Title1", "../Resources/Fonts/Gamer.ttf", "Stickman", 180, Colors::Black);
+		_gameTitleText1->Init();
 		RESOURCE.AddResource(_gameTitleText1);
 
 		_gameTitleText2 = make_shared<Font>("Title2", "../Resources/Fonts/Gamer.ttf", "Survivor", 175, Colors::Black);
+		_gameTitleText2->Init();
 		RESOURCE.AddResource(_gameTitleText2);
 
 		_buttonText1 = make_shared<Font>("Start", "../Resources/Fonts/Gamer.ttf", "Start", 70, Colors::Black);
+		_buttonText1->Init();
 		RESOURCE.AddResource(_buttonText1);
 
 		_buttonText2 = make_shared<Font>("Option", "../Resources/Fonts/Gamer.ttf", "Option", 64, Colors::Black);
+		_buttonText2->Init();
 		RESOURCE.AddResource(_buttonText2);
 
 		_buttonText3 = make_shared<Font>("Quit", "../Resources/Fonts/Gamer.ttf", "Quit", 64, Colors::Black);
+		_buttonText3->Init();
 		RESOURCE.AddResource(_buttonText3);
 
 		_buttonTextureNormal = make_shared<Texture>("Button_Normal", "../Resources/Images/UIs/Button.png");
+		_buttonTextureNormal->Init();
 		RESOURCE.AddResource(_buttonTextureNormal);
 
 		_buttonTextureSelect = make_shared<Texture>("Button_Select", "../Resources/Images/UIs/Button_selected.png");
+		_buttonTextureSelect->Init();
 		RESOURCE.AddResource(_buttonTextureSelect);
 	}
 
 	// Load Prefabs
 	{
-		auto self = shared_from_this();
-
 		_ground = make_shared<Ground>();
 		_ground->SetRenderPass(_textureRenderPass);
-		_ground->SetCurrentScene(self);
 
 		_background1 = make_shared<Background1>();
 		_background1->SetRenderPass(_textureRenderPass);
-		_background1->SetCurrentScene(self);
 
 		_background2 = make_shared<Background2>();
 		_background2->SetRenderPass(_textureRenderPass);
-		_background2->SetCurrentScene(self);
 
 		_character = make_shared<Character>();
 		_character->SetRenderPass(_textureRenderPass);
-		_character->SetCurrentScene(self);
 
 		_sideWall = make_shared<SideWall>();
 		_sideWall->SetRenderPass(_textureRenderPass);
-		_sideWall->SetCurrentScene(self);
 
 		_house1 = make_shared<House1>();
 		_house1->SetRenderPass(_textureRenderPass);
-		_house1->SetCurrentScene(self);
 
 		_house2 = make_shared<House2>();
 		_house2->SetRenderPass(_textureRenderPass);
-		_house2->SetCurrentScene(self);
 
 		_bush = make_shared<Bush>();
 		_bush->SetRenderPass(_textureRenderPass);
-		_bush->SetCurrentScene(self);
 	}
 }
 
@@ -185,35 +218,38 @@ void Lobby::CreateSceneContext()
 	LoadResources();
 
 #pragma region SCENE_CONTEXT
-	auto background1 = _background1->Instantiate("Background1", { 0.0f, -150.0f, 0.f });
-	_gameObjects.push_back(background1);
+	// Prefabs
+	{
+		auto background1 = _background1->Instantiate("Background1", { 0.0f, -150.0f, 0.f });
+		_gameObjects.push_back(background1);
 
-	auto background2 = _background2->Instantiate("Background2", { 0.0f, -200.0f, 0.f });
-	_gameObjects.push_back(background2);
+		auto background2 = _background2->Instantiate("Background2", { 0.0f, -200.0f, 0.f });
+		_gameObjects.push_back(background2);
 
-	auto bush1 = _bush->Instantiate("Bush1", { -384.0f, -140.0f, 0.0f });
-	_gameObjects.push_back(bush1);
+		auto bush1 = _bush->Instantiate("Bush1", { -384.0f, -140.0f, 0.0f });
+		_gameObjects.push_back(bush1);
 
-	auto bush2 = _bush->Instantiate("Bush2", { 0.0f, -140.0f, 0.0f });
-	_gameObjects.push_back(bush2);
+		auto bush2 = _bush->Instantiate("Bush2", { 0.0f, -140.0f, 0.0f });
+		_gameObjects.push_back(bush2);
 
-	auto house1 = _house1->Instantiate("House1", { 400.0f, 45.0f, 0.0f });
-	_gameObjects.push_back(house1);
+		auto house1 = _house1->Instantiate("House1", { 400.0f, 45.0f, 0.0f });
+		_gameObjects.push_back(house1);
 
-	auto house2 = _house2->Instantiate("House2", { -200.0f, -35.0f, 0.0f });
-	_gameObjects.push_back(house2);
+		auto house2 = _house2->Instantiate("House2", { -200.0f, -35.0f, 0.0f });
+		_gameObjects.push_back(house2);
 
-	auto ground_1 = _ground->Instantiate("Ground1", { -384.0f, -320.0f, 0.f });
-	_gameObjects.push_back(ground_1);
+		auto ground_1 = _ground->Instantiate("Ground1", { -384.0f, -320.0f, 0.f });
+		_gameObjects.push_back(ground_1);
 
-	auto ground_2 = _ground->Instantiate("Ground2", { 384.0f, -320.0f, 0.f });
-	_gameObjects.push_back(ground_2);
+		auto ground_2 = _ground->Instantiate("Ground2", { 384.0f, -320.0f, 0.f });
+		_gameObjects.push_back(ground_2);
 
-	auto sideWall = _sideWall->Instantiate("SideWall", { -550.0f, 200.0f, 0.0f }, glm::vec3(0.0f), glm::vec3(0.5f, 0.65f, 0.5f));
-	_gameObjects.push_back(sideWall);
+		auto sideWall = _sideWall->Instantiate("SideWall", { -550.0f, 200.0f, 0.0f }, glm::vec3(0.0f), glm::vec3(0.5f, 0.65f, 0.5f));
+		_gameObjects.push_back(sideWall);
 
-	auto character = _character->Instantiate("Character", { -300.0f, -140.0f, 0.0f });
-	_gameObjects.push_back(character);
+		auto character = _character->Instantiate("Character", { -300.0f, -140.0f, 0.0f });
+		_gameObjects.push_back(character);
+	}
 
 	// UI
 	{
@@ -256,7 +292,7 @@ void Lobby::CreateSceneContext()
 			_buttonText1Texture = make_shared<UIText>("Start", _uiCameraComponent, _buttonText1);
 			_button1 = make_shared<UIButton>
 				(
-					"Button",
+					"StartButton",
 					_uiCameraComponent,
 					_buttonTextureNormal,
 					glm::vec2(260.0f, 81.0f),
@@ -276,6 +312,8 @@ void Lobby::CreateSceneContext()
 			_buttonGameObject1->AddRenderable(static_pointer_cast<IRenderable>(_buttonText1Texture));
 			_textureRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_button1));
 			_uiRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_buttonText1Texture));
+			_buttonScript1 = make_shared<StartButtonScript>("StartButtonScript");
+			_buttonGameObject1->AddBehaviour(_buttonScript1);
 			_gameObjects.push_back(_buttonGameObject1);
 		}
 
@@ -284,7 +322,7 @@ void Lobby::CreateSceneContext()
 			_buttonText2Texture = make_shared<UIText>("Option", _uiCameraComponent, _buttonText2);
 			_button2 = make_shared<UIButton>
 				(
-					"Button",
+					"OptionButton",
 					_uiCameraComponent,
 					_buttonTextureNormal,
 					glm::vec2(260.0f, 81.0f),
@@ -304,6 +342,8 @@ void Lobby::CreateSceneContext()
 			_buttonGameObject2->AddRenderable(static_pointer_cast<IRenderable>(_buttonText2Texture));
 			_textureRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_button2));
 			_uiRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_buttonText2Texture));
+			_buttonScript2 = make_shared<OptionButtonScript>("OptionButtonScript");
+			_buttonGameObject2->AddBehaviour(_buttonScript2);
 			_gameObjects.push_back(_buttonGameObject2);
 		}
 
@@ -312,7 +352,7 @@ void Lobby::CreateSceneContext()
 			_buttonText3Texture = make_shared<UIText>("Quit", _uiCameraComponent, _buttonText3);
 			_button3 = make_shared<UIButton>
 				(
-					"Button",
+					"QuitButton",
 					_uiCameraComponent,
 					_buttonTextureNormal,
 					glm::vec2(260.0f, 81.0f),
@@ -332,7 +372,30 @@ void Lobby::CreateSceneContext()
 			_buttonGameObject3->AddRenderable(static_pointer_cast<IRenderable>(_buttonText3Texture));
 			_textureRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_button3));
 			_uiRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_buttonText3Texture));
+			_buttonScript3 = make_shared<QuitButtonScript>("QuitButtonScript");
+			_buttonGameObject3->AddBehaviour(_buttonScript3);
 			_gameObjects.push_back(_buttonGameObject3);
+		}
+
+		// Canvas
+		{
+			_uiCanvas = make_shared<UICanvas>("MainUICanvas", _uiCameraComponent, glm::vec2(300.0f, 200.0f));
+			_uiCanvasTransform = make_shared<Transform>
+			(
+				"MainUICanvas",
+				glm::vec3(0.0f, 0.0f, 0.0f),
+				glm::vec3(0.0f, 0.0f, 0.0f),
+				glm::vec3(1.0f, 1.0f, 1.0f)
+			);
+			_uiCanvasObject = make_shared<GameObject>("MainUICanvas");
+			_uiCanvasObject->SetTransform(_uiCanvasTransform);
+			_uiCanvasObject->AddComponent(_uiCanvas);
+			_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_button1));
+			_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_button2));
+			_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_button3));
+			_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_gameTitleTextTexture1));
+			_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_gameTitleTextTexture2));
+			_gameObjects.push_back(_uiCanvasObject);
 		}
 	}
 
@@ -341,6 +404,6 @@ void Lobby::CreateSceneContext()
 #pragma region PRESENT_RENDER_PASSES
 	RENDER.AddRenderPass(_textureRenderPass);
 	RENDER.AddRenderPass(_uiRenderPass);
-
+#pragma endregion
 }
 

@@ -6,7 +6,6 @@
 #include "Engine/Shader.h"
 #include "Engine/ITexture.h"
 #include "Engine/Texture.h"
-#include "example3.h"
 
 example2::example2(const string& name) : Super(name)
 {

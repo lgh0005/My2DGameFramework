@@ -251,7 +251,6 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
   </ItemGroup>
   <ItemGroup>
     <None Include="glsl\default.frag" />
-    <None Include="glsl\default.vert" />
     <None Include="glsl\text.frag" />
     <None Include="glsl\text.vert" />
   </ItemGroup>

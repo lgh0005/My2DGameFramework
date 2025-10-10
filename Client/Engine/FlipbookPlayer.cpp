@@ -11,7 +11,7 @@ FlipbookPlayer::FlipbookPlayer(const string& name, shared_ptr<Flipbook> flipbook
 void FlipbookPlayer::Awake(const shared_ptr<GameObject>& owner)
 {
 	Super::Awake(owner);
-	_flipbook->Awake();
+	_flipbook->Init();
 }
 
 void FlipbookPlayer::Render(const shared_ptr<Shader>& shader, const glm::mat4& model, const shared_ptr<Camera>& camera)

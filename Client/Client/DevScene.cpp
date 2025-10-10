@@ -99,9 +99,11 @@ void DevScene::CreateSceneContext()
 #pragma endregion
 
 #pragma region GAME_OBJECTS
+
 	// Text UI GameObject
 	{
 		_font = make_shared<Font>("font", "../Resources/Fonts/Crang.ttf", "Hello world!", 64, Colors::White);
+		_font->Init();
 		RESOURCE.AddResource(_font);
 
 		auto MyFont = RESOURCE.GetResource<Font>("font");
@@ -124,6 +126,7 @@ void DevScene::CreateSceneContext()
 	// Text UI GameObject
 	{
 		_font2 = make_shared<Font>("font2", "../Resources/Fonts/Crang.ttf", "This is Text!", 64, Colors::Red);
+		_font2->Init();
 		RESOURCE.AddResource(_font2);
 
 		auto MyFont = RESOURCE.GetResource<Font>("font2");
@@ -146,6 +149,7 @@ void DevScene::CreateSceneContext()
 	// Sprite GameObject
 	{
 		_texture = make_shared<Texture>("Texture", "../Resources/Images/cuphead_idle_0001.png");
+		_texture->Init();
 		RESOURCE.AddResource(_texture);
 		_sprite = make_shared<Sprite>("Sprite", RESOURCE.GetResource<Texture>("Texture"));
 		_spriteTransform = make_shared<Transform>
@@ -168,6 +172,7 @@ void DevScene::CreateSceneContext()
 	{
 		FlipbookInfo info{ 8, 16, 7, 0, 9, 12.0f, true, true };
 		_flipbook = make_shared<Flipbook>("Flipbook", "../Resources/Images/cuphead_overworld.png", info);
+		_flipbook->Init();
 		RESOURCE.AddResource(_flipbook);
 		_flipbookPlayer = make_shared<FlipbookPlayer>("FlipbookPlayer", RESOURCE.GetResource<Flipbook>("Flipbook"));
 		_flipbookTransform = make_shared<Transform>
@@ -197,10 +202,12 @@ void DevScene::CreateSceneContext()
 		AUDIO.AddSFX(MySFX);
 
 		_buttonHoveredTexture = make_shared<Texture>("HOVERED", "../Resources/Images/b_1_hover.png");
+		_buttonHoveredTexture->Init();
 		RESOURCE.AddResource(_buttonHoveredTexture);
 		_buttonHoveredTexture->Awake();
 
 		_buttonTexture = make_shared<Texture>("buttonTexture", "../Resources/Images/b_1.png");
+		_buttonTexture->Init();
 		RESOURCE.AddResource(_buttonTexture);
 		auto ButtonTexture = RESOURCE.GetResource<ITexture>("buttonTexture");
 		_button = make_shared<UIButton>
@@ -231,10 +238,12 @@ void DevScene::CreateSceneContext()
 	// Button CheckBox UI
 	{
 		_chechboxClicked = make_shared<Texture>("CLICKED", "../Resources/Images/b_2_click.png");
+		_chechboxClicked->Init();
 		RESOURCE.AddResource(_chechboxClicked);
 		_chechboxClicked->Awake();
 
 		_checkboxTexture = make_shared<Texture>("CheckBoxTexture", "../Resources/Images/b_2.png");
+		_checkboxTexture->Init();
 		RESOURCE.AddResource(_checkboxTexture);
 		auto CheckBoxTexture = RESOURCE.GetResource<ITexture>("CheckBoxTexture");
 		_checkbox = make_shared<UICheckBox>
@@ -284,7 +293,6 @@ void DevScene::CreateSceneContext()
 
 	RENDER.AddRenderPass(_uiRenderPass);
 	RENDER.AddRenderPass(_textureRenderPass);
-
 	
 #pragma endregion
 

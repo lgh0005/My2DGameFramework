@@ -53,6 +53,7 @@ void TestScene::CreateSceneContext()
 	// Sprite GameObject
 	{
 		_texture = make_shared<Texture>("Texture", "../Resources/Images/cuphead_idle_0001.png");
+		_texture->Init();
 		RESOURCE.AddResource(_texture);
 		_sprite = make_shared<Sprite>("Sprite", RESOURCE.GetResource<Texture>("Texture"));
 		_spriteTransform = make_shared<Transform>
