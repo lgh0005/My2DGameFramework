@@ -11,8 +11,5 @@ class UIImage : public IUIRenderable
 public:
 	UIImage(const string& name, shared_ptr<Camera> camera, shared_ptr<ITexture> image, const glm::vec2& size = glm::vec2(1.0f, 1.0f));
 	virtual ~UIImage() override = default;
-
-public:
-	virtual void Awake(const shared_ptr<GameObject>& owner) override;
 };
 

@@ -125,6 +125,12 @@ private:
 	shared_ptr<Texture> _houseTexture2;
 	shared_ptr<House2> _house2;
 
+	// BGM
+	shared_ptr<BGM> _lobbyBGM;
+
+	// SFX
+	shared_ptr<SFX> _lobbySFX;
+
 #pragma region MainUI
 	shared_ptr<UICanvas> _uiCanvas;
 	shared_ptr<Transform> _uiCanvasTransform;
@@ -163,11 +169,8 @@ private:
 	shared_ptr<Font> _buttonText3;
 	shared_ptr<UIText> _buttonText3Texture;
 	shared_ptr<QuitButtonScript> _buttonScript3;
-
 #pragma endregion
 
 #pragma endregion
-
-private:
 };
 

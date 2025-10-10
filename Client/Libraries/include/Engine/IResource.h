@@ -7,7 +7,6 @@ public:
 	virtual ~IResource() = default;
 
 public:
-	virtual void Awake();
 	virtual void Init();
 	virtual void Update();
 

@@ -106,32 +106,28 @@ void Lobby::LoadResources()
 		_backgroundTexture2->Init();
 		RESOURCE.AddResource(_backgroundTexture2);
 
+		// Flipbooks
+		{
+			FlipbookInfo info1{ 1, 8, 0, 0, 7, 16.0f, true, true };
+			_characterIdleRightFlipbook = make_shared<Flipbook>("Character_Idle_right", "../Resources/Images/Flipbooks/Player_normal/FB_Player_idle_right.png", info1);
+			_characterIdleRightFlipbook->Init();
+			RESOURCE.AddResource(_characterIdleRightFlipbook);
 
+			FlipbookInfo info2{ 1, 8, 0, 0, 7, 16.0f, true, true };
+			_characterIdleLeftFlipbook = make_shared<Flipbook>("Character_Idle_left", "../Resources/Images/Flipbooks/Player_normal/FB_Player_idle_left.png", info2);
+			_characterIdleLeftFlipbook->Init();
+			RESOURCE.AddResource(_characterIdleLeftFlipbook);
 
+			FlipbookInfo info3{ 1, 8, 0, 0, 7, 16.0f, true, true };
+			_characterWalkLeftFlipbook = make_shared<Flipbook>("Character_Walk_right", "../Resources/Images/Flipbooks/Player_normal/FB_Player_walk_right.png", info3);
+			_characterWalkLeftFlipbook->Init();
+			RESOURCE.AddResource(_characterWalkLeftFlipbook);
 
-		FlipbookInfo info1{ 1, 8, 0, 0, 7, 16.0f, true, true };
-		_characterIdleRightFlipbook = make_shared<Flipbook>("Character_Idle_right", "../Resources/Images/Flipbooks/Player_normal/FB_Player_idle_right.png", info1);
-		_characterIdleRightFlipbook->Init();
-		RESOURCE.AddResource(_characterIdleRightFlipbook);
-
-		FlipbookInfo info2{ 1, 8, 0, 0, 7, 16.0f, true, true };
-		_characterIdleLeftFlipbook = make_shared<Flipbook>("Character_Idle_left", "../Resources/Images/Flipbooks/Player_normal/FB_Player_idle_left.png", info2);
-		_characterIdleLeftFlipbook->Init();
-		RESOURCE.AddResource(_characterIdleLeftFlipbook);
-
-		FlipbookInfo info3{ 1, 8, 0, 0, 7, 16.0f, true, true };
-		_characterWalkLeftFlipbook = make_shared<Flipbook>("Character_Walk_right", "../Resources/Images/Flipbooks/Player_normal/FB_Player_walk_right.png", info3);
-		_characterWalkLeftFlipbook->Init();
-		RESOURCE.AddResource(_characterWalkLeftFlipbook);
-
-		FlipbookInfo info4{ 1, 8, 0, 0, 7, 16.0f, true, true };
-		_characterWalkRightFlipbook = make_shared<Flipbook>("Character_Walk_left", "../Resources/Images/Flipbooks/Player_normal/FB_Player_walk_left.png", info4);
-		_characterWalkRightFlipbook->Init();
-		RESOURCE.AddResource(_characterWalkRightFlipbook);
-
-		
-
-
+			FlipbookInfo info4{ 1, 8, 0, 0, 7, 16.0f, true, true };
+			_characterWalkRightFlipbook = make_shared<Flipbook>("Character_Walk_left", "../Resources/Images/Flipbooks/Player_normal/FB_Player_walk_left.png", info4);
+			_characterWalkRightFlipbook->Init();
+			RESOURCE.AddResource(_characterWalkRightFlipbook);
+		}
 
 		_sideWallTexture = make_shared<Texture>("SideWall", "../Resources/Images/Extras/sidewall.png");
 		_sideWallTexture->Init();
@@ -176,6 +172,12 @@ void Lobby::LoadResources()
 		_buttonTextureSelect = make_shared<Texture>("Button_Select", "../Resources/Images/UIs/Button_selected.png");
 		_buttonTextureSelect->Init();
 		RESOURCE.AddResource(_buttonTextureSelect);
+
+		_lobbyBGM = make_shared<BGM>("DadnMe", "../Resources/Audio/BGM/dadnme.wav", FMOD_LOOP_NORMAL);
+		AUDIO.AddBGM(_lobbyBGM);
+
+		_lobbySFX = make_shared<SFX>("ButtonSFX", "../Resources/Audio/SFX/whoosh2.wav", FMOD_LOOP_OFF);
+		AUDIO.AddSFX(_lobbySFX);
 	}
 
 	// Load Prefabs
@@ -218,6 +220,7 @@ void Lobby::CreateSceneContext()
 	LoadResources();
 
 #pragma region SCENE_CONTEXT
+
 	// Prefabs
 	{
 		auto background1 = _background1->Instantiate("Background1", { 0.0f, -150.0f, 0.f });
@@ -404,6 +407,10 @@ void Lobby::CreateSceneContext()
 #pragma region PRESENT_RENDER_PASSES
 	RENDER.AddRenderPass(_textureRenderPass);
 	RENDER.AddRenderPass(_uiRenderPass);
+#pragma endregion
+
+#pragma region PLAY_BGM
+	AUDIO.PlayBGM("DadnMe");
 #pragma endregion
 }
 

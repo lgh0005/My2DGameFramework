@@ -47,7 +47,6 @@ protected:
 
 // Add GameObjects, Components, Resources here
 private:
-
 #pragma region RENDER_PASSES
 	// Local scene shaders
 	shared_ptr<Shader> _textShader;

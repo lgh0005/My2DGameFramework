@@ -45,11 +45,18 @@ void OptionButtonScript::Init()
 
 void OptionButtonScript::MouseHovered()
 {
+	if (_sfxPlayFlag)
+	{
+		AUDIO.PlaySFX("ButtonSFX");
+		_sfxPlayFlag = false;
+	}
+
 	_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Select"));
 }
 
 void OptionButtonScript::MouseExit()
 {
+	_sfxPlayFlag = true;
 	_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Normal"));
 }
 

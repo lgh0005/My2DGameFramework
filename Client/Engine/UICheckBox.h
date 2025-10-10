@@ -13,7 +13,6 @@ public:
 	virtual ~UICheckBox() override = default;
 
 public:
-	virtual void Awake(const shared_ptr<GameObject>& owner) override;
 	virtual void Update() override;
 
 private:

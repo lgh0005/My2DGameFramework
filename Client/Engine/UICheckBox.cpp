@@ -8,12 +8,6 @@ UICheckBox::UICheckBox(const string& name, const shared_ptr<Camera>& camera, sha
 
 }
 
-void UICheckBox::Awake(const shared_ptr<GameObject>& owner)
-{
-	Super::Awake(owner);
-	_texture->Awake();
-}
-
 void UICheckBox::Update()
 {
 	Super::Update();

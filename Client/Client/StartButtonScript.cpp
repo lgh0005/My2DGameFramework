@@ -46,21 +46,28 @@ void StartButtonScript::Init()
 
 void StartButtonScript::MouseHovered()
 {
+	if (_sfxPlayFlag)
+	{
+		AUDIO.PlaySFX("ButtonSFX");
+		_sfxPlayFlag = false;
+	}
+
 	_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Select"));
 }
 
 void StartButtonScript::MouseExit()
 {
+	_sfxPlayFlag = true;
 	_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Normal"));
 }
 
 void StartButtonScript::MouseClickedDeferred()
 {
 	cout << "Start Button : Clicked! Deffered." << endl;
-	// SCENE.LoadScene("DevScene");
+	SCENE.LoadScene("DevScene");
 }
 
 void StartButtonScript::MouseClickedImmediate()
 {
-	cout << "Start Button : Clicked! Immediate." << endl;
+	AUDIO.PlaySFX("ButtonSFX");
 }

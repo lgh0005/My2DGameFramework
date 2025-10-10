@@ -204,7 +204,7 @@ void DevScene::CreateSceneContext()
 		_buttonHoveredTexture = make_shared<Texture>("HOVERED", "../Resources/Images/b_1_hover.png");
 		_buttonHoveredTexture->Init();
 		RESOURCE.AddResource(_buttonHoveredTexture);
-		_buttonHoveredTexture->Awake();
+		_buttonHoveredTexture->Init();
 
 		_buttonTexture = make_shared<Texture>("buttonTexture", "../Resources/Images/b_1.png");
 		_buttonTexture->Init();
@@ -240,7 +240,7 @@ void DevScene::CreateSceneContext()
 		_chechboxClicked = make_shared<Texture>("CLICKED", "../Resources/Images/b_2_click.png");
 		_chechboxClicked->Init();
 		RESOURCE.AddResource(_chechboxClicked);
-		_chechboxClicked->Awake();
+		_chechboxClicked->Init();
 
 		_checkboxTexture = make_shared<Texture>("CheckBoxTexture", "../Resources/Images/b_2.png");
 		_checkboxTexture->Init();

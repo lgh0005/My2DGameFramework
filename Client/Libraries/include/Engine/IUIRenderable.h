@@ -14,7 +14,6 @@ public:
 	virtual ~IUIRenderable() override = default;
 
 public:
-	virtual void Awake(const shared_ptr<GameObject>& owner) override;
 	virtual void Render(const shared_ptr<Shader>& shader, const glm::mat4& model, const shared_ptr<Camera>& camera) override;
 
 public:

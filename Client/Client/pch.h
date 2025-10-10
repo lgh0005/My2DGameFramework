@@ -29,6 +29,7 @@
 #include "Engine/UIButton.h"
 #include "Engine/UICanvas.h"
 #include "Engine/UICheckBox.h"
+#include "Engine/BoxCollider.h"
 #pragma endregion
 
 #pragma region Resources

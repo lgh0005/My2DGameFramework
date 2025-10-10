@@ -45,21 +45,27 @@ void QuitButtonScript::Init()
 
 void QuitButtonScript::MouseHovered()
 {
+	if (_sfxPlayFlag)
+	{
+		AUDIO.PlaySFX("ButtonSFX");
+		_sfxPlayFlag = false;
+	}
+
 	_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Select"));
 }
 
 void QuitButtonScript::MouseExit()
 {
+	_sfxPlayFlag = true;
 	_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Normal"));
 }
 
 void QuitButtonScript::MouseClickedDeferred()
 {
-	cout << "Quit Button : Clicked! Deffered." << endl;
 	GAME->Quit();
 }
 
 void QuitButtonScript::MouseClickedImmediate()
 {
-	cout << "Quit Button : Clicked! Immediate." << endl;
+	AUDIO.PlaySFX("ButtonSFX");
 }

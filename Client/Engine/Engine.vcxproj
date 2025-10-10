@@ -152,6 +152,7 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClInclude Include="BGM.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ColliderManager.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="EnginePch.h" />
     <ClInclude Include="Enums.h" />
@@ -201,6 +202,7 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClCompile Include="BGM.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ColliderManager.cpp" />
     <ClCompile Include="EnginePch.cpp" />
     <ClCompile Include="Flipbook.cpp" />
     <ClCompile Include="FlipbookPlayer.cpp" />
@@ -251,6 +253,7 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
   </ItemGroup>
   <ItemGroup>
     <None Include="glsl\default.frag" />
+    <None Include="glsl\default.vert" />
     <None Include="glsl\text.frag" />
     <None Include="glsl\text.vert" />
   </ItemGroup>

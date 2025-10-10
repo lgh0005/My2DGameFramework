@@ -7,9 +7,3 @@ UIImage::UIImage(const string& name, shared_ptr<Camera> camera, shared_ptr<IText
 {
 
 }
-
-void UIImage::Awake(const shared_ptr<GameObject>& owner)
-{
-	Super::Awake(owner);
-	_texture->Awake();
-}

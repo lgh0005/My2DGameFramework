@@ -7,9 +7,3 @@ UIText::UIText(const string& name, shared_ptr<Camera> camera, shared_ptr<ITextur
 {
 
 }
-
-void UIText::Awake(const shared_ptr<GameObject>& owner)
-{
-	Super::Awake(owner);
-	_texture->Awake();
-}

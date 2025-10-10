@@ -15,6 +15,9 @@ public:
 	virtual void Init() override;
 
 private:
+	bool _sfxPlayFlag = true;
+
+private:
 	shared_ptr<UIButton> _button;
 	void MouseHovered();
 	void MouseExit();

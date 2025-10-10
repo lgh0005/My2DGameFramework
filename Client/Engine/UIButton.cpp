@@ -11,12 +11,6 @@ UIButton::UIButton(const string& name, shared_ptr<Camera> camera, shared_ptr<ITe
 
 }
 
-void UIButton::Awake(const shared_ptr<GameObject>& owner)
-{
-	Super::Awake(owner);
-	_texture->Awake();
-}
-
 void UIButton::Update()
 {
     Super::Update();
