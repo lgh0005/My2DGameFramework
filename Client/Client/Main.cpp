@@ -8,7 +8,8 @@ int SDL_main(int, char**)
 	{
 		make_shared<DevScene>("DevScene"),
 		make_shared<TestScene>("TestScene"),
-		make_shared<Lobby>("Lobby")
+		make_shared<Lobby>("Lobby"),
+		make_shared<InGame>("InGame")
 	};
 
 	// Run game application

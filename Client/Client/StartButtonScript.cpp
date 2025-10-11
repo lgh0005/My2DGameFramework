@@ -64,7 +64,7 @@ void StartButtonScript::MouseExit()
 void StartButtonScript::MouseClickedDeferred()
 {
 	cout << "Start Button : Clicked! Deffered." << endl;
-	SCENE.LoadScene("DevScene");
+	SCENE.LoadScene("InGame");
 }
 
 void StartButtonScript::MouseClickedImmediate()

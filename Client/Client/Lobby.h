@@ -35,6 +35,8 @@ class SideWall;
 class House1;
 class House2;
 class Bush;
+class UISetting;
+class ColliderDebuger;
 #pragma endregion
 
 #pragma region Scripts
@@ -65,7 +67,7 @@ private:
 	=============================*/
 	shared_ptr<Shader> _textureShader;
 	shared_ptr<Shader> _textShader;
-	shared_ptr<Shader> _characterShader;
+	shared_ptr<Shader> _SettingUIShader;
 
 	/*======================
 	//    Game Cameras    //
@@ -85,7 +87,7 @@ private:
 	=======================*/
 	shared_ptr<RenderPass> _uiRenderPass;
 	shared_ptr<RenderPass> _textureRenderPass;
-	shared_ptr<RenderPass> _characterRenderPass;
+	shared_ptr<RenderPass> _SettingUIRenderPass;
 #pragma endregion
 
 #pragma region NECESSARY_RESOURCES
@@ -131,6 +133,18 @@ private:
 	// SFX
 	shared_ptr<SFX> _lobbySFX;
 
+	// Test
+	shared_ptr<Texture> _test;
+	shared_ptr<ColliderDebuger> _debugger;
+
+	// Settings UI
+	shared_ptr<Texture> _uiPanel;
+	shared_ptr<Texture> _uiToggle;
+	shared_ptr<Texture> _checkIcon;
+	shared_ptr<Texture> _backIcon;
+	shared_ptr<Font> _bgmText;
+	shared_ptr<Font> _sfxText;
+
 #pragma region MainUI
 	shared_ptr<UICanvas> _uiCanvas;
 	shared_ptr<Transform> _uiCanvasTransform;
@@ -169,6 +183,10 @@ private:
 	shared_ptr<Font> _buttonText3;
 	shared_ptr<UIText> _buttonText3Texture;
 	shared_ptr<QuitButtonScript> _buttonScript3;
+#pragma endregion
+
+#pragma region SettingUI
+	shared_ptr<UISetting> _settingUI;
 #pragma endregion
 
 #pragma endregion

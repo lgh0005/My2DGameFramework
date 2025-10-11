@@ -24,6 +24,7 @@
 #include "Engine/Transform.h"
 #include "Engine/Camera.h"
 #include "Engine/Sprite.h"
+#include "Engine/UIImage.h"
 #include "Engine/UIText.h"
 #include "Engine/FlipbookPlayer.h"
 #include "Engine/UIButton.h"

@@ -22,4 +22,5 @@ public:
 
 protected:
     shared_ptr<RenderPass> _renderPass;
+    weak_ptr<Scene> _currentScene;
 };

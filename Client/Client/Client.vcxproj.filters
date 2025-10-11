@@ -21,9 +21,6 @@
     <Filter Include="소스 파일\02. InGame">
       <UniqueIdentifier>{0f6db938-fdc5-4002-ae62-c733bc7f6512}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Lobby\Shaders">
-      <UniqueIdentifier>{fa652eba-b5f5-4267-b926-039959fe5d4d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\01. Lobby\Scene">
       <UniqueIdentifier>{634cc2ed-8b32-46e4-8e7d-d2a7b4115dbd}</UniqueIdentifier>
     </Filter>
@@ -68,6 +65,21 @@
     </Filter>
     <Filter Include="소스 파일\01. Lobby\Prefabs\Settings">
       <UniqueIdentifier>{72077592-146a-4e41-8df6-5518f6ca980a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Lobby\Prefabs\Debug">
+      <UniqueIdentifier>{09e42691-7653-427c-9b38-811f280602c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. InGame\Scene">
+      <UniqueIdentifier>{c298993e-aba6-4fb5-af31-354ed4198abb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. InGame\Prefab">
+      <UniqueIdentifier>{5f9a036a-5508-4612-84e1-f2a1a49b3366}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. InGame\Scripts">
+      <UniqueIdentifier>{a2317e25-1f10-469f-ad3b-08a3328fd646}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Lobby\Shaders">
+      <UniqueIdentifier>{4634f118-1724-4a5e-bec6-a88504a45c8d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -140,8 +152,11 @@
     <ClCompile Include="UISetting.cpp">
       <Filter>소스 파일\01. Lobby\Prefabs\Settings</Filter>
     </ClCompile>
+    <ClCompile Include="ColliderDebuger.cpp">
+      <Filter>소스 파일\01. Lobby\Prefabs\Debug</Filter>
+    </ClCompile>
     <ClCompile Include="InGame.cpp">
-      <Filter>소스 파일\02. InGame</Filter>
+      <Filter>소스 파일\02. InGame\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -214,8 +229,19 @@
     <ClInclude Include="UISetting.h">
       <Filter>소스 파일\01. Lobby\Prefabs\Settings</Filter>
     </ClInclude>
-    <ClInclude Include="InGame.h">
-      <Filter>소스 파일\02. InGame</Filter>
+    <ClInclude Include="ColliderDebuger.h">
+      <Filter>소스 파일\01. Lobby\Prefabs\Debug</Filter>
     </ClInclude>
+    <ClInclude Include="InGame.h">
+      <Filter>소스 파일\02. InGame\Scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resources\Shaders\SettingUI.frag">
+      <Filter>소스 파일\01. Lobby\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\SettingUI.vert">
+      <Filter>소스 파일\01. Lobby\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

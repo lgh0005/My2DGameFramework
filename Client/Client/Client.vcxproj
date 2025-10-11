@@ -137,6 +137,7 @@
     <ClInclude Include="Bush.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterController.h" />
+    <ClInclude Include="ColliderDebuger.h" />
     <ClInclude Include="DevScene.h" />
     <ClInclude Include="example.h" />
     <ClInclude Include="example1.h" />
@@ -163,6 +164,7 @@
     <ClCompile Include="Bush.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharacterController.cpp" />
+    <ClCompile Include="ColliderDebuger.cpp" />
     <ClCompile Include="DevScene.cpp" />
     <ClCompile Include="example.cpp" />
     <ClCompile Include="example1.cpp" />
@@ -184,6 +186,10 @@
     <ClCompile Include="StartButtonScript.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="UISetting.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resources\Shaders\SettingUI.frag" />
+    <None Include="..\Resources\Shaders\SettingUI.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
