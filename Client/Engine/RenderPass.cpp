@@ -9,6 +9,8 @@ void RenderPass::Render()
 {
 	_shader->Use();
 
+	if (_customUniforms) _customUniforms->Apply(_shader);
+
 	for (auto& renderable : _renderables)
 	{
 		shared_ptr<GameObject> owner;

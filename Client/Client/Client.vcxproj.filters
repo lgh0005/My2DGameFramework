@@ -15,53 +15,53 @@
     <Filter Include="소스 파일\99. Headers">
       <UniqueIdentifier>{15c16f7b-17c4-441d-8337-cf6b3a005f9a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Lobby">
+    <Filter Include="소스 파일\02. Lobby">
       <UniqueIdentifier>{2c6b4a0a-8d01-4422-8750-a90df7f83ede}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. InGame">
-      <UniqueIdentifier>{0f6db938-fdc5-4002-ae62-c733bc7f6512}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01. Lobby\Scripts">
+    <Filter Include="소스 파일\02. Lobby\Scripts">
       <UniqueIdentifier>{aae42fba-e41d-4be9-9d68-75e51f3ac5c9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Lobby\Prefabs">
-      <UniqueIdentifier>{b3b331af-d2c0-489f-a18d-c9103210c62c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01. Lobby\Prefabs\Backgrounds">
-      <UniqueIdentifier>{053ee63e-88c9-4727-b2d2-54e436245c64}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01. Lobby\Scripts\Controllers">
+    <Filter Include="소스 파일\02. Lobby\Scripts\Controllers">
       <UniqueIdentifier>{6b4dd425-dcfd-4f3d-bc24-bddc0ac87122}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Lobby\Scripts\UIScripts">
+    <Filter Include="소스 파일\02. Lobby\Scripts\UIScripts">
       <UniqueIdentifier>{cc154709-16eb-4e0a-b52c-585ccf469acd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Lobby\Prefabs\Settings">
-      <UniqueIdentifier>{72077592-146a-4e41-8df6-5518f6ca980a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01. Lobby\Prefabs\Debug">
-      <UniqueIdentifier>{09e42691-7653-427c-9b38-811f280602c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\02. InGame\Scene">
-      <UniqueIdentifier>{c298993e-aba6-4fb5-af31-354ed4198abb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\02. InGame\Prefab">
-      <UniqueIdentifier>{5f9a036a-5508-4612-84e1-f2a1a49b3366}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\02. InGame\Scripts">
-      <UniqueIdentifier>{a2317e25-1f10-469f-ad3b-08a3328fd646}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01. Lobby\Shaders">
-      <UniqueIdentifier>{4634f118-1724-4a5e-bec6-a88504a45c8d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01. Lobby\Scripts\UIScripts\MainUI">
+    <Filter Include="소스 파일\02. Lobby\Scripts\UIScripts\MainUI">
       <UniqueIdentifier>{26bcf438-a994-422d-9b5b-d64a62132632}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Lobby\Scripts\UIScripts\SettingUI">
+    <Filter Include="소스 파일\02. Lobby\Scripts\UIScripts\SettingUI">
       <UniqueIdentifier>{23f2c046-a59f-4a60-87b2-8547d3904c09}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Lobby\Prefabs\Scene">
+    <Filter Include="소스 파일\02. Lobby\Shaders">
+      <UniqueIdentifier>{4634f118-1724-4a5e-bec6-a88504a45c8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Lobby\Scene">
       <UniqueIdentifier>{634cc2ed-8b32-46e4-8e7d-d2a7b4115dbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03. InGame">
+      <UniqueIdentifier>{0f6db938-fdc5-4002-ae62-c733bc7f6512}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03. InGame\Scene">
+      <UniqueIdentifier>{c298993e-aba6-4fb5-af31-354ed4198abb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03. InGame\Scripts">
+      <UniqueIdentifier>{a2317e25-1f10-469f-ad3b-08a3328fd646}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Prefab">
+      <UniqueIdentifier>{b3b331af-d2c0-489f-a18d-c9103210c62c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Prefab\Backgrounds">
+      <UniqueIdentifier>{053ee63e-88c9-4727-b2d2-54e436245c64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Prefab\Settings">
+      <UniqueIdentifier>{72077592-146a-4e41-8df6-5518f6ca980a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Prefab\Debug">
+      <UniqueIdentifier>{09e42691-7653-427c-9b38-811f280602c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Prefab\Player">
+      <UniqueIdentifier>{c35157c0-0fd9-4187-bd7b-c2d0fcb717ae}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,64 +75,70 @@
       <Filter>소스 파일\00. Main</Filter>
     </ClCompile>
     <ClCompile Include="Lobby.cpp">
-      <Filter>소스 파일\01. Lobby\Prefabs\Scene</Filter>
+      <Filter>소스 파일\02. Lobby\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Background1.cpp">
-      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="Background2.cpp">
-      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="Ground.cpp">
-      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="SideWall.cpp">
-      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="House1.cpp">
-      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="House2.cpp">
-      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="Bush.cpp">
-      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
-      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="CharacterController.cpp">
-      <Filter>소스 파일\01. Lobby\Scripts\Controllers</Filter>
+      <Filter>소스 파일\02. Lobby\Scripts\Controllers</Filter>
     </ClCompile>
     <ClCompile Include="UISetting.cpp">
-      <Filter>소스 파일\01. Lobby\Prefabs\Settings</Filter>
+      <Filter>소스 파일\01. Prefab\Settings</Filter>
     </ClCompile>
     <ClCompile Include="ColliderDebuger.cpp">
-      <Filter>소스 파일\01. Lobby\Prefabs\Debug</Filter>
+      <Filter>소스 파일\01. Prefab\Debug</Filter>
     </ClCompile>
     <ClCompile Include="InGame.cpp">
-      <Filter>소스 파일\02. InGame\Scene</Filter>
+      <Filter>소스 파일\03. InGame\Scene</Filter>
     </ClCompile>
     <ClCompile Include="OptionButtonScript.cpp">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\MainUI</Filter>
+      <Filter>소스 파일\02. Lobby\Scripts\UIScripts\MainUI</Filter>
     </ClCompile>
     <ClCompile Include="QuitButtonScript.cpp">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\MainUI</Filter>
+      <Filter>소스 파일\02. Lobby\Scripts\UIScripts\MainUI</Filter>
     </ClCompile>
     <ClCompile Include="StartButtonScript.cpp">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\MainUI</Filter>
+      <Filter>소스 파일\02. Lobby\Scripts\UIScripts\MainUI</Filter>
     </ClCompile>
     <ClCompile Include="CloseButtonScript.cpp">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\SettingUI</Filter>
+      <Filter>소스 파일\02. Lobby\Scripts\UIScripts\SettingUI</Filter>
     </ClCompile>
     <ClCompile Include="BGMCheckBoxScript.cpp">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\SettingUI</Filter>
+      <Filter>소스 파일\02. Lobby\Scripts\UIScripts\SettingUI</Filter>
     </ClCompile>
     <ClCompile Include="SFXCheckBoxScript.cpp">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\SettingUI</Filter>
+      <Filter>소스 파일\02. Lobby\Scripts\UIScripts\SettingUI</Filter>
     </ClCompile>
     <ClCompile Include="UIBlocker.cpp">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\MainUI</Filter>
+      <Filter>소스 파일\02. Lobby\Scripts\UIScripts\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>소스 파일\03. InGame\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>소스 파일\01. Prefab\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -146,72 +152,78 @@
       <Filter>소스 파일\00. Main</Filter>
     </ClInclude>
     <ClInclude Include="Background1.h">
-      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="Background2.h">
-      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="Ground.h">
-      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="SideWall.h">
-      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="House1.h">
-      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="House2.h">
-      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="Bush.h">
-      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
-      <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="CharacterController.h">
-      <Filter>소스 파일\01. Lobby\Scripts\Controllers</Filter>
+      <Filter>소스 파일\02. Lobby\Scripts\Controllers</Filter>
     </ClInclude>
     <ClInclude Include="UISetting.h">
-      <Filter>소스 파일\01. Lobby\Prefabs\Settings</Filter>
+      <Filter>소스 파일\01. Prefab\Settings</Filter>
     </ClInclude>
     <ClInclude Include="ColliderDebuger.h">
-      <Filter>소스 파일\01. Lobby\Prefabs\Debug</Filter>
+      <Filter>소스 파일\01. Prefab\Debug</Filter>
     </ClInclude>
     <ClInclude Include="InGame.h">
-      <Filter>소스 파일\02. InGame\Scene</Filter>
+      <Filter>소스 파일\03. InGame\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Lobby.h">
-      <Filter>소스 파일\01. Lobby\Prefabs\Scene</Filter>
+      <Filter>소스 파일\02. Lobby\Scene</Filter>
     </ClInclude>
     <ClInclude Include="OptionButtonScript.h">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\MainUI</Filter>
+      <Filter>소스 파일\02. Lobby\Scripts\UIScripts\MainUI</Filter>
     </ClInclude>
     <ClInclude Include="QuitButtonScript.h">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\MainUI</Filter>
+      <Filter>소스 파일\02. Lobby\Scripts\UIScripts\MainUI</Filter>
     </ClInclude>
     <ClInclude Include="StartButtonScript.h">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\MainUI</Filter>
+      <Filter>소스 파일\02. Lobby\Scripts\UIScripts\MainUI</Filter>
     </ClInclude>
     <ClInclude Include="CloseButtonScript.h">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\SettingUI</Filter>
+      <Filter>소스 파일\02. Lobby\Scripts\UIScripts\SettingUI</Filter>
     </ClInclude>
     <ClInclude Include="BGMCheckBoxScript.h">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\SettingUI</Filter>
+      <Filter>소스 파일\02. Lobby\Scripts\UIScripts\SettingUI</Filter>
     </ClInclude>
     <ClInclude Include="SFXCheckBoxScript.h">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\SettingUI</Filter>
+      <Filter>소스 파일\02. Lobby\Scripts\UIScripts\SettingUI</Filter>
     </ClInclude>
     <ClInclude Include="UIBlocker.h">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\MainUI</Filter>
+      <Filter>소스 파일\02. Lobby\Scripts\UIScripts\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraController.h">
+      <Filter>소스 파일\03. InGame\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>소스 파일\01. Prefab\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resources\Shaders\SettingUI.frag">
-      <Filter>소스 파일\01. Lobby\Shaders</Filter>
+      <Filter>소스 파일\02. Lobby\Shaders</Filter>
     </None>
     <None Include="..\Resources\Shaders\SettingUI.vert">
-      <Filter>소스 파일\01. Lobby\Shaders</Filter>
+      <Filter>소스 파일\02. Lobby\Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

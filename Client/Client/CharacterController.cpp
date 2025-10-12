@@ -7,6 +7,8 @@ CharacterController::CharacterController(const string& name) : Super(name)
 	_idleRight = RESOURCE.GetResource<Flipbook>("Character_Idle_right");
 	_walkLeft = RESOURCE.GetResource<Flipbook>("Character_Walk_left");
 	_walkRight = RESOURCE.GetResource<Flipbook>("Character_Walk_right");
+	_chararcterShader = RESOURCE.GetResource<Shader>("CharacterShader");
+	_characterUniformSet = RESOURCE.GetResource<UniformSet>("CharacterUniforms");
 }
 
 void CharacterController::Init()
@@ -32,7 +34,7 @@ void CharacterController::Update()
 	auto flipbookPlayer = static_pointer_cast<FlipbookPlayer>(owner->GetRenderable("CharacterFlipbook"));
 	auto pos = transform->GetPosition();
 
-	if (INPUT.GetKey(Inputs::Key::D))
+	/*if (INPUT.GetKey(Inputs::Key::D))
 	{
 		pos.x += _moveSpeed * TIME.deltaTime;
 		flipbookPlayer->SetFlipbook(_walkRight);
@@ -48,6 +50,43 @@ void CharacterController::Update()
 	{
 		if (_lastDir == Direction::Right) flipbookPlayer->SetFlipbook(_idleRight);
 		else flipbookPlayer->SetFlipbook(_idleLeft);
+	}*/
+
+	if (INPUT.GetKey(Inputs::Key::D))
+	{
+		pos.x += _moveSpeed * TIME.deltaTime;
+		flipbookPlayer->SetFlipbook(_walkRight);
+		_lastDir = Direction::Right;
+	}
+	else if (INPUT.GetKey(Inputs::Key::A))
+	{
+		pos.x -= _moveSpeed * TIME.deltaTime;
+		flipbookPlayer->SetFlipbook(_walkRight); // 좌우 구분 필요 없음
+		_lastDir = Direction::Left;
+	}
+	else
+	{
+		flipbookPlayer->SetFlipbook(_idleRight); // 항상 오른쪽 Flipbook 사용
+	}
+
+	// 좌우 방향에 따른 유니폼 갱신
+	if (_characterUniformSet)
+	{
+		_characterUniformSet->Set("flip", _lastDir == Direction::Left);
+		_characterUniformSet->Apply(_chararcterShader);
+
+#pragma region DEBUG
+		if (_characterUniformSet)
+		{
+			GLuint programID = _chararcterShader->GetShaderProgram(); // Shader 클래스에서 프로그램 ID를 가져오는 함수
+			GLint flipLoc = glGetUniformLocation(programID, "flip");
+			GLint flipValue = 0;
+			glGetUniformiv(programID, flipLoc, &flipValue);
+
+			// 콘솔 출력
+			std::cout << "[DEBUG] flip uniform: " << flipValue << std::endl;
+		}
+#pragma endregion
 	}
 
 	// just moving constraint 

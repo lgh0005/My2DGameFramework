@@ -59,6 +59,22 @@ void Lobby::CreateRenderProperties()
 		RESOURCE.AddResource(_SettingUIShader);
 	}
 
+	// Load Character shader
+	{
+		_CharacterShader = make_shared<Shader>("CharacterShader", "../Resources/Shaders/Character.vert", "../Resources/Shaders/Character.frag");
+		_CharacterShader->Init();
+		_CharacterShader->AddUniform(Uniforms::UNIFORM_MODEL);
+		_CharacterShader->AddUniform(Uniforms::UNIFORM_VIEW);
+		_CharacterShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
+		_CharacterShader->AddUniform(Uniforms::UNIFORM_TEXTURE);
+		_CharacterShader->AddUniform("flip");
+		RESOURCE.AddResource(_CharacterShader);
+
+		_CharacterUniforms = make_shared<UniformSet>("CharacterUniforms");
+		_CharacterUniforms->Set("flip", false);
+		RESOURCE.AddResource(_CharacterUniforms);
+	}
+
 	// Load Main camera
 	{
 		_mainCameraComponent = make_shared<Camera>("MainCameraComponent");
@@ -104,6 +120,11 @@ void Lobby::CreateRenderProperties()
 		_SettingUIRenderPass = make_shared<RenderPass>();
 		_SettingUIRenderPass->SetShader(_SettingUIShader);
 		_SettingUIRenderPass->SetCamera(_uiCameraComponent);
+
+		_CharacterRenderPass = make_shared<RenderPass>();
+		_CharacterRenderPass->SetShader(_CharacterShader);
+		_CharacterRenderPass->SetCamera(_mainCameraComponent);
+		_CharacterRenderPass->SetUniformSet(_CharacterUniforms);
 	}
 }
 
@@ -243,7 +264,7 @@ void Lobby::LoadResources()
 		_background2->SetRenderPass(_textureRenderPass);
 
 		_character = make_shared<Character>();
-		_character->SetRenderPass(_textureRenderPass);
+		_character->SetRenderPass(_CharacterRenderPass);
 
 		_sideWall = make_shared<SideWall>();
 		_sideWall->SetRenderPass(_textureRenderPass);
@@ -488,6 +509,7 @@ void Lobby::CreateSceneContext()
 
 #pragma region PRESENT_RENDER_PASSES
 	RENDER.AddRenderPass(_textureRenderPass);
+	RENDER.AddRenderPass(_CharacterRenderPass);
 	RENDER.AddRenderPass(_uiRenderPass);
 	RENDER.AddRenderPass(_SettingUIRenderPass);
 #pragma endregion

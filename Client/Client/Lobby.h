@@ -18,6 +18,7 @@ class UICheckBox;
 
 #pragma region Resources
 class RenderPass;
+class UniformSet;
 class Shader;
 class Texture;
 class Font;
@@ -70,6 +71,9 @@ private:
 	shared_ptr<Shader> _textShader;
 	shared_ptr<Shader> _SettingUIShader;
 
+	shared_ptr<Shader> _CharacterShader;
+	shared_ptr<UniformSet> _CharacterUniforms;
+
 	/*======================
 	//    Game Cameras    //
 	======================*/
@@ -88,6 +92,7 @@ private:
 	=======================*/
 	shared_ptr<RenderPass> _uiRenderPass;
 	shared_ptr<RenderPass> _textureRenderPass;
+	shared_ptr<RenderPass> _CharacterRenderPass;
 	shared_ptr<RenderPass> _SettingUIRenderPass;
 #pragma endregion
 

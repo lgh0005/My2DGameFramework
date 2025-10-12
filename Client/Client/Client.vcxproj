@@ -136,6 +136,7 @@
     <ClInclude Include="Background2.h" />
     <ClInclude Include="BGMCheckBoxScript.h" />
     <ClInclude Include="Bush.h" />
+    <ClInclude Include="CameraController.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterController.h" />
     <ClInclude Include="CloseButtonScript.h" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Main.h" />
     <ClInclude Include="OptionButtonScript.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="QuitButtonScript.h" />
     <ClInclude Include="SFXCheckBoxScript.h" />
     <ClInclude Include="SideWall.h" />
@@ -161,6 +163,7 @@
     <ClCompile Include="Background2.cpp" />
     <ClCompile Include="BGMCheckBoxScript.cpp" />
     <ClCompile Include="Bush.cpp" />
+    <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharacterController.cpp" />
     <ClCompile Include="CloseButtonScript.cpp" />
@@ -176,6 +179,7 @@
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="QuitButtonScript.cpp" />
     <ClCompile Include="SFXCheckBoxScript.cpp" />
     <ClCompile Include="SideWall.cpp" />

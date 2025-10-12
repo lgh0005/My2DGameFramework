@@ -3,6 +3,8 @@
 
 class BoxCollider;
 
+class UniformSet;
+
 enum class Direction
 {
 	Left,
@@ -30,6 +32,9 @@ private:
 	shared_ptr<Flipbook> _idleRight;
 	shared_ptr<Flipbook> _walkLeft;
 	shared_ptr<Flipbook> _walkRight;
+
+	shared_ptr<Shader> _chararcterShader;
+	shared_ptr< UniformSet> _characterUniformSet;
 
 	bool _isMoving = false;
 	Direction _lastDir = Direction::Right;
