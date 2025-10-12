@@ -1,6 +1,10 @@
 #include "pch.h"
 #include "StartButtonScript.h"
 
+#pragma region Component
+#include "UIBlocker.h"
+#pragma endregion
+
 StartButtonScript::StartButtonScript(const string& name) : Super(name)
 {
 
@@ -8,6 +12,7 @@ StartButtonScript::StartButtonScript(const string& name) : Super(name)
 
 void StartButtonScript::Init()
 {
+#pragma region UI_Event
 	auto self = GetSelf<StartButtonScript>();
 
 	shared_ptr<GameObject> owner;
@@ -42,32 +47,53 @@ void StartButtonScript::Init()
 		UI::UIEventPolicy::Deferred,
 		EMPTY_VEC2, EMPTY_VEC2
 	);
+#pragma endregion
+
+#pragma region UI_Setting
+	shared_ptr<Scene> scene;
+	if (Utils::IsValidPtr(_currentScene, scene) == false) return;
+
+	shared_ptr<GameObject> go = scene->GetGameObject("UIBlocker");
+	_uiBlockerComponent = static_pointer_cast<UIBlocker>(go->GetBehaviour("UIBlocker"));
+#pragma endregion
 }
 
 void StartButtonScript::MouseHovered()
 {
-	if (_sfxPlayFlag)
+	if (_uiBlockerComponent->IsInteractive())
 	{
-		AUDIO.PlaySFX("ButtonSFX");
-		_sfxPlayFlag = false;
-	}
+		if (_sfxPlayFlag)
+		{
+			AUDIO.PlaySFX("ButtonSFX");
+			_sfxPlayFlag = false;
+		}
 
-	_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Select"));
+		_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Select"));
+	}
 }
 
 void StartButtonScript::MouseExit()
 {
-	_sfxPlayFlag = true;
-	_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Normal"));
+	if (_uiBlockerComponent->IsInteractive())
+	{
+		_sfxPlayFlag = true;
+		_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Normal"));
+	}
 }
 
 void StartButtonScript::MouseClickedDeferred()
 {
-	cout << "Start Button : Clicked! Deffered." << endl;
-	SCENE.LoadScene("InGame");
+	if (_uiBlockerComponent->IsInteractive())
+	{
+		cout << "Start Button : Clicked! Deffered." << endl;
+		SCENE.LoadScene("InGame");
+	}
 }
 
 void StartButtonScript::MouseClickedImmediate()
 {
-	AUDIO.PlaySFX("ButtonSFX");
+	if (_uiBlockerComponent->IsInteractive())
+	{
+		AUDIO.PlaySFX("ButtonSFX");
+	}
 }

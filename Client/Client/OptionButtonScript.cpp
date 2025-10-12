@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "OptionButtonScript.h"
+#include "UIBlocker.h"
 
 OptionButtonScript::OptionButtonScript(const string& name) : Super(name)
 {
@@ -56,37 +57,44 @@ void OptionButtonScript::Init()
 	};
 
 	for (auto& name : _settingUIObjectsName) _settingUIObjects.push_back(scene->GetGameObject(name));
+
+	shared_ptr<GameObject> go = scene->GetGameObject("UIBlocker");
+	_uiBlockerComponent = static_pointer_cast<UIBlocker>(go->GetBehaviour("UIBlocker"));
+	_uiBlockerComponent->SetCurrentScene(scene);
 #pragma endregion
 }
 
 void OptionButtonScript::MouseHovered()
 {
-	if (_sfxPlayFlag)
+	if (_uiBlockerComponent->IsInteractive())
 	{
-		AUDIO.PlaySFX("ButtonSFX");
-		_sfxPlayFlag = false;
-	}
+		if (_sfxPlayFlag)
+		{
+			AUDIO.PlaySFX("ButtonSFX");
+			_sfxPlayFlag = false;
+		}
 
-	_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Select"));
+		_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Select"));
+	}
 }
 
 void OptionButtonScript::MouseExit()
 {
-	_sfxPlayFlag = true;
-	_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Normal"));
+	if (_uiBlockerComponent->IsInteractive())
+	{
+		_sfxPlayFlag = true;
+		_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Normal"));
+	}
 }
 
 void OptionButtonScript::MouseClickedDeferred()
 {
 	cout << "Option Button : Clicked! Deffered." << endl;
-
-	shared_ptr<Scene> scene;
-	if (Utils::IsValidPtr(_currentScene, scene) == false) return;
-
 	for (auto& obj : _settingUIObjects) { obj->SetActive(true); }
 }
 
 void OptionButtonScript::MouseClickedImmediate()
 {
 	cout << "Option Button : Clicked! Immediate." << endl;
+	_uiBlockerComponent->SetInteractive(false);
 }

@@ -131,6 +131,9 @@
     <ClCompile Include="SFXCheckBoxScript.cpp">
       <Filter>소스 파일\01. Lobby\Scripts\UIScripts\SettingUI</Filter>
     </ClCompile>
+    <ClCompile Include="UIBlocker.cpp">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\MainUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -198,6 +201,9 @@
     </ClInclude>
     <ClInclude Include="SFXCheckBoxScript.h">
       <Filter>소스 파일\01. Lobby\Scripts\UIScripts\SettingUI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBlocker.h">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\MainUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

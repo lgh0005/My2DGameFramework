@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CloseButtonScript.h"
+#include "UIBlocker.h"
 
 CloseButtonScript::CloseButtonScript(const string& name) : Super(name)
 {
@@ -57,6 +58,9 @@ void CloseButtonScript::Init()
 
 	for (auto& name : _settingUIObjectsName) _settingUIObjects.push_back(scene->GetGameObject(name));
 
+	shared_ptr<GameObject> go = scene->GetGameObject("UIBlocker");
+	_uiBlockerComponent = static_pointer_cast<UIBlocker>(go->GetBehaviour("UIBlocker"));
+	_uiBlockerComponent->SetCurrentScene(scene);
 #pragma endregion
 }
 
@@ -81,4 +85,5 @@ void CloseButtonScript::MouseClickedDeferred()
 void CloseButtonScript::MouseClickedImmediate()
 {
 	cout << "Back Button : Clicked! Immediate." << endl;
+	_uiBlockerComponent->SetInteractive(true);
 }

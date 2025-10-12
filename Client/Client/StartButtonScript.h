@@ -2,6 +2,7 @@
 #include "Engine\IBehaviour.h"
 
 class UIButton;
+class UIBlocker;
 
 class StartButtonScript : public IBehaviour
 {
@@ -13,6 +14,9 @@ public:
 
 public:
 	virtual void Init() override;
+
+private:
+	shared_ptr<UIBlocker> _uiBlockerComponent;
 
 private:
 	bool _sfxPlayFlag = true;

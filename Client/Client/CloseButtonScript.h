@@ -1,6 +1,8 @@
 #pragma once
 #include "Engine\IBehaviour.h"
 
+class UIBlocker;
+
 class CloseButtonScript : public IBehaviour
 {
 	using Super = IBehaviour;
@@ -11,6 +13,9 @@ public:
 
 public:
 	virtual void Init() override;
+
+private:
+	shared_ptr<UIBlocker> _uiBlockerComponent;
 
 private:
 	bool _sfxPlayFlag = true;

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "QuitButtonScript.h"
+#include "UIBlocker.h"
 
 QuitButtonScript::QuitButtonScript(const string& name) : Super(name)
 {
@@ -8,6 +9,7 @@ QuitButtonScript::QuitButtonScript(const string& name) : Super(name)
 
 void QuitButtonScript::Init()
 {
+#pragma region UI_Event
 	auto self = GetSelf<QuitButtonScript>();
 	shared_ptr<GameObject> owner;
 	if (Utils::IsValidPtr<GameObject>(_owner, owner) == false) return;
@@ -41,31 +43,53 @@ void QuitButtonScript::Init()
 		UI::UIEventPolicy::Deferred,
 		EMPTY_VEC2, EMPTY_VEC2
 	);
+#pragma endregion
+
+#pragma region UI_Setting
+	shared_ptr<Scene> scene;
+	if (Utils::IsValidPtr(_currentScene, scene) == false) return;
+
+	shared_ptr<GameObject> go = scene->GetGameObject("UIBlocker");
+	_uiBlockerComponent = static_pointer_cast<UIBlocker>(go->GetBehaviour("UIBlocker"));
+	_uiBlockerComponent->SetCurrentScene(scene);
+#pragma endregion
 }
 
 void QuitButtonScript::MouseHovered()
 {
-	if (_sfxPlayFlag)
+	if (_uiBlockerComponent->IsInteractive())
 	{
-		AUDIO.PlaySFX("ButtonSFX");
-		_sfxPlayFlag = false;
-	}
+		if (_sfxPlayFlag)
+		{
+			AUDIO.PlaySFX("ButtonSFX");
+			_sfxPlayFlag = false;
+		}
 
-	_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Select"));
+		_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Select"));
+	}
 }
 
 void QuitButtonScript::MouseExit()
 {
-	_sfxPlayFlag = true;
-	_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Normal"));
+	if (_uiBlockerComponent->IsInteractive())
+	{
+		_sfxPlayFlag = true;
+		_button->SetTexture(RESOURCE.GetResource<Texture>("Button_Normal"));
+	}
 }
 
 void QuitButtonScript::MouseClickedDeferred()
 {
-	GAME->Quit();
+	if (_uiBlockerComponent->IsInteractive())
+	{
+		GAME->Quit();
+	}
 }
 
 void QuitButtonScript::MouseClickedImmediate()
 {
-	AUDIO.PlaySFX("ButtonSFX");
+	if (_uiBlockerComponent->IsInteractive())
+	{
+		AUDIO.PlaySFX("ButtonSFX");
+	}
 }

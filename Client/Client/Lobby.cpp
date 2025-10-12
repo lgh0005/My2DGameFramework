@@ -11,10 +11,11 @@
 #include "House2.h"
 #include "Bush.h"
 #include "UISetting.h"
-#include "ColliderDebuger.h"
 #pragma endregion
 
 #pragma region Scripts
+#include "UIBlocker.h"
+#include "CharacterController.h"
 #include "StartButtonScript.h"
 #include "OptionButtonScript.h"
 #include "QuitButtonScript.h"
@@ -316,6 +317,23 @@ void Lobby::CreateSceneContext()
 
 	// UI
 	{
+		// UI Blocker
+		{
+			_uiBlocker = make_shared<GameObject>("UIBlocker");
+			_uiBlockerTransform = make_shared<Transform>
+				(
+					"DummyTransform",
+					glm::vec3(0.0f, 0.0f, 0.0f),
+					glm::vec3(0.0f, 0.0f, 0.0f),
+					glm::vec3(1.0f, 1.0f, 1.0f)
+				);
+			_uiBlocker->SetTransform(_uiBlockerTransform);
+			_uiBlockerScript = make_shared<UIBlocker>("UIBlocker");
+			_uiBlockerScript->SetCurrentScene(shared_from_this());
+			_uiBlocker->AddBehaviour(_uiBlockerScript);
+			_gameObjects.push_back(_uiBlocker);
+		}
+
 		// Title Text #1
 		{
 			_gameTitleTextTexture1 = make_shared<UIText>("Title1", _uiCameraComponent, _gameTitleText1);
@@ -377,6 +395,7 @@ void Lobby::CreateSceneContext()
 			_uiRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_buttonText1Texture));
 			_buttonScript1 = make_shared<StartButtonScript>("StartButtonScript");
 			_buttonGameObject1->AddBehaviour(_buttonScript1);
+			_buttonScript1->SetCurrentScene(shared_from_this());
 			_gameObjects.push_back(_buttonGameObject1);
 		}
 
@@ -408,6 +427,7 @@ void Lobby::CreateSceneContext()
 			_buttonScript2 = make_shared<OptionButtonScript>("OptionButtonScript");
 			_buttonScript2->SetCurrentScene(shared_from_this());
 			_buttonGameObject2->AddBehaviour(_buttonScript2);
+			_buttonScript2->SetCurrentScene(shared_from_this());
 			_gameObjects.push_back(_buttonGameObject2);
 		}
 
@@ -438,6 +458,7 @@ void Lobby::CreateSceneContext()
 			_uiRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_buttonText3Texture));
 			_buttonScript3 = make_shared<QuitButtonScript>("QuitButtonScript");
 			_buttonGameObject3->AddBehaviour(_buttonScript3);
+			_buttonScript3->SetCurrentScene(shared_from_this());
 			_gameObjects.push_back(_buttonGameObject3);
 		}
 

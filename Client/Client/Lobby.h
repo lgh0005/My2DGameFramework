@@ -41,6 +41,7 @@ class ColliderDebuger;
 
 #pragma region Scripts
 class CharacterController;
+class UIBlocker;
 class StartButtonScript;
 class OptionButtonScript;
 class QuitButtonScript;
@@ -180,6 +181,11 @@ private:
 	shared_ptr<Font> _buttonText3;
 	shared_ptr<UIText> _buttonText3Texture;
 	shared_ptr<QuitButtonScript> _buttonScript3;
+
+	shared_ptr<GameObject> _uiBlocker;
+	shared_ptr<Transform> _uiBlockerTransform;
+	shared_ptr<UIBlocker> _uiBlockerScript;
+
 #pragma endregion
 
 #pragma region SettingUI

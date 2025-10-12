@@ -153,6 +153,7 @@
     <ClInclude Include="SFXCheckBoxScript.h" />
     <ClInclude Include="SideWall.h" />
     <ClInclude Include="StartButtonScript.h" />
+    <ClInclude Include="UIBlocker.h" />
     <ClInclude Include="UISetting.h" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +180,7 @@
     <ClCompile Include="SFXCheckBoxScript.cpp" />
     <ClCompile Include="SideWall.cpp" />
     <ClCompile Include="StartButtonScript.cpp" />
+    <ClCompile Include="UIBlocker.cpp" />
     <ClCompile Include="UISetting.cpp" />
   </ItemGroup>
   <ItemGroup>
