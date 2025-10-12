@@ -21,9 +21,6 @@
     <Filter Include="소스 파일\02. InGame">
       <UniqueIdentifier>{0f6db938-fdc5-4002-ae62-c733bc7f6512}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Lobby\Scene">
-      <UniqueIdentifier>{634cc2ed-8b32-46e4-8e7d-d2a7b4115dbd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\01. Lobby\Scripts">
       <UniqueIdentifier>{aae42fba-e41d-4be9-9d68-75e51f3ac5c9}</UniqueIdentifier>
     </Filter>
@@ -38,30 +35,6 @@
     </Filter>
     <Filter Include="소스 파일\01. Lobby\Scripts\UIScripts">
       <UniqueIdentifier>{cc154709-16eb-4e0a-b52c-585ccf469acd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\miscellaneous">
-      <UniqueIdentifier>{59e7b3b0-76ff-4ed2-bd96-70690953eab4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\miscellaneous\01. DevScene">
-      <UniqueIdentifier>{447c7fbc-bd2d-49be-a1b9-6beb44619d6e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\miscellaneous\01. DevScene\Scripts">
-      <UniqueIdentifier>{175d065a-1c04-455d-8d08-5d4c16536cc0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\miscellaneous\01. DevScene\Scene">
-      <UniqueIdentifier>{5af2dd72-bae9-4fc4-9ab5-97a48ca04125}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\miscellaneous\01. DevScene\Prefabs">
-      <UniqueIdentifier>{eb8d3636-bf7f-4737-8163-eaa1eaa4fdf2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\miscellaneous\01. DevScene\Shaders">
-      <UniqueIdentifier>{a9e13763-ac80-4e48-99b2-746c1332e2c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\miscellaneous\02. TestScene">
-      <UniqueIdentifier>{c2a11234-f22b-47cb-803c-90691c29ebbf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\miscellaneous\02. TestScene\Scene">
-      <UniqueIdentifier>{c66c4e0d-bd0d-457d-b53e-99a934a6e224}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\01. Lobby\Prefabs\Settings">
       <UniqueIdentifier>{72077592-146a-4e41-8df6-5518f6ca980a}</UniqueIdentifier>
@@ -81,6 +54,15 @@
     <Filter Include="소스 파일\01. Lobby\Shaders">
       <UniqueIdentifier>{4634f118-1724-4a5e-bec6-a88504a45c8d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01. Lobby\Scripts\UIScripts\MainUI">
+      <UniqueIdentifier>{26bcf438-a994-422d-9b5b-d64a62132632}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Lobby\Scripts\UIScripts\SettingUI">
+      <UniqueIdentifier>{23f2c046-a59f-4a60-87b2-8547d3904c09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Lobby\Prefabs\Scene">
+      <UniqueIdentifier>{634cc2ed-8b32-46e4-8e7d-d2a7b4115dbd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -92,26 +74,8 @@
     <ClCompile Include="Launcher.cpp">
       <Filter>소스 파일\00. Main</Filter>
     </ClCompile>
-    <ClCompile Include="DevScene.cpp">
-      <Filter>소스 파일\miscellaneous\01. DevScene\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="example.cpp">
-      <Filter>소스 파일\miscellaneous\01. DevScene\Scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="example2.cpp">
-      <Filter>소스 파일\miscellaneous\01. DevScene\Scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="example3.cpp">
-      <Filter>소스 파일\miscellaneous\01. DevScene\Scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="example1.cpp">
-      <Filter>소스 파일\miscellaneous\01. DevScene\Scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="TestScene.cpp">
-      <Filter>소스 파일\miscellaneous\02. TestScene\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Lobby.cpp">
-      <Filter>소스 파일\01. Lobby\Scene</Filter>
+      <Filter>소스 파일\01. Lobby\Prefabs\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Background1.cpp">
       <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
@@ -140,15 +104,6 @@
     <ClCompile Include="CharacterController.cpp">
       <Filter>소스 파일\01. Lobby\Scripts\Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="StartButtonScript.cpp">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts</Filter>
-    </ClCompile>
-    <ClCompile Include="OptionButtonScript.cpp">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts</Filter>
-    </ClCompile>
-    <ClCompile Include="QuitButtonScript.cpp">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts</Filter>
-    </ClCompile>
     <ClCompile Include="UISetting.cpp">
       <Filter>소스 파일\01. Lobby\Prefabs\Settings</Filter>
     </ClCompile>
@@ -157,6 +112,24 @@
     </ClCompile>
     <ClCompile Include="InGame.cpp">
       <Filter>소스 파일\02. InGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionButtonScript.cpp">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="QuitButtonScript.cpp">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="StartButtonScript.cpp">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\MainUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CloseButtonScript.cpp">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\SettingUI</Filter>
+    </ClCompile>
+    <ClCompile Include="BGMCheckBoxScript.cpp">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\SettingUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SFXCheckBoxScript.cpp">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\SettingUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -168,27 +141,6 @@
     </ClInclude>
     <ClInclude Include="Launcher.h">
       <Filter>소스 파일\00. Main</Filter>
-    </ClInclude>
-    <ClInclude Include="DevScene.h">
-      <Filter>소스 파일\miscellaneous\01. DevScene\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="example.h">
-      <Filter>소스 파일\miscellaneous\01. DevScene\Scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="example2.h">
-      <Filter>소스 파일\miscellaneous\01. DevScene\Scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="example3.h">
-      <Filter>소스 파일\miscellaneous\01. DevScene\Scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="example1.h">
-      <Filter>소스 파일\miscellaneous\01. DevScene\Scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="TestScene.h">
-      <Filter>소스 파일\miscellaneous\02. TestScene\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Lobby.h">
-      <Filter>소스 파일\01. Lobby\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Background1.h">
       <Filter>소스 파일\01. Lobby\Prefabs\Backgrounds</Filter>
@@ -217,15 +169,6 @@
     <ClInclude Include="CharacterController.h">
       <Filter>소스 파일\01. Lobby\Scripts\Controllers</Filter>
     </ClInclude>
-    <ClInclude Include="StartButtonScript.h">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts</Filter>
-    </ClInclude>
-    <ClInclude Include="OptionButtonScript.h">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts</Filter>
-    </ClInclude>
-    <ClInclude Include="QuitButtonScript.h">
-      <Filter>소스 파일\01. Lobby\Scripts\UIScripts</Filter>
-    </ClInclude>
     <ClInclude Include="UISetting.h">
       <Filter>소스 파일\01. Lobby\Prefabs\Settings</Filter>
     </ClInclude>
@@ -234,6 +177,27 @@
     </ClInclude>
     <ClInclude Include="InGame.h">
       <Filter>소스 파일\02. InGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Lobby.h">
+      <Filter>소스 파일\01. Lobby\Prefabs\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionButtonScript.h">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="QuitButtonScript.h">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="StartButtonScript.h">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\MainUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CloseButtonScript.h">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\SettingUI</Filter>
+    </ClInclude>
+    <ClInclude Include="BGMCheckBoxScript.h">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\SettingUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SFXCheckBoxScript.h">
+      <Filter>소스 파일\01. Lobby\Scripts\UIScripts\SettingUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

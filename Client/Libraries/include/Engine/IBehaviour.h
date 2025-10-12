@@ -1,6 +1,8 @@
 #pragma once
 #include "IComponent.h"
 
+class Scene;
+
 class IBehaviour : public IComponent
 {
 	using Super = IComponent;
@@ -10,10 +12,9 @@ public:
 	virtual ~IBehaviour() override = default;
 
 public:
-	template<typename T>
-	shared_ptr<T> GetSelf()
-	{
-		return static_pointer_cast<T>(shared_from_this());
-	}
+	void SetCurrentScene(const shared_ptr<Scene>& scene);
+
+protected:
+	weak_ptr<Scene> _currentScene;
 };
 

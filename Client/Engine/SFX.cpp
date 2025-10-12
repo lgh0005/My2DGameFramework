@@ -16,7 +16,7 @@ SFX::~SFX()
 void SFX::Play(FMOD::ChannelGroup* group)
 {
 	FMOD::Channel* channel = nullptr;
-	AUDIO.GetCoreSystem()->playSound(_sound, nullptr, false, &channel);
+	AUDIO.GetCoreSystem()->playSound(_sound, group, false, &channel);
 	if (group) channel->setChannelGroup(group);
 	_channel = channel;
 }

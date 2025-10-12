@@ -32,3 +32,13 @@ void Scene::ClearPreviousSceneContext()
 	RENDER.Clear();
 	RESOURCE.Clear();
 }
+
+shared_ptr<GameObject> Scene::GetGameObject(const string& name)
+{
+	for (auto obj : _gameObjects)
+	{
+		if (obj->GetName() == name)
+			return obj;
+	}
+	return nullptr;
+}

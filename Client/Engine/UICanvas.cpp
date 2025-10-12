@@ -32,6 +32,10 @@ void UICanvas::Init()
 
 void UICanvas::Render(const shared_ptr<Shader>& shader, const glm::mat4& model, const shared_ptr<Camera>& camera)
 {
+	shared_ptr<GameObject> owner;
+	if (Utils::IsValidPtr(_owner, owner) == false) return;
+	if (owner->GetActive() == false) return;
+
 	for (auto& ui : _uis) 
 		ui->Render(shader, model, camera);
 }

@@ -16,6 +16,7 @@ public:
 public:
 	const string& GetName() { return _name; }
 	void ClearPreviousSceneContext();
+	shared_ptr<GameObject> GetGameObject(const string& name);
 	vector<shared_ptr<GameObject>>& GetGameObjectList() { return _gameObjects; }
 
 protected:

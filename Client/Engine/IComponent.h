@@ -16,6 +16,10 @@ public:
 	virtual void LateUpdate();
 
 public:
+	virtual void OnEnable();
+	virtual void OnDisable();
+
+public:
 	const string& GetName() { return _name; }
 	weak_ptr<GameObject> GetOwner() { return _owner; }
 

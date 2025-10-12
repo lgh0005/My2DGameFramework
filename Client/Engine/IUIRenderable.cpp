@@ -13,5 +13,9 @@ IUIRenderable::IUIRenderable(const string& name, const shared_ptr<Camera>& camer
 
 void IUIRenderable::Render(const shared_ptr<Shader>& shader, const glm::mat4& model, const shared_ptr<Camera>& camera)
 {
+	shared_ptr<GameObject> owner;
+	if (Utils::IsValidPtr(_owner, owner) == false) return;
+	if (owner->GetActive() == false) return;
+
     _texture->Render(shader, model, camera);
 }

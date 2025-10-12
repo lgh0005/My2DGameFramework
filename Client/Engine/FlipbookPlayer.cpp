@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "FlipbookPlayer.h"
+#include "GameObject.h"
 #include "Flipbook.h"
 #include "Shader.h"
 
@@ -16,6 +17,10 @@ void FlipbookPlayer::Awake(const shared_ptr<GameObject>& owner)
 
 void FlipbookPlayer::Render(const shared_ptr<Shader>& shader, const glm::mat4& model, const shared_ptr<Camera>& camera)
 {
+	shared_ptr<GameObject> owner;
+	if (Utils::IsValidPtr(_owner, owner) == false) return;
+	if (owner->GetActive() == false) return;
+
 	_flipbook->Render(shader, model, camera);
 }
 

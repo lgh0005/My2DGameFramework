@@ -41,7 +41,14 @@ public:
 	weak_ptr<GameObject> GetParent() { return _parent; }
 	void SetParent(const shared_ptr<GameObject>& parent) { _parent = parent; }
 
+	// SetActive method
+	void SetActive(bool active);
+	bool GetActive() { return _isActive; }
+	void OnEnable();
+	void OnDisable();
+
 private:
+	bool _isActive = true;
 	const string _name;
 	shared_ptr<Transform> _transform;
 	weak_ptr<GameObject> _parent;

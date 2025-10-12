@@ -133,13 +133,10 @@ private:
 	// SFX
 	shared_ptr<SFX> _lobbySFX;
 
-	// Test
-	shared_ptr<Texture> _test;
-	shared_ptr<ColliderDebuger> _debugger;
-
 	// Settings UI
 	shared_ptr<Texture> _uiPanel;
 	shared_ptr<Texture> _uiToggle;
+	shared_ptr<Texture> _uiToggleSelected;
 	shared_ptr<Texture> _checkIcon;
 	shared_ptr<Texture> _backIcon;
 	shared_ptr<Font> _bgmText;

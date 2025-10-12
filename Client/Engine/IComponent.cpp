@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "IComponent.h"
+#include "GameObject.h"
 
 IComponent::IComponent(const string& name) : _name(name)
 {
@@ -11,3 +12,5 @@ void IComponent::Init() {}
 void IComponent::Update() {}
 void IComponent::FixedUpdate() {}
 void IComponent::LateUpdate() {}
+void IComponent::OnEnable() {}
+void IComponent::OnDisable() {}

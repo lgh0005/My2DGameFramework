@@ -8,6 +8,7 @@ OptionButtonScript::OptionButtonScript(const string& name) : Super(name)
 
 void OptionButtonScript::Init()
 {
+#pragma region UI_Events
 	auto self = GetSelf<OptionButtonScript>();
 	shared_ptr<GameObject> owner;
 	if (Utils::IsValidPtr<GameObject>(_owner, owner) == false) return;
@@ -41,6 +42,21 @@ void OptionButtonScript::Init()
 		UI::UIEventPolicy::Deferred,
 		EMPTY_VEC2, EMPTY_VEC2
 	);
+#pragma endregion
+
+#pragma region UI_Setting
+
+	shared_ptr<Scene> scene;
+	if (Utils::IsValidPtr(_currentScene, scene) == false) return;
+
+	_settingUIObjectsName = 
+	{
+		"SettingUIPanel", "SettingUIText1", "SettingUIText2", "bgmToggle", "sfxToggle",
+		"Check1", "Check2", "SettingClose", "Close", "SettingUI"
+	};
+
+	for (auto& name : _settingUIObjectsName) _settingUIObjects.push_back(scene->GetGameObject(name));
+#pragma endregion
 }
 
 void OptionButtonScript::MouseHovered()
@@ -63,6 +79,11 @@ void OptionButtonScript::MouseExit()
 void OptionButtonScript::MouseClickedDeferred()
 {
 	cout << "Option Button : Clicked! Deffered." << endl;
+
+	shared_ptr<Scene> scene;
+	if (Utils::IsValidPtr(_currentScene, scene) == false) return;
+
+	for (auto& obj : _settingUIObjects) { obj->SetActive(true); }
 }
 
 void OptionButtonScript::MouseClickedImmediate()

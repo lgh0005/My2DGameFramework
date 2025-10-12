@@ -67,6 +67,8 @@ void GameObject::FixedUpdate()
 
 void GameObject::Update()
 {
+	if (!_isActive) return;
+
 	// Update component, renderables, Behaviours
 	for (auto& component : _components) component->Update();
 	for (auto& renderable : _renderables) renderable->Update();
@@ -75,9 +77,38 @@ void GameObject::Update()
 
 void GameObject::LateUpdate()
 {
+	if (!_isActive) return;
+
 	// LateUpdate Transform, component, renderables, Behaviours
 	_transform->LateUpdate();
 	for (auto& component : _components) component->LateUpdate();
 	for (auto& renderable : _renderables) renderable->LateUpdate();
 	for (auto& behaviour : _behaviours) behaviour->LateUpdate();
+}
+
+void GameObject::SetActive(bool active)
+{
+	if (_isActive == active) return;
+	_isActive = active;
+
+	if (_transform == nullptr) return;
+
+	if (_isActive) OnEnable();
+	else OnDisable();
+}
+
+void GameObject::OnEnable()
+{
+	_transform->OnEnable();
+	for (auto& component : _components) component->OnEnable();
+	for (auto& renderable : _renderables) renderable->OnEnable();
+	for (auto& behaviour : _behaviours) behaviour->OnEnable();
+}
+
+void GameObject::OnDisable()
+{
+	_transform->OnDisable();
+	for (auto& component : _components) component->OnDisable();
+	for (auto& renderable : _renderables) renderable->OnDisable();
+	for (auto& behaviour : _behaviours) behaviour->OnDisable();
 }

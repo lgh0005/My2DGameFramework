@@ -15,7 +15,6 @@
 #pragma endregion
 
 #pragma region Scripts
-#include "example2.h"
 #include "StartButtonScript.h"
 #include "OptionButtonScript.h"
 #include "QuitButtonScript.h"
@@ -109,15 +108,6 @@ void Lobby::CreateRenderProperties()
 
 void Lobby::LoadResources()
 {
-	// For Debug
-	{
-		_test = make_shared<Texture>("TEST", "../Resources/Images/debug.png");
-		_test->Init();
-		RESOURCE.AddResource(_test);
-		_debugger = make_shared< ColliderDebuger>();
-		_debugger->SetRenderPass(_textureRenderPass);
-	}
-
 	// Load Resources
 	{
 		// Background
@@ -218,6 +208,10 @@ void Lobby::LoadResources()
 			_uiToggle->Init();
 			RESOURCE.AddResource(_uiToggle);
 
+			_uiToggleSelected = make_shared<Texture>("UIToggleSelected", "../Resources/Images/UIs/toggle_selected.png");
+			_uiToggleSelected->Init();
+			RESOURCE.AddResource(_uiToggleSelected);
+
 			_checkIcon = make_shared<Texture>("UICheck", "../Resources/Images/UIs/check.png");
 			_checkIcon->Init();
 			RESOURCE.AddResource(_checkIcon);
@@ -308,15 +302,16 @@ void Lobby::CreateSceneContext()
 		_gameObjects.push_back(ground_2);
 
 		auto sideWall = _sideWall->Instantiate("SideWall", { -550.0f, 200.0f, 0.0f }, glm::vec3(0.0f), glm::vec3(0.5f, 0.65f, 0.5f));
-		auto col2 = _debugger->Instantiate("wall_col", { -550.0f, 200.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 100.0f, 800.0f, 1.0f });
-		_gameObjects.push_back(col2);
 		_gameObjects.push_back(sideWall);
 
 		auto character = _character->Instantiate("Character", { -300.0f, -140.0f, 0.0f });
-		auto col1 = _debugger->Instantiate("char_col", { 0.f, 0.f, 0.f }, { 0.0f, 0.0f, 0.0f }, { 100.0f, 200.0f, 1.0f });
-		col1->SetParent(character);
-		_gameObjects.push_back(col1);
 		_gameObjects.push_back(character);
+	}
+
+	// Setting
+	{
+		auto setting = _settingUI->Instantiate("SettingUI", { 0.0f, 0.0f, 0.0f });
+		_gameObjects.push_back(setting);
 	}
 
 	// UI
@@ -370,19 +365,19 @@ void Lobby::CreateSceneContext()
 			_buttonTransform1 = make_shared<Transform>
 				(
 					"ButtonTransform",
-						glm::vec3(0.0f, 60.0f, 0.0f),
-						glm::vec3(0.0f, 0.0f, 0.0f),
-						glm::vec3(1.0f, 1.0f, 1.0f)
-						);
-						_buttonGameObject1 = make_shared<GameObject>("ButtonObject1");
-						_buttonGameObject1->SetTransform(_buttonTransform1);
-						_buttonGameObject1->AddRenderable(static_pointer_cast<IRenderable>(_button1));
-						_buttonGameObject1->AddRenderable(static_pointer_cast<IRenderable>(_buttonText1Texture));
-						_textureRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_button1));
-						_uiRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_buttonText1Texture));
-						_buttonScript1 = make_shared<StartButtonScript>("StartButtonScript");
-						_buttonGameObject1->AddBehaviour(_buttonScript1);
-						_gameObjects.push_back(_buttonGameObject1);
+					glm::vec3(0.0f, 60.0f, 0.0f),
+					glm::vec3(0.0f, 0.0f, 0.0f),
+					glm::vec3(1.0f, 1.0f, 1.0f)
+				);
+			_buttonGameObject1 = make_shared<GameObject>("ButtonObject1");
+			_buttonGameObject1->SetTransform(_buttonTransform1);
+			_buttonGameObject1->AddRenderable(static_pointer_cast<IRenderable>(_button1));
+			_buttonGameObject1->AddRenderable(static_pointer_cast<IRenderable>(_buttonText1Texture));
+			_textureRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_button1));
+			_uiRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_buttonText1Texture));
+			_buttonScript1 = make_shared<StartButtonScript>("StartButtonScript");
+			_buttonGameObject1->AddBehaviour(_buttonScript1);
+			_gameObjects.push_back(_buttonGameObject1);
 		}
 
 		// Button #2
@@ -411,6 +406,7 @@ void Lobby::CreateSceneContext()
 			_textureRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_button2));
 			_uiRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_buttonText2Texture));
 			_buttonScript2 = make_shared<OptionButtonScript>("OptionButtonScript");
+			_buttonScript2->SetCurrentScene(shared_from_this());
 			_buttonGameObject2->AddBehaviour(_buttonScript2);
 			_gameObjects.push_back(_buttonGameObject2);
 		}
@@ -465,12 +461,6 @@ void Lobby::CreateSceneContext()
 			_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_gameTitleTextTexture2));
 			_gameObjects.push_back(_uiCanvasObject);
 		}
-	}
-
-	// Setting
-	{
-		auto setting = _settingUI->Instantiate("SettingUI", { 0.0f, 0.0f, 0.0f });
-		_gameObjects.push_back(setting);
 	}
 
 #pragma endregion

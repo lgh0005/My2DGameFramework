@@ -21,5 +21,11 @@ private:
 	void MouseExit();
 	void MouseClickedDeferred();
 	void MouseClickedImmediate();
+
+#pragma region SETTING_UI
+private:
+	vector<shared_ptr<GameObject>> _settingUIObjects;
+	vector<string> _settingUIObjectsName;
+#pragma endregion
 };
 
