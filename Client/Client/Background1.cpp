@@ -11,6 +11,7 @@ shared_ptr<GameObject> Background1::Instantiate(const string& name, const glm::v
 	static auto texture = RESOURCE.GetResource<Texture>("Background1");
 
 	auto sprite = make_shared<Sprite>(name, texture);
+	sprite->SetParallaxFactor(0.92f);
 	background->AddRenderable(static_pointer_cast<IRenderable>(sprite));
 
 	if (_renderPass == nullptr) return nullptr;

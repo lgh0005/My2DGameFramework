@@ -11,6 +11,5 @@ public:
 		outPtr = weakPtr.lock();
 		return outPtr != nullptr;
 	}
-
 };
 

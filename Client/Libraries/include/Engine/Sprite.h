@@ -14,7 +14,11 @@ public:
 public:
 	virtual void Render(const shared_ptr<Shader>& shader, const glm::mat4& model, const shared_ptr<Camera>& camera) override;
 
+public:
+	void SetParallaxFactor(float value) { _parallaxFactor = value; }
+
 private:
 	shared_ptr<ITexture> _texture;
+	float _parallaxFactor = 1.0f;
 };
 

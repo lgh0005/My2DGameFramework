@@ -12,4 +12,3 @@ public:
 		const glm::vec3& scale = glm::vec3(1.0f)
 	) override;
 };
-

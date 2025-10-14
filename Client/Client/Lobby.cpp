@@ -153,18 +153,8 @@ void Lobby::LoadResources()
 				_characterIdleRightFlipbook->Init();
 				RESOURCE.AddResource(_characterIdleRightFlipbook);
 
-				FlipbookInfo info2{ 1, 8, 0, 0, 7, 16.0f, true, true };
-				_characterIdleLeftFlipbook = make_shared<Flipbook>("Character_Idle_left", "../Resources/Images/Flipbooks/Player_normal/FB_Player_idle_left.png", info2);
-				_characterIdleLeftFlipbook->Init();
-				RESOURCE.AddResource(_characterIdleLeftFlipbook);
-
-				FlipbookInfo info3{ 1, 8, 0, 0, 7, 16.0f, true, true };
-				_characterWalkLeftFlipbook = make_shared<Flipbook>("Character_Walk_right", "../Resources/Images/Flipbooks/Player_normal/FB_Player_walk_right.png", info3);
-				_characterWalkLeftFlipbook->Init();
-				RESOURCE.AddResource(_characterWalkLeftFlipbook);
-
 				FlipbookInfo info4{ 1, 8, 0, 0, 7, 16.0f, true, true };
-				_characterWalkRightFlipbook = make_shared<Flipbook>("Character_Walk_left", "../Resources/Images/Flipbooks/Player_normal/FB_Player_walk_left.png", info4);
+				_characterWalkRightFlipbook = make_shared<Flipbook>("Character_Walk_right", "../Resources/Images/Flipbooks/Player_normal/FB_Player_walk_right.png", info4);
 				_characterWalkRightFlipbook->Init();
 				RESOURCE.AddResource(_characterWalkRightFlipbook);
 			}

@@ -11,9 +11,7 @@ shared_ptr<GameObject> Character::Instantiate(const string& name, const glm::vec
 	auto transform = make_shared<Transform>(name, position, rotation, scale);
 	character->SetTransform(transform);
 
-	static auto shader = RESOURCE.GetResource<Shader>("TextureShader");
 	static auto flipbook = RESOURCE.GetResource<Flipbook>("Character_Idle_right");
-	static auto texture = RESOURCE.GetResource<Texture>("Test");
 
 	auto flipbookPlayer = make_shared<FlipbookPlayer>("CharacterFlipbook", flipbook);
 	character->AddRenderable(static_pointer_cast<IRenderable>(flipbookPlayer));

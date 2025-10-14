@@ -135,6 +135,9 @@
     <ClInclude Include="Background1.h" />
     <ClInclude Include="Background2.h" />
     <ClInclude Include="BGMCheckBoxScript.h" />
+    <ClInclude Include="Building1.h" />
+    <ClInclude Include="Building2.h" />
+    <ClInclude Include="Building3.h" />
     <ClInclude Include="Bush.h" />
     <ClInclude Include="CameraController.h" />
     <ClInclude Include="Character.h" />
@@ -144,6 +147,7 @@
     <ClInclude Include="Ground.h" />
     <ClInclude Include="House1.h" />
     <ClInclude Include="House2.h" />
+    <ClInclude Include="House3.h" />
     <ClInclude Include="InGame.h" />
     <ClInclude Include="Launcher.h" />
     <ClInclude Include="Lobby.h" />
@@ -151,17 +155,24 @@
     <ClInclude Include="OptionButtonScript.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerController.h" />
     <ClInclude Include="QuitButtonScript.h" />
     <ClInclude Include="SFXCheckBoxScript.h" />
     <ClInclude Include="SideWall.h" />
     <ClInclude Include="StartButtonScript.h" />
+    <ClInclude Include="Tree1.h" />
+    <ClInclude Include="Tree2.h" />
     <ClInclude Include="UIBlocker.h" />
+    <ClInclude Include="UIPlayerHUD.h" />
     <ClInclude Include="UISetting.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Background1.cpp" />
     <ClCompile Include="Background2.cpp" />
     <ClCompile Include="BGMCheckBoxScript.cpp" />
+    <ClCompile Include="Building1.cpp" />
+    <ClCompile Include="Building2.cpp" />
+    <ClCompile Include="Building3.cpp" />
     <ClCompile Include="Bush.cpp" />
     <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -171,6 +182,7 @@
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="House1.cpp" />
     <ClCompile Include="House2.cpp" />
+    <ClCompile Include="House3.cpp" />
     <ClCompile Include="InGame.cpp" />
     <ClCompile Include="Launcher.cpp" />
     <ClCompile Include="Lobby.cpp" />
@@ -180,11 +192,15 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="QuitButtonScript.cpp" />
     <ClCompile Include="SFXCheckBoxScript.cpp" />
     <ClCompile Include="SideWall.cpp" />
     <ClCompile Include="StartButtonScript.cpp" />
+    <ClCompile Include="Tree1.cpp" />
+    <ClCompile Include="Tree2.cpp" />
     <ClCompile Include="UIBlocker.cpp" />
+    <ClCompile Include="UIPlayerHUD.cpp" />
     <ClCompile Include="UISetting.cpp" />
   </ItemGroup>
   <ItemGroup>

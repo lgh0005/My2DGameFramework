@@ -3,9 +3,7 @@
 
 CharacterController::CharacterController(const string& name) : Super(name)
 {
-	_idleLeft = RESOURCE.GetResource<Flipbook>("Character_Idle_left");
 	_idleRight = RESOURCE.GetResource<Flipbook>("Character_Idle_right");
-	_walkLeft = RESOURCE.GetResource<Flipbook>("Character_Walk_left");
 	_walkRight = RESOURCE.GetResource<Flipbook>("Character_Walk_right");
 	_chararcterShader = RESOURCE.GetResource<Shader>("CharacterShader");
 	_characterUniformSet = RESOURCE.GetResource<UniformSet>("CharacterUniforms");
@@ -13,86 +11,56 @@ CharacterController::CharacterController(const string& name) : Super(name)
 
 void CharacterController::Init()
 {
-	auto self = GetSelf< CharacterController>();
+	auto self = GetSelf<CharacterController>();
 
 	shared_ptr<GameObject> owner;
 	if (Utils::IsValidPtr<GameObject>(_owner, owner) == false) return;
 
+	// Get transform
+	_ownerTransform = owner->GetTransform();
+
+	// Get collider
 	_collider = static_pointer_cast<BoxCollider>(owner->GetComponent("PlayerCollider"));
 	_collider->SetCollisionEnterCallback
 	(
 		[self](const shared_ptr<BoxCollider>& other) { self->OnCollisionEnter(other); }
 	);
+
+	// Get FlipbookPlayer
+	_CharacterFlipbookPlayer = static_pointer_cast<FlipbookPlayer>(owner->GetRenderable("CharacterFlipbook"));
 }
 
 void CharacterController::Update()
 {
-	shared_ptr<GameObject> owner;
-	if (Utils::IsValidPtr(_owner, owner) == false) return;
-
-	auto transform = owner->GetTransform();
-	auto flipbookPlayer = static_pointer_cast<FlipbookPlayer>(owner->GetRenderable("CharacterFlipbook"));
-	auto pos = transform->GetPosition();
-
-	/*if (INPUT.GetKey(Inputs::Key::D))
-	{
-		pos.x += _moveSpeed * TIME.deltaTime;
-		flipbookPlayer->SetFlipbook(_walkRight);
-		_lastDir = Direction::Right;
-	}
-	else if (INPUT.GetKey(Inputs::Key::A))
-	{
-		pos.x -= _moveSpeed * TIME.deltaTime;
-		flipbookPlayer->SetFlipbook(_walkLeft);
-		_lastDir = Direction::Left;
-	}
-	else
-	{
-		if (_lastDir == Direction::Right) flipbookPlayer->SetFlipbook(_idleRight);
-		else flipbookPlayer->SetFlipbook(_idleLeft);
-	}*/
+	auto pos = _ownerTransform->GetPosition();
 
 	if (INPUT.GetKey(Inputs::Key::D))
 	{
 		pos.x += _moveSpeed * TIME.deltaTime;
-		flipbookPlayer->SetFlipbook(_walkRight);
+		_CharacterFlipbookPlayer->SetFlipbook(_walkRight);
 		_lastDir = Direction::Right;
 	}
 	else if (INPUT.GetKey(Inputs::Key::A))
 	{
 		pos.x -= _moveSpeed * TIME.deltaTime;
-		flipbookPlayer->SetFlipbook(_walkRight); // 좌우 구분 필요 없음
+		_CharacterFlipbookPlayer->SetFlipbook(_walkRight);
 		_lastDir = Direction::Left;
 	}
 	else
 	{
-		flipbookPlayer->SetFlipbook(_idleRight); // 항상 오른쪽 Flipbook 사용
+		_CharacterFlipbookPlayer->SetFlipbook(_idleRight);
 	}
 
-	// 좌우 방향에 따른 유니폼 갱신
 	if (_characterUniformSet)
 	{
 		_characterUniformSet->Set("flip", _lastDir == Direction::Left);
 		_characterUniformSet->Apply(_chararcterShader);
-
-#pragma region DEBUG
-		if (_characterUniformSet)
-		{
-			GLuint programID = _chararcterShader->GetShaderProgram(); // Shader 클래스에서 프로그램 ID를 가져오는 함수
-			GLint flipLoc = glGetUniformLocation(programID, "flip");
-			GLint flipValue = 0;
-			glGetUniformiv(programID, flipLoc, &flipValue);
-
-			// 콘솔 출력
-			std::cout << "[DEBUG] flip uniform: " << flipValue << std::endl;
-		}
-#pragma endregion
 	}
 
 	// just moving constraint 
 	if (pos.x >= _moveXRange) pos.x = _moveXRange;
 
-	transform->SetPosition(pos);
+	_ownerTransform->SetPosition(pos);
 }
 
 void CharacterController::OnCollisionEnter(const shared_ptr<BoxCollider>& other)
