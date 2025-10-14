@@ -21,6 +21,7 @@ namespace Inputs
         A = SDL_SCANCODE_A,
         S = SDL_SCANCODE_S,
         D = SDL_SCANCODE_D,
+        E = SDL_SCANCODE_E,
         Right = SDL_SCANCODE_RIGHT,
         Left = SDL_SCANCODE_LEFT,
         Down = SDL_SCANCODE_DOWN,

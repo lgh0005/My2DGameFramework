@@ -16,6 +16,8 @@ void ColliderManager::RemoveColliderComponent(const shared_ptr<BoxCollider>& col
 	);
 }
 
+void ColliderManager::Clear() { _colliders.clear(); }
+
 void ColliderManager::Update()
 {
 	for (int i = 0; i < _colliders.size(); i++)

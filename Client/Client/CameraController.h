@@ -14,4 +14,7 @@ public:
 
 private:
 	float _moveSpeed = 500.0f;
+
+	float _maxMoveDistance = 2400.0f;
+	float _minMoveDistance = -160.0f;
 };

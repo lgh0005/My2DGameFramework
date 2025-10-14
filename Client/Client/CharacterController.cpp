@@ -21,10 +21,7 @@ void CharacterController::Init()
 
 	// Get collider
 	_collider = static_pointer_cast<BoxCollider>(owner->GetComponent("PlayerCollider"));
-	_collider->SetCollisionEnterCallback
-	(
-		[self](const shared_ptr<BoxCollider>& other) { self->OnCollisionEnter(other); }
-	);
+	_collider->SetCollisionEnterCallback([self](const shared_ptr<BoxCollider>& other) { self->OnCollisionEnter(other); } );
 
 	// Get FlipbookPlayer
 	_CharacterFlipbookPlayer = static_pointer_cast<FlipbookPlayer>(owner->GetRenderable("CharacterFlipbook"));
@@ -82,15 +79,13 @@ void CharacterController::OnCollisionEnter(const shared_ptr<BoxCollider>& other)
 	if (_lastDir == Direction::Right)
 	{
 		float maxX = otherPos.x - otherHalf.x - playerHalf.x;
-		if (playerPos.x > maxX)
-			playerPos.x = maxX;
+		if (playerPos.x > maxX) playerPos.x = maxX;
 	}
 	// 왼쪽 이동 중 벽에 충돌
 	else if (_lastDir == Direction::Left)
 	{
 		float minX = otherPos.x + otherHalf.x + playerHalf.x;
-		if (playerPos.x < minX)
-			playerPos.x = minX;
+		if (playerPos.x < minX) playerPos.x = minX;
 	}
 
 	transform->SetPosition(playerPos);

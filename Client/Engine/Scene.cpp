@@ -28,6 +28,7 @@ void Scene::Update()
 void Scene::ClearPreviousSceneContext()
 {
 	_gameObjects.clear();
+	COLLIDER.Clear();
 	AUDIO.Clear();
 	RENDER.Clear();
 	RESOURCE.Clear();

@@ -33,7 +33,9 @@ public:
 	uint32 GetCurrentFrame() const { return _currentFrame; }
 	uint32 GetTotalFrames() const { return _flipbookInfo.endFrame - _flipbookInfo.startFrame + 1; }
 
+
 public:
+	bool IsPlaying() const { return _flipbookInfo.isPlaying; }
 	void Play();
 	void Stop();
 

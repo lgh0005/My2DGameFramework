@@ -19,6 +19,7 @@ public:
 
 public:
 	void SetFlipbook(const shared_ptr<Flipbook>& flipbook) { _flipbook = flipbook; }
+	shared_ptr<Flipbook> GetCurrentFlipbook() { return _flipbook; }
 
 private:
 	shared_ptr<Flipbook> _flipbook;

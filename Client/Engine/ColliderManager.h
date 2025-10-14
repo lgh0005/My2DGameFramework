@@ -15,6 +15,9 @@ public:
 	void AddColliderComponent(const shared_ptr<BoxCollider>& collider);
 	void RemoveColliderComponent(const shared_ptr<BoxCollider>& collider);
 
+public:
+	void Clear();
+
 private:
 	vector<shared_ptr<BoxCollider>> _colliders;
 };

@@ -7,6 +7,7 @@
 FlipbookPlayer::FlipbookPlayer(const string& name, shared_ptr<Flipbook> flipbook)
 	: Super(name), _flipbook(flipbook)
 {
+
 }
 
 void FlipbookPlayer::Awake(const shared_ptr<GameObject>& owner)

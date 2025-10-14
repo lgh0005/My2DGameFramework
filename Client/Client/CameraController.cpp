@@ -23,5 +23,7 @@ void CameraController::Update()
 		pos.x -= _moveSpeed * TIME.deltaTime;
 	}
 
+	pos.x = clamp(pos.x, _minMoveDistance, _maxMoveDistance);
+
 	transform->SetPosition(pos);
 }

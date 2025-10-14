@@ -63,8 +63,11 @@
     <Filter Include="소스 파일\01. Prefab\Player">
       <UniqueIdentifier>{c35157c0-0fd9-4187-bd7b-c2d0fcb717ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Prefab\MainHUD">
-      <UniqueIdentifier>{175f639c-ed12-4b27-aea4-b911bab3b862}</UniqueIdentifier>
+    <Filter Include="소스 파일\01. Prefab\HUD">
+      <UniqueIdentifier>{b34dc5d6-c011-41b5-b3b3-4553b06ce248}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Prefab\Enemy">
+      <UniqueIdentifier>{bd61627b-8c17-4be6-a9c7-dfa356923b86}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -165,7 +168,10 @@
       <Filter>소스 파일\03. InGame\Scripts</Filter>
     </ClCompile>
     <ClCompile Include="UIPlayerHUD.cpp">
-      <Filter>소스 파일\01. Prefab\MainHUD</Filter>
+      <Filter>소스 파일\01. Prefab\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>소스 파일\01. Prefab\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -266,7 +272,10 @@
       <Filter>소스 파일\03. InGame\Scripts</Filter>
     </ClInclude>
     <ClInclude Include="UIPlayerHUD.h">
-      <Filter>소스 파일\01. Prefab\MainHUD</Filter>
+      <Filter>소스 파일\01. Prefab\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>소스 파일\01. Prefab\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

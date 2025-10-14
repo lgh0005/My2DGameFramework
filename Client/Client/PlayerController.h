@@ -9,7 +9,10 @@ enum class Direction
 
 enum class PlayerState
 {
-	// TODO
+	Normal,
+	Gun,
+	Sword,
+	END
 };
 
 class PlayerController : public IBehaviour
@@ -24,10 +27,21 @@ public:
 	virtual void Init() override;
 	virtual void Update() override;
 
+/*==============================
+//     Collide properties     //
+//============================*/
+private:
+	shared_ptr<BoxCollider> _wallCollider;
+	shared_ptr<BoxCollider> _groundCollider;
+	void OnColliderWithWall(const shared_ptr<BoxCollider>& other);
+
 /*=============================
 //     Moving properties     //
 //===========================*/
 private:
+	void MovePlayer();
+	void ChangeWeapon();
+
 	shared_ptr<Shader> _playerShader;
 	shared_ptr< UniformSet> _playerUniformSet;
 
@@ -37,6 +51,18 @@ private:
 	bool _isMoving = false;
 	Direction _lastDir = Direction::Right;
 	float _moveSpeed = 500.0f;
+
+	float _maxMoveDistance = 2100.0f;
+	float _minMoveDistance = -460.0f;
+
+/*=============================
+//     Attack properties     //
+//===========================*/
+private:
+	void Attack();
+	bool _isAttacking = false;
+	int _comboStep = 0;               // 현재 콤보 단계 (0이면 콤보 없음)
+	PlayerState _playerState = PlayerState::Normal;
 
 /*=============================
 //     Player Flipbooks      //
@@ -90,5 +116,9 @@ private:
 	shared_ptr<Flipbook> _sword_walk_r;
 	shared_ptr<Flipbook> _sword_wallslide_r;
 #pragma endregion
+
+	shared_ptr<GameObject> _NoWeaponText;
+	shared_ptr<GameObject> _PistolText;
+	shared_ptr<GameObject> _SwordText;
 };
 

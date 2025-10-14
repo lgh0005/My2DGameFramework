@@ -51,6 +51,10 @@ class UIPlayerHUD;
 class CameraController;
 #pragma endregion
 
+#pragma region Debug
+class ColliderDebuger;
+#pragma endregion
+
 class InGame : public Scene
 {
 	using Super = Scene;
@@ -70,9 +74,10 @@ private:
 	=============================*/
 	shared_ptr<Shader> _textureShader;
 	shared_ptr<Shader> _textShader;
-	shared_ptr<Shader> _uiShader;
 	shared_ptr<Shader> _playerShader;
 	shared_ptr<UniformSet> _playerUniforms;
+	shared_ptr<Shader> _uiShader;
+	shared_ptr<Shader> _debugShader;
 
 	/*======================
 	//    Game Cameras    //
@@ -93,8 +98,9 @@ private:
 	=======================*/
 	shared_ptr<RenderPass> _textRenderPass;
 	shared_ptr<RenderPass> _textureRenderPass;
-	shared_ptr<RenderPass> _uiRenderPass;
 	shared_ptr<RenderPass> _playerRenderpass;
+	shared_ptr<RenderPass> _uiRenderPass;
+	shared_ptr<RenderPass> _deubgRenderPass;
 #pragma endregion
 
 #pragma region NECESSARY_RESOURCES
@@ -194,6 +200,15 @@ private:
 
 #pragma endregion
 
+#pragma region DEBUG
+	shared_ptr<Texture> _debugTexture;
+	shared_ptr<ColliderDebuger> _debugPrf;
+#pragma endregion
+
+#pragma region SCENE_CONTEXT
+	shared_ptr<Player> _player;
+	shared_ptr<UIPlayerHUD> _mainHUD;
+
 #pragma region MAIN_UI
 	shared_ptr<Texture> _healthTexture;
 	shared_ptr<Sprite> _healthSprite;
@@ -211,16 +226,12 @@ private:
 	shared_ptr<Sprite> _healthSprite3;
 
 	shared_ptr<Font> _scoreText;
-	shared_ptr<Font> _noWeaponText;
-	array<shared_ptr<Font>, 11> _numberText;
-
-
-
+	shared_ptr<Font> _normalText;
+	shared_ptr<Font> _pistolText;
+	shared_ptr<Font> _swordText;
+	array<shared_ptr<Font>, 10> _numberText;
 #pragma endregion
 
-#pragma region SCENE_CONTEXT
-	shared_ptr<Player> _player;
-	shared_ptr<UIPlayerHUD> _mainHUD;
 #pragma endregion
 };
 

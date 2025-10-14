@@ -19,7 +19,6 @@ private:
 	shared_ptr<UIText> _scoreText;
 	shared_ptr<Transform> _scoreTextTransform;
 
-#pragma region 
 	// Score number
 	shared_ptr<GameObject> _scoreNumTextGameObject1;
 	shared_ptr<UIText> _scoreNumText1;
@@ -34,15 +33,15 @@ private:
 	shared_ptr<UIText> _noWeaponText;
 	shared_ptr<Transform> _noWeaponTextGameTransform;
 
-	// Ammo number
-	shared_ptr<GameObject> _ammoTextGameObject;
-	shared_ptr<UIText> _ammoText;
-	shared_ptr<Transform> _ammoTextTransform;
+	// Pistol text
+	shared_ptr<GameObject> _pistolTextGameObject;
+	shared_ptr<UIText> _pistolText;
+	shared_ptr<Transform> _pistolTextGameTransform;
 
-	// Durability number
-	shared_ptr<GameObject> _durabilityTextGameObject;
-	shared_ptr<UIText> _durabilityText;
-	shared_ptr<Transform> _durabilityTextTransform;
+	// Sword text
+	shared_ptr<GameObject> _swordTextGameObject;
+	shared_ptr<UIText> _swordText;
+	shared_ptr<Transform> _swordGameTransform;
 
 	// Canvas
 	shared_ptr<GameObject> _mainHUDCanvas;

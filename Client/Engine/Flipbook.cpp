@@ -70,8 +70,21 @@ void Flipbook::SetFrame(uint32 frame)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void Flipbook::Play() { _flipbookInfo.isPlaying = true; }
-void Flipbook::Stop() { _flipbookInfo.isPlaying = false; }
+void Flipbook::Play() 
+{
+    _flipbookInfo.isPlaying = true;
+    _currentFrame = _flipbookInfo.startFrame;
+    _elapsedTime = 0.0f;
+    SetFrame(_currentFrame);
+}
+
+void Flipbook::Stop() 
+{
+    _flipbookInfo.isPlaying = false; 
+    _currentFrame = _flipbookInfo.startFrame;
+    _elapsedTime = 0.0f;
+    SetFrame(_currentFrame);
+}
 
 void Flipbook::GetFrameVertices()
 {

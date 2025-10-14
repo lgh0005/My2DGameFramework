@@ -25,6 +25,10 @@
 #include "CameraController.h"
 #pragma endregion
 
+#pragma region FOR_DEBUG
+#include "ColliderDebuger.h";
+#pragma endregion
+
 InGame::InGame(const string& name) : Super(name)
 {
 
@@ -107,7 +111,7 @@ void InGame::LoadResources()
 
 			// Combo #1
 			{
-				FlipbookInfo info{ 1, 5, 0, 0, 4, 16.0f, true, true };
+				FlipbookInfo info{ 1, 5, 0, 0, 4, 20.0f, true, false };
 				_normal_combo_1_r = make_shared<Flipbook>("_normal_combo_1_r", "../Resources/Images/Flipbooks/Player_normal/FB_Player_combo_1_right.png", info);
 				_normal_combo_1_r->Init();
 				RESOURCE.AddResource(_normal_combo_1_r);
@@ -115,7 +119,7 @@ void InGame::LoadResources()
 
 			// Combo #2
 			{
-				FlipbookInfo info{ 1, 9, 0, 0, 8, 16.0f, true, true };
+				FlipbookInfo info{ 1, 9, 0, 0, 8, 30.0f, true, false };
 				_normal_combo_2_r = make_shared<Flipbook>("_normal_combo_2_r", "../Resources/Images/Flipbooks/Player_normal/FB_Player_combo_2_right.png", info);
 				_normal_combo_2_r->Init();
 				RESOURCE.AddResource(_normal_combo_2_r);
@@ -123,7 +127,7 @@ void InGame::LoadResources()
 
 			// Combo #3
 			{
-				FlipbookInfo info{ 1, 9, 0, 0, 8, 16.0f, true, true };
+				FlipbookInfo info{ 1, 5, 0, 0, 4, 20.0f, true, false };
 				_normal_combo_3_r = make_shared<Flipbook>("_normal_combo_3_r", "../Resources/Images/Flipbooks/Player_normal/FB_Player_combo_3_right.png", info);
 				_normal_combo_3_r->Init();
 				RESOURCE.AddResource(_normal_combo_3_r);
@@ -131,7 +135,7 @@ void InGame::LoadResources()
 
 			// Damaged
 			{
-				FlipbookInfo info{ 1, 4, 0, 0, 3, 16.0f, true, true };
+				FlipbookInfo info{ 1, 4, 0, 0, 3, 20.0f, true, false };
 				_normal_damaged_r = make_shared<Flipbook>("_normal_damaged_r", "../Resources/Images/Flipbooks/Player_normal/FB_Player_damaged_right.png", info);
 				_normal_damaged_r->Init();
 				RESOURCE.AddResource(_normal_damaged_r);
@@ -139,7 +143,7 @@ void InGame::LoadResources()
 
 			// Dash
 			{
-				FlipbookInfo info{ 1, 6, 0, 0, 5, 16.0f, true, true };
+				FlipbookInfo info{ 1, 6, 0, 0, 5, 20.0f, true, false };
 				_normal_dash_r = make_shared<Flipbook>("_normal_dash_r", "../Resources/Images/Flipbooks/Player_normal/FB_Player_dash_forward_right.png", info);
 				_normal_dash_r->Init();
 				RESOURCE.AddResource(_normal_dash_r);
@@ -147,7 +151,7 @@ void InGame::LoadResources()
 
 			// Died
 			{
-				FlipbookInfo info{ 1, 10, 0, 0, 9, 16.0f, true, true };
+				FlipbookInfo info{ 1, 10, 0, 0, 9, 20.0f, true, false };
 				_normal_died_r = make_shared<Flipbook>("_normal_died_r", "../Resources/Images/Flipbooks/Player_normal/FB_Player_died_right.png", info);
 				_normal_died_r->Init();
 				RESOURCE.AddResource(_normal_died_r);
@@ -155,7 +159,7 @@ void InGame::LoadResources()
 
 			// Fall
 			{
-				FlipbookInfo info{ 1, 2, 0, 0, 1, 16.0f, true, true };
+				FlipbookInfo info{ 1, 2, 0, 0, 1, 20.0f, true, false };
 				_normal_fall_r = make_shared<Flipbook>("_normal_fall_r", "../Resources/Images/Flipbooks/Player_normal/FB_Player_fall_right.png", info);
 				_normal_fall_r->Init();
 				RESOURCE.AddResource(_normal_fall_r);
@@ -171,7 +175,7 @@ void InGame::LoadResources()
 
 			// Jump
 			{
-				FlipbookInfo info{ 1, 5, 0, 0, 4, 16.0f, true, true };
+				FlipbookInfo info{ 1, 5, 0, 0, 4, 16.0f, true, false };
 				_normal_jump_r = make_shared<Flipbook>("_normal_jump_r", "../Resources/Images/Flipbooks/Player_normal/FB_Player_jump_right.png", info);
 				_normal_jump_r->Init();
 				RESOURCE.AddResource(_normal_jump_r);
@@ -187,7 +191,7 @@ void InGame::LoadResources()
 
 			// Slide
 			{
-				FlipbookInfo info{ 1, 8, 0, 0, 7, 16.0f, true, true };
+				FlipbookInfo info{ 1, 8, 0, 0, 7, 20.0f, true, false };
 				_normal_slide_r = make_shared<Flipbook>("_normal_slide_r", "../Resources/Images/Flipbooks/Player_normal/FB_Player_slide_right.png", info);
 				_normal_slide_r->Init();
 				RESOURCE.AddResource(_normal_slide_r);
@@ -203,7 +207,7 @@ void InGame::LoadResources()
 
 			// Wallslide
 			{
-				FlipbookInfo info{ 1, 2, 0, 0, 1, 16.0f, true, true };
+				FlipbookInfo info{ 1, 2, 0, 0, 1, 20.0f, true, false };
 				_normal_wallslide_r = make_shared<Flipbook>("_normal_wallslide_r", "../Resources/Images/Flipbooks/Player_normal/FB_Player_wallslide_right.png", info);
 				_normal_wallslide_r->Init();
 				RESOURCE.AddResource(_normal_wallslide_r);
@@ -213,7 +217,7 @@ void InGame::LoadResources()
 			#pragma region PLAYER_FLIPBOOK_GUN
 			// Climb
 			{
-				FlipbookInfo info{ 1, 4, 0, 0, 3, 16.0f, true, true };
+				FlipbookInfo info{ 1, 4, 0, 0, 3, 20.0f, true, false };
 				_gun_climb = make_shared<Flipbook>("_gun_climb", "../Resources/Images/Flipbooks/Player_gun/FB_Player_Gun_climb.png", info);
 				_gun_climb->Init();
 				RESOURCE.AddResource(_gun_climb);
@@ -221,7 +225,7 @@ void InGame::LoadResources()
 
 			// Air Attack
 			{
-				FlipbookInfo info{ 1, 2, 0, 0, 1, 16.0f, true, true };
+				FlipbookInfo info{ 1, 2, 0, 0, 1, 20.0f, true, false };
 				_gun_air_attack_r = make_shared<Flipbook>("_gun_air_attack_r", "../Resources/Images/Flipbooks/Player_gun/FB_Player_Gun_air_attack_right.png", info);
 				_gun_air_attack_r->Init();
 				RESOURCE.AddResource(_gun_air_attack_r);
@@ -229,7 +233,7 @@ void InGame::LoadResources()
 
 			// Damage
 			{
-				FlipbookInfo info{ 1, 4, 0, 0, 3, 16.0f, true, true };
+				FlipbookInfo info{ 1, 4, 0, 0, 3, 20.0f, true, false };
 				_gun_damaged_r = make_shared<Flipbook>("_gun_damaged_r", "../Resources/Images/Flipbooks/Player_gun/FB_Player_Gun_damaged_right.png", info);
 				_gun_damaged_r->Init();
 				RESOURCE.AddResource(_gun_damaged_r);
@@ -237,7 +241,7 @@ void InGame::LoadResources()
 
 			// Dash
 			{
-				FlipbookInfo info{ 1, 6, 0, 0, 5, 16.0f, true, true };
+				FlipbookInfo info{ 1, 6, 0, 0, 5, 20.0f, true, false };
 				_gun_dash_r = make_shared<Flipbook>("_gun_dash_r", "../Resources/Images/Flipbooks/Player_gun/FB_Player_Gun_dash_right.png", info);
 				_gun_dash_r->Init();
 				RESOURCE.AddResource(_gun_dash_r);
@@ -245,7 +249,7 @@ void InGame::LoadResources()
 
 			// Died
 			{
-				FlipbookInfo info{ 1, 10, 0, 0, 9, 16.0f, true, true };
+				FlipbookInfo info{ 1, 10, 0, 0, 9, 20.0f, true, false };
 				_gun_died_r = make_shared<Flipbook>("_gun_died_r", "../Resources/Images/Flipbooks/Player_gun/FB_Player_Gun_died_right.png", info);
 				_gun_died_r->Init();
 				RESOURCE.AddResource(_gun_died_r);
@@ -261,7 +265,7 @@ void InGame::LoadResources()
 
 			// Jump
 			{
-				FlipbookInfo info{ 1, 5, 0, 0, 4, 16.0f, true, true };
+				FlipbookInfo info{ 1, 5, 0, 0, 4, 20.0f, true, false };
 				_gun_jump_r = make_shared<Flipbook>("_gun_jump_r", "../Resources/Images/Flipbooks/Player_gun/FB_Player_Gun_jump_right.png", info);
 				_gun_jump_r->Init();
 				RESOURCE.AddResource(_gun_jump_r);
@@ -277,7 +281,7 @@ void InGame::LoadResources()
 
 			// Shot
 			{
-				FlipbookInfo info{ 1, 2, 0, 0, 1, 16.0f, true, true };
+				FlipbookInfo info{ 1, 2, 0, 0, 1, 20.0f, true, false };
 				_gun_shot_r = make_shared<Flipbook>("_gun_shot_r", "../Resources/Images/Flipbooks/Player_gun/FB_Player_Gun_shot_right.png", info);
 				_gun_shot_r->Init();
 				RESOURCE.AddResource(_gun_shot_r);
@@ -285,7 +289,7 @@ void InGame::LoadResources()
 
 			// Slide
 			{
-				FlipbookInfo info{ 1, 8, 0, 0, 7, 16.0f, true, true };
+				FlipbookInfo info{ 1, 8, 0, 0, 7, 20.0f, true, false };
 				_gun_slide_r = make_shared<Flipbook>("_gun_slide_r", "../Resources/Images/Flipbooks/Player_gun/FB_Player_Gun_slide_right.png", info);
 				_gun_slide_r->Init();
 				RESOURCE.AddResource(_gun_slide_r);
@@ -301,7 +305,7 @@ void InGame::LoadResources()
 
 			// Wallslide
 			{
-				FlipbookInfo info{ 1, 2, 0, 0, 1, 16.0f, true, true };
+				FlipbookInfo info{ 1, 2, 0, 0, 1, 20.0f, true, false };
 				_gun_wallslide_r = make_shared<Flipbook>("_gun_wallslide_r", "../Resources/Images/Flipbooks/Player_gun/FB_Player_Gun_wallslide_right.png", info);
 				_gun_wallslide_r->Init();
 				RESOURCE.AddResource(_gun_wallslide_r);
@@ -312,7 +316,7 @@ void InGame::LoadResources()
 
 			// Climb
 			{
-				FlipbookInfo info{ 1, 4, 0, 0, 3, 16.0f, true, true };
+				FlipbookInfo info{ 1, 4, 0, 0, 3, 20.0f, true, false };
 				_sword_climb = make_shared<Flipbook>("_sword_climb", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_climb.png", info);
 				_sword_climb->Init();
 				RESOURCE.AddResource(_sword_climb);
@@ -320,123 +324,137 @@ void InGame::LoadResources()
 
 			// Air Attack
 			{
-				FlipbookInfo info{ 1, 2, 0, 0, 1, 16.0f, true, true };
+				FlipbookInfo info{ 1, 2, 0, 0, 1, 20.0f, true, false };
 				_sword_air_attack_r = make_shared<Flipbook>("_sword_air_attack_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_air_attack_right.png", info);
 				_sword_air_attack_r->Init();
 				RESOURCE.AddResource(_sword_air_attack_r);
 			}
 
-// Combo #1
-{
-	FlipbookInfo info{ 1, 4, 0, 0, 3, 16.0f, true, true };
-	_sword_combo_1_r = make_shared<Flipbook>("_sword_combo_1_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_combo_1_right.png", info);
-	_sword_combo_1_r->Init();
-	RESOURCE.AddResource(_sword_combo_1_r);
+			// Combo #1
+			{
+				FlipbookInfo info{ 1, 4, 0, 0, 3, 20.0f, true, false };
+				_sword_combo_1_r = make_shared<Flipbook>("_sword_combo_1_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_combo_1_right.png", info);
+				_sword_combo_1_r->Init();
+				RESOURCE.AddResource(_sword_combo_1_r);
 			}
 
-// Combo #2
-{
-	FlipbookInfo info{ 1, 3, 0, 0, 2, 16.0f, true, true };
-	_sword_combo_2_r = make_shared<Flipbook>("_sword_combo_2_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_combo_2_right.png", info);
-	_sword_combo_2_r->Init();
-	RESOURCE.AddResource(_sword_combo_2_r);
-}
+			// Combo #2
+			{
+				FlipbookInfo info{ 1, 3, 0, 0, 2, 20.0f, true, false };
+				_sword_combo_2_r = make_shared<Flipbook>("_sword_combo_2_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_combo_2_right.png", info);
+				_sword_combo_2_r->Init();
+				RESOURCE.AddResource(_sword_combo_2_r);
+			}
 
-// Combo #3
-{
-	FlipbookInfo info{ 1, 4, 0, 0, 3, 16.0f, true, true };
-	_sword_combo_3_r = make_shared<Flipbook>("_sword_combo_3_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_combo_3_right.png", info);
-	_sword_combo_3_r->Init();
-	RESOURCE.AddResource(_sword_combo_3_r);
-}
+			// Combo #3
+			{
+				FlipbookInfo info{ 1, 4, 0, 0, 3, 20.0f, true, false };
+				_sword_combo_3_r = make_shared<Flipbook>("_sword_combo_3_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_combo_3_right.png", info);
+				_sword_combo_3_r->Init();
+				RESOURCE.AddResource(_sword_combo_3_r);
+			}
 
-// Damage
-{
-	FlipbookInfo info{ 1, 4, 0, 0, 3, 16.0f, true, true };
-	_sword_damaged_r = make_shared<Flipbook>("_sword_damaged_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_damaged_right.png", info);
-	_sword_damaged_r->Init();
-	RESOURCE.AddResource(_sword_damaged_r);
-}
+			// Damage
+			{
+				FlipbookInfo info{ 1, 4, 0, 0, 3, 20.0f, true, false };
+				_sword_damaged_r = make_shared<Flipbook>("_sword_damaged_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_damaged_right.png", info);
+				_sword_damaged_r->Init();
+				RESOURCE.AddResource(_sword_damaged_r);
+			}
 
-// Dash
-{
-	FlipbookInfo info{ 1, 6, 0, 0, 5, 16.0f, true, true };
-	_sword_dash_r = make_shared<Flipbook>("_sword_dash_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_dash_right.png", info);
-	_sword_dash_r->Init();
-	RESOURCE.AddResource(_sword_dash_r);
-}
+			// Dash
+			{
+				FlipbookInfo info{ 1, 6, 0, 0, 5, 20.0f, true, false };
+				_sword_dash_r = make_shared<Flipbook>("_sword_dash_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_dash_right.png", info);
+				_sword_dash_r->Init();
+				RESOURCE.AddResource(_sword_dash_r);
+			}
 
-// Died
-{
-	FlipbookInfo info{ 1, 10, 0, 0, 9, 16.0f, true, true };
-	_sword_died_r = make_shared<Flipbook>("_sword_died_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_died_right.png", info);
-	_sword_died_r->Init();
-	RESOURCE.AddResource(_sword_died_r);
-}
+			// Died
+			{
+				FlipbookInfo info{ 1, 10, 0, 0, 9, 20.0f, true, false };
+				_sword_died_r = make_shared<Flipbook>("_sword_died_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_died_right.png", info);
+				_sword_died_r->Init();
+				RESOURCE.AddResource(_sword_died_r);
+			}
 
-// Idle
-{
-	FlipbookInfo info{ 1, 8, 0, 0, 7, 16.0f, true, true };
-	_sword_idle_r = make_shared<Flipbook>("_sword_died_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_idle_right.png", info);
-	_sword_idle_r->Init();
-	RESOURCE.AddResource(_sword_idle_r);
-}
+			// Idle
+			{
+				FlipbookInfo info{ 1, 8, 0, 0, 7, 16.0f, true, true };
+				_sword_idle_r = make_shared<Flipbook>("_sword_idle_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_idle_right.png", info);
+				_sword_idle_r->Init();
+				RESOURCE.AddResource(_sword_idle_r);
+			}
 
-// Jump
-{
-	FlipbookInfo info{ 1, 5, 0, 0, 4, 16.0f, true, true };
-	_sword_jump_r = make_shared<Flipbook>("_sword_jump_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_jump_right.png", info);
-	_sword_jump_r->Init();
-	RESOURCE.AddResource(_sword_jump_r);
-}
+			// Jump
+			{
+				FlipbookInfo info{ 1, 5, 0, 0, 4, 20.0f, true, false };
+				_sword_jump_r = make_shared<Flipbook>("_sword_jump_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_jump_right.png", info);
+				_sword_jump_r->Init();
+				RESOURCE.AddResource(_sword_jump_r);
+			}
 
-// Run
-{
-	FlipbookInfo info{ 1, 8, 0, 0, 7, 16.0f, true, true };
-	_sword_run_r = make_shared<Flipbook>("_sword_run_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_run_right.png", info);
-	_sword_run_r->Init();
-	RESOURCE.AddResource(_sword_run_r);
-}
+			// Run
+			{
+				FlipbookInfo info{ 1, 8, 0, 0, 7, 16.0f, true, true };
+				_sword_run_r = make_shared<Flipbook>("_sword_run_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_run_right.png", info);
+				_sword_run_r->Init();
+				RESOURCE.AddResource(_sword_run_r);
+			}
 
-// Slide
-{
-	FlipbookInfo info{ 1, 8, 0, 0, 7, 16.0f, true, true };
-	_sword_slide_r = make_shared<Flipbook>("_sword_slide_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_slide_right.png", info);
-	_sword_slide_r->Init();
-	RESOURCE.AddResource(_sword_slide_r);
-}
+			// Slide
+			{
+				FlipbookInfo info{ 1, 8, 0, 0, 7, 20.0f, true, false };
+				_sword_slide_r = make_shared<Flipbook>("_sword_slide_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_slide_right.png", info);
+				_sword_slide_r->Init();
+				RESOURCE.AddResource(_sword_slide_r);
+			}
 
-// Walk
-{
-	FlipbookInfo info{ 1, 8, 0, 0, 7, 16.0f, true, true };
-	_sword_walk_r = make_shared<Flipbook>("_sword_walk_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_walk_right.png", info);
-	_sword_walk_r->Init();
-	RESOURCE.AddResource(_sword_walk_r);
-}
+			// Walk
+			{
+				FlipbookInfo info{ 1, 8, 0, 0, 7, 16.0f, true, true };
+				_sword_walk_r = make_shared<Flipbook>("_sword_walk_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_walk_right.png", info);
+				_sword_walk_r->Init();
+				RESOURCE.AddResource(_sword_walk_r);
+			}
 
-// Wallslide
-{
-	FlipbookInfo info{ 1, 2, 0, 0, 1, 16.0f, true, true };
-	_sword_wallslide_r = make_shared<Flipbook>("_sword_wallslide_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_wallslide_right.png", info);
-	_sword_wallslide_r->Init();
-	RESOURCE.AddResource(_sword_wallslide_r);
-}
-#pragma endregion
+			// Wallslide
+			{
+				FlipbookInfo info{ 1, 2, 0, 0, 1, 20.0f, true, false };
+				_sword_wallslide_r = make_shared<Flipbook>("_sword_wallslide_r", "../Resources/Images/Flipbooks/Player_sword/FB_Player_Sword_wallslide_right.png", info);
+				_sword_wallslide_r->Init();
+				RESOURCE.AddResource(_sword_wallslide_r);
+			}
 		}
 
-		// Main HUD UIs
+		// DEBUG
+		{
+			_debugTexture = make_shared<Texture>("TEST", "../Resources/Images/debug.png");
+			_debugTexture->Init();
+			RESOURCE.AddResource(_debugTexture);
+		}
+
+		// Main UI
 		{
 			_healthTexture = make_shared<Texture>("heart", "../Resources/Images/UIs/health.png");
 			_healthTexture->Init();
 			RESOURCE.AddResource(_healthTexture);
 
-			_scoreText = make_shared<Font>("Score", "../Resources/Fonts/Gamer.ttf", "Score :", 96, Colors::White);
+			_scoreText = make_shared<Font>("Score", "../Resources/Fonts/Gamer.ttf", "Score:", 96, Colors::White);
 			_scoreText->Init();
 			RESOURCE.AddResource(_scoreText);
 
-			_noWeaponText = make_shared<Font>("NoWeapon", "../Resources/Fonts/Gamer.ttf", "No Weapon", 96, Colors::White);
-			_noWeaponText->Init();
-			RESOURCE.AddResource(_noWeaponText);
+			_normalText = make_shared<Font>("Normal", "../Resources/Fonts/Gamer.ttf", "Normal", 96, Colors::White);
+			_normalText->Init();
+			RESOURCE.AddResource(_normalText);
+
+			_pistolText = make_shared<Font>("Pistol", "../Resources/Fonts/Gamer.ttf", "Pistol", 96, Colors::White);
+			_pistolText->Init();
+			RESOURCE.AddResource(_pistolText);
+
+			_swordText = make_shared<Font>("Sword", "../Resources/Fonts/Gamer.ttf", "Sword", 96, Colors::White);
+			_swordText->Init();
+			RESOURCE.AddResource(_swordText);
 
 			for (int i = 0; i <= 9; i++)
 			{
@@ -445,14 +463,6 @@ void InGame::LoadResources()
 				_numberText[i]->Init();
 				RESOURCE.AddResource(_numberText[i]);
 			}
-
-			_numberText[10] = make_shared<Font>("slash", "../Resources/Fonts/Gamer.ttf", "/", 96, Colors::White);
-			_numberText[10]->Init();
-			RESOURCE.AddResource(_numberText[10]);
-
-			_scoreText = make_shared<Font>("Score", "../Resources/Fonts/Gamer.ttf", "Score :", 96, Colors::White);
-			_scoreText->Init();
-			RESOURCE.AddResource(_scoreText);
 		}
 	}
 
@@ -493,16 +503,20 @@ void InGame::LoadResources()
 
 		_tree2 = make_shared<Tree2>();
 		_tree2->SetRenderPass(_textureRenderPass);
+
+		_mainHUD = make_shared<UIPlayerHUD>();
+		_mainHUD->SetCurrentScene(shared_from_this());
+		_mainHUD->SetRenderPass(_uiRenderPass);
+
+		_debugPrf = make_shared<ColliderDebuger>();
+		_debugPrf->SetRenderPass(_deubgRenderPass);
 	}
 
 	// Load GameObject prefabs
 	{
 		_player = make_shared<Player>();
+		_player->SetCurrentScene(shared_from_this());
 		_player->SetRenderPass(_playerRenderpass);
-
-		_mainHUD = make_shared<UIPlayerHUD>();
-		_mainHUD->SetCurrentScene(shared_from_this());
-		_mainHUD->SetRenderPass(_textRenderPass);
 	}
 }
 
@@ -531,18 +545,6 @@ void InGame::CreateRenderProperties()
 		RESOURCE.AddResource(_textShader);
 	}
 
-	// Load hud shaders
-	{
-		_uiShader = make_shared<Shader>("TextShader", "../Resources/Shaders/hud.vert", "../Resources/Shaders/hud.frag");
-		_uiShader->Init();
-		_uiShader->AddUniform(Uniforms::UNIFORM_MODEL);
-		_uiShader->AddUniform(Uniforms::UNIFORM_VIEW);
-		_uiShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
-		_uiShader->AddUniform(Uniforms::UNIFORM_TEXTURE);
-		_uiShader->AddUniform(Uniforms::UNIFORM_COLOR);
-		RESOURCE.AddResource(_uiShader);
-	}
-
 	// Load player shader
 	{
 		_playerShader = make_shared<Shader>("PlayerShader", "../Resources/Shaders/Character.vert", "../Resources/Shaders/Character.frag");
@@ -557,6 +559,28 @@ void InGame::CreateRenderProperties()
 		_playerUniforms = make_shared<UniformSet>("PlayerUniforms");
 		_playerUniforms->Set("flip", false);
 		RESOURCE.AddResource(_playerUniforms);
+	}
+
+	// Load ui shader
+	{
+		_uiShader = make_shared<Shader>("UIShader", "../Resources/Shaders/hud.vert", "../Resources/Shaders/hud.frag");
+		_uiShader->Init();
+		_uiShader->AddUniform(Uniforms::UNIFORM_MODEL);
+		_uiShader->AddUniform(Uniforms::UNIFORM_VIEW);
+		_uiShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
+		_uiShader->AddUniform(Uniforms::UNIFORM_TEXTURE);
+		RESOURCE.AddResource(_uiShader);
+	}
+
+	// DEBUG SHADER
+	{
+		_debugShader = make_shared<Shader>("DEBUG", "../Resources/Shaders/debug.vert", "../Resources/Shaders/debug.frag");
+		_debugShader->Init();
+		_debugShader->AddUniform(Uniforms::UNIFORM_MODEL);
+		_debugShader->AddUniform(Uniforms::UNIFORM_VIEW);
+		_debugShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
+		_debugShader->AddUniform(Uniforms::UNIFORM_TEXTURE);
+		RESOURCE.AddResource(_debugShader);
 	}
 
 	// Load Main camera
@@ -602,15 +626,19 @@ void InGame::CreateRenderProperties()
 		_textureRenderPass = make_shared<RenderPass>();
 		_textureRenderPass->SetShader(_textureShader);
 		_textureRenderPass->SetCamera(_mainCameraComponent);
-
-		_uiRenderPass = make_shared<RenderPass>();
-		_uiRenderPass->SetShader(_uiShader);
-		_uiRenderPass->SetCamera(_uiCameraComponent);
 		
 		_playerRenderpass = make_shared<RenderPass>();
 		_playerRenderpass->SetShader(_playerShader);
 		_playerRenderpass->SetCamera(_mainCameraComponent);
 		_playerRenderpass->SetUniformSet(_playerUniforms);
+
+		_uiRenderPass = make_shared<RenderPass>();
+		_uiRenderPass->SetShader(_uiShader);
+		_uiRenderPass->SetCamera(_uiCameraComponent);
+
+		_deubgRenderPass = make_shared<RenderPass>();
+		_deubgRenderPass->SetShader(_debugShader);
+		_deubgRenderPass->SetCamera(_mainCameraComponent);
 	}
 }
 
@@ -707,11 +735,11 @@ void InGame::CreateSceneContext()
 			auto player = _player->Instantiate("Player", { -300.0f, -140.0f, 0.0f });
 			_gameObjects.push_back(player);
 		}
-
-		// Main HUD
+	
+		// MainHUD
 		{
-			auto mainHUD = _mainHUD->Instantiate("MainHUD", { 0.0f, 0.0f ,0.0f });
-			_gameObjects.push_back(mainHUD);
+			auto hud = _mainHUD->Instantiate("mainHUD", { 0.0f, 0.0f, 0.0f });
+			_gameObjects.push_back(hud);
 
 			_healthObject1 = make_shared<GameObject>("_healthObject1");
 			_healthTransform1 = make_shared<Transform>
@@ -760,8 +788,9 @@ void InGame::CreateSceneContext()
 #pragma region PRESENT_RENDER_PASSES
 	RENDER.AddRenderPass(_textureRenderPass);
 	RENDER.AddRenderPass(_playerRenderpass);
-	RENDER.AddRenderPass(_uiRenderPass);
 	RENDER.AddRenderPass(_textRenderPass);
+	RENDER.AddRenderPass(_uiRenderPass);
+	RENDER.AddRenderPass(_deubgRenderPass);
 #pragma endregion
 
 #pragma region PLAY_BGM
