@@ -22,13 +22,12 @@ void BulletSpawner::SpawnBullet(const glm::vec3& position, Direction dir)
 	if (Utils::IsValidPtr(_currentScene, scene) == false) return;
 
 	shared_ptr<GameObject> bullet = _bulletPrefab->Instantiate("Bullet", position);
-	// cout << bullet->GetTransform()->GetPosition().x << " " << bullet->GetTransform()->GetPosition().y << endl;
+
+	bullet->GetTransform()->UpdateModelMatrix();
+
+	shared_ptr<RenderPass> renderPass = scene->GetRenderPass("_bulletRenderPass");
+	auto renderable = bullet->GetRenderable("BulletSprite");
+	renderPass->AddRenderable(renderable);
 
 	scene->AddGameObject(bullet);
-
-	auto sprite = make_shared<Sprite>("Bullet", RESOURCE.GetResource<Texture>("BulletTexture"));
-	bullet->AddRenderable(static_pointer_cast<IRenderable>(sprite));
-
-	shared_ptr<BulletController> script = static_pointer_cast<BulletController>(bullet->GetBehaviour("BulletController"));
-	script->SetDirection(dir);	
 }

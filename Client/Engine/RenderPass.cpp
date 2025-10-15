@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "GameObject.h"
+#include "Transform.h"
 #include "RenderPass.h"
 #include "Shader.h"
 #include "Camera.h"
@@ -17,7 +18,8 @@ void RenderPass::Render()
 		if (Utils::IsValidPtr(renderable->GetOwner(), owner) == false) continue;
 		if (owner->GetActive() == false) continue;
 
-		renderable->Render(_shader, renderable->GetModel(), _camera);
+		// renderable->Render(_shader, renderable->GetModel(), _camera);
+		renderable->Render(_shader, owner->GetTransform()->GetModel(), _camera);
 	}
 
 	_shader->Unuse();

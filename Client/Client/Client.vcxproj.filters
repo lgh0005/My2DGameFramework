@@ -33,9 +33,6 @@
     <Filter Include="소스 파일\02. Lobby\Scripts\UIScripts\SettingUI">
       <UniqueIdentifier>{23f2c046-a59f-4a60-87b2-8547d3904c09}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. Lobby\Shaders">
-      <UniqueIdentifier>{4634f118-1724-4a5e-bec6-a88504a45c8d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\02. Lobby\Scene">
       <UniqueIdentifier>{634cc2ed-8b32-46e4-8e7d-d2a7b4115dbd}</UniqueIdentifier>
     </Filter>
@@ -316,13 +313,5 @@
     <ClInclude Include="UIPlayerHealth.h">
       <Filter>소스 파일\01. Prefabs\HUD</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Resources\Shaders\SettingUI.frag">
-      <Filter>소스 파일\02. Lobby\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\SettingUI.vert">
-      <Filter>소스 파일\02. Lobby\Shaders</Filter>
-    </None>
   </ItemGroup>
 </Project>

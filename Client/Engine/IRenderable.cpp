@@ -9,20 +9,3 @@ IRenderable::IRenderable(const string& name) : Super(name)
 {
 
 }
-
-void IRenderable::Init()
-{
-    shared_ptr<GameObject> owner;
-    if (Utils::IsValidPtr<GameObject>(_owner, owner) == false)
-    {
-        _model = glm::mat4(1.0f);
-        return;
-    }
-
-    _ownerTransform = owner->GetTransform();
-}
-
-void IRenderable::Update()
-{
-    _model = _ownerTransform->GetModel();
-}
