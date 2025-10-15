@@ -8,13 +8,15 @@
 #pragma comment(lib, "Engine/Release/Engine.lib")
 #endif
 
-#include "Engine/Game.h"
-#include "Engine/Scene.h"
-
 // Launcher
 #include "Launcher.h"
 
 // Game build essestials
+#pragma region Main
+#include "Engine/Game.h"
+#include "Engine/Scene.h"
+#pragma endregion
+
 #pragma region GameObject
 #include "Engine/GameObject.h"
 #pragma endregion
@@ -31,6 +33,7 @@
 #include "Engine/UICanvas.h"
 #include "Engine/UICheckBox.h"
 #include "Engine/BoxCollider.h"
+#include "Engine/RigidBody.h"
 #pragma endregion
 
 #pragma region Resources
@@ -42,3 +45,6 @@
 #include "Engine/BGM.h"
 #include "Engine/SFX.h"
 #pragma endregion
+
+// Misc
+#include "Enums.h"

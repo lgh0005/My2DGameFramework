@@ -1,15 +1,20 @@
 #include "pch.h"
 #include "UIPlayerHUD.h"
+#include "UIPlayerHealth.h"
+
+UIPlayerHUD::UIPlayerHUD(const string& name) : Super(name)
+{
+
+}
 
 shared_ptr<GameObject> UIPlayerHUD::Instantiate(const string& name, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale)
 {
-	// GameObject List
-	shared_ptr<Scene> currentScene;
-	if (Utils::IsValidPtr(_currentScene, currentScene) == false) return nullptr;
-	auto& GameObjectList = currentScene->GetGameObjectList();
+	shared_ptr<Scene> scene;
+	if (Utils::IsValidPtr(_currentScene, scene) == false) return nullptr;
+	auto& GameObjectList = scene->GetGameObjectList();
 
-	// UI Camera
-	shared_ptr<Camera> camera = _renderPass->GetCamera();
+	shared_ptr<GameObject> uiCameraObj = scene->GetGameObject("UICamera");
+	shared_ptr<Camera> uiCamera = static_pointer_cast<Camera>(uiCameraObj->GetComponent("UICameraComponent"));
 
 	// Score
 	{
@@ -17,14 +22,14 @@ shared_ptr<GameObject> UIPlayerHUD::Instantiate(const string& name, const glm::v
 		_scoreTextTransform = make_shared<Transform>
 			(
 				"TitleText1",
-				glm::vec3(150.0f, 360.0f, 0.0f),
+				glm::vec3(200.0f, 360.0f, 0.0f),
 				glm::vec3(0.0f, 0.0f, 0.0f),
 				glm::vec3(1.0f, 1.0f, 1.0f)
 			);
-		_scoreText = make_shared<UIText>("Score", camera, RESOURCE.GetResource<Font>("Score"));
+		_scoreText = make_shared<UIText>("Score", uiCamera, RESOURCE.GetResource<Font>("Score"));
 		_scoreTextGameObject->SetTransform(_scoreTextTransform);
 		_scoreTextGameObject->AddRenderable(_scoreText);
-		_renderPass->AddRenderable(_scoreText);
+		scene->GetRenderPass("_textRenderPass")->AddRenderable(_scoreText);
 		GameObjectList.push_back(_scoreTextGameObject);
 	}
 
@@ -38,21 +43,21 @@ shared_ptr<GameObject> UIPlayerHUD::Instantiate(const string& name, const glm::v
 			auto numTransform = make_shared<Transform>
 			(
 				"ScoreNumTransform_" + to_string(i),
-				glm::vec3(300.0f + i * 50.0f, 360.0f, 0.0f),
+				glm::vec3(350.0f + i * 40.0f, 360.0f, 0.0f),
 				glm::vec3(0.0f),
 				glm::vec3(1.0f)
 			);
 
 			auto numText = make_shared<UIText>
 			(
-				"0", // �ʱⰪ
-				camera,
+				"0",
+				uiCamera,
 				RESOURCE.GetResource<Font>("0")
 			);
 
 			numGameObject->SetTransform(numTransform);
 			numGameObject->AddRenderable(numText);
-			_renderPass->AddRenderable(numText);
+			scene->GetRenderPass("_textRenderPass")->AddRenderable(numText);
 			GameObjectList.push_back(numGameObject);
 
 			_scoreNumTextObjects.push_back(numGameObject);
@@ -71,10 +76,10 @@ shared_ptr<GameObject> UIPlayerHUD::Instantiate(const string& name, const glm::v
 				glm::vec3(0.0f, 0.0f, 0.0f),
 				glm::vec3(1.0f, 1.0f, 1.0f)
 			);
-		_noWeaponText = make_shared<UIText>("Normal", camera, RESOURCE.GetResource<Font>("Normal"));
+		_noWeaponText = make_shared<UIText>("Normal", uiCamera, RESOURCE.GetResource<Font>("Normal"));
 		_noWeaponTextGameObject->SetTransform(_noWeaponTextGameTransform);
 		_noWeaponTextGameObject->AddRenderable(_noWeaponText);
-		_renderPass->AddRenderable(_noWeaponText);
+		scene->GetRenderPass("_textRenderPass")->AddRenderable(_noWeaponText);
 		_noWeaponTextGameObject->SetActive(true);
 		GameObjectList.push_back(_noWeaponTextGameObject);
 	}
@@ -89,10 +94,10 @@ shared_ptr<GameObject> UIPlayerHUD::Instantiate(const string& name, const glm::v
 				glm::vec3(0.0f, 0.0f, 0.0f),
 				glm::vec3(1.0f, 1.0f, 1.0f)
 			);
-		_pistolText = make_shared<UIText>("Pistol", camera, RESOURCE.GetResource<Font>("Pistol"));
+		_pistolText = make_shared<UIText>("Pistol", uiCamera, RESOURCE.GetResource<Font>("Pistol"));
 		_pistolTextGameObject->SetTransform(_pistolTextGameTransform);
 		_pistolTextGameObject->AddRenderable(_pistolText);
-		_renderPass->AddRenderable(_pistolText);
+		scene->GetRenderPass("_textRenderPass")->AddRenderable(_pistolText);
 		_pistolTextGameObject->SetActive(false);
 		GameObjectList.push_back(_pistolTextGameObject);
 	}
@@ -107,18 +112,28 @@ shared_ptr<GameObject> UIPlayerHUD::Instantiate(const string& name, const glm::v
 				glm::vec3(0.0f, 0.0f, 0.0f),
 				glm::vec3(1.0f, 1.0f, 1.0f)
 			);
-		_swordText = make_shared<UIText>("Sword", camera, RESOURCE.GetResource<Font>("Sword"));
+		_swordText = make_shared<UIText>("Sword", uiCamera, RESOURCE.GetResource<Font>("Sword"));
 		_swordTextGameObject->SetTransform(_swordGameTransform);
 		_swordTextGameObject->AddRenderable(_swordText);
-		_renderPass->AddRenderable(_swordText);
+		scene->GetRenderPass("_textRenderPass")->AddRenderable(_swordText);
 		_swordTextGameObject->SetActive(false);
 		GameObjectList.push_back(_swordTextGameObject);
 	}
 
+	// Health Icon
+	shared_ptr<UIPlayerHealth> _playerHealth = make_shared<UIPlayerHealth>("PlayerHealth");
+	_playerHealth->SetCurrentScene(scene);
+	auto icon1 = _playerHealth->Instantiate("health1", { -550.0f, 350.0f, 0.0f });
+	GameObjectList.push_back(icon1);
+	auto icon2 = _playerHealth->Instantiate("health2", { -480.0f, 350.0f, 0.0f });
+	GameObjectList.push_back(icon2);
+	auto icon3 = _playerHealth->Instantiate("health3", { -410.0f, 350.0f, 0.0f });
+	GameObjectList.push_back(icon3);
+
 	// Canvas
 	{
 		_mainHUDCanvas = make_shared<GameObject>("MainHUD");
-		_uiCanvas = make_shared<UICanvas>("MainHUDCanavs", camera, glm::vec2(WindowConfig::GWinSizeX, WindowConfig::GWinSizeY));
+		_uiCanvas = make_shared<UICanvas>("MainHUDCanavs", uiCamera, glm::vec2(WindowConfig::GWinSizeX, WindowConfig::GWinSizeY));
 		_uiCanvasTransform = make_shared<Transform>
 			(
 				"MainHUDUICanvas",
@@ -131,6 +146,7 @@ shared_ptr<GameObject> UIPlayerHUD::Instantiate(const string& name, const glm::v
 		_uiCanvas->AddUIComponent(_pistolText);
 		_uiCanvas->AddUIComponent(_swordText);
 		for (auto& numText : _scoreNumText) _uiCanvas->AddUIComponent(numText);
+
 		_mainHUDCanvas->AddComponent(_uiCanvas);
 	}
 

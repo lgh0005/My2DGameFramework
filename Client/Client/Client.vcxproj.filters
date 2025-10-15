@@ -48,26 +48,32 @@
     <Filter Include="소스 파일\03. InGame\Scripts">
       <UniqueIdentifier>{a2317e25-1f10-469f-ad3b-08a3328fd646}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Prefab">
+    <Filter Include="소스 파일\01. Prefabs">
       <UniqueIdentifier>{b3b331af-d2c0-489f-a18d-c9103210c62c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Prefab\Backgrounds">
+    <Filter Include="소스 파일\01. Prefabs\Backgrounds">
       <UniqueIdentifier>{053ee63e-88c9-4727-b2d2-54e436245c64}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Prefab\Settings">
+    <Filter Include="소스 파일\01. Prefabs\Settings">
       <UniqueIdentifier>{72077592-146a-4e41-8df6-5518f6ca980a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Prefab\Debug">
+    <Filter Include="소스 파일\01. Prefabs\Debug">
       <UniqueIdentifier>{09e42691-7653-427c-9b38-811f280602c4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Prefab\Player">
+    <Filter Include="소스 파일\01. Prefabs\Player">
       <UniqueIdentifier>{c35157c0-0fd9-4187-bd7b-c2d0fcb717ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Prefab\HUD">
+    <Filter Include="소스 파일\01. Prefabs\HUD">
       <UniqueIdentifier>{b34dc5d6-c011-41b5-b3b3-4553b06ce248}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01. Prefab\Enemy">
+    <Filter Include="소스 파일\01. Prefabs\Enemy">
       <UniqueIdentifier>{bd61627b-8c17-4be6-a9c7-dfa356923b86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Prefabs\Bullet">
+      <UniqueIdentifier>{eec9c6e9-8fed-4f0a-a005-57063cd0669a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01. Prefabs\LobbyUI">
+      <UniqueIdentifier>{8363eac1-0472-4688-b5f2-d9bc400272fb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -84,16 +90,16 @@
       <Filter>소스 파일\02. Lobby\Scene</Filter>
     </ClCompile>
     <ClCompile Include="SideWall.cpp">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="CharacterController.cpp">
       <Filter>소스 파일\02. Lobby\Scripts\Controllers</Filter>
     </ClCompile>
     <ClCompile Include="UISetting.cpp">
-      <Filter>소스 파일\01. Prefab\Settings</Filter>
+      <Filter>소스 파일\01. Prefabs\Settings</Filter>
     </ClCompile>
     <ClCompile Include="ColliderDebuger.cpp">
-      <Filter>소스 파일\01. Prefab\Debug</Filter>
+      <Filter>소스 파일\01. Prefabs\Debug</Filter>
     </ClCompile>
     <ClCompile Include="InGame.cpp">
       <Filter>소스 파일\03. InGame\Scene</Filter>
@@ -123,55 +129,70 @@
       <Filter>소스 파일\03. InGame\Scripts</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>소스 파일\01. Prefab\Player</Filter>
+      <Filter>소스 파일\01. Prefabs\Player</Filter>
     </ClCompile>
     <ClCompile Include="Background1.cpp">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="Background2.cpp">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="Building1.cpp">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="Building2.cpp">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="Building3.cpp">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="Bush.cpp">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="Ground.cpp">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="House1.cpp">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="House2.cpp">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="House3.cpp">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="Tree1.cpp">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="Tree2.cpp">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
       <Filter>소스 파일\03. InGame\Scripts</Filter>
     </ClCompile>
     <ClCompile Include="UIPlayerHUD.cpp">
-      <Filter>소스 파일\01. Prefab\HUD</Filter>
+      <Filter>소스 파일\01. Prefabs\HUD</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>소스 파일\01. Prefab\Enemy</Filter>
+      <Filter>소스 파일\01. Prefabs\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletSpawner.cpp">
+      <Filter>소스 파일\03. InGame\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>소스 파일\01. Prefabs\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletController.cpp">
+      <Filter>소스 파일\03. InGame\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="LobbyUI.cpp">
+      <Filter>소스 파일\01. Prefabs\LobbyUI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIPlayerHealth.cpp">
+      <Filter>소스 파일\01. Prefabs\HUD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,16 +206,16 @@
       <Filter>소스 파일\00. Main</Filter>
     </ClInclude>
     <ClInclude Include="SideWall.h">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="CharacterController.h">
       <Filter>소스 파일\02. Lobby\Scripts\Controllers</Filter>
     </ClInclude>
     <ClInclude Include="UISetting.h">
-      <Filter>소스 파일\01. Prefab\Settings</Filter>
+      <Filter>소스 파일\01. Prefabs\Settings</Filter>
     </ClInclude>
     <ClInclude Include="ColliderDebuger.h">
-      <Filter>소스 파일\01. Prefab\Debug</Filter>
+      <Filter>소스 파일\01. Prefabs\Debug</Filter>
     </ClInclude>
     <ClInclude Include="InGame.h">
       <Filter>소스 파일\03. InGame\Scene</Filter>
@@ -227,55 +248,73 @@
       <Filter>소스 파일\03. InGame\Scripts</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>소스 파일\01. Prefab\Player</Filter>
+      <Filter>소스 파일\01. Prefabs\Player</Filter>
     </ClInclude>
     <ClInclude Include="Background1.h">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="Background2.h">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="Building1.h">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="Building2.h">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="Building3.h">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="Bush.h">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="Ground.h">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="House1.h">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="House2.h">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="House3.h">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="Tree1.h">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="Tree2.h">
-      <Filter>소스 파일\01. Prefab\Backgrounds</Filter>
+      <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClInclude>
     <ClInclude Include="PlayerController.h">
       <Filter>소스 파일\03. InGame\Scripts</Filter>
     </ClInclude>
     <ClInclude Include="UIPlayerHUD.h">
-      <Filter>소스 파일\01. Prefab\HUD</Filter>
+      <Filter>소스 파일\01. Prefabs\HUD</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>소스 파일\01. Prefab\Enemy</Filter>
+      <Filter>소스 파일\01. Prefabs\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletSpawner.h">
+      <Filter>소스 파일\03. InGame\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>소스 파일\01. Prefabs\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletController.h">
+      <Filter>소스 파일\03. InGame\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h">
+      <Filter>소스 파일\99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="LobbyUI.h">
+      <Filter>소스 파일\01. Prefabs\LobbyUI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIPlayerHealth.h">
+      <Filter>소스 파일\01. Prefabs\HUD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

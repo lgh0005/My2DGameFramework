@@ -5,6 +5,11 @@ class Enemy : public Prefab
 {
 	using Super = Prefab;
 
+public:
+	Enemy(const string& name);
+	virtual ~Enemy() override = default;
+
+public:
 	virtual shared_ptr<GameObject> Instantiate
 	(
 		const string& name,

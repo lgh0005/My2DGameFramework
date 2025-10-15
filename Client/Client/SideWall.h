@@ -3,6 +3,12 @@
 
 class SideWall : public Prefab
 {
+	using Super = Prefab;
+
+public:
+	SideWall(const string& name);
+	virtual ~SideWall() override = default;
+
 public:
 	virtual shared_ptr<GameObject> Instantiate
 	(

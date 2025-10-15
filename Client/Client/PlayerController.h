@@ -1,11 +1,7 @@
 #pragma once
 #include "Engine\IBehaviour.h"
 
-enum class Direction
-{
-	Left,
-	Right
-};
+class BulletSpawner;
 
 enum class PlayerState
 {
@@ -32,18 +28,22 @@ public:
 //============================*/
 private:
 	shared_ptr<BoxCollider> _wallCollider;
-	shared_ptr<BoxCollider> _groundCollider;
 	void OnColliderWithWall(const shared_ptr<BoxCollider>& other);
+
+	shared_ptr<GameObject> _attackColliderObject1;
+	shared_ptr<GameObject> _attackColliderObject2;
+	void SetAttackCollider();
 
 /*=============================
 //     Moving properties     //
 //===========================*/
 private:
 	void MovePlayer();
+	void JumpPlayer();
 	void ChangeWeapon();
 
 	shared_ptr<Shader> _playerShader;
-	shared_ptr< UniformSet> _playerUniformSet;
+	shared_ptr<UniformSet> _playerUniformSet;
 
 	shared_ptr<FlipbookPlayer> _playerFlipbookPlayer;
 
@@ -55,14 +55,25 @@ private:
 	float _maxMoveDistance = 2100.0f;
 	float _minMoveDistance = -460.0f;
 
+	shared_ptr<RigidBody> _playerRigidBody;
+
 /*=============================
 //     Attack properties     //
 //===========================*/
 private:
 	void Attack();
 	bool _isAttacking = false;
-	int _comboStep = 0;               // 현재 콤보 단계 (0이면 콤보 없음)
+	int _comboStep = 0; 
 	PlayerState _playerState = PlayerState::Normal;
+
+	shared_ptr<GameObject> _bulletSpawnerObject;
+	shared_ptr<BulletSpawner> _bulletSpawner;
+	float _gunCooldown = 1.0f; // 0.3초 간격
+	float _gunTimer = 0.0f;
+
+	void AttackNormal();
+	void AttackSword();
+	void AttackGun();
 
 /*=============================
 //     Player Flipbooks      //

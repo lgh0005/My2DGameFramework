@@ -138,6 +138,9 @@
     <ClInclude Include="Building1.h" />
     <ClInclude Include="Building2.h" />
     <ClInclude Include="Building3.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletController.h" />
+    <ClInclude Include="BulletSpawner.h" />
     <ClInclude Include="Bush.h" />
     <ClInclude Include="CameraController.h" />
     <ClInclude Include="Character.h" />
@@ -152,6 +155,7 @@
     <ClInclude Include="InGame.h" />
     <ClInclude Include="Launcher.h" />
     <ClInclude Include="Lobby.h" />
+    <ClInclude Include="LobbyUI.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="OptionButtonScript.h" />
     <ClInclude Include="pch.h" />
@@ -164,8 +168,10 @@
     <ClInclude Include="Tree1.h" />
     <ClInclude Include="Tree2.h" />
     <ClInclude Include="UIBlocker.h" />
+    <ClInclude Include="UIPlayerHealth.h" />
     <ClInclude Include="UIPlayerHUD.h" />
     <ClInclude Include="UISetting.h" />
+    <ClInclude Include="Enums.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Background1.cpp" />
@@ -174,6 +180,9 @@
     <ClCompile Include="Building1.cpp" />
     <ClCompile Include="Building2.cpp" />
     <ClCompile Include="Building3.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletController.cpp" />
+    <ClCompile Include="BulletSpawner.cpp" />
     <ClCompile Include="Bush.cpp" />
     <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -188,6 +197,7 @@
     <ClCompile Include="InGame.cpp" />
     <ClCompile Include="Launcher.cpp" />
     <ClCompile Include="Lobby.cpp" />
+    <ClCompile Include="LobbyUI.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="OptionButtonScript.cpp" />
     <ClCompile Include="pch.cpp">
@@ -202,6 +212,7 @@
     <ClCompile Include="Tree1.cpp" />
     <ClCompile Include="Tree2.cpp" />
     <ClCompile Include="UIBlocker.cpp" />
+    <ClCompile Include="UIPlayerHealth.cpp" />
     <ClCompile Include="UIPlayerHUD.cpp" />
     <ClCompile Include="UISetting.cpp" />
   </ItemGroup>

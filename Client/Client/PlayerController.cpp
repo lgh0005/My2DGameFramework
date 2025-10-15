@@ -1,5 +1,10 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "PlayerController.h"
+
+#pragma region PREFAB_SCRIPT
+#include "BulletSpawner.h"
+#pragma endregion
+
 
 PlayerController::PlayerController(const string& name) : Super(name)
 {
@@ -77,6 +82,15 @@ void PlayerController::Init()
 	// Get Colliders
 	_wallCollider = static_pointer_cast<BoxCollider>(owner->GetComponent("Player_WallCollider"));
 	_wallCollider->SetCollisionEnterCallback([self](const shared_ptr<BoxCollider>& other) { self->OnColliderWithWall(other); });
+	_attackColliderObject1 = scene->GetGameObject("PlayerAttackArea1");
+	_attackColliderObject2 = scene->GetGameObject("PlayerAttackArea2");
+
+	// Get BulletSpanwer
+	_bulletSpawnerObject = scene->GetGameObject("BulletSpawner");
+	_bulletSpawner = static_pointer_cast<BulletSpawner>(_bulletSpawnerObject->GetBehaviour("BulletSpawner"));
+
+	// Get RigidBody;
+	_playerRigidBody = static_pointer_cast<RigidBody>(owner->GetComponent("PlayerJumper"));
 
 	// Ensure initial state
 	_playerState = PlayerState::Normal;
@@ -90,7 +104,10 @@ void PlayerController::Init()
 
 void PlayerController::Update()
 {
+	if (_gunTimer > 0.0f) _gunTimer -= TIME.deltaTime;
+
 	MovePlayer();
+	JumpPlayer();
 	ChangeWeapon();
 	Attack();
 }
@@ -103,12 +120,12 @@ void PlayerController::ChangeWeapon()
 		_playerState = static_cast<PlayerState>(nextState);
 	}
 
-	// ¸ğµç UI¸¦ ÀÏ´Ü ºñÈ°¼ºÈ­
+	// ëª¨ë“  UIë¥¼ ì¼ë‹¨ ë¹„í™œì„±í™”
 	if (_NoWeaponText)  _NoWeaponText->SetActive(false);
 	if (_PistolText)    _PistolText->SetActive(false);
 	if (_SwordText)     _SwordText->SetActive(false);
 
-	// ÇöÀç »óÅÂ¿¡ ÇØ´çÇÏ´Â UI¸¸ È°¼ºÈ­
+	// í˜„ì¬ ìƒíƒœì— í•´ë‹¹í•˜ëŠ” UIë§Œ í™œì„±í™”
 	switch (_playerState)
 	{
 	case PlayerState::Normal:
@@ -127,9 +144,11 @@ void PlayerController::ChangeWeapon()
 
 void PlayerController::Attack()
 {
+	if (_playerRigidBody->IsGrounded() == false) return;
+
 	shared_ptr<Flipbook> attackFlipbook = nullptr;
 
-	// ÇöÀç ÄŞº¸ ´Ü°è¿¡ µû¶ó °ø°İ Flipbook ¼±ÅÃ
+	// í˜„ì¬ ì½¤ë³´ ë‹¨ê³„ì— ë”°ë¼ ê³µê²© Flipbook ì„ íƒ
 	if (_playerState == PlayerState::Normal)
 	{
 		switch (_comboStep)
@@ -138,6 +157,7 @@ void PlayerController::Attack()
 		case 1: attackFlipbook = _normal_combo_2_r; break;
 		case 2: attackFlipbook = _normal_combo_3_r; break;
 		}
+		// TODO : Damage enemy with normal
 	}
 	else if (_playerState == PlayerState::Sword)
 	{
@@ -147,32 +167,35 @@ void PlayerController::Attack()
 		case 1: attackFlipbook = _sword_combo_2_r; break;
 		case 2: attackFlipbook = _sword_combo_3_r; break;
 		}
+		// TODO : Damage enemy with sword
 	}
 	else if (_playerState == PlayerState::Gun)
 	{
 		attackFlipbook = _gun_shot_r;
+		// TODO : Damage enemy with bullet
+		AttackGun();
 	}
 
 	if (!attackFlipbook) return;
 
 	auto currentFlipbook = _playerFlipbookPlayer->GetCurrentFlipbook();
 
-	// Å¬¸¯ ½Ã ´ÙÀ½ ÄŞº¸ ´Ü°è °ø°İ ½ÇÇà
+	// í´ë¦­ ì‹œ ë‹¤ìŒ ì½¤ë³´ ë‹¨ê³„ ê³µê²© ì‹¤í–‰
 	if (INPUT.MouseClick(Inputs::Mouse::Left) && !_isAttacking)
 	{
 		_playerFlipbookPlayer->SetFlipbook(attackFlipbook);
 		attackFlipbook->Play();
 		_isAttacking = true;
 
-		// ´ÙÀ½ ÄŞº¸ ´Ü°è·Î
-		if (_playerState != PlayerState::Gun) // GunÀº ´ÜÀÏ °ø°İ
+		// ë‹¤ìŒ ì½¤ë³´ ë‹¨ê³„ë¡œ
+		if (_playerState != PlayerState::Gun) // Gunì€ ë‹¨ì¼ ê³µê²©
 			_comboStep = (_comboStep + 1) % 3;
 	}
 
-	// °ø°İ ÁßÀÌ¸é Flipbook ³¡³¯ ¶§±îÁö À¯Áö
+	// ê³µê²© ì¤‘ì´ë©´ Flipbook ëë‚  ë•Œê¹Œì§€ ìœ ì§€
 	if (_isAttacking && !_playerFlipbookPlayer->GetCurrentFlipbook()->IsPlaying())
 	{
-		// °ø°İ ³¡³ª¸é Idle·Î ÀüÈ¯
+		// ê³µê²© ëë‚˜ë©´ Idleë¡œ ì „í™˜
 		shared_ptr<Flipbook> idleFlipbook = nullptr;
 		switch (_playerState)
 		{
@@ -190,7 +213,7 @@ void PlayerController::Attack()
 		_isAttacking = false;
 	}
 
-	// Flip Ã³¸®
+	// Flip ì²˜ë¦¬
 	if (_playerUniformSet)
 	{
 		_playerUniformSet->Set("flip", _lastDir == Direction::Left);
@@ -198,6 +221,39 @@ void PlayerController::Attack()
 	}
 }
 
+void PlayerController::AttackNormal()
+{
+
+}
+
+void PlayerController::AttackSword()
+{
+
+}
+
+void PlayerController::AttackGun()
+{
+	if (INPUT.MouseClick(Inputs::Mouse::Left) && !_isAttacking && _gunTimer <= 0.0f)
+	{
+		shared_ptr<Flipbook> attackFlipbook = _gun_shot_r;
+		if (!attackFlipbook) return;
+
+		_playerFlipbookPlayer->SetFlipbook(attackFlipbook);
+		attackFlipbook->Play();
+		_isAttacking = true;
+
+		// ì´ì•Œ ìƒì„±
+		if (_bulletSpawner)
+		{
+			auto spawnerTransform = _bulletSpawnerObject->GetTransform();
+			spawnerTransform->UpdateModelMatrix();
+			glm::vec3 spawnPos = spawnerTransform->GetWorldPosition();
+			_bulletSpawner->SpawnBullet(spawnPos, _lastDir);
+		}
+
+		_gunTimer = _gunCooldown;
+	}
+}
 
 void PlayerController::OnColliderWithWall(const shared_ptr<BoxCollider>& other)
 {
@@ -210,13 +266,13 @@ void PlayerController::OnColliderWithWall(const shared_ptr<BoxCollider>& other)
 	auto otherPos = otherOwner->GetTransform()->GetPosition();
 	glm::vec2 otherHalf = other->GetSize() * 0.5f;
 
-	// ¿À¸¥ÂÊ ÀÌµ¿ Áß º®¿¡ Ãæµ¹
+	// ì˜¤ë¥¸ìª½ ì´ë™ ì¤‘ ë²½ì— ì¶©ëŒ
 	if (_lastDir == Direction::Right)
 	{
 		float maxX = otherPos.x - otherHalf.x - playerHalf.x;
 		if (playerPos.x > maxX) playerPos.x = maxX;
 	}
-	// ¿ŞÂÊ ÀÌµ¿ Áß º®¿¡ Ãæµ¹
+	// ì™¼ìª½ ì´ë™ ì¤‘ ë²½ì— ì¶©ëŒ
 	else if (_lastDir == Direction::Left)
 	{
 		float minX = otherPos.x + otherHalf.x + playerHalf.x;
@@ -234,7 +290,7 @@ void PlayerController::MovePlayer()
 	if (INPUT.GetKey(Inputs::Key::D)) { pos.x += _moveSpeed * TIME.deltaTime; _lastDir = Direction::Right; isMoving = true; }
 	if (INPUT.GetKey(Inputs::Key::A)) { pos.x -= _moveSpeed * TIME.deltaTime; _lastDir = Direction::Left; isMoving = true; }
 
-	// °ø°İ ÁßÀÌ¸é Flipbook µ¤¾î¾²±â ±İÁö
+	// ê³µê²© ì¤‘ì´ë©´ Flipbook ë®ì–´ì“°ê¸° ê¸ˆì§€
 	if (!_isAttacking)
 	{
 		shared_ptr<Flipbook> flipbook = nullptr;
@@ -267,6 +323,70 @@ void PlayerController::MovePlayer()
 		_playerUniformSet->Apply(_playerShader);
 	}
 
+	SetAttackCollider();
+
 	pos.x = clamp(pos.x, _minMoveDistance, _maxMoveDistance);
 	_ownerTransform->SetPosition(pos);
+}
+
+void PlayerController::JumpPlayer()
+{
+	// ìŠ¤í˜ì´ìŠ¤ ì…ë ¥ ì‹œ ì í”„ ì²˜ë¦¬
+	if (INPUT.GetKeyDown(Inputs::Key::Space))
+	{
+		if (_playerRigidBody->IsGrounded())
+			_playerRigidBody->Jump(1000.0f);
+	}
+
+	// ê³µì¤‘ ìƒíƒœì¼ ë•Œë§Œ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
+	if (!_playerRigidBody->IsGrounded())
+	{
+		shared_ptr<Flipbook> fallFlipbook = nullptr;
+		switch (_playerState)
+		{
+		case PlayerState::Normal: fallFlipbook = _normal_fall_r; break;
+		case PlayerState::Gun:    fallFlipbook = _gun_jump_r;    break;
+		case PlayerState::Sword:  fallFlipbook = _sword_jump_r;  break;
+		}
+
+		if (fallFlipbook && _playerFlipbookPlayer->GetCurrentFlipbook() != fallFlipbook)
+		{
+			_playerFlipbookPlayer->SetFlipbook(fallFlipbook);
+			fallFlipbook->Play();
+		}
+	}
+}
+
+void PlayerController::SetAttackCollider()
+{
+	_attackColliderObject1->SetActive(false);
+	_attackColliderObject2->SetActive(false);
+	_bulletSpawnerObject->SetActive(false);
+
+	shared_ptr<GameObject> activeCollider = nullptr;
+	switch (_playerState)
+	{
+	case PlayerState::Normal:
+		activeCollider = _attackColliderObject1;
+		break;
+	case PlayerState::Sword:
+		activeCollider = _attackColliderObject2;
+		break;
+	case PlayerState::Gun:
+		activeCollider = _bulletSpawnerObject;
+		break;
+	default:
+		break;
+	}
+
+	if (!activeCollider) return;
+
+	// í™œì„±í™”
+	activeCollider->SetActive(true);
+
+	// ë°©í–¥ì— ë”°ë¼ x ìœ„ì¹˜ ë°˜ì „ (local position ê¸°ì¤€)
+	auto attackTransform = activeCollider->GetTransform();
+	glm::vec3 localPos = attackTransform->GetPosition();
+	localPos.x = (_lastDir == Direction::Left) ? -abs(localPos.x) : abs(localPos.x);
+	attackTransform->SetPosition(localPos);
 }

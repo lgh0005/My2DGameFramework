@@ -12,5 +12,3 @@ void IComponent::Init() {}
 void IComponent::Update() {}
 void IComponent::FixedUpdate() {}
 void IComponent::LateUpdate() {}
-void IComponent::OnEnable() {}
-void IComponent::OnDisable() {}

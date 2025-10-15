@@ -7,15 +7,19 @@
 #include "SFXCheckBoxScript.h"
 #pragma endregion
 
+UISetting::UISetting(const string& name) : Super(name)
+{
+
+}
+
 shared_ptr<GameObject> UISetting::Instantiate(const string& name, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale)
 {
-	// GameObject List
-	shared_ptr<Scene> currentScene;
-	if (Utils::IsValidPtr(_currentScene, currentScene) == false) return nullptr;
-	auto& GameObjectList = currentScene->GetGameObjectList();
+	shared_ptr<Scene> scene;
+	if (Utils::IsValidPtr(_currentScene, scene) == false) return nullptr;
+	auto& GameObjectList = scene->GetGameObjectList();
 
-	// UI Camera
-	shared_ptr<Camera> camera = _renderPass->GetCamera();
+	shared_ptr<GameObject> uiCameraObj = scene->GetGameObject("UICamera");
+	shared_ptr<Camera> uiCamera = static_pointer_cast<Camera>(uiCameraObj->GetComponent("UICameraComponent"));
 
 	// Canvas Panel
 	{
@@ -27,10 +31,10 @@ shared_ptr<GameObject> UISetting::Instantiate(const string& name, const glm::vec
 			glm::vec3(0.0f, 0.0f, 0.0f),
 			glm::vec3(1.0f, 1.0f, 1.0f)
 		);
-		_settingUIPanel = make_shared<UIImage>("SettingUIPanel", camera, RESOURCE.GetResource<Texture>("UIPanel"));
+		_settingUIPanel = make_shared<UIImage>("SettingUIPanel", uiCamera, RESOURCE.GetResource<Texture>("UIPanel"));
 		_settingUIPanelGameObject->SetTransform(_settingUIPanelTransform);
 		_settingUIPanelGameObject->AddRenderable(_settingUIPanel);
-		_renderPass->AddRenderable(_settingUIPanel);
+		scene->GetRenderPass("_SettingUIRenderPass")->AddRenderable(_settingUIPanel);
 		_settingUIPanelGameObject->SetActive(false);
 		GameObjectList.push_back(_settingUIPanelGameObject);
 	}
@@ -45,10 +49,10 @@ shared_ptr<GameObject> UISetting::Instantiate(const string& name, const glm::vec
 			glm::vec3(0.0f, 0.0f, 0.0f),
 			glm::vec3(1.0f, 1.0f, 1.0f)
 		);
-		_settingUIText1 = make_shared<UIText>("SettingUIText1", camera, RESOURCE.GetResource<Font>("bgm"));
+		_settingUIText1 = make_shared<UIText>("SettingUIText1", uiCamera, RESOURCE.GetResource<Font>("bgm"));
 		_settingUITextGameObject1->SetTransform(_settingUITextTransform1);
 		_settingUITextGameObject1->AddRenderable(_settingUIText1);
-		_renderPass->AddRenderable(_settingUIText1);
+		scene->GetRenderPass("_SettingUIRenderPass")->AddRenderable(_settingUIText1);
 		_settingUITextGameObject1->SetActive(false);
 		GameObjectList.push_back(_settingUITextGameObject1);
 	}
@@ -63,10 +67,10 @@ shared_ptr<GameObject> UISetting::Instantiate(const string& name, const glm::vec
 				glm::vec3(0.0f, 0.0f, 0.0f),
 				glm::vec3(1.0f, 1.0f, 1.0f)
 			);
-		_settingUIText2 = make_shared<UIText>("SettingUIText2", camera, RESOURCE.GetResource<Font>("sfx"));
+		_settingUIText2 = make_shared<UIText>("SettingUIText2", uiCamera, RESOURCE.GetResource<Font>("sfx"));
 		_settingUITextGameObject2->SetTransform(_settingUITextTransform2);
 		_settingUITextGameObject2->AddRenderable(_settingUIText2);
-		_renderPass->AddRenderable(_settingUIText2);
+		scene->GetRenderPass("_SettingUIRenderPass")->AddRenderable(_settingUIText2);
 		_settingUITextGameObject2->SetActive(false);
 		GameObjectList.push_back(_settingUITextGameObject2);
 	}
@@ -85,12 +89,12 @@ shared_ptr<GameObject> UISetting::Instantiate(const string& name, const glm::vec
 				glm::vec3(0.0f, 0.0f, 0.0f),
 				glm::vec3(1.0f, 1.0f, 1.0f)
 			);
-			_settingUICheckBox1 = make_shared<UICheckBox>("bgmToggle", camera, _settingUIToggleTexture, glm::vec2(100.f, 100.f), Inputs::Mouse::Left);
+			_settingUICheckBox1 = make_shared<UICheckBox>("bgmToggle", uiCamera, _settingUIToggleTexture, glm::vec2(100.f, 100.f), Inputs::Mouse::Left);
 			_settingUIToggleGameObject1->SetTransform(_settingUIToggleTransform1);
 			_settingUIToggleGameObject1->AddRenderable(_settingUICheckBox1);
-			_renderPass->AddRenderable(_settingUICheckBox1);
+			scene->GetRenderPass("_SettingUIRenderPass")->AddRenderable(_settingUICheckBox1);
 			auto _bgmToggleScript = make_shared<BGMCheckBoxScript>("bgmToggleScript");
-			_bgmToggleScript->SetCurrentScene(currentScene);
+			_bgmToggleScript->SetCurrentScene(scene);
 			_settingUIToggleGameObject1->AddBehaviour(_bgmToggleScript);
 			_settingUIToggleGameObject1->SetActive(false);
 			GameObjectList.push_back(_settingUIToggleGameObject1);
@@ -106,12 +110,12 @@ shared_ptr<GameObject> UISetting::Instantiate(const string& name, const glm::vec
 					glm::vec3(0.0f, 0.0f, 0.0f),
 					glm::vec3(1.0f, 1.0f, 1.0f)
 				);
-			_settingUICheckBox2 = make_shared<UICheckBox>("sfxToggle", camera, _settingUIToggleTexture, glm::vec2(100.f, 100.f), Inputs::Mouse::Left);
+			_settingUICheckBox2 = make_shared<UICheckBox>("sfxToggle", uiCamera, _settingUIToggleTexture, glm::vec2(100.f, 100.f), Inputs::Mouse::Left);
 			_settingUIToggleGameObject2->SetTransform(_settingUIToggleTransform2);
 			_settingUIToggleGameObject2->AddRenderable(_settingUICheckBox2);
-			_renderPass->AddRenderable(_settingUICheckBox2);
+			scene->GetRenderPass("_SettingUIRenderPass")->AddRenderable(_settingUICheckBox2);
 			auto _sfxToggleScript = make_shared<SFXCheckBoxScript>("sfxToggleScript");
-			_sfxToggleScript->SetCurrentScene(currentScene);
+			_sfxToggleScript->SetCurrentScene(scene);
 			_settingUIToggleGameObject2->AddBehaviour(_sfxToggleScript);
 			_settingUIToggleGameObject2->SetActive(false);
 			GameObjectList.push_back(_settingUIToggleGameObject2);
@@ -127,10 +131,10 @@ shared_ptr<GameObject> UISetting::Instantiate(const string& name, const glm::vec
 				glm::vec3(0.0f, 0.0f, 0.0f),
 				glm::vec3(1.0f, 1.0f, 1.0f)
 			);
-			_closeIcon1 = make_shared<UIImage>("check", camera, RESOURCE.GetResource<Texture>("UICheck"));
+			_closeIcon1 = make_shared<UIImage>("check", uiCamera, RESOURCE.GetResource<Texture>("UICheck"));
 			_closeIconGameObject1->SetTransform(_closeIconTransform1);
 			_closeIconGameObject1->AddRenderable(_closeIcon1);
-			_renderPass->AddRenderable(_closeIcon1);
+			scene->GetRenderPass("_SettingUIRenderPass")->AddRenderable(_closeIcon1);
 			_closeIconGameObject1->SetParent(_settingUIToggleGameObject1);
 			_closeIconGameObject1->SetActive(false);
 			GameObjectList.push_back(_closeIconGameObject1);
@@ -146,10 +150,10 @@ shared_ptr<GameObject> UISetting::Instantiate(const string& name, const glm::vec
 					glm::vec3(0.0f, 0.0f, 0.0f),
 					glm::vec3(1.0f, 1.0f, 1.0f)
 				);
-			_closeIcon2 = make_shared<UIImage>("check", camera, RESOURCE.GetResource<Texture>("UICheck"));
+			_closeIcon2 = make_shared<UIImage>("check", uiCamera, RESOURCE.GetResource<Texture>("UICheck"));
 			_closeIconGameObject2->SetTransform(_closeIconTransform2);
 			_closeIconGameObject2->AddRenderable(_closeIcon2);
-			_renderPass->AddRenderable(_closeIcon2);
+			scene->GetRenderPass("_SettingUIRenderPass")->AddRenderable(_closeIcon2);
 			_closeIconGameObject2->SetParent(_settingUIToggleGameObject2);
 			_closeIconGameObject2->SetActive(false);
 			GameObjectList.push_back(_closeIconGameObject2);
@@ -166,12 +170,12 @@ shared_ptr<GameObject> UISetting::Instantiate(const string& name, const glm::vec
 				glm::vec3(0.0f, 0.0f, 0.0f),
 				glm::vec3(1.0f, 1.0f, 1.0f)
 			);
-		_settingUICloseButton = make_shared<UIButton>("CloseButton", camera, _settingUIToggleTexture, glm::vec2(100.f, 100.f), Inputs::Mouse::Left);
+		_settingUICloseButton = make_shared<UIButton>("CloseButton", uiCamera, _settingUIToggleTexture, glm::vec2(100.f, 100.f), Inputs::Mouse::Left);
 		_settingUICloseGameObject->SetTransform(_settingUICloseTransform);
 		_settingUICloseGameObject->AddRenderable(_settingUICloseButton);
-		_renderPass->AddRenderable(_settingUICloseButton);
+		scene->GetRenderPass("_SettingUIRenderPass")->AddRenderable(_settingUICloseButton);
 		auto _settingUICloseScript = make_shared<CloseButtonScript>("CloseButtonScript");
-		_settingUICloseScript->SetCurrentScene(currentScene);
+		_settingUICloseScript->SetCurrentScene(scene);
 		_settingUICloseGameObject->AddBehaviour(_settingUICloseScript);
 		_settingUICloseGameObject->SetActive(false);
 		GameObjectList.push_back(_settingUICloseGameObject);
@@ -187,10 +191,10 @@ shared_ptr<GameObject> UISetting::Instantiate(const string& name, const glm::vec
 				glm::vec3(0.0f, 0.0f, 0.0f),
 				glm::vec3(1.0f, 1.0f, 1.0f)
 			);
-		_closeIcon3 = make_shared<UIImage>("close", camera, RESOURCE.GetResource<Texture>("UIBack"));
+		_closeIcon3 = make_shared<UIImage>("close", uiCamera, RESOURCE.GetResource<Texture>("UIBack"));
 		_closeIconGameObject3->SetTransform(_closeIconTransform3);
 		_closeIconGameObject3->AddRenderable(_closeIcon3);
-		_renderPass->AddRenderable(_closeIcon3);
+		scene->GetRenderPass("_SettingUIRenderPass")->AddRenderable(_closeIcon3);
 		_closeIconGameObject3->SetParent(_settingUICloseGameObject);
 		_closeIconGameObject3->SetActive(false);
 		GameObjectList.push_back(_closeIconGameObject3);
@@ -199,7 +203,7 @@ shared_ptr<GameObject> UISetting::Instantiate(const string& name, const glm::vec
 	// Canvas
 	{
 		_settingUIGameObject = make_shared<GameObject>("SettingUI");
-		_uiCanvas = make_shared<UICanvas>("SettingUICanvas", camera, glm::vec2(300.0f, 200.0f));
+		_uiCanvas = make_shared<UICanvas>("SettingUICanvas", uiCamera, glm::vec2(300.0f, 200.0f));
 		_uiCanvasTransform = make_shared<Transform>
 			(
 				"SettingUICanvas",

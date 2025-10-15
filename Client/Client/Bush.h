@@ -3,6 +3,12 @@
 
 class Bush : public Prefab
 {
+	using Super = Prefab;
+
+public:
+	Bush(const string& name);
+	virtual ~Bush() override = default;
+
 public:
 	virtual shared_ptr<GameObject> Instantiate
 	(

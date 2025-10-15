@@ -11,6 +11,7 @@
 #include "House2.h"
 #include "Bush.h"
 #include "UISetting.h"
+#include "LobbyUI.h"
 #pragma endregion
 
 #pragma region Scripts
@@ -25,253 +26,253 @@ Lobby::Lobby(const string& name) : Super(name) {}
 
 void Lobby::CreateRenderProperties()
 {
-	// Load default texture shaders
-	{
-		_textureShader = make_shared<Shader>("TextureShader", "../Resources/Shaders/default.vert", "../Resources/Shaders/default.frag");
-		_textureShader->Init();
-		_textureShader->AddUniform(Uniforms::UNIFORM_MODEL);
-		_textureShader->AddUniform(Uniforms::UNIFORM_VIEW);
-		_textureShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
-		_textureShader->AddUniform(Uniforms::UNIFORM_TEXTURE);
-		RESOURCE.AddResource(_textureShader);
-	}
+	/*=================
+	//    Shaders    //
+	=================*/
+	shared_ptr<Shader> _textureShader = make_shared<Shader>("TextureShader", "../Resources/Shaders/default.vert", "../Resources/Shaders/default.frag");
+	_textureShader->Init();
+	_textureShader->AddUniform(Uniforms::UNIFORM_MODEL);
+	_textureShader->AddUniform(Uniforms::UNIFORM_VIEW);
+	_textureShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
+	_textureShader->AddUniform(Uniforms::UNIFORM_TEXTURE);
+	RESOURCE.AddResource(_textureShader);
 
-	// Load default text surface shaders
-	{
-		_textShader = make_shared<Shader>("TextShader", "../Resources/Shaders/text.vert", "../Resources/Shaders/text.frag");
-		_textShader->Init();
-		_textShader->AddUniform(Uniforms::UNIFORM_MODEL);
-		_textShader->AddUniform(Uniforms::UNIFORM_VIEW);
-		_textShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
-		_textShader->AddUniform(Uniforms::UNIFORM_TEXTURE);
-		_textShader->AddUniform(Uniforms::UNIFORM_COLOR);
-		RESOURCE.AddResource(_textShader);
-	}
+	shared_ptr<Shader> _textShader = make_shared<Shader>("TextShader", "../Resources/Shaders/text.vert", "../Resources/Shaders/text.frag");
+	_textShader->Init();
+	_textShader->AddUniform(Uniforms::UNIFORM_MODEL);
+	_textShader->AddUniform(Uniforms::UNIFORM_VIEW);
+	_textShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
+	_textShader->AddUniform(Uniforms::UNIFORM_TEXTURE);
+	_textShader->AddUniform(Uniforms::UNIFORM_COLOR);
+	RESOURCE.AddResource(_textShader);
 
-	// Load SettingUI shader
-	{
-		_SettingUIShader = make_shared<Shader>("SettingUIShader", "../Resources/Shaders/SettingUI.vert", "../Resources/Shaders/SettingUI.frag");
-		_SettingUIShader->Init();
-		_SettingUIShader->AddUniform(Uniforms::UNIFORM_MODEL);
-		_SettingUIShader->AddUniform(Uniforms::UNIFORM_VIEW);
-		_SettingUIShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
-		_SettingUIShader->AddUniform(Uniforms::UNIFORM_TEXTURE);
-		RESOURCE.AddResource(_SettingUIShader);
-	}
+	shared_ptr<Shader> _SettingUIShader = make_shared<Shader>("SettingUIShader", "../Resources/Shaders/SettingUI.vert", "../Resources/Shaders/SettingUI.frag");
+	_SettingUIShader->Init();
+	_SettingUIShader->AddUniform(Uniforms::UNIFORM_MODEL);
+	_SettingUIShader->AddUniform(Uniforms::UNIFORM_VIEW);
+	_SettingUIShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
+	_SettingUIShader->AddUniform(Uniforms::UNIFORM_TEXTURE);
+	RESOURCE.AddResource(_SettingUIShader);
 
-	// Load Character shader
-	{
-		_CharacterShader = make_shared<Shader>("CharacterShader", "../Resources/Shaders/Character.vert", "../Resources/Shaders/Character.frag");
-		_CharacterShader->Init();
-		_CharacterShader->AddUniform(Uniforms::UNIFORM_MODEL);
-		_CharacterShader->AddUniform(Uniforms::UNIFORM_VIEW);
-		_CharacterShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
-		_CharacterShader->AddUniform(Uniforms::UNIFORM_TEXTURE);
-		_CharacterShader->AddUniform("flip");
-		RESOURCE.AddResource(_CharacterShader);
+	shared_ptr<Shader> _CharacterShader = make_shared<Shader>("CharacterShader", "../Resources/Shaders/Character.vert", "../Resources/Shaders/Character.frag");
+	_CharacterShader->Init();
+	_CharacterShader->AddUniform(Uniforms::UNIFORM_MODEL);
+	_CharacterShader->AddUniform(Uniforms::UNIFORM_VIEW);
+	_CharacterShader->AddUniform(Uniforms::UNIFORM_PROJECTION);
+	_CharacterShader->AddUniform(Uniforms::UNIFORM_TEXTURE);
+	_CharacterShader->AddUniform("flip");
+	RESOURCE.AddResource(_CharacterShader);
+	shared_ptr<UniformSet> _CharacterUniforms = make_shared<UniformSet>("CharacterUniforms");
+	_CharacterUniforms->Set("flip", false);
+	RESOURCE.AddResource(_CharacterUniforms);
 
-		_CharacterUniforms = make_shared<UniformSet>("CharacterUniforms");
-		_CharacterUniforms->Set("flip", false);
-		RESOURCE.AddResource(_CharacterUniforms);
-	}
-
-	// Load Main camera
-	{
-		_mainCameraComponent = make_shared<Camera>("MainCameraComponent");
-		_mainCamera = make_shared<GameObject>("MainCamera");
-		_mainCamera->AddComponent(_mainCameraComponent);
-		_mainCameraTransform = make_shared<Transform>
-		(
-			"MainCameraTransform",
-			glm::vec3(0.0f, 0.0f, 0.0f),
-			glm::vec3(0.0f, 0.0f, 0.0f),
-			glm::vec3(1.0f, 1.0f, 1.0f)
-		);
-		_mainCamera->SetTransform(_mainCameraTransform);
-		_gameObjects.push_back(_mainCamera);
-	}
+	/*=================
+	//    Cameras    //
+	=================*/
+	// Main Camera
+	shared_ptr<Camera> _mainCameraComponent = make_shared<Camera>("MainCameraComponent");
+	shared_ptr<GameObject> _mainCamera = make_shared<GameObject>("MainCamera");
+	_mainCamera->AddComponent(_mainCameraComponent);
+	shared_ptr<Transform> _mainCameraTransform = make_shared<Transform>
+	(
+		"MainCameraTransform",
+		glm::vec3(0.0f, 0.0f, 0.0f),
+		glm::vec3(0.0f, 0.0f, 0.0f),
+		glm::vec3(1.0f, 1.0f, 1.0f)
+	);
+	_mainCamera->SetTransform(_mainCameraTransform);
+	_gameObjects.push_back(_mainCamera);
 
 	// Load UI camera
-	{
-		_uiCameraComponent = make_shared<Camera>("UICameraComponent");
-		_uiCamera = make_shared<GameObject>("UICamera");
-		_uiCamera->AddComponent(_uiCameraComponent);
-		_uiCameraTransform = make_shared<Transform>
-		(
-			"UICameraTransform",
-			glm::vec3(0.0f, 0.0f, 0.0f),
-			glm::vec3(0.0f, 0.0f, 0.0f),
-			glm::vec3(1.0f, 1.0f, 1.0f)
-		);
-		_uiCamera->SetTransform(_uiCameraTransform);
-		_gameObjects.push_back(_uiCamera);
-	}
+	shared_ptr<Camera> _uiCameraComponent = make_shared<Camera>("UICameraComponent");
+	shared_ptr<GameObject> _uiCamera = make_shared<GameObject>("UICamera");
+	_uiCamera->AddComponent(_uiCameraComponent);
+	shared_ptr<Transform> _uiCameraTransform = make_shared<Transform>
+	(
+		"UICameraTransform",
+		glm::vec3(0.0f, 0.0f, 0.0f),
+		glm::vec3(0.0f, 0.0f, 0.0f),
+		glm::vec3(1.0f, 1.0f, 1.0f)
+	);
+	_uiCamera->SetTransform(_uiCameraTransform);
+	_gameObjects.push_back(_uiCamera);
 
-	// Create render passes
-	{
-		_uiRenderPass = make_shared<RenderPass>();
-		_uiRenderPass->SetShader(_textShader);
-		_uiRenderPass->SetCamera(_uiCameraComponent);
+	/*=======================
+	//    Render Passes    //
+	=======================*/
+	shared_ptr<RenderPass> _textRenderPass = make_shared<RenderPass>();
+	_textRenderPass->SetShader(_textShader);
+	_textRenderPass->SetCamera(_uiCameraComponent);
+	AddRenderPass("_textRenderPass", _textRenderPass);
 
-		_textureRenderPass = make_shared<RenderPass>();
-		_textureRenderPass->SetShader(_textureShader);
-		_textureRenderPass->SetCamera(_mainCameraComponent);
+	shared_ptr<RenderPass> _textureRenderPass = make_shared<RenderPass>();
+	_textureRenderPass->SetShader(_textureShader);
+	_textureRenderPass->SetCamera(_mainCameraComponent);
+	AddRenderPass("_textureRenderPass", _textureRenderPass);
 
-		_SettingUIRenderPass = make_shared<RenderPass>();
-		_SettingUIRenderPass->SetShader(_SettingUIShader);
-		_SettingUIRenderPass->SetCamera(_uiCameraComponent);
+	shared_ptr<RenderPass> _SettingUIRenderPass = make_shared<RenderPass>();
+	_SettingUIRenderPass->SetShader(_SettingUIShader);
+	_SettingUIRenderPass->SetCamera(_uiCameraComponent);
+	AddRenderPass("_SettingUIRenderPass", _SettingUIRenderPass);
 
-		_CharacterRenderPass = make_shared<RenderPass>();
-		_CharacterRenderPass->SetShader(_CharacterShader);
-		_CharacterRenderPass->SetCamera(_mainCameraComponent);
-		_CharacterRenderPass->SetUniformSet(_CharacterUniforms);
-	}
+	shared_ptr<RenderPass> _CharacterRenderPass = make_shared<RenderPass>();
+	_CharacterRenderPass->SetShader(_CharacterShader);
+	_CharacterRenderPass->SetCamera(_mainCameraComponent);
+	_CharacterRenderPass->SetUniformSet(_CharacterUniforms);
+	AddRenderPass("_CharacterRenderPass", _CharacterRenderPass);
 }
 
 void Lobby::LoadResources()
 {
-	// Load Resources
-	{
-		// Background
-		{
-			_groundTexture = make_shared<Texture>("Ground", "../Resources/Images/Extras/groundBig.png");
-			_groundTexture->Init();
-			RESOURCE.AddResource(_groundTexture);
+	/*=====================
+	//    Backgrounds    //
+	=====================*/
+	shared_ptr<Texture> _groundTexture = make_shared<Texture>("Ground", "../Resources/Images/Extras/groundBig.png");
+	_groundTexture->Init();
+	RESOURCE.AddResource(_groundTexture);
 
-			_backgroundTexture1 = make_shared<Texture>("Background1", "../Resources/Images/Extras/background2.png");
-			_backgroundTexture1->Init();
-			RESOURCE.AddResource(_backgroundTexture1);
+	shared_ptr<Texture> _backgroundTexture1 = make_shared<Texture>("Background1", "../Resources/Images/Extras/background2.png");
+	_backgroundTexture1->Init();
+	RESOURCE.AddResource(_backgroundTexture1);
 
-			_backgroundTexture2 = make_shared<Texture>("Background2", "../Resources/Images/Extras/background1.png");
-			_backgroundTexture2->Init();
-			RESOURCE.AddResource(_backgroundTexture2);
+	shared_ptr<Texture> _backgroundTexture2 = make_shared<Texture>("Background2", "../Resources/Images/Extras/background1.png");
+	_backgroundTexture2->Init();
+	RESOURCE.AddResource(_backgroundTexture2);
 
-			// Flipbooks
-			{
-				FlipbookInfo info1{ 1, 8, 0, 0, 7, 16.0f, true, true };
-				_characterIdleRightFlipbook = make_shared<Flipbook>("Character_Idle_right", "../Resources/Images/Flipbooks/Player_normal/FB_Player_idle_right.png", info1);
-				_characterIdleRightFlipbook->Init();
-				RESOURCE.AddResource(_characterIdleRightFlipbook);
+	/*===================
+	//    Flipbooks    //
+	===================*/
+	FlipbookInfo info1{ 1, 8, 0, 0, 7, 16.0f, true, true };
+	shared_ptr<Flipbook> _characterIdleRightFlipbook = make_shared<Flipbook>("Character_Idle_right", "../Resources/Images/Flipbooks/Player_normal/FB_Player_idle_right.png", info1);
+	_characterIdleRightFlipbook->Init();
+	RESOURCE.AddResource(_characterIdleRightFlipbook);
 
-				FlipbookInfo info4{ 1, 8, 0, 0, 7, 16.0f, true, true };
-				_characterWalkRightFlipbook = make_shared<Flipbook>("Character_Walk_right", "../Resources/Images/Flipbooks/Player_normal/FB_Player_walk_right.png", info4);
-				_characterWalkRightFlipbook->Init();
-				RESOURCE.AddResource(_characterWalkRightFlipbook);
-			}
+	FlipbookInfo info4{ 1, 8, 0, 0, 7, 16.0f, true, true };
+	shared_ptr<Flipbook> _characterWalkRightFlipbook = make_shared<Flipbook>("Character_Walk_right", "../Resources/Images/Flipbooks/Player_normal/FB_Player_walk_right.png", info4);
+	_characterWalkRightFlipbook->Init();
+	RESOURCE.AddResource(_characterWalkRightFlipbook);
 
-			_sideWallTexture = make_shared<Texture>("SideWall", "../Resources/Images/Extras/sidewall.png");
-			_sideWallTexture->Init();
-			RESOURCE.AddResource(_sideWallTexture);
+	/*===============
+	//    Props    //
+	===============*/
+	shared_ptr<Texture> _sideWallTexture = make_shared<Texture>("SideWall", "../Resources/Images/Extras/sidewall.png");
+	_sideWallTexture->Init();
+	RESOURCE.AddResource(_sideWallTexture);
 
-			_houseTexture1 = make_shared<Texture>("House1", "../Resources/Images/Extras/building2.png");
-			_houseTexture1->Init();
-			RESOURCE.AddResource(_houseTexture1);
+	shared_ptr<Texture> _houseTexture1 = make_shared<Texture>("House1", "../Resources/Images/Extras/building2.png");
+	_houseTexture1->Init();
+	RESOURCE.AddResource(_houseTexture1);
 
-			_houseTexture2 = make_shared<Texture>("House2", "../Resources/Images/Extras/house2.png");
-			_houseTexture2->Init();
-			RESOURCE.AddResource(_houseTexture2);
+	shared_ptr<Texture> _houseTexture2 = make_shared<Texture>("House2", "../Resources/Images/Extras/house2.png");
+	_houseTexture2->Init();
+	RESOURCE.AddResource(_houseTexture2);
 
-			_bushTexture = make_shared<Texture>("Bush", "../Resources/Images/Extras/grass_foreground.png");
-			_bushTexture->Init();
-			RESOURCE.AddResource(_bushTexture);
+	shared_ptr<Texture> _bushTexture = make_shared<Texture>("Bush", "../Resources/Images/Extras/grass_foreground.png");
+	_bushTexture->Init();
+	RESOURCE.AddResource(_bushTexture);
 
-			_gameTitleText1 = make_shared<Font>("Title1", "../Resources/Fonts/Gamer.ttf", "Stickman", 180, Colors::Black);
-			_gameTitleText1->Init();
-			RESOURCE.AddResource(_gameTitleText1);
+	/*=============
+	//    UIs    //
+	=============*/
+	shared_ptr<Font> _gameTitleText1 = make_shared<Font>("Title1", "../Resources/Fonts/Gamer.ttf", "Stickman", 180, Colors::Black);
+	_gameTitleText1->Init();
+	RESOURCE.AddResource(_gameTitleText1);
 
-			_gameTitleText2 = make_shared<Font>("Title2", "../Resources/Fonts/Gamer.ttf", "Survivor", 175, Colors::Black);
-			_gameTitleText2->Init();
-			RESOURCE.AddResource(_gameTitleText2);
+	shared_ptr<Font> _gameTitleText2 = make_shared<Font>("Title2", "../Resources/Fonts/Gamer.ttf", "Survivor", 175, Colors::Black);
+	_gameTitleText2->Init();
+	RESOURCE.AddResource(_gameTitleText2);
 
-			_buttonText1 = make_shared<Font>("Start", "../Resources/Fonts/Gamer.ttf", "Start", 70, Colors::Black);
-			_buttonText1->Init();
-			RESOURCE.AddResource(_buttonText1);
+	shared_ptr<Font> _buttonText1 = make_shared<Font>("Start", "../Resources/Fonts/Gamer.ttf", "Start", 70, Colors::Black);
+	_buttonText1->Init();
+	RESOURCE.AddResource(_buttonText1);
 
-			_buttonText2 = make_shared<Font>("Option", "../Resources/Fonts/Gamer.ttf", "Option", 64, Colors::Black);
-			_buttonText2->Init();
-			RESOURCE.AddResource(_buttonText2);
+	shared_ptr<Font> _buttonText2 = make_shared<Font>("Option", "../Resources/Fonts/Gamer.ttf", "Option", 64, Colors::Black);
+	_buttonText2->Init();
+	RESOURCE.AddResource(_buttonText2);
 
-			_buttonText3 = make_shared<Font>("Quit", "../Resources/Fonts/Gamer.ttf", "Quit", 64, Colors::Black);
-			_buttonText3->Init();
-			RESOURCE.AddResource(_buttonText3);
+	shared_ptr<Font> _buttonText3 = make_shared<Font>("Quit", "../Resources/Fonts/Gamer.ttf", "Quit", 64, Colors::Black);
+	_buttonText3->Init();
+	RESOURCE.AddResource(_buttonText3);
 
-			_buttonTextureNormal = make_shared<Texture>("Button_Normal", "../Resources/Images/UIs/Button.png");
-			_buttonTextureNormal->Init();
-			RESOURCE.AddResource(_buttonTextureNormal);
+	shared_ptr<Texture> _buttonTextureNormal = make_shared<Texture>("Button_Normal", "../Resources/Images/UIs/Button.png");
+	_buttonTextureNormal->Init();
+	RESOURCE.AddResource(_buttonTextureNormal);
 
-			_buttonTextureSelect = make_shared<Texture>("Button_Select", "../Resources/Images/UIs/Button_selected.png");
-			_buttonTextureSelect->Init();
-			RESOURCE.AddResource(_buttonTextureSelect);
+	shared_ptr<Texture> _buttonTextureSelect = make_shared<Texture>("Button_Select", "../Resources/Images/UIs/Button_selected.png");
+	_buttonTextureSelect->Init();
+	RESOURCE.AddResource(_buttonTextureSelect);
 
-			_lobbyBGM = make_shared<BGM>("DadnMe", "../Resources/Audio/BGM/dadnme.wav", FMOD_LOOP_NORMAL);
-			AUDIO.AddBGM(_lobbyBGM);
+	/*================
+	//    Audios    //
+	================*/
+	shared_ptr<BGM> _lobbyBGM = make_shared<BGM>("DadnMe", "../Resources/Audio/BGM/dadnme.wav", FMOD_LOOP_NORMAL);
+	AUDIO.AddBGM(_lobbyBGM);
 
-			_lobbySFX = make_shared<SFX>("ButtonSFX", "../Resources/Audio/SFX/whoosh2.wav", FMOD_LOOP_OFF);
-			AUDIO.AddSFX(_lobbySFX);
-		}
+	shared_ptr<SFX> _lobbySFX = make_shared<SFX>("ButtonSFX", "../Resources/Audio/SFX/whoosh2.wav", FMOD_LOOP_OFF);
+	AUDIO.AddSFX(_lobbySFX);
 	
-		// Settings UI
-		{
-			_uiPanel = make_shared<Texture>("UIPanel", "../Resources/Images/UIs/UI_Panel.png");
-			_uiPanel->Init();
-			RESOURCE.AddResource(_uiPanel);
+	/*====================
+	//    Setting UIs   //
+	====================*/
+	shared_ptr<Texture> _uiPanel = make_shared<Texture>("UIPanel", "../Resources/Images/UIs/UI_Panel.png");
+	_uiPanel->Init();
+	RESOURCE.AddResource(_uiPanel);
 
-			_uiToggle = make_shared<Texture>("UIToggle", "../Resources/Images/UIs/toggle.png");
-			_uiToggle->Init();
-			RESOURCE.AddResource(_uiToggle);
+	shared_ptr<Texture> _uiToggle = make_shared<Texture>("UIToggle", "../Resources/Images/UIs/toggle.png");
+	_uiToggle->Init();
+	RESOURCE.AddResource(_uiToggle);
 
-			_uiToggleSelected = make_shared<Texture>("UIToggleSelected", "../Resources/Images/UIs/toggle_selected.png");
-			_uiToggleSelected->Init();
-			RESOURCE.AddResource(_uiToggleSelected);
+	shared_ptr<Texture> _uiToggleSelected = make_shared<Texture>("UIToggleSelected", "../Resources/Images/UIs/toggle_selected.png");
+	_uiToggleSelected->Init();
+	RESOURCE.AddResource(_uiToggleSelected);
 
-			_checkIcon = make_shared<Texture>("UICheck", "../Resources/Images/UIs/check.png");
-			_checkIcon->Init();
-			RESOURCE.AddResource(_checkIcon);
+	shared_ptr<Texture> _checkIcon = make_shared<Texture>("UICheck", "../Resources/Images/UIs/check.png");
+	_checkIcon->Init();
+	RESOURCE.AddResource(_checkIcon);
 
-			_backIcon = make_shared<Texture>("UIBack", "../Resources/Images/UIs/back.png");
-			_backIcon->Init();
-			RESOURCE.AddResource(_backIcon);
+	shared_ptr<Texture> _backIcon = make_shared<Texture>("UIBack", "../Resources/Images/UIs/back.png");
+	_backIcon->Init();
+	RESOURCE.AddResource(_backIcon);
 
-			_bgmText = make_shared<Font>("bgm", "../Resources/Fonts/Gamer.ttf", "BGM", 128, Colors::Black);
-			_bgmText->Init();
-			RESOURCE.AddResource(_bgmText);
+	shared_ptr<Font> _bgmText = make_shared<Font>("bgm", "../Resources/Fonts/Gamer.ttf", "BGM", 128, Colors::Black);
+	_bgmText->Init();
+	RESOURCE.AddResource(_bgmText);
 
-			_sfxText = make_shared<Font>("sfx", "../Resources/Fonts/Gamer.ttf", "SFX", 128, Colors::Black);
-			_sfxText->Init();
-			RESOURCE.AddResource(_sfxText);
-		}
-	}
+	shared_ptr<Font> _sfxText = make_shared<Font>("sfx", "../Resources/Fonts/Gamer.ttf", "SFX", 128, Colors::Black);
+	_sfxText->Init();
+	RESOURCE.AddResource(_sfxText);
 
-	// Load Prefabs
-	{
-		_ground = make_shared<Ground>();
-		_ground->SetRenderPass(_textureRenderPass);
+	/*================
+	//    Prefabs   //
+	================*/
+	auto self = shared_from_this();
 
-		_background1 = make_shared<Background1>();
-		_background1->SetRenderPass(_textureRenderPass);
+	shared_ptr<Ground> _ground = make_shared<Ground>("Ground");
+	_ground->SetCurrentScene(self);
 
-		_background2 = make_shared<Background2>();
-		_background2->SetRenderPass(_textureRenderPass);
+	shared_ptr<Background1> _background1 = make_shared<Background1>("Background1");
+	_background1->SetCurrentScene(self);
 
-		_character = make_shared<Character>();
-		_character->SetRenderPass(_CharacterRenderPass);
+	shared_ptr<Background2> _background2 = make_shared<Background2>("Background2");
+	_background2->SetCurrentScene(self);
 
-		_sideWall = make_shared<SideWall>();
-		_sideWall->SetRenderPass(_textureRenderPass);
+	shared_ptr<Character> _character = make_shared<Character>("Character");
+	_character->SetCurrentScene(self);
 
-		_house1 = make_shared<House1>();
-		_house1->SetRenderPass(_textureRenderPass);
+	shared_ptr<SideWall> _sideWall = make_shared<SideWall>("SideWall");
+	_sideWall->SetCurrentScene(self);
 
-		_house2 = make_shared<House2>();
-		_house2->SetRenderPass(_textureRenderPass);
+	shared_ptr<House1> _house1 = make_shared<House1>("House1");
+	_house1->SetCurrentScene(self);
 
-		_bush = make_shared<Bush>();
-		_bush->SetRenderPass(_textureRenderPass);
+	shared_ptr<House2> _house2 = make_shared<House2>("House2");
+	_house2->SetCurrentScene(self);
 
-		_settingUI = make_shared<UISetting>();
-		_settingUI->SetRenderPass(_SettingUIRenderPass);
-		_settingUI->SetCurrentScene(shared_from_this());
-	}
+	shared_ptr<Bush> _bush = make_shared<Bush>("Bush");
+	_bush->SetCurrentScene(self);
+
+	shared_ptr<UISetting> _settingUI = make_shared<UISetting>("SettingUI");
+	_settingUI->SetCurrentScene(self);
 }
 
 void Lobby::CreateSceneContext()
@@ -285,227 +286,73 @@ void Lobby::CreateSceneContext()
 	// Load nessesary resources
 	LoadResources();
 
-#pragma region SCENE_CONTEXT
+	/*==============================
+	//		MAIN_SCENE_CONTEXT    //
+	==============================*/
+	auto self = shared_from_this();
 
-	// Prefabs
-	{
-		auto background1 = _background1->Instantiate("Background1", { 0.0f, -150.0f, 0.f });
-		_gameObjects.push_back(background1);
+	shared_ptr<Background1> _background1 = make_shared<Background1>("Background1");
+	_background1->SetCurrentScene(self);
+	auto background1 = _background1->Instantiate("Background1", { 0.0f, -150.0f, 0.f });
+	_gameObjects.push_back(background1);
 
-		auto background2 = _background2->Instantiate("Background2", { 0.0f, -200.0f, 0.f });
-		_gameObjects.push_back(background2);
+	shared_ptr<Background2> _background2 = make_shared<Background2>("Background2");
+	_background2->SetCurrentScene(self);
+	auto background2 = _background2->Instantiate("Background2", { 0.0f, -200.0f, 0.f });
+	_gameObjects.push_back(background2);
 
-		auto bush1 = _bush->Instantiate("Bush1", { -384.0f, -140.0f, 0.0f });
-		_gameObjects.push_back(bush1);
+	shared_ptr<Bush> _bush = make_shared<Bush>("Bush");
+	_bush->SetCurrentScene(self);
+	auto bush1 = _bush->Instantiate("Bush1", { -384.0f, -140.0f, 0.0f });
+	_gameObjects.push_back(bush1);
+	auto bush2 = _bush->Instantiate("Bush2", { 0.0f, -140.0f, 0.0f });
+	_gameObjects.push_back(bush2);
 
-		auto bush2 = _bush->Instantiate("Bush2", { 0.0f, -140.0f, 0.0f });
-		_gameObjects.push_back(bush2);
+	shared_ptr<House1> _house1 = make_shared<House1>("House1");
+	_house1->SetCurrentScene(self);
+	auto house1 = _house1->Instantiate("House1", { 400.0f, 45.0f, 0.0f });
+	_gameObjects.push_back(house1);
 
-		auto house1 = _house1->Instantiate("House1", { 400.0f, 45.0f, 0.0f });
-		_gameObjects.push_back(house1);
+	shared_ptr<House2> _house2 = make_shared<House2>("House2");
+	_house2->SetCurrentScene(self);
+	auto house2 = _house2->Instantiate("House2", { -200.0f, -35.0f, 0.0f });
+	_gameObjects.push_back(house2);
 
-		auto house2 = _house2->Instantiate("House2", { -200.0f, -35.0f, 0.0f });
-		_gameObjects.push_back(house2);
+	shared_ptr<Ground> _ground = make_shared<Ground>("Ground");
+	_ground->SetCurrentScene(self);
+	auto ground_1 = _ground->Instantiate("Ground1", { -384.0f, -320.0f, 0.f });
+	_gameObjects.push_back(ground_1);
+	auto ground_2 = _ground->Instantiate("Ground2", { 384.0f, -320.0f, 0.f });
+	_gameObjects.push_back(ground_2);
 
-		auto ground_1 = _ground->Instantiate("Ground1", { -384.0f, -320.0f, 0.f });
-		_gameObjects.push_back(ground_1);
+	shared_ptr<SideWall> _sideWall = make_shared<SideWall>("SideWall");
+	_sideWall->SetCurrentScene(self);
+	auto sideWall = _sideWall->Instantiate("SideWall", { -550.0f, 200.0f, 0.0f }, glm::vec3(0.0f), glm::vec3(0.5f, 0.65f, 0.5f));
+	_gameObjects.push_back(sideWall);
 
-		auto ground_2 = _ground->Instantiate("Ground2", { 384.0f, -320.0f, 0.f });
-		_gameObjects.push_back(ground_2);
+	shared_ptr<Character> _character = make_shared<Character>("Character");
+	_character->SetCurrentScene(self);
+	auto character = _character->Instantiate("Character", { -300.0f, -140.0f, 0.0f });
+	_gameObjects.push_back(character);
 
-		auto sideWall = _sideWall->Instantiate("SideWall", { -550.0f, 200.0f, 0.0f }, glm::vec3(0.0f), glm::vec3(0.5f, 0.65f, 0.5f));
-		_gameObjects.push_back(sideWall);
+	shared_ptr<UISetting> _settingUI = make_shared<UISetting>("SettingUI");
+	_settingUI->SetCurrentScene(self);
+	auto setting = _settingUI->Instantiate("SettingUI", { 0.0f, 0.0f, 0.0f });
+	_gameObjects.push_back(setting);
 
-		auto character = _character->Instantiate("Character", { -300.0f, -140.0f, 0.0f });
-		_gameObjects.push_back(character);
-	}
+	shared_ptr<LobbyUI> _lobbyUI = make_shared<LobbyUI>("LobbyUI");
+	_lobbyUI->SetCurrentScene(self);
+	auto lobby = _lobbyUI->Instantiate("LobbyUI", { 0.0f, 0.0f, 0.0f });
+	_gameObjects.push_back(lobby);
 
-	// Setting
-	{
-		auto setting = _settingUI->Instantiate("SettingUI", { 0.0f, 0.0f, 0.0f });
-		_gameObjects.push_back(setting);
-	}
 
-	// UI
-	{
-		// UI Blocker
-		{
-			_uiBlocker = make_shared<GameObject>("UIBlocker");
-			_uiBlockerTransform = make_shared<Transform>
-				(
-					"DummyTransform",
-					glm::vec3(0.0f, 0.0f, 0.0f),
-					glm::vec3(0.0f, 0.0f, 0.0f),
-					glm::vec3(1.0f, 1.0f, 1.0f)
-				);
-			_uiBlocker->SetTransform(_uiBlockerTransform);
-			_uiBlockerScript = make_shared<UIBlocker>("UIBlocker");
-			_uiBlockerScript->SetCurrentScene(shared_from_this());
-			_uiBlocker->AddBehaviour(_uiBlockerScript);
-			_gameObjects.push_back(_uiBlocker);
-		}
+	// Add RenderPasses to RenderManager
+	RENDER.AddRenderPass(GetRenderPass("_textureRenderPass"));
+	RENDER.AddRenderPass(GetRenderPass("_CharacterRenderPass"));
+	RENDER.AddRenderPass(GetRenderPass("_textRenderPass"));
+	RENDER.AddRenderPass(GetRenderPass("_SettingUIRenderPass"));
 
-		// Title Text #1
-		{
-			_gameTitleTextTexture1 = make_shared<UIText>("Title1", _uiCameraComponent, _gameTitleText1);
-			_gameTitleTextTransform1 = make_shared<Transform>
-				(
-					"TitleText1",
-					glm::vec3(0.0f, 320.0f, 0.0f),
-					glm::vec3(0.0f, 0.0f, 0.0f),
-					glm::vec3(1.0f, 1.0f, 1.0f)
-				);
-			_gameTitleGameObject1 = make_shared<GameObject>("Title1");
-			_gameTitleGameObject1->SetTransform(_gameTitleTextTransform1);
-			_gameTitleGameObject1->AddRenderable(static_pointer_cast<IRenderable>(_gameTitleTextTexture1));
-			_uiRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_gameTitleTextTexture1));
-			_gameObjects.push_back(_gameTitleGameObject1);
-		}
-
-		// Title Text #2
-		{
-			_gameTitleTextTexture2 = make_shared<UIText>("Title2", _uiCameraComponent, _gameTitleText2);
-			_gameTitleTextTransform2 = make_shared<Transform>
-				(
-					"TitleText2",
-					glm::vec3(0.0f, 220.0f, 0.0f),
-					glm::vec3(0.0f, 0.0f, 0.0f),
-					glm::vec3(1.0f, 1.0f, 1.0f)
-				);
-			_gameTitleGameObject2 = make_shared<GameObject>("Title2");
-			_gameTitleGameObject2->SetTransform(_gameTitleTextTransform2);
-			_gameTitleGameObject2->AddRenderable(static_pointer_cast<IRenderable>(_gameTitleTextTexture2));
-			_uiRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_gameTitleTextTexture2));
-			_gameObjects.push_back(_gameTitleGameObject2);
-		}
-
-		// Button #1
-		{
-			_buttonText1Texture = make_shared<UIText>("Start", _uiCameraComponent, _buttonText1);
-			_button1 = make_shared<UIButton>
-				(
-					"StartButton",
-					_uiCameraComponent,
-					_buttonTextureNormal,
-					glm::vec2(260.0f, 81.0f),
-					Inputs::Mouse::Left
-				);
-
-			_buttonTransform1 = make_shared<Transform>
-				(
-					"ButtonTransform",
-					glm::vec3(0.0f, 60.0f, 0.0f),
-					glm::vec3(0.0f, 0.0f, 0.0f),
-					glm::vec3(1.0f, 1.0f, 1.0f)
-				);
-			_buttonGameObject1 = make_shared<GameObject>("ButtonObject1");
-			_buttonGameObject1->SetTransform(_buttonTransform1);
-			_buttonGameObject1->AddRenderable(static_pointer_cast<IRenderable>(_button1));
-			_buttonGameObject1->AddRenderable(static_pointer_cast<IRenderable>(_buttonText1Texture));
-			_textureRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_button1));
-			_uiRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_buttonText1Texture));
-			_buttonScript1 = make_shared<StartButtonScript>("StartButtonScript");
-			_buttonGameObject1->AddBehaviour(_buttonScript1);
-			_buttonScript1->SetCurrentScene(shared_from_this());
-			_gameObjects.push_back(_buttonGameObject1);
-		}
-
-		// Button #2
-		{
-			_buttonText2Texture = make_shared<UIText>("Option", _uiCameraComponent, _buttonText2);
-			_button2 = make_shared<UIButton>
-				(
-					"OptionButton",
-					_uiCameraComponent,
-					_buttonTextureNormal,
-					glm::vec2(260.0f, 81.0f),
-					Inputs::Mouse::Left
-				);
-
-			_buttonTransform2 = make_shared<Transform>
-				(
-					"ButtonTransform",
-					glm::vec3(0.0f, -40.0f, 0.0f),
-					glm::vec3(0.0f, 0.0f, 0.0f),
-					glm::vec3(1.0f, 1.0f, 1.0f)
-				);
-			_buttonGameObject2 = make_shared<GameObject>("ButtonObject2");
-			_buttonGameObject2->SetTransform(_buttonTransform2);
-			_buttonGameObject2->AddRenderable(static_pointer_cast<IRenderable>(_button2));
-			_buttonGameObject2->AddRenderable(static_pointer_cast<IRenderable>(_buttonText2Texture));
-			_textureRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_button2));
-			_uiRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_buttonText2Texture));
-			_buttonScript2 = make_shared<OptionButtonScript>("OptionButtonScript");
-			_buttonScript2->SetCurrentScene(shared_from_this());
-			_buttonGameObject2->AddBehaviour(_buttonScript2);
-			_buttonScript2->SetCurrentScene(shared_from_this());
-			_gameObjects.push_back(_buttonGameObject2);
-		}
-
-		// Button #3
-		{
-			_buttonText3Texture = make_shared<UIText>("Quit", _uiCameraComponent, _buttonText3);
-			_button3 = make_shared<UIButton>
-				(
-					"QuitButton",
-					_uiCameraComponent,
-					_buttonTextureNormal,
-					glm::vec2(260.0f, 81.0f),
-					Inputs::Mouse::Left
-				);
-
-			_buttonTransform3 = make_shared<Transform>
-				(
-					"ButtonTransform",
-					glm::vec3(0.0f, -140.0f, 0.0f),
-					glm::vec3(0.0f, 0.0f, 0.0f),
-					glm::vec3(1.0f, 1.0f, 1.0f)
-				);
-			_buttonGameObject3 = make_shared<GameObject>("ButtonObject3");
-			_buttonGameObject3->SetTransform(_buttonTransform3);
-			_buttonGameObject3->AddRenderable(static_pointer_cast<IRenderable>(_button3));
-			_buttonGameObject3->AddRenderable(static_pointer_cast<IRenderable>(_buttonText3Texture));
-			_textureRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_button3));
-			_uiRenderPass->AddRenderable(static_pointer_cast<IRenderable>(_buttonText3Texture));
-			_buttonScript3 = make_shared<QuitButtonScript>("QuitButtonScript");
-			_buttonGameObject3->AddBehaviour(_buttonScript3);
-			_buttonScript3->SetCurrentScene(shared_from_this());
-			_gameObjects.push_back(_buttonGameObject3);
-		}
-
-		// Canvas
-		{
-			_uiCanvas = make_shared<UICanvas>("MainUICanvas", _uiCameraComponent, glm::vec2(300.0f, 200.0f));
-			_uiCanvasTransform = make_shared<Transform>
-				(
-					"MainUICanvas",
-					glm::vec3(0.0f, 0.0f, 0.0f),
-					glm::vec3(0.0f, 0.0f, 0.0f),
-					glm::vec3(1.0f, 1.0f, 1.0f)
-				);
-			_uiCanvasObject = make_shared<GameObject>("MainUICanvas");
-			_uiCanvasObject->SetTransform(_uiCanvasTransform);
-			_uiCanvasObject->AddComponent(_uiCanvas);
-			_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_button1));
-			_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_button2));
-			_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_button3));
-			_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_gameTitleTextTexture1));
-			_uiCanvas->AddUIComponent(static_pointer_cast<IUIElement>(_gameTitleTextTexture2));
-			_gameObjects.push_back(_uiCanvasObject);
-		}
-	}
-
-#pragma endregion
-
-#pragma region PRESENT_RENDER_PASSES
-	RENDER.AddRenderPass(_textureRenderPass);
-	RENDER.AddRenderPass(_CharacterRenderPass);
-	RENDER.AddRenderPass(_uiRenderPass);
-	RENDER.AddRenderPass(_SettingUIRenderPass);
-#pragma endregion
-
-#pragma region PLAY_BGM
+	// Play BGM
 	AUDIO.PlayBGM("DadnMe");
-#pragma endregion
 }
 

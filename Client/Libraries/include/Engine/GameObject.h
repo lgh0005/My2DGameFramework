@@ -44,10 +44,13 @@ public:
 	// SetActive method
 	void SetActive(bool active);
 	bool GetActive() { return _isActive; }
-	void OnEnable();
-	void OnDisable();
+
+	// GameObject state change methods
+	void Destroy() { _pendingDestroy = true; }
+	bool IsPendingDestroy() const { return _pendingDestroy; }
 
 private:
+	bool _pendingDestroy = false;
 	bool _isActive = true;
 	const string _name;
 	shared_ptr<Transform> _transform;

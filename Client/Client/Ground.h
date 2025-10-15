@@ -5,6 +5,12 @@ class RenderPass;
 
 class Ground : public Prefab
 {
+	using Super = Prefab;
+
+public:
+	Ground(const string& name);
+	virtual ~Ground() override = default;
+
 public:
 	virtual shared_ptr<GameObject> Instantiate
 	(

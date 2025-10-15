@@ -3,6 +3,12 @@
 
 class UISetting : public Prefab
 {
+	using Super = Prefab;
+
+public:
+	UISetting(const string& name);
+	virtual ~UISetting() override = default;
+
 public:
 	virtual shared_ptr<GameObject> Instantiate
 	(

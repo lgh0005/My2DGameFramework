@@ -1,19 +1,22 @@
 #include "pch.h"
 #include "Character.h"
-
-#pragma region SCRIPT
 #include "CharacterController.h"
-#pragma endregion
+
+Character::Character(const string& name) : Super(name)
+{
+
+}
 
 shared_ptr<GameObject> Character::Instantiate(const string& name, const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale)
 {
+	shared_ptr<Scene> scene;
+	if (Utils::IsValidPtr(_currentScene, scene) == false) return nullptr;
+
 	auto character = make_shared<GameObject>(name);
 	auto transform = make_shared<Transform>(name, position, rotation, scale);
 	character->SetTransform(transform);
 
-	static auto flipbook = RESOURCE.GetResource<Flipbook>("Character_Idle_right");
-
-	auto flipbookPlayer = make_shared<FlipbookPlayer>("CharacterFlipbook", flipbook);
+	auto flipbookPlayer = make_shared<FlipbookPlayer>("CharacterFlipbook", RESOURCE.GetResource<Flipbook>("Character_Idle_right"));
 	character->AddRenderable(static_pointer_cast<IRenderable>(flipbookPlayer));
 
 	auto collider = make_shared<BoxCollider>("PlayerCollider", glm::vec2(100.0f, 200.0f));
@@ -23,8 +26,7 @@ shared_ptr<GameObject> Character::Instantiate(const string& name, const glm::vec
 	shared_ptr<CharacterController> script = make_shared<CharacterController>("PlayerController");
 	character->AddBehaviour(static_pointer_cast<IBehaviour>(script));
 
-	if (_renderPass == nullptr) return nullptr;
-	_renderPass->AddRenderable(static_pointer_cast<IRenderable>(flipbookPlayer));
+	scene->GetRenderPass("_CharacterRenderPass")->AddRenderable(flipbookPlayer);
 
 	return character;
 }

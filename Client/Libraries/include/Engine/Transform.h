@@ -26,9 +26,14 @@ public:
 	void SetScale(const glm::vec3& scale) { _scale = scale; _dirty = true; }
 	glm::vec3 GetScale() { return _scale; }
 
+public:
+	void UpdateModelMatrix();
+	glm::vec3 GetWorldPosition();
+	glm::vec3 GetWorldScale();
+	glm::vec3 GetWorldRotation();
+
 private:
 	glm::mat4 CalculateLocalModel();
-	void UpdateModelMatrix();
 
 private:
 	glm::mat4 _model;

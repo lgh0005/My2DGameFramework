@@ -1,12 +1,16 @@
 #pragma once
+#include "IResource.h"
 
 class Scene;
 class GameObject;
 class RenderPass;
 
-class Prefab
+class Prefab : public IResource
 {
+    using Super = IResource;
+
 public:
+    Prefab(const string& name);
     virtual ~Prefab() = default;
 
     virtual shared_ptr<GameObject> Instantiate
@@ -17,10 +21,8 @@ public:
         const glm::vec3& scale = glm::vec3(1.0f)
     ) abstract;
 
-    void SetRenderPass(const shared_ptr<RenderPass>& renderPass);
     void SetCurrentScene(const shared_ptr<Scene>& scene);
 
 protected:
-    shared_ptr<RenderPass> _renderPass;
     weak_ptr<Scene> _currentScene;
 };

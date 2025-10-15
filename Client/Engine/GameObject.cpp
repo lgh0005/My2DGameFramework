@@ -92,23 +92,4 @@ void GameObject::SetActive(bool active)
 	_isActive = active;
 
 	if (_transform == nullptr) return;
-
-	if (_isActive) OnEnable();
-	else OnDisable();
-}
-
-void GameObject::OnEnable()
-{
-	_transform->OnEnable();
-	for (auto& component : _components) component->OnEnable();
-	for (auto& renderable : _renderables) renderable->OnEnable();
-	for (auto& behaviour : _behaviours) behaviour->OnEnable();
-}
-
-void GameObject::OnDisable()
-{
-	_transform->OnDisable();
-	for (auto& component : _components) component->OnDisable();
-	for (auto& renderable : _renderables) renderable->OnDisable();
-	for (auto& behaviour : _behaviours) behaviour->OnDisable();
 }

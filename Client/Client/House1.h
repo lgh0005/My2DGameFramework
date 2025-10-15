@@ -3,6 +3,12 @@
 
 class House1 : public Prefab
 {
+	using Super = Prefab;
+
+public:
+	House1(const string& name);
+	virtual ~House1() override = default;
+
 public:
 	virtual shared_ptr<GameObject> Instantiate
 	(

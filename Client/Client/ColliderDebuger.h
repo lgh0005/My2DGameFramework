@@ -3,6 +3,12 @@
 
 class ColliderDebuger : public Prefab
 {
+	using Super = Prefab;
+
+public:
+	ColliderDebuger(const string& name);
+	virtual ~ColliderDebuger() override = default;
+
 public:
 	virtual shared_ptr<GameObject> Instantiate
 	(

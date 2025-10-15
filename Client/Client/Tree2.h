@@ -3,6 +3,12 @@
 
 class Tree2 : public Prefab
 {
+	using Super = Prefab;
+
+public:
+	Tree2(const string& name);
+	virtual ~Tree2() override = default;
+
 public:
 	virtual shared_ptr<GameObject> Instantiate
 	(

@@ -26,6 +26,7 @@ namespace Inputs
         Left = SDL_SCANCODE_LEFT,
         Down = SDL_SCANCODE_DOWN,
         Up = SDL_SCANCODE_UP,
+        Space = SDL_SCANCODE_SPACE
     };
 
     enum class Keymod : uint16

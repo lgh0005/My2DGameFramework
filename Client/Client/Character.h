@@ -3,6 +3,12 @@
 
 class Character : public Prefab
 {
+	using Super = Prefab;
+
+public:
+	Character(const string& name);
+	virtual ~Character() override = default;
+
 public:
 	virtual shared_ptr<GameObject> Instantiate
 	(

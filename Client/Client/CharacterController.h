@@ -5,12 +5,6 @@ class BoxCollider;
 class UniformSet;
 class FlipbookPlayer;
 
-enum class Direction
-{
-	Left,
-	Right
-};
-
 class CharacterController : public IBehaviour
 {
 	using Super = IBehaviour;

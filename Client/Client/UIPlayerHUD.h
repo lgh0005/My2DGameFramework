@@ -3,6 +3,12 @@
 
 class UIPlayerHUD : public Prefab
 {
+	using Super = Prefab;
+
+public:
+	UIPlayerHUD(const string& name);
+	virtual ~UIPlayerHUD() override = default;
+
 public:
 	virtual shared_ptr<GameObject> Instantiate
 	(

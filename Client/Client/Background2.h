@@ -3,6 +3,12 @@
 
 class Background2 : public Prefab
 {
+	using Super = Prefab;
+
+public:
+	Background2(const string& name);
+	virtual ~Background2() override = default;
+
 public:
 	virtual shared_ptr<GameObject> Instantiate
 	(

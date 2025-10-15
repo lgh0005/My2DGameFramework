@@ -2,9 +2,9 @@
 #include "Prefab.h"
 #include "Scene.h"
 
-void Prefab::SetRenderPass(const shared_ptr<RenderPass>& renderPass)
+Prefab::Prefab(const string& name) : Super(name)
 {
-	_renderPass = renderPass;
+
 }
 
 void Prefab::SetCurrentScene(const shared_ptr<Scene>& scene)
