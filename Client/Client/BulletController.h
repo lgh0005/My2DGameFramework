@@ -13,13 +13,6 @@ public:
 	virtual void Init() override;
 	virtual void Update() override;
 
-/*==============================
-//     Collide properties     //
-//============================*/
-private:
-	shared_ptr<BoxCollider> _bulletCollider;
-	void OnCollideWithEnemy(const shared_ptr<BoxCollider>& other);
-
 /*=============================
 //     Moving properties     //
 //===========================*/
@@ -35,8 +28,17 @@ private:
 	float _maxMoveDistance = 500.0f;
 	float _minMoveDistance = -500.0f;
 
-	float _speed = 600.0f;
+	float _speed = 900.0f;
 	Direction _direction = Direction::Right;
 	float _travelledDistance = 0.0f;
+
+	EObjectType _type = EObjectType::Bullet;
+
+/*==============================
+//     Collide properties     //
+//============================*/
+private:
+	shared_ptr<BoxCollider> _bulletCollider;
+	void OnCollisionWithEnemy(const shared_ptr<BoxCollider>& other);
 };
 

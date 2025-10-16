@@ -148,6 +148,8 @@
     <ClInclude Include="CloseButtonScript.h" />
     <ClInclude Include="ColliderDebuger.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyController.h" />
+    <ClInclude Include="EnemySpawner.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="House1.h" />
     <ClInclude Include="House2.h" />
@@ -190,6 +192,8 @@
     <ClCompile Include="CloseButtonScript.cpp" />
     <ClCompile Include="ColliderDebuger.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyController.cpp" />
+    <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="House1.cpp" />
     <ClCompile Include="House2.cpp" />

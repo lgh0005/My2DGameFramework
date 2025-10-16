@@ -35,5 +35,9 @@ private:
 	// Attack area : sword state
 	shared_ptr<GameObject> _attackArea2;
 	shared_ptr<Transform> _attackAreaTransform2;
+
+	// Player Collider
+	shared_ptr<GameObject> _playerCollider;
+	shared_ptr<Transform> _playerColliderTransform;
 };
 

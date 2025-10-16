@@ -20,14 +20,8 @@ void BulletSpawner::SpawnBullet(const glm::vec3& position, Direction dir)
 {
 	shared_ptr<Scene> scene;
 	if (Utils::IsValidPtr(_currentScene, scene) == false) return;
-
 	shared_ptr<GameObject> bullet = _bulletPrefab->Instantiate("Bullet", position);
-
-	bullet->GetTransform()->UpdateModelMatrix();
-
-	shared_ptr<RenderPass> renderPass = scene->GetRenderPass("_bulletRenderPass");
-	auto renderable = bullet->GetRenderable("BulletSprite");
-	renderPass->AddRenderable(renderable);
-
+	auto bulletController = static_pointer_cast<BulletController>(bullet->GetBehaviour("BulletController"));
+	bulletController->SetDirection(dir);
 	scene->AddGameObject(bullet);
 }

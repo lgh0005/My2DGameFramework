@@ -18,10 +18,6 @@ shared_ptr<GameObject> Ground::Instantiate(const string& name, const glm::vec3& 
 	auto sprite = make_shared<Sprite>(name, RESOURCE.GetResource<Texture>("Ground"));
 	ground->AddRenderable(static_pointer_cast<IRenderable>(sprite));
 
-	auto collider = make_shared<BoxCollider>("GroundCollider", glm::vec2(800.0f, 100.0f));
-	COLLIDER.AddColliderComponent(collider);
-	ground->AddComponent(collider);
-
 	scene->GetRenderPass("_textureRenderPass")->AddRenderable(sprite);
 
 	return ground;

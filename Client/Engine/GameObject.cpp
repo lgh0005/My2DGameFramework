@@ -3,11 +3,21 @@
 #include "IComponent.h"
 #include "IRenderable.h"
 #include "IBehaviour.h"
+#include "BoxCollider.h"
 #include "Transform.h"
 
 GameObject::GameObject(const string& name) : _name(name)
 {
 
+}
+
+GameObject::~GameObject()
+{
+	for (auto& component : _components)
+	{
+		shared_ptr<BoxCollider> collider = dynamic_pointer_cast<BoxCollider>(component);
+		if (collider) COLLIDER.RemoveColliderComponent(collider);
+	}
 }
 
 shared_ptr<IComponent> GameObject::GetComponent(const string& name)
@@ -86,10 +96,34 @@ void GameObject::LateUpdate()
 	for (auto& behaviour : _behaviours) behaviour->LateUpdate();
 }
 
+void GameObject::SetParent(const shared_ptr<GameObject>& parent)
+{
+	_parent = parent;
+	if (parent) parent->AddChild(shared_from_this());
+}
+
+void GameObject::Destroy()
+{
+	SetActive(false);
+	_pendingDestroy = true;
+	for (auto& child : _children)
+	{
+		if (child)
+			child->Destroy();
+	}
+}
+
 void GameObject::SetActive(bool active)
 {
 	if (_isActive == active) return;
 	_isActive = active;
 
+	for (auto& child : _children)
+	{
+		if (child)
+			child->SetActive(active);
+	}
+
 	if (_transform == nullptr) return;
 }
+

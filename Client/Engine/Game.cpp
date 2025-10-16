@@ -54,12 +54,15 @@ void Game::Launch(const string& FirstSceneName)
 
 void Game::Update()
 {
-    // Update Managers
+    // Update Scene property managers
     SCENE.Update();
     COLLIDER.Update();
     INPUT.Update();
     AUDIO.Update();
     UIMANAGER.Update();
+    SCENE.LateUpdate();
+
+    // Update RenderManager
     RENDER.Update();
 }
 

@@ -17,8 +17,6 @@ void RenderPass::Render()
 		shared_ptr<GameObject> owner;
 		if (Utils::IsValidPtr(renderable->GetOwner(), owner) == false) continue;
 		if (owner->GetActive() == false) continue;
-
-		// renderable->Render(_shader, renderable->GetModel(), _camera);
 		renderable->Render(_shader, owner->GetTransform()->GetModel(), _camera);
 	}
 

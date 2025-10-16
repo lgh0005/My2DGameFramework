@@ -72,6 +72,12 @@
     <Filter Include="소스 파일\01. Prefabs\LobbyUI">
       <UniqueIdentifier>{8363eac1-0472-4688-b5f2-d9bc400272fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\03. InGame\Scripts\Controllers">
+      <UniqueIdentifier>{eae562ff-0c65-4e3b-8b8d-4cf2404a7405}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03. InGame\Scripts\Spawners">
+      <UniqueIdentifier>{980c6f32-8be7-42e2-bcce-a02b8c74067e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -122,9 +128,6 @@
     <ClCompile Include="UIBlocker.cpp">
       <Filter>소스 파일\02. Lobby\Scripts\UIScripts\MainUI</Filter>
     </ClCompile>
-    <ClCompile Include="CameraController.cpp">
-      <Filter>소스 파일\03. InGame\Scripts</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>소스 파일\01. Prefabs\Player</Filter>
     </ClCompile>
@@ -167,29 +170,38 @@
     <ClCompile Include="Tree2.cpp">
       <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerController.cpp">
-      <Filter>소스 파일\03. InGame\Scripts</Filter>
-    </ClCompile>
     <ClCompile Include="UIPlayerHUD.cpp">
       <Filter>소스 파일\01. Prefabs\HUD</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>소스 파일\01. Prefabs\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="BulletSpawner.cpp">
-      <Filter>소스 파일\03. InGame\Scripts</Filter>
-    </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>소스 파일\01. Prefabs\Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="BulletController.cpp">
-      <Filter>소스 파일\03. InGame\Scripts</Filter>
     </ClCompile>
     <ClCompile Include="LobbyUI.cpp">
       <Filter>소스 파일\01. Prefabs\LobbyUI</Filter>
     </ClCompile>
     <ClCompile Include="UIPlayerHealth.cpp">
       <Filter>소스 파일\01. Prefabs\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletController.cpp">
+      <Filter>소스 파일\03. InGame\Scripts\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>소스 파일\03. InGame\Scripts\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>소스 파일\03. InGame\Scripts\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletSpawner.cpp">
+      <Filter>소스 파일\03. InGame\Scripts\Spawners</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyController.cpp">
+      <Filter>소스 파일\03. InGame\Scripts\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySpawner.cpp">
+      <Filter>소스 파일\03. InGame\Scripts\Spawners</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,9 +253,6 @@
     <ClInclude Include="UIBlocker.h">
       <Filter>소스 파일\02. Lobby\Scripts\UIScripts\MainUI</Filter>
     </ClInclude>
-    <ClInclude Include="CameraController.h">
-      <Filter>소스 파일\03. InGame\Scripts</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>소스 파일\01. Prefabs\Player</Filter>
     </ClInclude>
@@ -286,23 +295,14 @@
     <ClInclude Include="Tree2.h">
       <Filter>소스 파일\01. Prefabs\Backgrounds</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerController.h">
-      <Filter>소스 파일\03. InGame\Scripts</Filter>
-    </ClInclude>
     <ClInclude Include="UIPlayerHUD.h">
       <Filter>소스 파일\01. Prefabs\HUD</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>소스 파일\01. Prefabs\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="BulletSpawner.h">
-      <Filter>소스 파일\03. InGame\Scripts</Filter>
-    </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>소스 파일\01. Prefabs\Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="BulletController.h">
-      <Filter>소스 파일\03. InGame\Scripts</Filter>
     </ClInclude>
     <ClInclude Include="Enums.h">
       <Filter>소스 파일\99. Headers</Filter>
@@ -312,6 +312,24 @@
     </ClInclude>
     <ClInclude Include="UIPlayerHealth.h">
       <Filter>소스 파일\01. Prefabs\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletController.h">
+      <Filter>소스 파일\03. InGame\Scripts\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraController.h">
+      <Filter>소스 파일\03. InGame\Scripts\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>소스 파일\03. InGame\Scripts\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletSpawner.h">
+      <Filter>소스 파일\03. InGame\Scripts\Spawners</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyController.h">
+      <Filter>소스 파일\03. InGame\Scripts\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpawner.h">
+      <Filter>소스 파일\03. InGame\Scripts\Spawners</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

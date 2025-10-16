@@ -29,6 +29,8 @@ public:
 	void SetCollisionEnterCallback(CollisionEnterCallBack callback) { _collisionEnterEvent = callback; }
 	void SetCollisionExitCallback(CollisionExitCallBack callback) { _collisionExitEvent = callback; }
 	void SetCollisionState(const CollisionState& state) { _state = state; }
+	void ClearCollisionEnterCallback() { _collisionEnterEvent = nullptr; }
+	void ClearCollisionExitCallback() { _collisionExitEvent = nullptr; }
 
 private:
 	CollisionState _state = CollisionState::None;

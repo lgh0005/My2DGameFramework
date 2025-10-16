@@ -23,13 +23,28 @@ void Scene::Update()
 	for (auto& obj : _gameObjects) { obj->FixedUpdate(); }
 	for (auto& obj : _gameObjects) { obj->Update(); }
 	for (auto& obj : _gameObjects) { obj->LateUpdate(); }
+}
 
-	// post processing in one-tick frame
-	ApplyPendingChanges();
+void Scene::LateUpdate()
+{
+	for (auto& obj : _pendingAdd)
+	{
+		_gameObjects.push_back(obj);
+		obj->Init();
+	}
+	_pendingAdd.clear();
+
+	_gameObjects.erase
+	(
+		remove_if(_gameObjects.begin(), _gameObjects.end(),
+			[](const shared_ptr<GameObject>& obj) { return obj->IsPendingDestroy(); }),
+		_gameObjects.end()
+	);
 }
 
 void Scene::ClearPreviousSceneContext()
 {
+	_pendingAdd.clear();
 	_gameObjects.clear();
 	COLLIDER.Clear();
 	AUDIO.Clear();
@@ -62,21 +77,4 @@ shared_ptr<RenderPass> Scene::GetRenderPass(const string& name)
 {
 	if (_renderPasses.count(name) == false) return nullptr;
 	return _renderPasses[name];
-}
-
-void Scene::ApplyPendingChanges()
-{
-	for (auto& obj : _pendingAdd)
-	{
-		_gameObjects.push_back(obj);
-		obj->Init();
-	}
-	_pendingAdd.clear();
-
-	_gameObjects.erase
-	(
-		remove_if(_gameObjects.begin(), _gameObjects.end(),
-			[](const shared_ptr<GameObject>& obj) { return obj->IsPendingDestroy(); }),
-		_gameObjects.end()
-	);
 }

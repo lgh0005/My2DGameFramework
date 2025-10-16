@@ -3,12 +3,21 @@
 
 class BulletSpawner;
 
-enum class PlayerState
+enum class EPlayerWeaponState
 {
 	Normal,
 	Gun,
 	Sword,
 	END
+};
+
+enum class EPlayerState
+{
+	Idle,
+	Walk,
+	Damaged,
+	Attack,
+	Died,
 };
 
 class PlayerController : public IBehaviour
@@ -27,12 +36,13 @@ public:
 //     Collide properties     //
 //============================*/
 private:
-	shared_ptr<BoxCollider> _wallCollider;
-	void OnColliderWithWall(const shared_ptr<BoxCollider>& other);
+	shared_ptr<BoxCollider> _playerCollider;
+	void OnColliderWithEnemy(const shared_ptr<BoxCollider>& other);
 
-	shared_ptr<GameObject> _attackColliderObject1;
-	shared_ptr<GameObject> _attackColliderObject2;
+	// shared_ptr<GameObject> _attackColliderObject1;
+	// shared_ptr<GameObject> _attackColliderObject2;
 	void SetAttackCollider();
+	EObjectType _type = EObjectType::Player;
 
 /*=============================
 //     Moving properties     //
@@ -44,7 +54,6 @@ private:
 
 	shared_ptr<Shader> _playerShader;
 	shared_ptr<UniformSet> _playerUniformSet;
-
 	shared_ptr<FlipbookPlayer> _playerFlipbookPlayer;
 
 	shared_ptr<Transform> _ownerTransform;
@@ -64,7 +73,7 @@ private:
 	void Attack();
 	bool _isAttacking = false;
 	int _comboStep = 0; 
-	PlayerState _playerState = PlayerState::Normal;
+	EPlayerWeaponState _playerState = EPlayerWeaponState::Normal;
 
 	shared_ptr<GameObject> _bulletSpawnerObject;
 	shared_ptr<BulletSpawner> _bulletSpawner;

@@ -13,6 +13,7 @@ public:
 public:
 	void Init();
 	void Update();
+	void LateUpdate();
 
 public:
 	const string& GetName() { return _name; }
@@ -29,9 +30,6 @@ protected:
 	virtual void LoadResources() abstract;
 	virtual void CreateRenderProperties() abstract;
 	virtual void CreateSceneContext() abstract;
-
-private:
-	void ApplyPendingChanges();
 
 protected:
 	string _name;

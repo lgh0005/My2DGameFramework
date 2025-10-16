@@ -15,6 +15,7 @@ shared_ptr<GameObject> Player::Instantiate(const string& name, const glm::vec3& 
 {
 	shared_ptr<Scene> scene;
 	if (Utils::IsValidPtr(_currentScene, scene) == false) return nullptr;
+	auto& GameObjectList = scene->GetGameObjectList();
 
 	// Player
 	{
@@ -33,16 +34,44 @@ shared_ptr<GameObject> Player::Instantiate(const string& name, const glm::vec3& 
 				glm::vec3(0.0f),
 				glm::vec3(50.0f, 50.0f, 1.0f)
 			);
-		shared_ptr<Sprite> testSprite = make_shared<Sprite>("TestSprite3", RESOURCE.GetResource<Texture>("TEST3"));
-		_bulletSpawner->AddRenderable(testSprite);
 		_bulletSpawner->SetTransform(_bulletSpawnerTransform);
 		shared_ptr<BulletSpawner> spawner = make_shared<BulletSpawner>("BulletSpawner");
 		spawner->SetCurrentScene(scene);
 		_bulletSpawner->AddBehaviour(spawner);
 		_bulletSpawner->SetParent(_player);
 		_bulletSpawner->SetActive(false);
+		GameObjectList.push_back(_bulletSpawner);
+	}
+
+	// Flipbook
+	{
+		auto flipbook = RESOURCE.GetResource<Flipbook>("_normal_idle_r");
+		shared_ptr<Flipbook> flipbookCopy = make_shared<Flipbook>(*flipbook);
+		auto flipbookPlayer = make_shared<FlipbookPlayer>("PlayerFlipbook", flipbookCopy);
+		_player->AddRenderable(static_pointer_cast<IRenderable>(flipbookPlayer));
+		scene->GetRenderPass("_playerRenderPass")->AddRenderable(flipbookPlayer);
+	}
+
+	// Main player collider
+	{
+		_playerCollider = make_shared<GameObject>("PlayerCollider");
+		_playerColliderTransform = make_shared<Transform>
+			(
+				"PlayerCollider",
+				glm::vec3(0.0f, -50.0f, 0.0f),
+				glm::vec3(0.0f),
+				glm::vec3(80.0f, 150.0f, 1.0f)
+			);
+		_playerCollider->SetTransform(_playerColliderTransform);
+		_playerCollider->SetParent(_player);
+		shared_ptr<Sprite> testSprite = make_shared<Sprite>("TestSprite3", RESOURCE.GetResource<Texture>("TEST3"));
+		_playerCollider->AddRenderable(testSprite);
+
+		shared_ptr<BoxCollider> playerCollider = make_shared<BoxCollider>("PlayerMainCollider", glm::vec2(1.0f, 1.0f));
+		_playerCollider->AddComponent(playerCollider);
+
 		scene->GetRenderPass("_debugRenderPass")->AddRenderable(testSprite);
-		scene->GetGameObjectList().push_back(_bulletSpawner);
+		GameObjectList.push_back(_playerCollider);
 	}
 
 	// AttackArea #1
@@ -50,9 +79,9 @@ shared_ptr<GameObject> Player::Instantiate(const string& name, const glm::vec3& 
 		_attackArea1 = make_shared<GameObject>("PlayerAttackArea1");
 		_attackAreaTransform1 = make_shared<Transform>
 			(
-				"PlayerAttackAreaTransform", 
-				glm::vec3(80.0f, -80.0f, 0.0f), 
-				glm::vec3(0.0f), 
+				"PlayerAttackAreaTransform",
+				glm::vec3(80.0f, -80.0f, 0.0f),
+				glm::vec3(0.0f),
 				glm::vec3(80.0f, 100.0f, 1.0f)
 			);
 		shared_ptr<Sprite> testSprite = make_shared<Sprite>("TestSprite", RESOURCE.GetResource<Texture>("TEST1"));
@@ -61,7 +90,7 @@ shared_ptr<GameObject> Player::Instantiate(const string& name, const glm::vec3& 
 		_attackArea1->SetParent(_player);
 		_attackArea1->SetActive(false);
 		scene->GetRenderPass("_debugRenderPass")->AddRenderable(testSprite);
-		scene->GetGameObjectList().push_back(_attackArea1);
+		GameObjectList.push_back(_attackArea1);
 	}
 
 	// AttackArea #2
@@ -80,32 +109,14 @@ shared_ptr<GameObject> Player::Instantiate(const string& name, const glm::vec3& 
 		_attackArea2->SetParent(_player);
 		_attackArea2->SetActive(false);
 		scene->GetRenderPass("_debugRenderPass")->AddRenderable(testSprite);
-		scene->GetGameObjectList().push_back(_attackArea2);
-	}
-
-	// Flipbook
-	{
-		auto flipbook = RESOURCE.GetResource<Flipbook>("_normal_idle_r");
-		shared_ptr<Flipbook> flipbookCopy = make_shared<Flipbook>(*flipbook);
-		auto flipbookPlayer = make_shared<FlipbookPlayer>("PlayerFlipbook", flipbookCopy);
-		_player->AddRenderable(static_pointer_cast<IRenderable>(flipbookPlayer));
-		scene->GetRenderPass("_playerRenderPass")->AddRenderable(flipbookPlayer);
-	}
-
-	// Collider
-	{
-		auto collider1 = make_shared<BoxCollider>("Player_WallCollider", glm::vec2(80.0f, 250.0f));
-		COLLIDER.AddColliderComponent(collider1);
-		_player->AddComponent(collider1);
+		GameObjectList.push_back(_attackArea2);
 	}
 
 	// Player controller
 	{
 		shared_ptr<PlayerController> script = make_shared<PlayerController>("PlayerController");
-		shared_ptr<Scene> scene;
-		if (Utils::IsValidPtr(_currentScene, scene) == false) return nullptr;
 		script->SetCurrentScene(scene);
-		_player->AddBehaviour(static_pointer_cast<IBehaviour>(script));
+		_player->AddBehaviour(script);
 	}
 
 	// RigidBody

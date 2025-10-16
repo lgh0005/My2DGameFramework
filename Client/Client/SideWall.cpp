@@ -18,10 +18,6 @@ shared_ptr<GameObject> SideWall::Instantiate(const string& name, const glm::vec3
 	auto sprite = make_shared<Sprite>(name, RESOURCE.GetResource<Texture>("SideWall"));
 	background->AddRenderable(static_pointer_cast<IRenderable>(sprite));
 
-	auto collider = make_shared<BoxCollider>("WallCollider", glm::vec2(100.0f, 800.0f));
-	COLLIDER.AddColliderComponent(collider);
-	background->AddComponent(collider);
-
 	scene->GetRenderPass("_textureRenderPass")->AddRenderable(sprite);
 
 	return background;

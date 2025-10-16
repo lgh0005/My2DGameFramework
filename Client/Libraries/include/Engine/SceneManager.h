@@ -13,10 +13,12 @@ public:
 public:
 	virtual void Init() override;
 	virtual void Update() override;
+	void LateUpdate();
 
 public:
 	void AddScenes(const vector<shared_ptr<Scene>>& scenes);
 	void LoadScene(const string& scene);
+	void Clear();
 
 private:
 	unordered_map<string, shared_ptr<Scene>> _scenes;

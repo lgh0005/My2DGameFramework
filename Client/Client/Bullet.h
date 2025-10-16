@@ -17,5 +17,9 @@ public:
 		const glm::vec3& rotation = glm::vec3(0.0f),
 		const glm::vec3& scale = glm::vec3(1.0f)
 	) override;
+
+private:
+	shared_ptr<GameObject> _bullet;
+	shared_ptr<Transform> _bulletTransform;
 };
 

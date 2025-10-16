@@ -5,7 +5,6 @@
 #include "BulletSpawner.h"
 #pragma endregion
 
-
 PlayerController::PlayerController(const string& name) : Super(name)
 {
 	_playerShader = RESOURCE.GetResource<Shader>("PlayerShader");
@@ -14,54 +13,54 @@ PlayerController::PlayerController(const string& name) : Super(name)
 	// ==========================
 	// Normal Flipbooks
 	// ==========================
-	_normal_climb = RESOURCE.GetResource<Flipbook>("_normal_climb");
+	_normal_climb = RESOURCE.GetResource<Flipbook>("_normal_climb"); // X
 	_normal_combo_1_r = RESOURCE.GetResource<Flipbook>("_normal_combo_1_r");
 	_normal_combo_2_r = RESOURCE.GetResource<Flipbook>("_normal_combo_2_r");
 	_normal_combo_3_r = RESOURCE.GetResource<Flipbook>("_normal_combo_3_r");
 	_normal_damaged_r = RESOURCE.GetResource<Flipbook>("_normal_damaged_r");
-	_normal_dash_r = RESOURCE.GetResource<Flipbook>("_normal_dash_r");
+	_normal_dash_r = RESOURCE.GetResource<Flipbook>("_normal_dash_r");	 // X
 	_normal_died_r = RESOURCE.GetResource<Flipbook>("_normal_died_r");
 	_normal_fall_r = RESOURCE.GetResource<Flipbook>("_normal_fall_r");
 	_normal_idle_r = RESOURCE.GetResource<Flipbook>("_normal_idle_r");
 	_normal_jump_r = RESOURCE.GetResource<Flipbook>("_normal_jump_r");
-	_normal_run_r = RESOURCE.GetResource<Flipbook>("_normal_run_r");
-	_normal_slide_r = RESOURCE.GetResource<Flipbook>("_normal_slide_r");
+	_normal_run_r = RESOURCE.GetResource<Flipbook>("_normal_run_r");	 // X
+	_normal_slide_r = RESOURCE.GetResource<Flipbook>("_normal_slide_r"); // X
 	_normal_walk_r = RESOURCE.GetResource<Flipbook>("_normal_walk_r");
-	_normal_wallslide_r = RESOURCE.GetResource<Flipbook>("_normal_wallslide_r");
+	_normal_wallslide_r = RESOURCE.GetResource<Flipbook>("_normal_wallslide_r"); // X
 
 	// ==========================
 	// Gun Flipbooks
 	// ==========================
-	_gun_climb = RESOURCE.GetResource<Flipbook>("_gun_climb");
+	_gun_climb = RESOURCE.GetResource<Flipbook>("_gun_climb"); // X
 	_gun_air_attack_r = RESOURCE.GetResource<Flipbook>("_gun_air_attack_r");
 	_gun_damaged_r = RESOURCE.GetResource<Flipbook>("_gun_damaged_r");
-	_gun_dash_r = RESOURCE.GetResource<Flipbook>("_gun_dash_r");
+	_gun_dash_r = RESOURCE.GetResource<Flipbook>("_gun_dash_r");   // X
 	_gun_died_r = RESOURCE.GetResource<Flipbook>("_gun_died_r");
 	_gun_idle_r = RESOURCE.GetResource<Flipbook>("_gun_idle_r");
 	_gun_jump_r = RESOURCE.GetResource<Flipbook>("_gun_jump_r");
-	_gun_run_r = RESOURCE.GetResource<Flipbook>("_gun_run_r");
+	_gun_run_r = RESOURCE.GetResource<Flipbook>("_gun_run_r");     // X
 	_gun_shot_r = RESOURCE.GetResource<Flipbook>("_gun_shot_r");
-	_gun_slide_r = RESOURCE.GetResource<Flipbook>("_gun_slide_r");
+	_gun_slide_r = RESOURCE.GetResource<Flipbook>("_gun_slide_r"); // X
 	_gun_walk_r = RESOURCE.GetResource<Flipbook>("_gun_walk_r");
-	_gun_wallslide_r = RESOURCE.GetResource<Flipbook>("_gun_wallslide_r");
+	_gun_wallslide_r = RESOURCE.GetResource<Flipbook>("_gun_wallslide_r"); // X
 
 	// ==========================
 	// Sword Flipbooks
 	// ==========================
-	_sword_climb = RESOURCE.GetResource<Flipbook>("_sword_climb");
-	_sword_air_attack_r = RESOURCE.GetResource<Flipbook>("_sword_air_attack_r");
+	_sword_climb = RESOURCE.GetResource<Flipbook>("_sword_climb"); // X
+	_sword_air_attack_r = RESOURCE.GetResource<Flipbook>("_sword_air_attack_r"); // X
 	_sword_combo_1_r = RESOURCE.GetResource<Flipbook>("_sword_combo_1_r");
 	_sword_combo_2_r = RESOURCE.GetResource<Flipbook>("_sword_combo_2_r");
 	_sword_combo_3_r = RESOURCE.GetResource<Flipbook>("_sword_combo_3_r");
 	_sword_damaged_r = RESOURCE.GetResource<Flipbook>("_sword_damaged_r");
-	_sword_dash_r = RESOURCE.GetResource<Flipbook>("_sword_dash_r");
+	_sword_dash_r = RESOURCE.GetResource<Flipbook>("_sword_dash_r");   // X
 	_sword_died_r = RESOURCE.GetResource<Flipbook>("_sword_died_r");
 	_sword_idle_r = RESOURCE.GetResource<Flipbook>("_sword_idle_r");
 	_sword_jump_r = RESOURCE.GetResource<Flipbook>("_sword_jump_r");
-	_sword_run_r = RESOURCE.GetResource<Flipbook>("_sword_run_r");
-	_sword_slide_r = RESOURCE.GetResource<Flipbook>("_sword_slide_r");
+	_sword_run_r = RESOURCE.GetResource<Flipbook>("_sword_run_r");      // X
+	_sword_slide_r = RESOURCE.GetResource<Flipbook>("_sword_slide_r");  // X
 	_sword_walk_r = RESOURCE.GetResource<Flipbook>("_sword_walk_r");
-	_sword_wallslide_r = RESOURCE.GetResource<Flipbook>("_sword_wallslide_r");
+	_sword_wallslide_r = RESOURCE.GetResource<Flipbook>("_sword_wallslide_r"); // X
 }
 
 void PlayerController::Init()
@@ -80,10 +79,11 @@ void PlayerController::Init()
 	_playerFlipbookPlayer = static_pointer_cast<FlipbookPlayer>(owner->GetRenderable("PlayerFlipbook"));
 
 	// Get Colliders
-	_wallCollider = static_pointer_cast<BoxCollider>(owner->GetComponent("Player_WallCollider"));
-	_wallCollider->SetCollisionEnterCallback([self](const shared_ptr<BoxCollider>& other) { self->OnColliderWithWall(other); });
-	_attackColliderObject1 = scene->GetGameObject("PlayerAttackArea1");
-	_attackColliderObject2 = scene->GetGameObject("PlayerAttackArea2");
+	shared_ptr<GameObject> colliderObj = scene->GetGameObject("PlayerCollider");
+	_playerCollider = static_pointer_cast<BoxCollider>(colliderObj->GetComponent("PlayerMainCollider"));
+	_playerCollider->SetCollisionEnterCallback([self](const shared_ptr<BoxCollider>& other) { self->OnColliderWithEnemy(other); });
+	//_attackColliderObject1 = scene->GetGameObject("PlayerAttackArea1");
+	//_attackColliderObject2 = scene->GetGameObject("PlayerAttackArea2");*/
 
 	// Get BulletSpanwer
 	_bulletSpawnerObject = scene->GetGameObject("BulletSpawner");
@@ -93,7 +93,7 @@ void PlayerController::Init()
 	_playerRigidBody = static_pointer_cast<RigidBody>(owner->GetComponent("PlayerJumper"));
 
 	// Ensure initial state
-	_playerState = PlayerState::Normal;
+	_playerState = EPlayerWeaponState::Normal;
 	_lastDir = Direction::Right;
 
 	// Get GameObject
@@ -116,8 +116,8 @@ void PlayerController::ChangeWeapon()
 {
 	if (INPUT.GetKeyDown(Inputs::Key::E))
 	{
-		int nextState = (static_cast<int>(_playerState) + 1) % static_cast<int>(PlayerState::END);
-		_playerState = static_cast<PlayerState>(nextState);
+		int nextState = (static_cast<int>(_playerState) + 1) % static_cast<int>(EPlayerWeaponState::END);
+		_playerState = static_cast<EPlayerWeaponState>(nextState);
 	}
 
 	// 모든 UI를 일단 비활성화
@@ -128,13 +128,13 @@ void PlayerController::ChangeWeapon()
 	// 현재 상태에 해당하는 UI만 활성화
 	switch (_playerState)
 	{
-	case PlayerState::Normal:
+	case EPlayerWeaponState::Normal:
 		if (_NoWeaponText) _NoWeaponText->SetActive(true);
 		break;
-	case PlayerState::Gun:
+	case EPlayerWeaponState::Gun:
 		if (_PistolText) _PistolText->SetActive(true);
 		break;
-	case PlayerState::Sword:
+	case EPlayerWeaponState::Sword:
 		if (_SwordText) _SwordText->SetActive(true);
 		break;
 	default:
@@ -149,7 +149,7 @@ void PlayerController::Attack()
 	shared_ptr<Flipbook> attackFlipbook = nullptr;
 
 	// 현재 콤보 단계에 따라 공격 Flipbook 선택
-	if (_playerState == PlayerState::Normal)
+	if (_playerState == EPlayerWeaponState::Normal)
 	{
 		switch (_comboStep)
 		{
@@ -159,7 +159,7 @@ void PlayerController::Attack()
 		}
 		// TODO : Damage enemy with normal
 	}
-	else if (_playerState == PlayerState::Sword)
+	else if (_playerState == EPlayerWeaponState::Sword)
 	{
 		switch (_comboStep)
 		{
@@ -169,7 +169,7 @@ void PlayerController::Attack()
 		}
 		// TODO : Damage enemy with sword
 	}
-	else if (_playerState == PlayerState::Gun)
+	else if (_playerState == EPlayerWeaponState::Gun)
 	{
 		attackFlipbook = _gun_shot_r;
 		// TODO : Damage enemy with bullet
@@ -188,7 +188,7 @@ void PlayerController::Attack()
 		_isAttacking = true;
 
 		// 다음 콤보 단계로
-		if (_playerState != PlayerState::Gun) // Gun은 단일 공격
+		if (_playerState != EPlayerWeaponState::Gun) // Gun은 단일 공격
 			_comboStep = (_comboStep + 1) % 3;
 	}
 
@@ -199,9 +199,9 @@ void PlayerController::Attack()
 		shared_ptr<Flipbook> idleFlipbook = nullptr;
 		switch (_playerState)
 		{
-		case PlayerState::Normal: idleFlipbook = _normal_idle_r; break;
-		case PlayerState::Sword:  idleFlipbook = _sword_idle_r;  break;
-		case PlayerState::Gun:    idleFlipbook = _gun_idle_r;    break;
+		case EPlayerWeaponState::Normal: idleFlipbook = _normal_idle_r; break;
+		case EPlayerWeaponState::Sword:  idleFlipbook = _sword_idle_r;  break;
+		case EPlayerWeaponState::Gun:    idleFlipbook = _gun_idle_r;    break;
 		}
 
 		if (idleFlipbook)
@@ -246,7 +246,6 @@ void PlayerController::AttackGun()
 		if (_bulletSpawner)
 		{
 			auto spawnerTransform = _bulletSpawnerObject->GetTransform();
-			spawnerTransform->UpdateModelMatrix();
 			glm::vec3 spawnPos = spawnerTransform->GetWorldPosition();
 			_bulletSpawner->SpawnBullet(spawnPos, _lastDir);
 		}
@@ -255,32 +254,32 @@ void PlayerController::AttackGun()
 	}
 }
 
-void PlayerController::OnColliderWithWall(const shared_ptr<BoxCollider>& other)
-{
-	shared_ptr<GameObject> otherOwner;
-	if (Utils::IsValidPtr(other->GetOwner(), otherOwner) == false) return;
-
-	auto playerPos = _ownerTransform->GetPosition();
-	glm::vec2 playerHalf = _wallCollider->GetSize() * 0.5f;
-
-	auto otherPos = otherOwner->GetTransform()->GetPosition();
-	glm::vec2 otherHalf = other->GetSize() * 0.5f;
-
-	// 오른쪽 이동 중 벽에 충돌
-	if (_lastDir == Direction::Right)
-	{
-		float maxX = otherPos.x - otherHalf.x - playerHalf.x;
-		if (playerPos.x > maxX) playerPos.x = maxX;
-	}
-	// 왼쪽 이동 중 벽에 충돌
-	else if (_lastDir == Direction::Left)
-	{
-		float minX = otherPos.x + otherHalf.x + playerHalf.x;
-		if (playerPos.x < minX) playerPos.x = minX;
-	}
-
-	_ownerTransform->SetPosition(playerPos);
-}
+//void PlayerController::OnColliderWithWall(const shared_ptr<BoxCollider>& other)
+//{
+//	shared_ptr<GameObject> otherOwner;
+//	if (Utils::IsValidPtr(other->GetOwner(), otherOwner) == false) return;
+//
+//	auto playerPos = _ownerTransform->GetPosition();
+//	glm::vec2 playerHalf = _wallCollider->GetSize() * 0.5f;
+//
+//	auto otherPos = otherOwner->GetTransform()->GetPosition();
+//	glm::vec2 otherHalf = other->GetSize() * 0.5f;
+//
+//	// 오른쪽 이동 중 벽에 충돌
+//	if (_lastDir == Direction::Right)
+//	{
+//		float maxX = otherPos.x - otherHalf.x - playerHalf.x;
+//		if (playerPos.x > maxX) playerPos.x = maxX;
+//	}
+//	// 왼쪽 이동 중 벽에 충돌
+//	else if (_lastDir == Direction::Left)
+//	{
+//		float minX = otherPos.x + otherHalf.x + playerHalf.x;
+//		if (playerPos.x < minX) playerPos.x = minX;
+//	}
+//
+//	_ownerTransform->SetPosition(playerPos);
+//}
 
 void PlayerController::MovePlayer()
 {
@@ -298,18 +297,18 @@ void PlayerController::MovePlayer()
 		{
 			switch (_playerState)
 			{
-			case PlayerState::Normal: flipbook = _normal_walk_r; break;
-			case PlayerState::Gun:    flipbook = _gun_walk_r;    break;
-			case PlayerState::Sword:  flipbook = _sword_walk_r;  break;
+			case EPlayerWeaponState::Normal: flipbook = _normal_walk_r; break;
+			case EPlayerWeaponState::Gun:    flipbook = _gun_walk_r;    break;
+			case EPlayerWeaponState::Sword:  flipbook = _sword_walk_r;  break;
 			}
 		}
 		else
 		{
 			switch (_playerState)
 			{
-			case PlayerState::Normal: flipbook = _normal_idle_r; break;
-			case PlayerState::Gun:    flipbook = _gun_idle_r;    break;
-			case PlayerState::Sword:  flipbook = _sword_idle_r;  break;
+			case EPlayerWeaponState::Normal: flipbook = _normal_idle_r; break;
+			case EPlayerWeaponState::Gun:    flipbook = _gun_idle_r;    break;
+			case EPlayerWeaponState::Sword:  flipbook = _sword_idle_r;  break;
 			}
 		}
 
@@ -344,9 +343,9 @@ void PlayerController::JumpPlayer()
 		shared_ptr<Flipbook> fallFlipbook = nullptr;
 		switch (_playerState)
 		{
-		case PlayerState::Normal: fallFlipbook = _normal_fall_r; break;
-		case PlayerState::Gun:    fallFlipbook = _gun_jump_r;    break;
-		case PlayerState::Sword:  fallFlipbook = _sword_jump_r;  break;
+		case EPlayerWeaponState::Normal: fallFlipbook = _normal_fall_r; break;
+		case EPlayerWeaponState::Gun:    fallFlipbook = _gun_jump_r;    break;
+		case EPlayerWeaponState::Sword:  fallFlipbook = _sword_jump_r;  break;
 		}
 
 		if (fallFlipbook && _playerFlipbookPlayer->GetCurrentFlipbook() != fallFlipbook)
@@ -357,22 +356,34 @@ void PlayerController::JumpPlayer()
 	}
 }
 
+void PlayerController::OnColliderWithEnemy(const shared_ptr<BoxCollider>& other)
+{
+	shared_ptr<GameObject> owner;
+	if (Utils::IsValidPtr(other->GetOwner(), owner) == false)
+	{
+		cout << "owner is null" << endl;
+	}
+
+	string name = owner->GetName();
+	cout << "Collided with " << name << endl;
+}
+
 void PlayerController::SetAttackCollider()
 {
-	_attackColliderObject1->SetActive(false);
-	_attackColliderObject2->SetActive(false);
+	/*_attackColliderObject1->SetActive(false);
+	_attackColliderObject2->SetActive(false);*/
 	_bulletSpawnerObject->SetActive(false);
 
 	shared_ptr<GameObject> activeCollider = nullptr;
 	switch (_playerState)
 	{
-	case PlayerState::Normal:
+	/*case PlayerState::Normal:
 		activeCollider = _attackColliderObject1;
 		break;
 	case PlayerState::Sword:
 		activeCollider = _attackColliderObject2;
-		break;
-	case PlayerState::Gun:
+		break;*/
+	case EPlayerWeaponState::Gun:
 		activeCollider = _bulletSpawnerObject;
 		break;
 	default:

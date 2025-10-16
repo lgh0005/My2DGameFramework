@@ -91,10 +91,10 @@ void Transform::UpdateModelMatrix()
 	shared_ptr<Transform> parent;
 	if (Utils::IsValidPtr<Transform>(_parent, parent))
 	{
-		if (parent->_dirty)  // 부모가 더럽다면 먼저 갱신
-			parent->UpdateModelMatrix();
+		//if (parent->_dirty)  // 부모가 더럽다면 먼저 갱신
+		//	parent->UpdateModelMatrix();
 
-		// 로컬 모델 계산 후 부모 모델 곱하기
+		//// 로컬 모델 계산 후 부모 모델 곱하기
 		_model = parent->GetModel() * CalculateLocalModel();
 	}
 	else
