@@ -13,11 +13,7 @@ GameObject::GameObject(const string& name) : _name(name)
 
 GameObject::~GameObject()
 {
-	for (auto& component : _components)
-	{
-		shared_ptr<BoxCollider> collider = dynamic_pointer_cast<BoxCollider>(component);
-		if (collider) COLLIDER.RemoveColliderComponent(collider);
-	}
+	
 }
 
 shared_ptr<IComponent> GameObject::GetComponent(const string& name)
@@ -106,10 +102,26 @@ void GameObject::Destroy()
 {
 	SetActive(false);
 	_pendingDestroy = true;
+
+	for (auto& component : _components) component->Destroy();
+	for (auto& renderable : _renderables) renderable->Destroy();
+	for (auto& behaviour : _behaviours) behaviour->Destroy();
+
 	for (auto& child : _children)
 	{
 		if (child)
 			child->Destroy();
+	}
+
+	/* FOR DEFENCE */
+	{
+		_transform = nullptr;
+		_parent.reset(); // weak_ptr¸¦ ºñ¿ó´Ï´Ù.
+
+		_components.clear();
+		_renderables.clear();
+		_behaviours.clear();
+		_children.clear();
 	}
 }
 
@@ -117,6 +129,11 @@ void GameObject::SetActive(bool active)
 {
 	if (_isActive == active) return;
 	_isActive = active;
+
+	if (_transform) _transform->SetActive(active);
+	for (auto& component : _components) component->SetActive(active);
+	for (auto& renderable : _components) renderable->SetActive(active);
+	for (auto& behaviour : _components) behaviour->SetActive(active);
 
 	for (auto& child : _children)
 	{

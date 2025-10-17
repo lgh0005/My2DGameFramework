@@ -60,6 +60,20 @@ void RenderManager::Update()
     SDL_GL_SwapWindow(_window);
 }
 
+void RenderManager::LateUpdate()
+{
+    for (auto& renderPass : _renderQueue)
+    {
+        auto& renderables = renderPass->GetRenderables();
+        renderables.erase
+        (
+            remove_if(renderables.begin(), renderables.end(),
+            [](const shared_ptr<IRenderable>& renderable) { return renderable->IsPendingDestroy(); }),
+            renderables.end()
+        );
+    }
+}
+
 void RenderManager::AddRenderPass(const shared_ptr<RenderPass>& renderPass)
 {
     _renderQueue.push_back(renderPass);

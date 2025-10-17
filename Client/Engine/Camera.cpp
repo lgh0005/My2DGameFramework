@@ -26,6 +26,8 @@ void Camera::Awake(const shared_ptr<GameObject>& owner)
 
 void Camera::Update()
 {
+    Super::Update();
+
     if (auto owner = _owner.lock())
     {
         auto transform = owner->GetTransform();

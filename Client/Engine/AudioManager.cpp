@@ -46,6 +46,8 @@ void AudioManager::Update()
 	_system->update();
 }
 
+void AudioManager::LateUpdate() {}
+
 void AudioManager::PlayBGM(const string& name)
 {
 	auto it = _bgm.find(name);

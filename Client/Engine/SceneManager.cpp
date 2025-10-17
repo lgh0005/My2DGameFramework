@@ -14,7 +14,7 @@ void SceneManager::Update()
 
 void SceneManager::LateUpdate()
 {
-	if (_currentScene) _currentScene->LateUpdate();
+	_currentScene->LateUpdate();
 }
 
 void SceneManager::AddScenes(const vector<shared_ptr<Scene>>& scenes)

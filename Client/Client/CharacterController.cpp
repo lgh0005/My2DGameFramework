@@ -19,10 +19,6 @@ void CharacterController::Init()
 	// Get transform
 	_ownerTransform = owner->GetTransform();
 
-	// Get collider
-	_collider = static_pointer_cast<BoxCollider>(owner->GetComponent("PlayerCollider"));
-	_collider->SetCollisionEnterCallback([self](const shared_ptr<BoxCollider>& other) { self->OnCollisionEnter(other); } );
-
 	// Get FlipbookPlayer
 	_CharacterFlipbookPlayer = static_pointer_cast<FlipbookPlayer>(owner->GetRenderable("CharacterFlipbook"));
 }
@@ -55,38 +51,9 @@ void CharacterController::Update()
 	}
 
 	// just moving constraint 
-	if (pos.x >= _moveXRange) pos.x = _moveXRange;
+	if (pos.x >= _maxMoveXRange) pos.x = _maxMoveXRange;
+	if (pos.x <= _minMoveXRange) pos.x = _minMoveXRange;
 
 	_ownerTransform->SetPosition(pos);
 }
 
-void CharacterController::OnCollisionEnter(const shared_ptr<BoxCollider>& other)
-{
-	shared_ptr<GameObject> owner;
-	if (Utils::IsValidPtr(_owner, owner) == false) return;
-
-	shared_ptr<GameObject> otherOwner;
-	if (Utils::IsValidPtr(other->GetOwner(), otherOwner) == false) return;
-
-	auto transform = owner->GetTransform();
-	auto playerPos = transform->GetPosition();
-	glm::vec2 playerHalf = _collider->GetSize() * 0.5f;
-
-	auto otherPos = otherOwner->GetTransform()->GetPosition();
-	glm::vec2 otherHalf = other->GetSize() * 0.5f;
-
-	// 오른쪽 이동 중 벽에 충돌
-	if (_lastDir == Direction::Right)
-	{
-		float maxX = otherPos.x - otherHalf.x - playerHalf.x;
-		if (playerPos.x > maxX) playerPos.x = maxX;
-	}
-	// 왼쪽 이동 중 벽에 충돌
-	else if (_lastDir == Direction::Left)
-	{
-		float minX = otherPos.x + otherHalf.x + playerHalf.x;
-		if (playerPos.x < minX) playerPos.x = minX;
-	}
-
-	transform->SetPosition(playerPos);
-}

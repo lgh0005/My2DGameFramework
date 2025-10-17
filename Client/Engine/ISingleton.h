@@ -12,6 +12,7 @@ protected:
 public:
 	virtual void Init() abstract;
 	virtual void Update() abstract;
+	virtual void LateUpdate() abstract;
 	static T& GetInstance() { static T s_Instance; return s_Instance; }
 };
 

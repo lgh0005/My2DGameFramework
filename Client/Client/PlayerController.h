@@ -18,6 +18,14 @@ enum class EPlayerState
 	Damaged,
 	Attack,
 	Died,
+	Jump,
+	END
+};
+
+enum
+{
+	PLAYER_WEAPON_STATE_COUNT = static_cast<uint32>(EPlayerWeaponState::END),
+	PLAYER_STATE_COUNT = static_cast<uint32>(EPlayerState::END)
 };
 
 class PlayerController : public IBehaviour
@@ -39,10 +47,15 @@ private:
 	shared_ptr<BoxCollider> _playerCollider;
 	void OnColliderWithEnemy(const shared_ptr<BoxCollider>& other);
 
-	// shared_ptr<GameObject> _attackColliderObject1;
-	// shared_ptr<GameObject> _attackColliderObject2;
+	shared_ptr<BoxCollider> _normalAttackCollider;
+	void OnCollideNormalAttackArea(const shared_ptr<BoxCollider>& other);
+	glm::vec2 _normalAttackColliderOffset;
+
+	shared_ptr<BoxCollider> _swordAttackCollider;
+	void OnCollideSwordAttackArea(const shared_ptr<BoxCollider>& other);
+	glm::vec2 _swordAttackColliderOffset;
+
 	void SetAttackCollider();
-	EObjectType _type = EObjectType::Player;
 
 /*=============================
 //     Moving properties     //
@@ -50,7 +63,6 @@ private:
 private:
 	void MovePlayer();
 	void JumpPlayer();
-	void ChangeWeapon();
 
 	shared_ptr<Shader> _playerShader;
 	shared_ptr<UniformSet> _playerUniformSet;
@@ -73,16 +85,24 @@ private:
 	void Attack();
 	bool _isAttacking = false;
 	int _comboStep = 0; 
-	EPlayerWeaponState _playerState = EPlayerWeaponState::Normal;
 
 	shared_ptr<GameObject> _bulletSpawnerObject;
 	shared_ptr<BulletSpawner> _bulletSpawner;
 	float _gunCooldown = 1.0f; // 0.3√  ∞£∞›
 	float _gunTimer = 0.0f;
 
+	void ChangeWeapon();
+
 	void AttackNormal();
 	void AttackSword();
 	void AttackGun();
+
+/*=================================
+//     Player State Machine      //
+//===============================*/
+private:
+	EPlayerWeaponState _playerWeaponState = EPlayerWeaponState::Normal;
+	EPlayerState _playerState = EPlayerState::Idle;
 
 /*=============================
 //     Player Flipbooks      //

@@ -103,3 +103,27 @@ namespace UI
 
     constexpr int32 UITYPE_COUNT = static_cast<int32>(UIType::END) - 1;
 }
+
+namespace CollisionLayer
+{
+    enum class Layers : uint8
+    {
+        None = 0,
+        Player = 1 << 0,
+        PlayerAttack = 1 << 1,
+        Enemy = 1 << 2,
+        EnemyAttack = 1 << 3,
+        Bullet = 1 << 4,
+        All = ~0
+    };
+
+    inline Layers operator|(Layers a, Layers b)
+    {
+        return static_cast<Layers>(static_cast<uint32>(a) | static_cast<uint32>(b));
+    }
+
+    inline Layers operator&(Layers a, Layers b)
+    {
+        return static_cast<Layers>(static_cast<uint32>(a) & static_cast<uint32>(b));
+    }
+}

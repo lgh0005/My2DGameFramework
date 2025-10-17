@@ -11,6 +11,8 @@ public:
 public:
 	virtual void Init() override;
 	virtual void Update() override;
+	virtual void LateUpdate() override;
+
 	float deltaTime = 0.0f;
 	float FPS = 0.0f;
 

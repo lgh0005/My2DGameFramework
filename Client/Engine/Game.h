@@ -9,8 +9,11 @@ public:
 public:
 	void Init();
 	void Launch(const string& FirstSceneName);
-	void Update();
 	void Quit();
+
+private:
+	void Update();
+	void LateUpdate();
 
 private:
 	SDL_Event _event;

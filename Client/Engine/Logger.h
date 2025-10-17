@@ -8,6 +8,7 @@ class Logger : public ISingleton<Logger>
 public:
 	virtual void Init() override;
 	virtual void Update() override;
+	virtual void LateUpdate() override;
 
 public:
 	static void WriteLog(const string& msg);

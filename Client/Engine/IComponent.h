@@ -20,6 +20,12 @@ public:
 	weak_ptr<GameObject> GetOwner() { return _owner; }
 
 public:
+	void SetActive(bool active) { _isActive = active; }
+	bool IsActive() { return _isActive; }
+	void Destroy() { _pendingDestroy = true; }
+	bool IsPendingDestroy() const { return _pendingDestroy; }
+
+public:
 	template<typename T>
 	shared_ptr<T> GetSelf()
 	{
@@ -27,6 +33,8 @@ public:
 	}
 
 protected:
+	bool _pendingDestroy = false;
+	bool _isActive = true;
 	const string _name;
 	weak_ptr<GameObject> _owner;
 };

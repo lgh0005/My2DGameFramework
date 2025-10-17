@@ -33,18 +33,39 @@ private:
 	shared_ptr<FlipbookPlayer> _playerFlipbookPlayer;
 	shared_ptr<Transform> _ownerTransform;
 
-	void SetEnemyState(EEnemyState state) { _enemyState = state; }
-	EEnemyState _enemyState = EEnemyState::Idle;
-	Direction _lastDir = Direction::Right;
 	float _moveSpeed = 500.0f;
-
 	float _maxMoveDistance = 2100.0f;
 	float _minMoveDistance = -460.0f;
 
+/*=============================
+//		  Enemy States       //
+//===========================*/
+public:
+	// TEST
+	bool _damaged = false;
+	void EMOTIONAL_DAMAGE()
+	{
+		if (!_damaged)
+		{
+			_health -= 2;
+			cout << "[Enemy Healt] : " << _health << endl;
+		}
+		_damaged = true;
+	}
+	void SetDamage(bool damage) { _damaged = damage; }
+
+private:
+	void SetEnemyState(EEnemyState state) { _enemyState = state; }
+	EEnemyState _enemyState = EEnemyState::Idle;
+	Direction _lastDir = Direction::Right;
+
+	// Attack
 	void Attack();
 	int _comboStep = 0;
 
+	// Health
 	void Died();
+	void Damaged();
 	int _health = 4;
 
 /*=============================

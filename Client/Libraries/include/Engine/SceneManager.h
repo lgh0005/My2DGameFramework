@@ -13,7 +13,7 @@ public:
 public:
 	virtual void Init() override;
 	virtual void Update() override;
-	void LateUpdate();
+	virtual void LateUpdate() override;
 
 public:
 	void AddScenes(const vector<shared_ptr<Scene>>& scenes);

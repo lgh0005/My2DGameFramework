@@ -1,14 +1,9 @@
 #include "pch.h"
 #include "Logger.h"
 
-void Logger::Init()
-{
-	// TODO : Logger 시작 로그를 작성한다.
-}
-
-void Logger::Update()
-{
-}
+void Logger::Init() {}
+void Logger::Update() {}
+void Logger::LateUpdate() {}
 
 void Logger::WriteLog(const string& msg)
 {

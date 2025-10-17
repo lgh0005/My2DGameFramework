@@ -16,7 +16,7 @@ void Sprite::Render(const shared_ptr<Shader>& shader, const glm::mat4& model, co
 {
 	shared_ptr<GameObject> owner;
 	if (Utils::IsValidPtr(_owner, owner) == false) return;
-	if (owner->GetActive() == false) return;
+	if (owner->IsActive() == false) return;
 
 	glm::mat4 renderModel = model;
 	if (_parallaxFactor < 1.0f)

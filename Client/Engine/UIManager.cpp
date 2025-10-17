@@ -3,15 +3,14 @@
 #include "IUIElement.h"
 #include "UIEvent.h"
 
-void UIManager::Init()
-{
-
-}
+void UIManager::Init() {}
 
 void UIManager::Update()
 {
 	ProcessEvents();
 }
+
+void UIManager::LateUpdate() {}
 
 void UIManager::CreateEvent(const UI::UIEventType type, const UI::UIEventPolicy policy, 
 	weak_ptr<IUIElement> sender, const glm::vec2 mouse, glm::vec2 delta, function<void()> callback)

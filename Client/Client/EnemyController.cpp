@@ -37,9 +37,10 @@ void EnemyController::Init()
 
 void EnemyController::Update()
 {
-	MoveEnemy();
+	// TODO : State에 따라서 flipbook과 호출해야 하는 함수를 호출
+	/*MoveEnemy();
 	Attack();
-	Died();
+	Died();*/
 }
 
 void EnemyController::MoveEnemy()
@@ -63,4 +64,9 @@ void EnemyController::Died()
 	// 1. 상태가 Died인지 체크
 	// 2. Died 애니메이션으로 전환
 	// 3. 객체 소멸
+}
+
+void EnemyController::Damaged()
+{
+
 }

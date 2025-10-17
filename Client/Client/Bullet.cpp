@@ -3,7 +3,6 @@
 
 #pragma region SCRIPT
 #include "BulletController.h"
-#include "BulletCollideScript.h"
 #pragma endregion
 
 Bullet::Bullet(const string& name) : Super(name)
@@ -43,10 +42,10 @@ shared_ptr<GameObject> Bullet::Instantiate(const string& name, const glm::vec3& 
 	}
 
 	// Collider
-	{
-		shared_ptr<BoxCollider> bulletCollider = make_shared<BoxCollider>("BulletCollider", glm::vec2(1.0f, 1.0f));
-		_bullet->AddComponent(bulletCollider);
-	}
+	shared_ptr<BoxCollider> bulletCollider = make_shared<BoxCollider>("BulletCollider", glm::vec2(40.0f, 25.0f));
+	bulletCollider->SetLayer(CollisionLayer::Layers::Bullet);
+	bulletCollider->SetMask(CollisionLayer::Layers::Enemy);
+	_bullet->AddComponent(bulletCollider);
 
 	// script
 	{

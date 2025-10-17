@@ -15,7 +15,7 @@ void IUIRenderable::Render(const shared_ptr<Shader>& shader, const glm::mat4& mo
 {
 	shared_ptr<GameObject> owner;
 	if (Utils::IsValidPtr(_owner, owner) == false) return;
-	if (owner->GetActive() == false) return;
+	if (owner->IsActive() == false) return;
 
     _texture->Render(shader, model, camera);
 }

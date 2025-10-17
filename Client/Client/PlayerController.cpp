@@ -79,11 +79,14 @@ void PlayerController::Init()
 	_playerFlipbookPlayer = static_pointer_cast<FlipbookPlayer>(owner->GetRenderable("PlayerFlipbook"));
 
 	// Get Colliders
-	shared_ptr<GameObject> colliderObj = scene->GetGameObject("PlayerCollider");
-	_playerCollider = static_pointer_cast<BoxCollider>(colliderObj->GetComponent("PlayerMainCollider"));
+	_playerCollider = static_pointer_cast<BoxCollider>(owner->GetComponent("PlayerMainCollider"));
 	_playerCollider->SetCollisionEnterCallback([self](const shared_ptr<BoxCollider>& other) { self->OnColliderWithEnemy(other); });
-	//_attackColliderObject1 = scene->GetGameObject("PlayerAttackArea1");
-	//_attackColliderObject2 = scene->GetGameObject("PlayerAttackArea2");*/
+	_normalAttackCollider = static_pointer_cast<BoxCollider>(owner->GetComponent("PlayerAttackAreaNormal"));
+	_normalAttackCollider->SetCollisionEnterCallback([self](const shared_ptr<BoxCollider>& other) { self->OnCollideNormalAttackArea(other); });
+	_normalAttackColliderOffset = _normalAttackCollider->GetOffset();
+	_swordAttackCollider = static_pointer_cast<BoxCollider>(owner->GetComponent("PlayerAttackAreaSword"));
+	_swordAttackCollider->SetCollisionEnterCallback([self](const shared_ptr<BoxCollider>& other) { self->OnCollideSwordAttackArea(other); });
+	_swordAttackColliderOffset = _swordAttackCollider->GetOffset();
 
 	// Get BulletSpanwer
 	_bulletSpawnerObject = scene->GetGameObject("BulletSpawner");
@@ -93,7 +96,8 @@ void PlayerController::Init()
 	_playerRigidBody = static_pointer_cast<RigidBody>(owner->GetComponent("PlayerJumper"));
 
 	// Ensure initial state
-	_playerState = EPlayerWeaponState::Normal;
+	_playerWeaponState = EPlayerWeaponState::Normal;
+	_playerState = EPlayerState::Idle;
 	_lastDir = Direction::Right;
 
 	// Get GameObject
@@ -112,36 +116,7 @@ void PlayerController::Update()
 	Attack();
 }
 
-void PlayerController::ChangeWeapon()
-{
-	if (INPUT.GetKeyDown(Inputs::Key::E))
-	{
-		int nextState = (static_cast<int>(_playerState) + 1) % static_cast<int>(EPlayerWeaponState::END);
-		_playerState = static_cast<EPlayerWeaponState>(nextState);
-	}
-
-	// 모든 UI를 일단 비활성화
-	if (_NoWeaponText)  _NoWeaponText->SetActive(false);
-	if (_PistolText)    _PistolText->SetActive(false);
-	if (_SwordText)     _SwordText->SetActive(false);
-
-	// 현재 상태에 해당하는 UI만 활성화
-	switch (_playerState)
-	{
-	case EPlayerWeaponState::Normal:
-		if (_NoWeaponText) _NoWeaponText->SetActive(true);
-		break;
-	case EPlayerWeaponState::Gun:
-		if (_PistolText) _PistolText->SetActive(true);
-		break;
-	case EPlayerWeaponState::Sword:
-		if (_SwordText) _SwordText->SetActive(true);
-		break;
-	default:
-		break;
-	}
-}
-
+#pragma region LEGACY
 void PlayerController::Attack()
 {
 	if (_playerRigidBody->IsGrounded() == false) return;
@@ -149,7 +124,7 @@ void PlayerController::Attack()
 	shared_ptr<Flipbook> attackFlipbook = nullptr;
 
 	// 현재 콤보 단계에 따라 공격 Flipbook 선택
-	if (_playerState == EPlayerWeaponState::Normal)
+	if (_playerWeaponState == EPlayerWeaponState::Normal)
 	{
 		switch (_comboStep)
 		{
@@ -159,7 +134,7 @@ void PlayerController::Attack()
 		}
 		// TODO : Damage enemy with normal
 	}
-	else if (_playerState == EPlayerWeaponState::Sword)
+	else if (_playerWeaponState == EPlayerWeaponState::Sword)
 	{
 		switch (_comboStep)
 		{
@@ -169,7 +144,7 @@ void PlayerController::Attack()
 		}
 		// TODO : Damage enemy with sword
 	}
-	else if (_playerState == EPlayerWeaponState::Gun)
+	else if (_playerWeaponState == EPlayerWeaponState::Gun)
 	{
 		attackFlipbook = _gun_shot_r;
 		// TODO : Damage enemy with bullet
@@ -188,7 +163,7 @@ void PlayerController::Attack()
 		_isAttacking = true;
 
 		// 다음 콤보 단계로
-		if (_playerState != EPlayerWeaponState::Gun) // Gun은 단일 공격
+		if (_playerWeaponState != EPlayerWeaponState::Gun) // Gun은 단일 공격
 			_comboStep = (_comboStep + 1) % 3;
 	}
 
@@ -197,7 +172,7 @@ void PlayerController::Attack()
 	{
 		// 공격 끝나면 Idle로 전환
 		shared_ptr<Flipbook> idleFlipbook = nullptr;
-		switch (_playerState)
+		switch (_playerWeaponState)
 		{
 		case EPlayerWeaponState::Normal: idleFlipbook = _normal_idle_r; break;
 		case EPlayerWeaponState::Sword:  idleFlipbook = _sword_idle_r;  break;
@@ -254,33 +229,6 @@ void PlayerController::AttackGun()
 	}
 }
 
-//void PlayerController::OnColliderWithWall(const shared_ptr<BoxCollider>& other)
-//{
-//	shared_ptr<GameObject> otherOwner;
-//	if (Utils::IsValidPtr(other->GetOwner(), otherOwner) == false) return;
-//
-//	auto playerPos = _ownerTransform->GetPosition();
-//	glm::vec2 playerHalf = _wallCollider->GetSize() * 0.5f;
-//
-//	auto otherPos = otherOwner->GetTransform()->GetPosition();
-//	glm::vec2 otherHalf = other->GetSize() * 0.5f;
-//
-//	// 오른쪽 이동 중 벽에 충돌
-//	if (_lastDir == Direction::Right)
-//	{
-//		float maxX = otherPos.x - otherHalf.x - playerHalf.x;
-//		if (playerPos.x > maxX) playerPos.x = maxX;
-//	}
-//	// 왼쪽 이동 중 벽에 충돌
-//	else if (_lastDir == Direction::Left)
-//	{
-//		float minX = otherPos.x + otherHalf.x + playerHalf.x;
-//		if (playerPos.x < minX) playerPos.x = minX;
-//	}
-//
-//	_ownerTransform->SetPosition(playerPos);
-//}
-
 void PlayerController::MovePlayer()
 {
 	auto pos = _ownerTransform->GetPosition();
@@ -295,7 +243,7 @@ void PlayerController::MovePlayer()
 		shared_ptr<Flipbook> flipbook = nullptr;
 		if (isMoving)
 		{
-			switch (_playerState)
+			switch (_playerWeaponState)
 			{
 			case EPlayerWeaponState::Normal: flipbook = _normal_walk_r; break;
 			case EPlayerWeaponState::Gun:    flipbook = _gun_walk_r;    break;
@@ -304,7 +252,7 @@ void PlayerController::MovePlayer()
 		}
 		else
 		{
-			switch (_playerState)
+			switch (_playerWeaponState)
 			{
 			case EPlayerWeaponState::Normal: flipbook = _normal_idle_r; break;
 			case EPlayerWeaponState::Gun:    flipbook = _gun_idle_r;    break;
@@ -341,7 +289,7 @@ void PlayerController::JumpPlayer()
 	if (!_playerRigidBody->IsGrounded())
 	{
 		shared_ptr<Flipbook> fallFlipbook = nullptr;
-		switch (_playerState)
+		switch (_playerWeaponState)
 		{
 		case EPlayerWeaponState::Normal: fallFlipbook = _normal_fall_r; break;
 		case EPlayerWeaponState::Gun:    fallFlipbook = _gun_jump_r;    break;
@@ -356,48 +304,135 @@ void PlayerController::JumpPlayer()
 	}
 }
 
-void PlayerController::OnColliderWithEnemy(const shared_ptr<BoxCollider>& other)
+void PlayerController::ChangeWeapon()
 {
-	shared_ptr<GameObject> owner;
-	if (Utils::IsValidPtr(other->GetOwner(), owner) == false)
+	if (INPUT.GetKeyDown(Inputs::Key::E))
 	{
-		cout << "owner is null" << endl;
+		int nextState = (static_cast<int>(_playerWeaponState) + 1) % static_cast<int>(EPlayerWeaponState::END);
+		_playerWeaponState = static_cast<EPlayerWeaponState>(nextState);
 	}
 
-	string name = owner->GetName();
-	cout << "Collided with " << name << endl;
-}
+	// 모든 UI를 일단 비활성화
+	if (_NoWeaponText)  _NoWeaponText->SetActive(false);
+	if (_PistolText)    _PistolText->SetActive(false);
+	if (_SwordText)     _SwordText->SetActive(false);
 
-void PlayerController::SetAttackCollider()
-{
-	/*_attackColliderObject1->SetActive(false);
-	_attackColliderObject2->SetActive(false);*/
-	_bulletSpawnerObject->SetActive(false);
-
-	shared_ptr<GameObject> activeCollider = nullptr;
-	switch (_playerState)
+	// 현재 상태에 해당하는 UI만 활성화
+	switch (_playerWeaponState)
 	{
-	/*case PlayerState::Normal:
-		activeCollider = _attackColliderObject1;
+	case EPlayerWeaponState::Normal:
+		if (_NoWeaponText) _NoWeaponText->SetActive(true);
 		break;
-	case PlayerState::Sword:
-		activeCollider = _attackColliderObject2;
-		break;*/
 	case EPlayerWeaponState::Gun:
-		activeCollider = _bulletSpawnerObject;
+		if (_PistolText) _PistolText->SetActive(true);
+		break;
+	case EPlayerWeaponState::Sword:
+		if (_SwordText) _SwordText->SetActive(true);
 		break;
 	default:
 		break;
 	}
-
-	if (!activeCollider) return;
-
-	// 활성화
-	activeCollider->SetActive(true);
-
-	// 방향에 따라 x 위치 반전 (local position 기준)
-	auto attackTransform = activeCollider->GetTransform();
-	glm::vec3 localPos = attackTransform->GetPosition();
-	localPos.x = (_lastDir == Direction::Left) ? -abs(localPos.x) : abs(localPos.x);
-	attackTransform->SetPosition(localPos);
 }
+
+void PlayerController::SetAttackCollider()
+{
+	// 1. 총알 발사기 위치/활성화 설정
+	if (_bulletSpawnerObject)
+	{
+		bool isGunner = (_playerWeaponState == EPlayerWeaponState::Gun);
+		_bulletSpawnerObject->SetActive(isGunner);
+
+		if (isGunner)
+		{
+			auto spawnerTransform = _bulletSpawnerObject->GetTransform();
+			glm::vec3 localPos = spawnerTransform->GetPosition();
+			localPos.x = (_lastDir == Direction::Left) ? -abs(localPos.x) : abs(localPos.x);
+			spawnerTransform->SetPosition(localPos);
+		}
+	}
+
+	// 2. 근접 공격 콜라이더들의 offset을 방향에 따라 즉시 조정
+	if (_lastDir == Direction::Right)
+	{
+		// 오른쪽을 볼 때는 원본 offset을 그대로 사용
+		// shared_ptr는 if문에서 바로 유효성 검사가 가능합니다.
+		if (_normalAttackCollider)
+			_normalAttackCollider->SetOffset(_normalAttackColliderOffset);
+		if (_swordAttackCollider)
+			_swordAttackCollider->SetOffset(_swordAttackColliderOffset);
+	}
+	else // Direction::Left
+	{
+		// 왼쪽을 볼 때는 원본 offset의 x값만 부호를 바꿔서 설정
+		if (_normalAttackCollider)
+		{
+			glm::vec2 leftOffset = _normalAttackColliderOffset;
+			leftOffset.x *= -1.0f;
+			_normalAttackCollider->SetOffset(leftOffset);
+		}
+		if (_swordAttackCollider)
+		{
+			glm::vec2 leftOffset = _swordAttackColliderOffset;
+			leftOffset.x *= -1.0f;
+			_swordAttackCollider->SetOffset(leftOffset);
+		}
+	}
+}
+#pragma endregion
+
+#pragma region COLLIDER_METHODS
+void PlayerController::OnColliderWithEnemy(const shared_ptr<BoxCollider>& other)
+{
+	cout << "[Player Body] 적과 부딪힘!" << endl;
+}
+
+void PlayerController::OnCollideNormalAttackArea(const shared_ptr<BoxCollider>& other)
+{
+	// 1. 공격 상태인지 먼저 확인합니다.
+	if (!_isAttacking || _playerWeaponState != EPlayerWeaponState::Normal)
+	{
+		return;
+	}
+
+	// 2. 충돌한 상대방의 GameObject를 안전하게 가져옵니다.
+	shared_ptr<GameObject> otherOwner;
+	if (Utils::IsValidPtr(other->GetOwner(), otherOwner) == false)
+	{
+		return;
+	}
+
+	// 3. 상대방이 "EnemyController" 스크립트를 가지고 있는지 확인합니다.
+	auto enemyController = otherOwner->GetBehaviour("EnemyController");
+	if (enemyController != nullptr)
+	{
+		// 4. 적일 경우에만 공격 성공 로직을 실행합니다.
+		cout << "[Normal Attack] 공격 성공! 상대: " << otherOwner->GetName() << endl;
+
+		// TODO: 여기에 적의 체력을 깎는 코드를 추가합니다.
+		// 예: static_pointer_cast<EnemyController>(enemyController)->TakeDamage(10);
+	}
+}
+
+void PlayerController::OnCollideSwordAttackArea(const shared_ptr<BoxCollider>& other)
+{
+	if (!_isAttacking || _playerWeaponState != EPlayerWeaponState::Sword)
+	{
+		return;
+	}
+
+	shared_ptr<GameObject> otherOwner;
+	if (Utils::IsValidPtr(other->GetOwner(), otherOwner) == false)
+	{
+		return;
+	}
+
+	auto enemyController = otherOwner->GetBehaviour("EnemyController");
+	if (enemyController != nullptr)
+	{
+		cout << "[Sword Attack] 공격 성공! 상대: " << otherOwner->GetName() << endl;
+
+		// TODO: 여기에 적의 체력을 깎는 코드를 추가합니다.
+		// 예: static_pointer_cast<EnemyController>(enemyController)->TakeDamage(25);
+	}
+}
+#pragma endregion

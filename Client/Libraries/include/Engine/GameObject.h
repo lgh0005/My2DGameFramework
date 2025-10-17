@@ -46,7 +46,7 @@ public:
 
 	// SetActive method
 	void SetActive(bool active);
-	bool GetActive() { return _isActive; }
+	bool IsActive() { return _isActive; }
 
 	// GameObject state change methods
 	void Destroy();

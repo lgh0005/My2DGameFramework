@@ -10,7 +10,6 @@ Transform::Transform(const string& name, const glm::vec3& position, const glm::v
 
 void Transform::Init()
 {
-	// Set parent
 	Super::Init();
 
 	shared_ptr<GameObject> owner;

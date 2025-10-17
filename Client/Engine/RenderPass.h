@@ -20,6 +20,7 @@ public:
 	void SetCamera(const shared_ptr<Camera>& camera) { _camera = camera; }
 	shared_ptr<Camera> GetCamera() { return _camera; }
 	void AddRenderable(const shared_ptr<IRenderable>& renderable) { _renderables.push_back(renderable); }
+	vector<shared_ptr<IRenderable>>& GetRenderables() { return _renderables; }
 	void SetUniformSet(const shared_ptr<UniformSet>& uniformSet) { _customUniforms = uniformSet; }
 
 public:

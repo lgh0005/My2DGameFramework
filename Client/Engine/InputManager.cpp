@@ -24,6 +24,8 @@ void InputManager::Update()
 	_mouseWheel = 0;
 }
 
+void InputManager::LateUpdate() {}
+
 void InputManager::GetEvent(const SDL_Event& e)
 {
 	switch (e.type)

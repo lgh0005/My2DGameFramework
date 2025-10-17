@@ -34,7 +34,7 @@ void UICanvas::Render(const shared_ptr<Shader>& shader, const glm::mat4& model, 
 {
 	shared_ptr<GameObject> owner;
 	if (Utils::IsValidPtr(_owner, owner) == false) return;
-	if (owner->GetActive() == false) return;
+	if (owner->IsActive() == false) return;
 
 	for (auto& ui : _uis) 
 		ui->Render(shader, model, camera);

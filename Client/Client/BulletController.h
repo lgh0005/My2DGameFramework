@@ -32,8 +32,6 @@ private:
 	Direction _direction = Direction::Right;
 	float _travelledDistance = 0.0f;
 
-	EObjectType _type = EObjectType::Bullet;
-
 /*==============================
 //     Collide properties     //
 //============================*/

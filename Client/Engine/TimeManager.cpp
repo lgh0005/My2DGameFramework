@@ -1,11 +1,8 @@
 #include "pch.h"
 #include "TimeManager.h"
 
-void TimeManager::Init()
-{
-
-}
-
+void TimeManager::Init() {}
+void TimeManager::LateUpdate() {}
 void TimeManager::Update()
 {
     _currentTime = SDL_GetPerformanceCounter();
@@ -13,3 +10,4 @@ void TimeManager::Update()
     FPS = 1.f / deltaTime;
     _lastTime = _currentTime;
 }
+

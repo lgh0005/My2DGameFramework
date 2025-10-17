@@ -23,7 +23,7 @@ shared_ptr<GameObject> Character::Instantiate(const string& name, const glm::vec
 	COLLIDER.AddColliderComponent(collider);
 	character->AddComponent(collider);
 
-	shared_ptr<CharacterController> script = make_shared<CharacterController>("PlayerController");
+	shared_ptr<CharacterController> script = make_shared<CharacterController>("CharacterController");
 	character->AddBehaviour(static_pointer_cast<IBehaviour>(script));
 
 	scene->GetRenderPass("_CharacterRenderPass")->AddRenderable(flipbookPlayer);

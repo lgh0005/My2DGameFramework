@@ -20,7 +20,7 @@ void FlipbookPlayer::Render(const shared_ptr<Shader>& shader, const glm::mat4& m
 {
 	shared_ptr<GameObject> owner;
 	if (Utils::IsValidPtr(_owner, owner) == false) return;
-	if (owner->GetActive() == false) return;
+	if (owner->IsActive() == false) return;
 
 	_flipbook->Render(shader, model, camera);
 }

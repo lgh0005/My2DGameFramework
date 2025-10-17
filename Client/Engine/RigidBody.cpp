@@ -11,6 +11,8 @@ RigidBody::RigidBody(const string& name, float gravity, float velocity)
 
 void RigidBody::Update()
 {
+	Super::Update();
+
 	shared_ptr<GameObject> owner;
 	if (Utils::IsValidPtr(_owner, owner) == false) return;
 

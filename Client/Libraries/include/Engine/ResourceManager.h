@@ -13,6 +13,7 @@ public:
 public:
 	virtual void Init() override;
 	virtual void Update() override;
+	virtual void LateUpdate() override;
 
 public:
 	void AddResource(shared_ptr<IResource> resource);

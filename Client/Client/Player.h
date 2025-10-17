@@ -28,6 +28,7 @@ private:
 	shared_ptr<GameObject> _bulletSpawner;
 	shared_ptr<Transform> _bulletSpawnerTransform;
 
+#pragma region COLLIDER_DEBUG
 	// Attack area : normal state
 	shared_ptr<GameObject> _attackArea1;
 	shared_ptr<Transform> _attackAreaTransform1;
@@ -39,5 +40,6 @@ private:
 	// Player Collider
 	shared_ptr<GameObject> _playerCollider;
 	shared_ptr<Transform> _playerColliderTransform;
+#pragma endregion
 };
 

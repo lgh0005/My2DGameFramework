@@ -2,15 +2,9 @@
 #include "ResourceManager.h"
 #include "IResource.h"
 
-void ResourceManager::Init()
-{
-
-}
-
-void ResourceManager::Update()
-{
-
-}
+void ResourceManager::Init() {}
+void ResourceManager::Update() {}
+void ResourceManager::LateUpdate() {}
 
 void ResourceManager::AddResource(shared_ptr<IResource> resource)
 {

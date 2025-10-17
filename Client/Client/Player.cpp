@@ -54,62 +54,81 @@ shared_ptr<GameObject> Player::Instantiate(const string& name, const glm::vec3& 
 
 	// Main player collider
 	{
-		_playerCollider = make_shared<GameObject>("PlayerCollider");
-		_playerColliderTransform = make_shared<Transform>
-			(
-				"PlayerCollider",
-				glm::vec3(0.0f, -50.0f, 0.0f),
-				glm::vec3(0.0f),
-				glm::vec3(80.0f, 150.0f, 1.0f)
-			);
-		_playerCollider->SetTransform(_playerColliderTransform);
-		_playerCollider->SetParent(_player);
-		shared_ptr<Sprite> testSprite = make_shared<Sprite>("TestSprite3", RESOURCE.GetResource<Texture>("TEST3"));
-		_playerCollider->AddRenderable(testSprite);
+		shared_ptr<BoxCollider> playerCollider = make_shared<BoxCollider>("PlayerMainCollider", glm::vec2(80.0f, 150.0f), glm::vec2(0.0f, -50.0f));
+		playerCollider->SetLayer(CollisionLayer::Layers::Player);
+		playerCollider->SetMask(CollisionLayer::Layers::EnemyAttack);
+		_player->AddComponent(playerCollider);
 
-		shared_ptr<BoxCollider> playerCollider = make_shared<BoxCollider>("PlayerMainCollider", glm::vec2(1.0f, 1.0f));
-		_playerCollider->AddComponent(playerCollider);
-
-		scene->GetRenderPass("_debugRenderPass")->AddRenderable(testSprite);
-		GameObjectList.push_back(_playerCollider);
+		// DEBUG
+		{
+			_playerCollider = make_shared<GameObject>("PlayerCollider");
+			_playerColliderTransform = make_shared<Transform>
+				(
+					"PlayerCollider",
+					glm::vec3(0.0f, -50.0f, 0.0f),
+					glm::vec3(0.0f),
+					glm::vec3(80.0f, 150.0f, 1.0f)
+				);
+			_playerCollider->SetTransform(_playerColliderTransform);
+			_playerCollider->SetParent(_player);
+			shared_ptr<Sprite> testSprite = make_shared<Sprite>("TestSprite3", RESOURCE.GetResource<Texture>("TEST3"));
+			_playerCollider->AddRenderable(testSprite);
+			scene->GetRenderPass("_debugRenderPass")->AddRenderable(testSprite);
+			GameObjectList.push_back(_playerCollider);
+		}
 	}
 
-	// AttackArea #1
+	// AttackArea #1 : Normal
 	{
-		_attackArea1 = make_shared<GameObject>("PlayerAttackArea1");
-		_attackAreaTransform1 = make_shared<Transform>
-			(
-				"PlayerAttackAreaTransform",
-				glm::vec3(80.0f, -80.0f, 0.0f),
-				glm::vec3(0.0f),
-				glm::vec3(80.0f, 100.0f, 1.0f)
-			);
-		shared_ptr<Sprite> testSprite = make_shared<Sprite>("TestSprite", RESOURCE.GetResource<Texture>("TEST1"));
-		_attackArea1->AddRenderable(testSprite);
-		_attackArea1->SetTransform(_attackAreaTransform1);
-		_attackArea1->SetParent(_player);
-		_attackArea1->SetActive(false);
-		scene->GetRenderPass("_debugRenderPass")->AddRenderable(testSprite);
-		GameObjectList.push_back(_attackArea1);
+		shared_ptr<BoxCollider> normalAttackArea = make_shared<BoxCollider>("PlayerAttackAreaNormal", glm::vec2(90.0f, 100.0f), glm::vec2(100.0f, -50.0f));
+		normalAttackArea->SetLayer(CollisionLayer::Layers::PlayerAttack);
+		normalAttackArea->SetMask(CollisionLayer::Layers::Enemy);
+		_player->AddComponent(normalAttackArea);
+
+		// DEBUG
+		{
+			_attackArea1 = make_shared<GameObject>("PlayerAttackAreaNormal");
+			_attackAreaTransform1 = make_shared<Transform>
+				(
+					"PlayerAttackAreaTransform",
+					glm::vec3(100.0f, -50.0f, 0.0f),
+					glm::vec3(0.0f),
+					glm::vec3(90.0f, 100.0f, 1.0f)
+				);
+			shared_ptr<Sprite> testSprite = make_shared<Sprite>("TestSprite", RESOURCE.GetResource<Texture>("TEST1"));
+			_attackArea1->AddRenderable(testSprite);
+			_attackArea1->SetTransform(_attackAreaTransform1);
+			_attackArea1->SetParent(_player);
+			_attackArea1->SetActive(false);
+			scene->GetRenderPass("_debugRenderPass")->AddRenderable(testSprite);
+			GameObjectList.push_back(_attackArea1);
+		}
 	}
 
-	// AttackArea #2
+	// AttackArea #2 : Sword
 	{
-		_attackArea2 = make_shared<GameObject>("PlayerAttackArea2");
-		_attackAreaTransform2 = make_shared<Transform>
-			(
-				"PlayerAttackAreaTransform",
-				glm::vec3(80.0f, -80.0f, 0.0f),
-				glm::vec3(0.0f),
-				glm::vec3(110.0f, 100.0f, 1.0f)
-			);
-		shared_ptr<Sprite> testSprite = make_shared<Sprite>("TestSprite2", RESOURCE.GetResource<Texture>("TEST2"));
-		_attackArea2->AddRenderable(testSprite);
-		_attackArea2->SetTransform(_attackAreaTransform2);
-		_attackArea2->SetParent(_player);
-		_attackArea2->SetActive(false);
-		scene->GetRenderPass("_debugRenderPass")->AddRenderable(testSprite);
-		GameObjectList.push_back(_attackArea2);
+		shared_ptr<BoxCollider> swordAttackArea = make_shared<BoxCollider>("PlayerAttackAreaSword", glm::vec2(80.0f, 100.0f), glm::vec2(115.0f, -50.0f));
+		swordAttackArea->SetLayer(CollisionLayer::Layers::PlayerAttack);
+		swordAttackArea->SetMask(CollisionLayer::Layers::Enemy);
+		_player->AddComponent(swordAttackArea);
+
+		{
+			_attackArea2 = make_shared<GameObject>("PlayerAttackAreaSword");
+			_attackAreaTransform2 = make_shared<Transform>
+				(
+					"PlayerAttackAreaTransform",
+					glm::vec3(115.0f, -50.0f, 0.0f),
+					glm::vec3(0.0f),
+					glm::vec3(110.0f, 100.0f, 1.0f)
+				);
+			shared_ptr<Sprite> testSprite = make_shared<Sprite>("TestSprite2", RESOURCE.GetResource<Texture>("TEST2"));
+			_attackArea2->AddRenderable(testSprite);
+			_attackArea2->SetTransform(_attackAreaTransform2);
+			_attackArea2->SetParent(_player);
+			_attackArea2->SetActive(false);
+			scene->GetRenderPass("_debugRenderPass")->AddRenderable(testSprite);
+			GameObjectList.push_back(_attackArea2);
+		}
 	}
 
 	// Player controller

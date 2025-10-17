@@ -18,13 +18,6 @@ public:
 	virtual void Update() override;
 
 /*=============================
-//    Collider properties    //
-=============================*/
-private:
-	shared_ptr<BoxCollider> _collider;
-	void OnCollisionEnter(const shared_ptr<BoxCollider>& other);
-
-/*=============================
 //     Moving properties     //
 =============================*/
 private:
@@ -44,6 +37,7 @@ private:
 //     Misc.     //
 =================*/
 private:
-	float _moveXRange = -200.0f;
+	float _maxMoveXRange = -200.0f;
+	float _minMoveXRange = -400.0f;
 };
 

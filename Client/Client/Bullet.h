@@ -21,5 +21,8 @@ public:
 private:
 	shared_ptr<GameObject> _bullet;
 	shared_ptr<Transform> _bulletTransform;
+
+	shared_ptr<GameObject> _bulletCollider;
+	shared_ptr<Transform> _bulletColliderTransform;
 };
 

@@ -22,6 +22,7 @@ public:
 public:
 	virtual void Init() override;
 	virtual void Update() override;
+	virtual void LateUpdate() override;
 
 public:
 	void GetEvent(const SDL_Event& e);

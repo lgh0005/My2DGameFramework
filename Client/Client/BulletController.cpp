@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "BulletController.h"
-#include "BulletCollideScript.h"
+#include "EnemyController.h"
 
 BulletController::BulletController(const string& name) : Super(name)
 {
@@ -13,10 +13,12 @@ void BulletController::Init()
     auto self = GetSelf<BulletController>();
 
     shared_ptr<GameObject> owner;
-    if (Utils::IsValidPtr(_owner, owner) == false) return; 
+    if (Utils::IsValidPtr(_owner, owner) == false) return;
 
-    // Get bullet and bullet collider
+    // 2. 씬을 검색할 필요 없이, 나의 주인에게서 직접 컴포넌트를 가져옵니다.
     _bulletCollider = static_pointer_cast<BoxCollider>(owner->GetComponent("BulletCollider"));
+
+    // 3. 이제 "나의" 콜라이더에 정확히 콜백을 등록할 수 있습니다.
     _bulletCollider->ClearCollisionEnterCallback();
     _bulletCollider->SetCollisionEnterCallback([self](const shared_ptr<BoxCollider>& other) { self->OnCollisionWithEnemy(other); });
 }
@@ -24,7 +26,7 @@ void BulletController::Init()
 void BulletController::Update()
 {
 	MoveBullet();
-}
+ }
 
 void BulletController::MoveBullet()
 {
@@ -55,17 +57,23 @@ void BulletController::MoveBullet()
 
 void BulletController::OnCollisionWithEnemy(const shared_ptr<BoxCollider>& other)
 {
-    // TODO
-    // 1. 적의 생명을 2깎는다.
-    // 2. 이 오브젝트 소멸. 주의할 것은 이 오브젝트(BulletCollider) 뿐만 아니라,
-    // 이 오브젝트 부모도 없애야함.
-
-    // DEBUG
+    // Get enemy controller
     shared_ptr<GameObject> Other;
     if (Utils::IsValidPtr(other->GetOwner(), Other) == false) return;
 
+    auto enmeyController = static_pointer_cast<EnemyController>(Other->GetBehaviour("EnemyController"));
+    if (enmeyController == nullptr) return;
+
+    // 1. 적의 체력 깎기
     string otherName = Other->GetName();
     cout << "Collided! with " << otherName << endl;
+    enmeyController->EMOTIONAL_DAMAGE();
+
+    // 2. 총알 소멸
+    shared_ptr<GameObject> owner;
+    if (Utils::IsValidPtr(_owner, owner) == false) return;
+    owner->Destroy();
+    enmeyController->SetDamage(false);
 }
 
 
