@@ -21,19 +21,19 @@ public:
 	shared_ptr<Camera> GetCamera() { return _camera; }
 	void AddRenderable(const shared_ptr<IRenderable>& renderable) { _renderables.push_back(renderable); }
 	vector<shared_ptr<IRenderable>>& GetRenderables() { return _renderables; }
-	void SetUniformSet(const shared_ptr<UniformSet>& uniformSet) { _customUniforms = uniformSet; }
+	void SetUniformSet(const shared_ptr<UniformSet>& uniformSet) { _customGlobalUniforms = uniformSet; }
 
 public:
 	template<typename T>
 	void SetUniform(const string& name, const T& value)
 	{
-		_customUniforms->Set(name, value);
+		_customGlobalUniforms->Set(name, value);
 	}
 
 private:
 	shared_ptr<Shader> _shader;
 	shared_ptr<Camera> _camera;
 	vector<shared_ptr<IRenderable>> _renderables;
-	shared_ptr<UniformSet> _customUniforms;
+	shared_ptr<UniformSet> _customGlobalUniforms;
 };
 

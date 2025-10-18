@@ -21,14 +21,14 @@ void ITexture::Render(const shared_ptr<Shader>& shader, const glm::mat4& model, 
 	glBindVertexArray(_vao);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
 
-	// Uniforms
-	shader->SetUniformValue(Uniforms::UNIFORM_MODEL, model);
-	shader->SetUniformValue(Uniforms::UNIFORM_VIEW, camera->GetView());
-	shader->SetUniformValue(Uniforms::UNIFORM_PROJECTION, camera->GetProjection());
-	shader->SetUniformValue(Uniforms::UNIFORM_TEXTURE, 0);
+	//// Uniforms
+	//shader->SetUniformValue(Uniforms::UNIFORM_MODEL, model);
+	//shader->SetUniformValue(Uniforms::UNIFORM_VIEW, camera->GetView());
+	//shader->SetUniformValue(Uniforms::UNIFORM_PROJECTION, camera->GetProjection());
+	//shader->SetUniformValue(Uniforms::UNIFORM_TEXTURE, 0);
 
-	// Apply them at once
-	shader->ApplyUniforms();
+	//// Apply them at once
+	//shader->ApplyUniforms();
 
 	// Bind texture
 	UseTexture();

@@ -1,10 +1,12 @@
 #include "pch.h"
 #include "GameObject.h"
 #include "Transform.h"
+#include "Shader.h"
 #include "Sprite.h"
 #include "ITexture.h"
 #include "Texture.h"
 #include "Camera.h"
+#include "IUniformProvider.h"
 
 Sprite::Sprite(const string& name, shared_ptr<ITexture> texture)
 	: Super(name), _texture(texture)
@@ -28,6 +30,19 @@ void Sprite::Render(const shared_ptr<Shader>& shader, const glm::mat4& model, co
 			renderModel = glm::translate(model, -cameraPos * (1.0f - _parallaxFactor));
 		}
 	}
+
+	// Apply local uniforms
+	shared_ptr<IUniformProvider> provider = owner->GetUniformProvider();
+	if (provider) provider->ApplyUniforms(shader);
+
+	// Uniforms
+	shader->SetUniformValue(Uniforms::UNIFORM_MODEL, model);
+	shader->SetUniformValue(Uniforms::UNIFORM_VIEW, camera->GetView());
+	shader->SetUniformValue(Uniforms::UNIFORM_PROJECTION, camera->GetProjection());
+	shader->SetUniformValue(Uniforms::UNIFORM_TEXTURE, 0);
+
+	// Apply them at once
+	shader->ApplyUniforms();
 
 	_texture->Render(shader, renderModel, camera);
 }

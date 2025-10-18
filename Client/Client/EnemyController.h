@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine\IBehaviour.h"
+#include "Engine\IUniformProvider.h"
 
 #pragma region States
 #include "EnemyWalkState.h"

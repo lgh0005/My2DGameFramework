@@ -3,6 +3,8 @@
 #include "GameObject.h"
 #include "Flipbook.h"
 #include "Shader.h"
+#include "Camera.h"
+#include "IUniformProvider.h"
 
 FlipbookPlayer::FlipbookPlayer(const string& name, shared_ptr<Flipbook> flipbook)
 	: Super(name), _flipbook(flipbook)
@@ -21,6 +23,19 @@ void FlipbookPlayer::Render(const shared_ptr<Shader>& shader, const glm::mat4& m
 	shared_ptr<GameObject> owner;
 	if (Utils::IsValidPtr(_owner, owner) == false) return;
 	if (owner->IsActive() == false) return;
+
+	// Apply local uniforms
+	shared_ptr<IUniformProvider> provider = owner->GetUniformProvider();
+	if (provider) provider->ApplyUniforms(shader);
+
+	// Uniforms
+	shader->SetUniformValue(Uniforms::UNIFORM_MODEL, model);
+	shader->SetUniformValue(Uniforms::UNIFORM_VIEW, camera->GetView());
+	shader->SetUniformValue(Uniforms::UNIFORM_PROJECTION, camera->GetProjection());
+	shader->SetUniformValue(Uniforms::UNIFORM_TEXTURE, 0);
+
+	// Apply them at once
+	shader->ApplyUniforms();
 
 	_flipbook->Render(shader, model, camera);
 }

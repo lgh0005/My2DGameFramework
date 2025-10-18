@@ -5,7 +5,10 @@
 BulletController::BulletController(const string& name) : Super(name)
 {
 	_bulletShader = RESOURCE.GetResource<Shader>("BulletShader");
-	_bulletUniformSet = RESOURCE.GetResource<UniformSet>("BulletUniforms");
+    _bulletUniformSet = make_shared<UniformSet>("BulletController_UniformSet");
+    /*shared_ptr<UniformSet> bulletUniformSet = make_shared<UniformSet>("BulletController_UniformSet");
+    RESOURCE.AddResource(bulletUniformSet);
+	_bulletUniformSet = RESOURCE.GetResource<UniformSet>("BulletController_UniformSet");*/
 }
 
 void BulletController::Init()
@@ -46,13 +49,22 @@ void BulletController::MoveBullet()
         return;
     }
 
-    if (_bulletUniformSet)
+    /*if (_bulletUniformSet)
     {
         _bulletUniformSet->Set("flip", _direction == EDirection::Left);
         _bulletUniformSet->Apply(_bulletShader);
-    }
+    }*/
 
     owner->GetTransform()->SetPosition(pos);
+}
+
+void BulletController::ApplyUniforms(const shared_ptr<Shader>& shader)
+{
+    if (_bulletUniformSet)
+    {
+        _bulletUniformSet->Set("flip", _direction == EDirection::Left);
+        _bulletUniformSet->Apply(shader);
+    }
 }
 
 void BulletController::OnCollisionWithEnemy(const shared_ptr<BoxCollider>& other)

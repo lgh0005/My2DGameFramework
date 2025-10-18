@@ -169,6 +169,7 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClInclude Include="IResource.h" />
     <ClInclude Include="ISingleton.h" />
     <ClInclude Include="ITexture.h" />
+    <ClInclude Include="IUniformProvider.h" />
     <ClInclude Include="Prefab.h" />
     <ClInclude Include="RenderPass.h" />
     <ClInclude Include="SFX.h" />
@@ -218,6 +219,7 @@ xcopy /Y "$(SolutionDir)Engine\*.h" "$(SolutionDir)Libraries\include\Engine"</Co
     <ClCompile Include="IResource.cpp" />
     <ClCompile Include="ISingleton.cpp" />
     <ClCompile Include="ITexture.cpp" />
+    <ClCompile Include="IUniformProvider.cpp" />
     <ClCompile Include="Prefab.cpp" />
     <ClCompile Include="RenderPass.cpp" />
     <ClCompile Include="SFX.cpp" />

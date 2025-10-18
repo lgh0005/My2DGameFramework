@@ -3,6 +3,7 @@
 #include "IComponent.h"
 #include "IRenderable.h"
 #include "IBehaviour.h"
+#include "IUniformProvider.h"
 #include "BoxCollider.h"
 #include "Transform.h"
 
@@ -45,6 +46,7 @@ shared_ptr<IBehaviour> GameObject::GetBehaviour(const string& name)
 	}
 	return nullptr;
 }
+
 
 void GameObject::Init()
 {

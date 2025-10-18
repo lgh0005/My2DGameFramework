@@ -194,6 +194,9 @@
     <ClCompile Include="UniformSet.cpp">
       <Filter>소스 파일\05. Resources</Filter>
     </ClCompile>
+    <ClCompile Include="IUniformProvider.cpp">
+      <Filter>소스 파일\06. Interfaces</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnginePch.h">
@@ -342,6 +345,9 @@
     </ClInclude>
     <ClInclude Include="UniformSet.h">
       <Filter>소스 파일\05. Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="IUniformProvider.h">
+      <Filter>소스 파일\06. Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

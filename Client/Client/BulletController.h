@@ -1,7 +1,8 @@
 #pragma once
 #include "Engine\IBehaviour.h"
+#include "Engine\IUniformProvider.h"
 
-class BulletController : public IBehaviour
+class BulletController : public IBehaviour, public IUniformProvider
 {
 	using Super = IBehaviour;
 
@@ -18,6 +19,7 @@ public:
 //===========================*/
 public:
 	void SetDirection(EDirection dir) { _direction = dir; }
+	virtual void ApplyUniforms(const shared_ptr<Shader>& shader) override;
 
 private:
 	void MoveBullet();

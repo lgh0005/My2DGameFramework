@@ -4,6 +4,7 @@ class IComponent;
 class IRenderable;
 class IBehaviour;
 class Transform;
+class IUniformProvider;
 
 class GameObject : public enable_shared_from_this<GameObject>
 {
@@ -15,14 +16,16 @@ public:
 	void AddComponent(const shared_ptr<IComponent>& component) { _components.push_back(component); }
 	void AddRenderable(const shared_ptr<IRenderable>& renderable) { _renderables.push_back(renderable); }
 	void AddBehaviour(const shared_ptr<IBehaviour>& behaviour) { _behaviours.push_back(behaviour); }
+	void AddUniformProvider(const shared_ptr<IUniformProvider>& provider) { _uniformProvider = provider; }
 
-	// Component Getters
+// Component Getters
 public:
 	shared_ptr<IComponent> GetComponent(const string& name);
 	shared_ptr<IRenderable> GetRenderable(const string& name);
 	shared_ptr<IBehaviour> GetBehaviour(const string& name);
+	shared_ptr<IUniformProvider> GetUniformProvider() { return _uniformProvider; }
 
-	// Init and Update
+// Init and Update
 public:
 	void Init();
 	void FixedUpdate();
@@ -62,5 +65,6 @@ private:
 	vector<shared_ptr<IComponent>> _components;
 	vector<shared_ptr<IRenderable>> _renderables;
 	vector<shared_ptr<IBehaviour>> _behaviours;
+	shared_ptr<IUniformProvider>_uniformProvider;
 };
 

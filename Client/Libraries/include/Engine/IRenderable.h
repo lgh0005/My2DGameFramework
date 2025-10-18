@@ -2,6 +2,7 @@
 #include "IComponent.h"
 
 class Shader;
+class UniformSet;
 class Camera;
 class Transform;
 

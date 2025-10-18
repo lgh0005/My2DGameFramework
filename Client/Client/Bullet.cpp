@@ -43,6 +43,7 @@ shared_ptr<GameObject> Bullet::Instantiate(const string& name, const glm::vec3& 
 	// script
 	{
 		shared_ptr<BulletController> script = make_shared<BulletController>("BulletController");
+		_bullet->AddUniformProvider(script);
 		_bullet->AddBehaviour(script);
 	}
 

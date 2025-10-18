@@ -99,7 +99,7 @@ private:
 
 	shared_ptr<GameObject> _bulletSpawnerObject;
 	shared_ptr<BulletSpawner> _bulletSpawner;
-	float _gunCooldown = 1.0f;
+	float _gunCooldown = 0.1f;
 	float _gunTimer = 0.0f;
 	void HandleWeaponChange();
 

@@ -10,7 +10,7 @@ void RenderPass::Render()
 {
 	_shader->Use();
 
-	if (_customUniforms) _customUniforms->Apply(_shader);
+	if (_customGlobalUniforms) _customGlobalUniforms->Apply(_shader);
 
 	for (auto& renderable : _renderables)
 	{
