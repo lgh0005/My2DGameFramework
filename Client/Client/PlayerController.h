@@ -1,6 +1,15 @@
 #pragma once
 #include "Engine\IBehaviour.h"
 
+#pragma region States
+#include "PlayerIdleState.h"
+#include "PlayerWalkState.h"
+#include "PlayerJumpState.h"
+#include "PlayerAttackState.h"
+#include "PlayerDamageState.h"
+#include "PlayerDieState.h"
+#pragma endregion
+
 class BulletSpawner;
 
 enum class EPlayerWeaponState
@@ -32,6 +41,13 @@ class PlayerController : public IBehaviour
 {
 	using Super = IBehaviour;
 
+	friend class PlayerIdleState;
+	friend class PlayerWalkState;
+	friend class PlayerJumpState;
+	friend class PlayerAttackState;
+	friend class PlayerDamageState;
+	friend class PlayterDieState;
+
 public:
 	PlayerController(const string& name);
 	virtual ~PlayerController() override = default;
@@ -61,16 +77,12 @@ private:
 //     Moving properties     //
 //===========================*/
 private:
-	void MovePlayer();
-	void JumpPlayer();
-
 	shared_ptr<Shader> _playerShader;
 	shared_ptr<UniformSet> _playerUniformSet;
-	shared_ptr<FlipbookPlayer> _playerFlipbookPlayer;
 
 	shared_ptr<Transform> _ownerTransform;
 	bool _isMoving = false;
-	Direction _lastDir = Direction::Right;
+	EDirection _lastDir = EDirection::Right;
 	float _moveSpeed = 500.0f;
 
 	float _maxMoveDistance = 2100.0f;
@@ -82,27 +94,24 @@ private:
 //     Attack properties     //
 //===========================*/
 private:
-	void Attack();
 	bool _isAttacking = false;
 	int _comboStep = 0; 
 
 	shared_ptr<GameObject> _bulletSpawnerObject;
 	shared_ptr<BulletSpawner> _bulletSpawner;
-	float _gunCooldown = 1.0f; // 0.3√  ∞£∞›
+	float _gunCooldown = 1.0f;
 	float _gunTimer = 0.0f;
-
-	void ChangeWeapon();
-
-	void AttackNormal();
-	void AttackSword();
-	void AttackGun();
+	void HandleWeaponChange();
 
 /*=================================
 //     Player State Machine      //
 //===============================*/
 private:
+	void ChangeState(const shared_ptr<StateMachine<PlayerController>>& newState);
 	EPlayerWeaponState _playerWeaponState = EPlayerWeaponState::Normal;
 	EPlayerState _playerState = EPlayerState::Idle;
+	shared_ptr<StateMachine<PlayerController>> _currentState;
+	shared_ptr<FlipbookPlayer> _playerFlipbookPlayer;
 
 /*=============================
 //     Player Flipbooks      //
@@ -157,6 +166,7 @@ private:
 	shared_ptr<Flipbook> _sword_wallslide_r;
 #pragma endregion
 
+	void ApplyFlipDirection();
 	shared_ptr<GameObject> _NoWeaponText;
 	shared_ptr<GameObject> _PistolText;
 	shared_ptr<GameObject> _SwordText;

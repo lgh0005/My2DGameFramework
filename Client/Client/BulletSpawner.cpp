@@ -16,7 +16,7 @@ void BulletSpawner::Init()
 	_bulletPrefab = static_pointer_cast<Bullet>(RESOURCE.GetResource<Prefab>("Bullet"));
 }
 
-void BulletSpawner::SpawnBullet(const glm::vec3& position, Direction dir)
+void BulletSpawner::SpawnBullet(const glm::vec3& position, EDirection dir)
 {
 	shared_ptr<Scene> scene;
 	if (Utils::IsValidPtr(_currentScene, scene) == false) return;

@@ -36,8 +36,8 @@ void BulletController::MoveBullet()
     glm::vec3 pos = owner->GetTransform()->GetPosition();
     float moveAmount = _speed * TIME.deltaTime;
 
-    if (_direction == Direction::Right) pos.x += moveAmount;
-    else if (_direction == Direction::Left)  pos.x -= moveAmount;
+    if (_direction == EDirection::Right) pos.x += moveAmount;
+    else if (_direction == EDirection::Left)  pos.x -= moveAmount;
 
     _travelledDistance += moveAmount;
     if (_travelledDistance > _maxMoveDistance)
@@ -48,7 +48,7 @@ void BulletController::MoveBullet()
 
     if (_bulletUniformSet)
     {
-        _bulletUniformSet->Set("flip", _direction == Direction::Left);
+        _bulletUniformSet->Set("flip", _direction == EDirection::Left);
         _bulletUniformSet->Apply(_bulletShader);
     }
 
@@ -67,13 +67,13 @@ void BulletController::OnCollisionWithEnemy(const shared_ptr<BoxCollider>& other
     // 1. ÀûÀÇ Ã¼·Â ±ð±â
     string otherName = Other->GetName();
     cout << "Collided! with " << otherName << endl;
-    enmeyController->EMOTIONAL_DAMAGE();
+    // enmeyController->EMOTIONAL_DAMAGE();
 
     // 2. ÃÑ¾Ë ¼Ò¸ê
     shared_ptr<GameObject> owner;
     if (Utils::IsValidPtr(_owner, owner) == false) return;
     owner->Destroy();
-    enmeyController->SetDamage(false);
+    // enmeyController->SetDamage(false);
 }
 
 

@@ -30,7 +30,7 @@ private:
 
 	shared_ptr<Transform> _ownerTransform;
 	bool _isMoving = false;
-	Direction _lastDir = Direction::Right;
+	EDirection _lastDir = EDirection::Right;
 	float _moveSpeed = 500.0f;
 
 /*=================

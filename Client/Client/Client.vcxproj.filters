@@ -78,6 +78,18 @@
     <Filter Include="소스 파일\03. InGame\Scripts\Spawners">
       <UniqueIdentifier>{980c6f32-8be7-42e2-bcce-a02b8c74067e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\03. InGame\Scripts\StateMachines">
+      <UniqueIdentifier>{b984f012-0efc-4920-9a06-671ad6cd2ef3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03. InGame\Scripts\StateMachines\PlayerState">
+      <UniqueIdentifier>{5fe5feed-8027-4c67-8a4b-90fe8805fe7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03. InGame\Scripts\StateMachines\EnemyState">
+      <UniqueIdentifier>{66c2a692-c311-4012-9419-60075caaa967}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03. InGame\Scripts\GameManager">
+      <UniqueIdentifier>{301eac94-8c32-4707-a659-1d69372f1724}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -202,6 +214,33 @@
     </ClCompile>
     <ClCompile Include="EnemySpawner.cpp">
       <Filter>소스 파일\03. InGame\Scripts\Spawners</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>소스 파일\03. InGame\Scripts\StateMachines</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>소스 파일\03. InGame\Scripts\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyWalkState.cpp">
+      <Filter>소스 파일\03. InGame\Scripts\StateMachines\EnemyState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerIdleState.cpp">
+      <Filter>소스 파일\03. InGame\Scripts\StateMachines\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerWalkState.cpp">
+      <Filter>소스 파일\03. InGame\Scripts\StateMachines\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerJumpState.cpp">
+      <Filter>소스 파일\03. InGame\Scripts\StateMachines\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttackState.cpp">
+      <Filter>소스 파일\03. InGame\Scripts\StateMachines\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDamageState.cpp">
+      <Filter>소스 파일\03. InGame\Scripts\StateMachines\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDieState.cpp">
+      <Filter>소스 파일\03. InGame\Scripts\StateMachines\PlayerState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -330,6 +369,33 @@
     </ClInclude>
     <ClInclude Include="EnemySpawner.h">
       <Filter>소스 파일\03. InGame\Scripts\Spawners</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>소스 파일\03. InGame\Scripts\StateMachines</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>소스 파일\03. InGame\Scripts\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyWalkState.h">
+      <Filter>소스 파일\03. InGame\Scripts\StateMachines\EnemyState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerIdleState.h">
+      <Filter>소스 파일\03. InGame\Scripts\StateMachines\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerWalkState.h">
+      <Filter>소스 파일\03. InGame\Scripts\StateMachines\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerJumpState.h">
+      <Filter>소스 파일\03. InGame\Scripts\StateMachines\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttackState.h">
+      <Filter>소스 파일\03. InGame\Scripts\StateMachines\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDamageState.h">
+      <Filter>소스 파일\03. InGame\Scripts\StateMachines\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDieState.h">
+      <Filter>소스 파일\03. InGame\Scripts\StateMachines\PlayerState</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

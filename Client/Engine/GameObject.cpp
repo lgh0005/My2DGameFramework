@@ -132,8 +132,8 @@ void GameObject::SetActive(bool active)
 
 	if (_transform) _transform->SetActive(active);
 	for (auto& component : _components) component->SetActive(active);
-	for (auto& renderable : _components) renderable->SetActive(active);
-	for (auto& behaviour : _components) behaviour->SetActive(active);
+	for (auto& renderable : _renderables) renderable->SetActive(active);
+	for (auto& behaviour : _behaviours) behaviour->SetActive(active);
 
 	for (auto& child : _children)
 	{

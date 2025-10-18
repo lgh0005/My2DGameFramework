@@ -17,7 +17,7 @@ public:
 //     Moving properties     //
 //===========================*/
 public:
-	void SetDirection(Direction dir) { _direction = dir; }
+	void SetDirection(EDirection dir) { _direction = dir; }
 
 private:
 	void MoveBullet();
@@ -29,7 +29,7 @@ private:
 	float _minMoveDistance = -500.0f;
 
 	float _speed = 900.0f;
-	Direction _direction = Direction::Right;
+	EDirection _direction = EDirection::Right;
 	float _travelledDistance = 0.0f;
 
 /*==============================

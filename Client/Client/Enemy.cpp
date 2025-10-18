@@ -35,24 +35,6 @@ shared_ptr<GameObject> Enemy::Instantiate(const string& name, const glm::vec3& p
 		enemyAttackCollider->SetLayer(CollisionLayer::Layers::EnemyAttack);
 		enemyAttackCollider->SetMask(CollisionLayer::Layers::Player);
 		_enemy->AddComponent(enemyAttackCollider);
-
-		// DEBUG
-		{
-			_attackArea1 = make_shared<GameObject>("EnemyAttackArea1");
-			_attackAreaTransform1 = make_shared<Transform>
-				(
-					"EnemyAttackAreaTransform",
-					glm::vec3(80.0f, -80.0f, 0.0f),
-					glm::vec3(0.0f),
-					glm::vec3(80.0f, 100.0f, 1.0f)
-				);
-			shared_ptr<Sprite> testSprite = make_shared<Sprite>("TestSprite", RESOURCE.GetResource<Texture>("TEST1"));
-			_attackArea1->AddRenderable(testSprite);
-			_attackArea1->SetTransform(_attackAreaTransform1);
-			_attackArea1->SetParent(_enemy);
-			scene->GetRenderPass("_debugRenderPass")->AddRenderable(testSprite);
-			GameObjectList.push_back(_attackArea1);
-		}
 	}
 
 	// Main Collider
@@ -61,25 +43,6 @@ shared_ptr<GameObject> Enemy::Instantiate(const string& name, const glm::vec3& p
 		enemyCollider->SetLayer(CollisionLayer::Layers::Enemy);
 		enemyCollider->SetMask(CollisionLayer::Layers::PlayerAttack | CollisionLayer::Layers::Bullet);
 		_enemy->AddComponent(enemyCollider);
-
-		// DEBUG
-		{
-			_enemyCollider = make_shared<GameObject>("EnemyCollider");
-			_enemyColliderTransform = make_shared<Transform>
-				(
-					"EnemyCollider",
-					glm::vec3(0.0f, -50.0f, 0.0f),
-					glm::vec3(0.0f),
-					glm::vec3(60.0f, 150.0f, 1.0f)
-				);
-			_enemyCollider->SetTransform(_enemyColliderTransform);
-			_enemyCollider->SetParent(_enemy);
-
-			shared_ptr<Sprite> testSprite = make_shared<Sprite>("TestSprite3", RESOURCE.GetResource<Texture>("TEST3"));
-			_enemyCollider->AddRenderable(testSprite);
-			scene->GetRenderPass("_debugRenderPass")->AddRenderable(testSprite);
-			GameObjectList.push_back(_enemyCollider);
-		}
 	}
 
 	// Script

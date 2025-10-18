@@ -32,20 +32,13 @@ shared_ptr<GameObject> Bullet::Instantiate(const string& name, const glm::vec3& 
 		renderPass->AddRenderable(renderable);
 	}
 
-	// DEBUG
-	{
-		auto testSprite = make_shared<Sprite>("TestSprite3", RESOURCE.GetResource<Texture>("TEST1"));
-		_bullet->AddRenderable(testSprite);
-		shared_ptr<RenderPass> renderPass = scene->GetRenderPass("_debugRenderPass");
-		auto renderable = _bullet->GetRenderable("TestSprite3");
-		renderPass->AddRenderable(renderable);
-	}
-
 	// Collider
-	shared_ptr<BoxCollider> bulletCollider = make_shared<BoxCollider>("BulletCollider", glm::vec2(40.0f, 25.0f));
-	bulletCollider->SetLayer(CollisionLayer::Layers::Bullet);
-	bulletCollider->SetMask(CollisionLayer::Layers::Enemy);
-	_bullet->AddComponent(bulletCollider);
+	{
+		shared_ptr<BoxCollider> bulletCollider = make_shared<BoxCollider>("BulletCollider", glm::vec2(40.0f, 25.0f));
+		bulletCollider->SetLayer(CollisionLayer::Layers::Bullet);
+		bulletCollider->SetMask(CollisionLayer::Layers::Enemy);
+		_bullet->AddComponent(bulletCollider);
+	}
 
 	// script
 	{

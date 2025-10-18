@@ -18,7 +18,7 @@ public:
 	virtual void Update() override;
 
 public:
-	void SetFlipbook(const shared_ptr<Flipbook>& flipbook) { _flipbook = flipbook; }
+	void SetFlipbook(const shared_ptr<Flipbook>& flipbook);
 	shared_ptr<Flipbook> GetCurrentFlipbook() { return _flipbook; }
 
 private:

@@ -31,13 +31,13 @@ void CharacterController::Update()
 	{
 		pos.x += _moveSpeed * TIME.deltaTime;
 		_CharacterFlipbookPlayer->SetFlipbook(_walkRight);
-		_lastDir = Direction::Right;
+		_lastDir = EDirection::Right;
 	}
 	else if (INPUT.GetKey(Inputs::Key::A))
 	{
 		pos.x -= _moveSpeed * TIME.deltaTime;
 		_CharacterFlipbookPlayer->SetFlipbook(_walkRight);
-		_lastDir = Direction::Left;
+		_lastDir = EDirection::Left;
 	}
 	else
 	{
@@ -46,7 +46,7 @@ void CharacterController::Update()
 
 	if (_characterUniformSet)
 	{
-		_characterUniformSet->Set("flip", _lastDir == Direction::Left);
+		_characterUniformSet->Set("flip", _lastDir == EDirection::Left);
 		_characterUniformSet->Apply(_chararcterShader);
 	}
 

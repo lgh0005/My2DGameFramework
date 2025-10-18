@@ -15,7 +15,7 @@ public:
 	virtual void Init() override;
 
 public:
-	void SpawnBullet(const glm::vec3& position, Direction dir);
+	void SpawnBullet(const glm::vec3& position, EDirection dir);
 
 private:
 	shared_ptr<Bullet> _bulletPrefab;

@@ -1,18 +1,29 @@
 #pragma once
 #include "Engine\IBehaviour.h"
 
+#pragma region States
+#include "EnemyWalkState.h"
+#pragma endregion
+
 enum class EEnemyState
 {
-	Idle,
 	Walk,
 	Damaged,
 	Attack,
 	Died,
+	END
+};
+
+enum
+{
+	ENEMY_STATE_COUNT = static_cast<uint32>(EEnemyState::END)
 };
 
 class EnemyController : public IBehaviour
 {
 	using Super = IBehaviour;
+
+	friend class EnemyWalkState;
 
 public:
 	EnemyController(const string& name);
@@ -22,55 +33,58 @@ public:
 	virtual void Init() override;
 	virtual void Update() override;
 
+/*==============================
+//     Default properties     //
+//============================*/
+private:
+	int _health = 4;
+
 /*=============================
 //     Moving properties     //
 //===========================*/
 private:
-	void MoveEnemy();
-
 	shared_ptr<Shader> _enemyShader;
 	shared_ptr<UniformSet> _enemyUniformSet;
-	shared_ptr<FlipbookPlayer> _playerFlipbookPlayer;
 	shared_ptr<Transform> _ownerTransform;
 
-	float _moveSpeed = 500.0f;
+	EDirection _lastDir = EDirection::Right;
+	float _moveSpeed = 200.0f;
 	float _maxMoveDistance = 2100.0f;
 	float _minMoveDistance = -460.0f;
 
-/*=============================
-//		  Enemy States       //
-//===========================*/
-public:
-	// TEST
-	bool _damaged = false;
-	void EMOTIONAL_DAMAGE()
-	{
-		if (!_damaged)
-		{
-			_health -= 2;
-			cout << "[Enemy Healt] : " << _health << endl;
-		}
-		_damaged = true;
-	}
-	void SetDamage(bool damage) { _damaged = damage; }
-
+/*==============================
+//     Collide properties     //
+//============================*/
 private:
-	void SetEnemyState(EEnemyState state) { _enemyState = state; }
-	EEnemyState _enemyState = EEnemyState::Idle;
-	Direction _lastDir = Direction::Right;
+	shared_ptr<BoxCollider> _enemyCollider;
+	void OnColliderWithPlayerAttack(const shared_ptr<BoxCollider>& other);
 
-	// Attack
-	void Attack();
+	shared_ptr<BoxCollider> _normalAttackCollider;
+	void OnColliderWithPlayer(const shared_ptr<BoxCollider>& other);
+	glm::vec2 _normalAttackColliderOffset;
+
+	void SetAttackCollider();
+
+/*=============================
+//     Attack properties     //
+//===========================*/
+private:
+	bool _isAttacking = false;
 	int _comboStep = 0;
 
-	// Health
-	void Died();
-	void Damaged();
-	int _health = 4;
+/*=================================
+//	   Enemy State Machine       //
+//===============================*/
+private:
+	void ChangeState(const shared_ptr<StateMachine<EnemyController>>& newState);
+	EEnemyState _enemyState = EEnemyState::Walk;
+	shared_ptr<FlipbookPlayer> _enemyFlipbookPlayer;
+	shared_ptr<StateMachine<EnemyController>> _currentState;
 
 /*=============================
 //     Enemy Flipbooks       //
 //===========================*/
+#pragma region FLIP_BOOKS
 private:
 	shared_ptr<Flipbook> _normal_combo_1_r;
 	shared_ptr<Flipbook> _normal_combo_2_r;
@@ -79,5 +93,8 @@ private:
 	shared_ptr<Flipbook> _normal_died_r;
 	shared_ptr<Flipbook> _normal_idle_r;
 	shared_ptr<Flipbook> _normal_walk_r;
+#pragma endregion
+
+	void ApplyFlipDirection();
 };
 

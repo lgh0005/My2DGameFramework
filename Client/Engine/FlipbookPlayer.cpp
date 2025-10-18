@@ -31,3 +31,8 @@ void FlipbookPlayer::Update()
 	_flipbook->Update();
 }
 
+void FlipbookPlayer::SetFlipbook(const shared_ptr<Flipbook>& flipbook)
+{
+	_flipbook = flipbook;
+	_flipbook->Init();
+}

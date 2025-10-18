@@ -12,7 +12,7 @@ int SDL_main(int, char**)
 
 	// Run game application
 	LAUNCH->AddScenes(SCENES);
-	LAUNCH->Run("InGame");
+	LAUNCH->Run("Lobby");
 
 	// Close game application
 	SCENE.Clear();

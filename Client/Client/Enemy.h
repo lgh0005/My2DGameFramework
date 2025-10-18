@@ -21,13 +21,5 @@ public:
 private:
 	shared_ptr<GameObject> _enemy;
 	shared_ptr<Transform> _enemyTransform;
-
-	// DEBUG : Attack area : normal state
-	shared_ptr<GameObject> _attackArea1;
-	shared_ptr<Transform> _attackAreaTransform1;
-
-	// DEBUG : Player Collider
-	shared_ptr<GameObject> _enemyCollider;
-	shared_ptr<Transform> _enemyColliderTransform;
 };
 
